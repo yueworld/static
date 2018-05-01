@@ -1,0 +1,60 @@
+<div class="ys-dialog ys-org-selector animated fadeIn fadeOut">
+    <div class="col-xs-12 p0 container animated">
+        <div class="col-xs-12 selector-header">
+            <h3 class="pull-left m0" ng-if="$parent.option.action=='user'">人员选择</h3>
+            <h3 class="pull-left m0" ng-if="$parent.option.action=='pos'">职位选择</h3>
+            <div class="pull-left search" ng-if="$parent.option.action=='user'">
+                <input type="text" class="form-control" ng-model="$parent.$parent.filter.term"><span
+                    ng-click="$parent.$parent.search()"></span>
+            </div>
+            <icon class="pull-right text-invalid" name="close-1" width="26px" height="50px"
+                  ng-click="$parent.close()"></icon>
+        </div>
+        <div class="col-xs-12 p0 select-body">
+            <div class="col-xs-5 p0 selector-toolbar">
+                <div class="title">
+                    <span class="col-xs-5 fs12" style="text-align: center">按部门选择</span>
+                </div>
+                <div class="col-xs-12 p0 selector-content">
+                    <div treecontrol class="ys-framework-tree user" tree-model="$parent.trees"
+                         expanded-nodes="$parent.expandedTrees" selected-node="$parent.selectedNode"
+                         on-selection="$parent.onSelected">
+                        {{node.name}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-7 p0 selector-result">
+                <div class="title fs12" ng-if="$parent.option.action=='user'">
+                    {{$parent.$parent.option.action=='user'?'已选人员':'已选职位'}}
+                    <icon name="right-1" width="10px" height="40px"></icon>
+                    {{$parent.$parent.selectOrg.name}}
+                    <div class="pull-right" ng-if="$parent.$parent.option.multiple">
+                        <button class="btn btn-success">已选</button>
+                    </div>
+                </div>
+                <div class="title fs12" ng-if="$parent.option.action=='pos'">
+                    已选职位
+                    <icon name="right-1" width="12px" height="40px"></icon>
+                </div>
+                <div class="col-xs-12 p0 selector-content">
+                    <ul ng-if="$parent.items.length!=0">
+                        <li ng-repeat="item in $parent.$parent.items"
+                            ng-click="$parent.$parent.$parent.select(item)">
+                            <span ng-if="$parent.$parent.$parent.option.action=='user'">{{item.realname}}</span>
+                            <span ng-if="$parent.$parent.$parent.option.action=='pos'">{{item.name}} <sup class="text-danger">({{item.realname}})</sup></span>
+                            <em class="ys-checkbox" ng-class="{'selected':$parent.$parent.$parent.isSelected(item)}"></em>
+                        </li>
+                    </ul>
+                    <div class="col-xs-12 no-data" ng-if="$parent.items.length==0">
+                        <icon name="no-data-1" height="100px" width="28px"></icon>
+                        未查询到相关数据
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 p0 selector-footer">
+            <button class="btn btn-primary pull-right" ng-click="$parent.submit(true)">确认</button>
+            <button class="btn btn-default pull-right" ng-click="$parent.submit(false)">取消</button>
+        </div>
+    </div>
+</div>

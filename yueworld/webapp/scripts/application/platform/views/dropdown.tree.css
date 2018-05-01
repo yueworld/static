@@ -1,0 +1,22 @@
+.ys-framework-dropdown-tree {position: relative;background: #fff}
+.ys-framework-dropdown-tree-text {cursor: pointer;background:#fff url(../../../../styles/img/common/icon/select-black-down-icon.png) no-repeat right  10px center!important;user-select: none;/*box-shadow:none;border:1px solid #dbdede*/transition:none;}
+
+.ys-framework-dropdown-tree-container {position: absolute;top: 100%;left: 0;z-index: 1000;width: 100%;float: left;display: none;font-size: 14px;background: #fff;/*background:#f6f6f6;*/}
+.ys-framework-dropdown-tree-search{width: 100%;display: none}
+.ys-framework-dropdown-tree-search input{background:#fff url(../../../../styles/img/common/icon/select-black-up-icon.png) no-repeat right  10px center!important;/*border:1px solid #aaa!important;*/}
+.ys-framework-dropdown-tree-items{padding: 5px 0;box-shadow: 0 6px 12px rgba(0, 0, 0, .175);max-height: 380px;width: 100%;border: 1px solid #dfe5e9;overflow-y: scroll;}
+.ys-framework-dropdown-tree-container .item{display: block;padding: 0px 20px;height:36px;line-height:36px;clear: both;font-weight: normal;color: #333;white-space: nowrap;cursor: pointer}
+.ys-framework-dropdown-tree-container .item:hover{background-color:#dae1e7}
+.ys-framework-dropdown-tree-container .item.active{background: #dae1e7}
+.ys-framework-dropdown-tree-container .ys-framework-tree{
+    padding: 15px;box-shadow: 0 6px 12px rgba(0, 0, 0, .175);max-height: 380px;width: 100%;border: 1px solid #dfe5e9;overflow-y: scroll;
+}
+.ys-framework-dropdown-tree-container .ys-framework-tree .title{font-size: 14px;font-weight: normal;padding-left: 0px;}
+.ys-framework-dropdown-tree-container .ys-framework-tree .tree-branch-head{padding:1px 15px 1px 17px!important;text-align: center;background-position: center!important;line-height: 34px;height: 34px!important;}
+.ys-framework-dropdown-tree-container .ys-framework-tree .title:hover .tree-branch-head{background-size: contain!important;}
+.ys-framework-dropdown-tree.open .ys-framework-dropdown-tree-text{/*border:1px solid #aaa;border-bottom: none;*/background:#fff url(../../../../styles/img/common/icon/select-black-up-icon.png) no-repeat right  10px center!important;}
+.ys-framework-dropdown-tree.open .ys-framework-dropdown-tree-container{display: block}
+.ys-framework-dropdown-tree.open.search .ys-framework-dropdown-tree-container{display: block;top:0;}
+.ys-framework-dropdown-tree.open.search .ys-framework-dropdown-tree-search{display:block;}
+.ys-framework-dropdown-tree .caret{display:none;position: absolute;width: 5px;height: 5px;bottom: 3px;right: 3px;border: none;border-right: solid 2px #999;border-bottom: solid 2px #999;}
+.require .ys-framework-dropdown-tree .ys-framework-dropdown-tree-text{border-left:none;}

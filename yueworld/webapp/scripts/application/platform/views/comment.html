@@ -1,0 +1,62 @@
+<div class="col-xs-12 p0 ys-framework-dialog-comment">
+    <div class="col-xs-12 p0 selector-header">
+        <div class="col-xs-10 pl20 title">
+            {{option.title}}
+        </div>
+        <div class="col-xs-2 pr15">
+            <icon class="pull-right ys-framework-dialog-close" name="close-1" width="14px" height="50px"
+                  ng-click="close()"></icon>
+        </div>
+    </div>
+    <div class="col-xs-12 p0 select-body">
+        <div class="col-xs-12 p0" ng-if="$parent.option.category=='INVITATION_PLAN_YX'">
+            <div class="col-xs-10 col-xs-offset-1 p0 mb15">
+                <div class="col-xs-3 text-right lh34">日期 :</div>
+                <div class="col-xs-6 p0 text-left">
+                    <input type="text" class="form-control require" ng-model="$parent.$parent.input.createdDate"
+                           current-text="今天"
+                           clear-text="清空"
+                           close-text="关闭"
+                           is-open="createdDate"
+                           datepicker-append-to-body="true"
+                           ng-click="createdDate=true"
+                           uib-datepicker-popup="yyyy-MM-dd" error="{{$parent.$parent.input.errorCode}}" code="9001"/>
+                </div>
+            </div>
+            <div class="col-xs-10 col-xs-offset-1   p0 mb15">
+                <div class="col-xs-3 text-right lh34">方式 :</div>
+                <div class="col-xs-6 p0 text-left">
+                    <select class="w100p" ng-model="$parent.$parent.input.category"
+                            select2="{containerCssClass: 'require',single:true,placeholder:'请选择沟通方式',data:[{id:'INVITATION_PLAN_KC',text:'看场'},{id:'INVITATION_PLAN_MT',text:'面谈'},{id:'INVITATION_PLAN_DH',text:'电话'}]}"
+                            error="{{$parent.$parent.input.errorCode}}" code="9002"></select>
+                </div>
+            </div>
+            <div class="col-xs-10 col-xs-offset-1  p0 mb15">
+                <div class="col-xs-3 text-right lh34">联系人 :</div>
+                <div class="col-xs-6 p0 text-left">
+                    <input class="form-control require" ng-model="$parent.$parent.input.contactPerson"
+                           error="{{$parent.$parent.input.errorCode}}" code="9003">
+                </div>
+            </div>
+            <div class="col-xs-10 col-xs-offset-1  p0 mb15">
+                <div class="col-xs-3 text-right lh34">联系电话 :</div>
+                <div class="col-xs-6 p0 text-left">
+                    <input class="form-control require" ng-model="$parent.$parent.input.tel"
+                           error="{{$parent.$parent.input.errorCode}}" code="9004">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-10 col-xs-offset-1  p0 mb20">
+            <div class="col-xs-3 text-right lh34">内容 :</div>
+            <div class="col-xs-8 p0 text-left">
+                    <textarea class="form-control require" style="resize: none;height: 80px;"
+                              ng-model="$parent.input.content" error="{{$parent.input.errorCode}}"
+                              code="9005"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0 ys-dialog-footer selector-footer">
+        <button class="btn btn-primary pull-right" ng-click="submit(true)">确认</button>
+        <button class="btn btn-default pull-right" ng-click="submit(false)">取消</button>
+    </div>
+</div>

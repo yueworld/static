@@ -1,0 +1,35 @@
+<div class="col-xs-12 p0" ng-class="{'folding':foldingStatus=='1'}">
+    <div class="ys-product-navbar-action">
+        <a ui-sref="management.workflow.design.index" href="javascript:void(0)">
+            <icon name="flow-1" width="18px" height="44px"></icon>
+            流程设计
+        </a>
+    </div>
+    <div class="col-xs-12 p0 ys-framework-product-body" ng-class="{'folding':foldingStatus=='1'}">
+        <div class="ys-framework-product-body-left">
+            <div treecontrol class="col-xs-12 p0 pt20 ys-framework-tree ys-framework-tree-simple"
+                 tree-model="[categories.root]"
+                 expanded-nodes="expandedCategories" selected-node="selectedNode"
+                 on-selection="onSelection" on-db-selection="onDbSelection">
+                <span>
+                    {{node.name}}<span ng-if="node.isEnabled==2" class="text-danger"> - 未启用</span>
+                </span>
+            </div>
+        </div>
+        <div class="ys-product-navbar-collapse" ng-class="{'fold':foldingStatus=='1'}">
+            <div class="inner" ng-click="folding()">
+                <div class="bg"></div>
+                <div class="body">
+                    <icon name="indent-1" width="24" height="60"></icon>
+                </div>
+            </div>
+        </div>
+        <div class="ys-framework-product-body-right">
+            <div class="col-xs-12 p0">
+                <div class="animated-ui-view fadeIn fadeOut" ui-view></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,17 @@
+<div class="dialog-mask-layer ys-layout-selector animated fadeIn fadeOut">
+    <div class="col-xs-12 p0 container animated">
+        <div class="col-xs-12 selector-header">
+            <h3 class="pull-left m0">请选择</h3>
+            <icon class="pull-right text-invalid" name="close-1" width="26px" height="50px" ng-click="$parent.close()"></icon>
+        </div>
+        <div class="col-xs-12 p0 select-body">
+            <div treecontrol class="ys-framework-tree user" tree-model="$parent.layouts" expanded-nodes="$parent.expandedLayouts" selected-node="$parent.selectedNode" on-selection="$parent.onSelected">
+                {{node.name}}
+            </div>
+        </div>
+        <div class="col-xs-12 p0 selector-footer">
+            <button class="btn btn-primary pull-right" ng-click="$parent.submit()">确认</button>
+            <button class="btn btn-default pull-right" ng-click="$parent.close()">取消</button>
+        </div>
+    </div>
+</div>

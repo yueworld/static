@@ -1,0 +1,118 @@
+<div class="ys-wrapper"
+     ng-class="{'unfold':ysSidebarStatus!='fold','fold':ysSidebarStatus=='fold'}">
+    <div id="ys-topbar" class="ys-framework-topbar">
+        <div class="logo pull-left pointer" ui-sref="operations.situation.index">
+            <img ng-src="{{::$app.setting.text('/ui/logo')}}" alt="{{::$app.setting.text('/ui/title/full')}}"/>
+        </div>
+        <div class="fold" ng-click="toggleSidebar()">
+            <icon name="menus-3" height="44px" width="16px"></icon>
+        </div>
+        <div class="channel pull-left">
+            <div class="item" ui-sref="{{item.state}}" ng-repeat="item in topBarMenus"
+                 ng-class="{'active':$app.router.includes(item.includes)}" ng-bind="::item.text">
+            </div>
+        </div>
+        <div class="menus pull-right">
+            <div class="item dropdown mc hidden">
+                <div class="dropdown-toggle">
+                    消息 <span class="notice-num">0</span>
+                </div>
+                <div class="dropdown-menu">
+                    <div class="arrow"></div>
+                    <div class="head">系统消息通知</div>
+                    <div class="m">
+                        <a href="javascript:void(0)" class="text-primary">
+                            你发起的商务条件审批表已经审核完成 ！
+                            <span>2017-10-09 14:49</span>
+                        </a>
+                    </div>
+                    <div class="footer text-primary">
+                        查看更多 »
+                    </div>
+                </div>
+            </div>
+            <div class="item dropdown my">
+                <div class="dropdown-toggle">
+                    {{$app.user.realname}}
+                </div>
+                <div class="dropdown-menu hidden">
+                    <div class="arrow"></div>
+                    <div class="list">
+                        <div class="entrance">
+                            <icon name="suo-1" width="80px" height="20px"></icon>
+                            <span>修改密码</span>
+                        </div>
+                        <div class="entrance">
+                            <icon name="zhuti-1" width="80px" height="20px"></icon>
+                            <span>专业主题</span>
+                        </div>
+                        <div class="entrance" ui-sref="admin.situation.index">
+                            <icon name="setting-1" width="80px" height="20px"></icon>
+                            <span>进入后台</span>
+                        </div>
+                    </div>
+                    <div class="footer" ng-click="$app.user.logout()">
+                        退出系统
+                    </div>
+                </div>
+            </div>
+            <div class="item dropdown fullscreen">
+                <div class="dropdown-toggle" ng-if="!$app.screen.isFullscreen" ng-click="$app.screen.fullscreen()">
+                    进入全屏
+                </div>
+                <div class="dropdown-toggle" ng-if="$app.screen.isFullscreen" ng-click="$app.screen.exitFullscreen()">
+                    退出全屏
+                </div>
+                <!--<ul class="dropdown-menu">
+                    <div class="arrow"></div>
+                    <li ng-if="!$app.screen.isFullscreen" ng-click="$app.screen.fullscreen()">进入</li>
+                    <li ng-if="$app.screen.isFullscreen" ng-click="$app.screen.exitFullscreen()">退出</li>
+                </ul>-->
+            </div>
+
+            <!--<a href="javascript:void(0)" ng-click="$app.screen.fullscreen()" ng-if="!$app.screen.isFullscreen">
+                &lt;!&ndash;<icon name="fullscreen-enter-1" width="13px" height="44px"></icon>&ndash;&gt;
+                全屏模式
+            </a>
+            <a href="javascript:void(0)" ng-click="$app.screen.exitFullscreen()" ng-if="$app.screen.isFullscreen">
+                &lt;!&ndash;<icon name="fullscreen-exit-1" width="13px" height="44px"></icon>&ndash;&gt;
+                退出全屏
+            </a>-->
+            <!--<a href="javascript:void(0)" ng-click="$app.logout()">
+                <icon name="logout-1" width="15px" height="44px"></icon>
+                退出
+            </a>-->
+        </div>
+    </div>
+    <div class="ys-framework-sidebar">
+        <div class="ys-framework-sidebar-container">
+            <!--ui-sref="operations.situation.index" ng-class="{'active':$app.router.includes('operations')}"-->
+            <div class="item" ng-repeat="item in sideBarMenus" ui-sref="{{item.state}}"
+                 ng-class="{'active':$app.router.includes(item.includes)}">
+                <i class="{{'icon-'+item.icon}}"></i>
+                {{item.text}}
+            </div>
+            <div class="line hidden"></div>
+            <!--<div class="manager">
+                系统设置
+            </div>-->
+        </div>
+    </div>
+    <div class="col-xs-12 p0 bg-white ys-framework-product">
+        <!--<div class="ys-product-navbar-sub">
+            <div class="item" ui-sref="operations.situation.index"
+                 ng-class="{'active':$app.router.includes('operations.situation.index')}">
+                经营总况
+            </div>
+        </div>-->
+        <!--<div class="col-xs-12 p0 ys-framework-product-container">-->
+        <div class="col-xs-12 p0">
+            <div class="col-xs-12 p0 bg-white animated-ui-view fadeIn fadeOut" ui-view></div>
+        </div>
+        <!--</div>-->
+    </div>
+</div>
+<!-- 评论/留言 -->
+<!--<div ys-comment></div>-->
+<!-- 图片放大 -->
+<!--<div ys-img-zoom></div>-->

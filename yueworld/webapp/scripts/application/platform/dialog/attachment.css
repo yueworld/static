@@ -1,0 +1,9 @@
+/* 附件管理器 */
+.ys-framework-dialog-attachment .container{top:-1000px}
+.ys-framework-dialog-attachment .select-body{/*height: 380px;*/overflow-y: scroll;overflow-x: hidden}
+.ys-framework-dialog-attachment button.uploader{height: 50px;line-height: 50px;padding:0}
+.ys-framework-dialog-attachment .select-body .list{border:1px solid #ddd;margin-top: 10px;margin-bottom: 15px}
+.ys-framework-dialog-attachment .select-body .list .col-xs-2,
+.ys-framework-dialog-attachment .select-body .list .col-xs-3,
+.ys-framework-dialog-attachment .select-body .list .col-xs-4{height: 36px;line-height: 36px}
+.ys-framework-dialog-attachment .select-body .list .drop{cursor: pointer}

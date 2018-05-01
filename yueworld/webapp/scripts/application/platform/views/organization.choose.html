@@ -1,0 +1,20 @@
+<div class="col-xs-12 p0">
+    <div class="col-xs-12 selector-header">
+        <div class="col-xs-7 pl5 title">
+            请选择{{option.title}}
+        </div>
+        <icon class="pull-right ys-dialog-close" name="close-1" width="16px" height="50px" ng-click="close()"></icon>
+    </div>
+    <div class="col-xs-12 p0 ys-dialog-body select-body">
+        <div treecontrol class="ys-framework-tree ys-framework-tree-simple" tree-model="trees" style="min-height: 300px"
+             filter-expression="option.filterExpression"
+             expanded-nodes="expandedItems" selected-node="selectedNode"
+             on-selection="onSelected">
+            {{node.name}}
+        </div>
+    </div>
+    <div class="col-xs-12 p0 ys-dialog-footer selector-footer">
+        <button class="btn btn-primary pull-right" ng-click="submit(true)">确认</button>
+        <button class="btn btn-default pull-right" ng-click="submit(false)">取消</button>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="col-xs-12 p0 ys-framework-dialog-attachment">
+    <div class="col-xs-12 p0 selector-header">
+        <div class="col-xs-10 pl20 title">
+            {{option.title}}
+        </div>
+        <div class="col-xs-2 pr15">
+            <icon class="pull-right ys-framework-dialog-close" name="close-1" width="14px" height="50px"
+                  ng-click="close()"></icon>
+        </div>
+    </div>
+    <div class="col-xs-12 p0 select-body">
+        <div class="col-xs-12 p20">
+            <button type="button" class="col-xs-4 col-xs-offset-4 btn btn-primary uploader"
+                    uploader="attachments">
+                <icon name="add-2" width="16px" height="49px"></icon>
+                上传附件
+            </button>
+        </div>
+        <div class="col-xs-12">
+            <div class="alert-info text-center" style="padding: 8px;margin-bottom: 15px">
+                可上传小于 {{attachments.maxSize/1024}}M 的常用文件
+            </div>
+        </div>
+        <div class="col-xs-12" ng-if="option.files.length">
+            <div class="col-xs-12 p0"><b>附件列表</b></div>
+            <div class="col-xs-12 p0 list">
+                <div class="col-xs-12 p0" ng-repeat="file in option.files">
+                    <div class="col-xs-4 text-ellipsis">
+                        <icon name="kouzhen-1" width="16px" height="36px"></icon>
+                        <a ng-href="{{$app.getStaticUrl(file.path)}}" target="_blank">{{file.originalName}}</a>
+                    </div>
+                    <div class="col-xs-3 text-center">
+                        {{file.realname}}
+                    </div>
+                    <div class="col-xs-3 p0 text-center">
+                        {{file.createdDate|date:'yyyy-MM-dd HH:mm:ss'}}
+                    </div>
+                    <div class="col-xs-2 text-center text-danger drop"
+                         ng-click="drop(file)">删除
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0 selector-footer">
+        <button class="btn btn-default pull-right" ng-click="submit(true)">关闭</button>
+    </div>
+</div>

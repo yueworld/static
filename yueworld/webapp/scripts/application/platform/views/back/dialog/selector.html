@@ -1,0 +1,73 @@
+<div class="col-xs-12 p0 ys-dialog-selector">
+    <div class="col-xs-12 p0 selector-header">
+        <div class="col-xs-5 pl20 title">
+            选择{{option.title}}
+        </div>
+        <div class="col-xs-5 p0">
+            <div class="pull-left search">
+                <input type="text" class="form-control" ng-model="filter.name" placeholder="快速搜索"><span
+                    ng-click="search()"></span>
+            </div>
+        </div>
+        <div class="col-xs-2 pr15">
+            <icon class="pull-right text-invalid" name="close-1" width="22px" height="50px"
+                  ng-click="close()"></icon>
+        </div>
+    </div>
+    <div class="col-xs-12 p0 select-body">
+        <div class="col-xs-5 p0 selector-toolbar">
+            <div class="col-xs-12 title">{{option.title}}列表</div>
+            <div class="col-xs-12 p20 selector-content ">
+                <div class="col-xs-12 p0 ys-framework-tree user">
+                    <ul>
+                        <li class="tree-expanded">
+                            <div class="title" ng-click="!filter.name&&onSelected(items[0])">
+                                <i class="tree-branch-head"></i>
+                                <i class="tree-leaf-head"></i>
+                                <div class="tree-label">
+                                        <span class="lh34"><span ng-if="!option.single"
+                                                                 class="ys-checkbox"
+                                                                 ng-class="{'selected':items[0].selected,'half-selected':items[0].halfSelected}"></span>
+                                        {{items[0].text}}
+                                        </span>
+                                </div>
+                            </div>
+                            <ul>
+                                <li class="tree-leaf" ng-repeat="item in items[0].children"
+                                    ng-if="!filter.name||item.text.indexOf(filter.name)!=-1">
+                                    <div class="title" ng-click="onSelected(item)">
+                                        <i class="tree-leaf-head"></i>
+                                        <div class="tree-label">
+                                                <span class="lh34"><span
+                                                        class="ys-checkbox"
+                                                        ng-class="{'selected':item.selected,'half-selected':item.halfSelected}"></span> {{item.text}}
+                                                </span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-7 p0 selector-result">
+            <div class="title fs12">
+                已选{{option.title}}
+            </div>
+            <div class="col-xs-12 p0 selector-content">
+                <ul ng-if="items[0].halfSelected||items[0].selected">
+                    <li ng-repeat="item in $parent.items[0].children" ng-if="item.selected"
+                        ng-click="onSelected(item)">
+                        <span>{{item.text}}</span>
+                        <icon name="error-1" width="18px" height="34px"></icon>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0 selector-footer">
+        <button class="btn btn-primary pull-right" ng-click="submit(true)">确认</button>
+        <button class="btn btn-default pull-right" ng-click="submit(false)">取消</button>
+    </div>
+</div>

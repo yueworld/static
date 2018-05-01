@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no"/>
+    <title ng-bind="::$app.setting.text('/ui/title/full')">商业管理系统</title>
+    <base href="/">
+    <script type="text/javascript">var match = /(msie\s|trident.*rv:)([\w.]+)/.exec(navigator.userAgent.toLowerCase());
+    if (match && match[2] && parseFloat(match[2]) < 10) {
+        window.location.href = "/browser.err.html"
+    }</script>
+</head>
+<body>
+<div ng-include="'scripts/application/platform/views/icons.html'"></div>
+<div main-framework></div>
+<div class="ys-framework-loading in">
+    <div class="pre">
+        <div class="left-bar">
+            <div class="left-bar-top-bar"></div>
+            <div class="left-bar-bottom-bar"></div>
+        </div>
+        <div class="loader-spinner">
+            <div class="so"></div>
+            <div class="ul"></div>
+            <div class="te"></div>
+            <div class="ar"></div>
+            <div class="y"></div>
+        </div>
+        <div class="right-bar">
+            <div class="right-bar-top-bar"></div>
+            <div class="right-bar-bottom-bar"></div>
+        </div>
+    </div>
+    <div class="loader-text">请稍候、系统正在努力加载中。</div>
+</div>
+</body>
+</html>

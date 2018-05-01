@@ -1,0 +1,36 @@
+/* 通用选择器 */
+.ys-dialog-selector .select-body{/*height: 350px;*/}
+.ys-dialog-selector .selector-content{height: 300px;/*border-top:1px solid #ccc*/}
+.ys-dialog-selector .selector-toolbar > .title{line-height: 40px;height: 40px;background: #f3f3f3;font-size: 14px;color: #757575;padding-left: 20px}
+.ys-dialog-selector .selector-toolbar > .title span{line-height: 40px;line-height: 40px;background:#808c92;color: #fff;display: inline-block}
+.ys-dialog-selector .selector-toolbar .selector-content{overflow-y: scroll}
+.ys-dialog-selector .selector-toolbar .selector-content i.tree-leaf-head:before{background-color: #fff!important;height: 0!important;}
+.ys-dialog-selector .selector-result .title{line-height: 40px;height: 40px;background: #f3f3f3;font-size: 14px;color: #757575;border-left: 1px solid #ccc;padding-left: 20px}
+.ys-dialog-selector .selector-result .selector-content{border-left: 1px solid #ccc;padding:20px;overflow-y: scroll}
+.ys-dialog-selector .selector-result .selector-content ul{list-style: none;padding:0;margin: 0;border:1px solid #ccc }
+.ys-dialog-selector .selector-result .selector-content li{padding:0 13px;height: 34px;line-height:34px;border-bottom: 1px solid #ddd}
+.ys-dialog-selector .selector-result .selector-content li:last-child{border-bottom: none}
+.ys-dialog-selector .selector-result .selector-content li icon{float: right;color: #E64E4D}
+.ys-dialog-selector .selector-result .selector-content li:hover{background: #f3f3f3;cursor: pointer}
+
+/* 树形菜单选择器 */
+.ys-dialog-tree .select-body{height: 380px;overflow-y: scroll;overflow-x: hidden}
+
+
+
+/* 铺位选择*/
+.ys-dialog-store .container{width: 680px;left:calc(100vw /2 - 300px)!important;top:-1000px}
+.ys-dialog-store .selector-header{height: 50px;padding:0 20px;border-bottom:1px solid #ccc;}
+.ys-dialog-store .selector-header h3{margin: 0;line-height: 50px;font-size: 18px}
+.ys-dialog-store .selector-header .pull-right{cursor: pointer}
+.ys-dialog-store .selector-footer{padding:15px 20px;border-top:1px solid #ccc}
+.ys-dialog-store .selector-footer .btn{margin-left: 10px}
+.ys-dialog-store .selector-footer .btn-primary{padding:5px 32px;background: #808c92;border:1px solid #808c92}
+.ys-dialog-store .selector-footer .btn-default{border:2px solid #808c92;padding:4px 16px}
+.ys-dialog-store .select-body{}
+.ys-dialog-store .list{border-top:4px solid #808C92;margin-top: 15px;}
+.ys-dialog-store .list .title{border-left:1px solid #ddd;border-right:1px solid #ddd;padding-left: 15px;}
+.ys-dialog-store .list ul{border:1px solid #ddd;list-style: none;padding:0;height: 294px;margin-bottom: 15px;overflow-y: scroll;overflow-x: hidden;/*padding:6px 0*/}
+.ys-dialog-store .list ul li{list-style: none;padding:0;padding-left: 15px;height: 35px;line-height: 35px;}
+.ys-dialog-store .list ul li.selected{background: #eaeaea;border-left:3px solid #18b0e2;padding-left: 15px}
+.ys-dialog-store .list ul li:hover{background: #eaeaea;cursor: pointer}

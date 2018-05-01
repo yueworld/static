@@ -1,0 +1,105 @@
+.ys-workflow-process-index{}
+.ys-workflow-process-index .nav-title{font-size: 22px;line-height: 34px;height: 34px}
+.ys-workflow-process-index .nav-title .add{padding:0 16px;height: 34px;line-height: 32px}
+.ys-workflow-process-index .ys-product-conditions .btn{width: 90px;padding:auto 0;/*color: #757575*/}
+.ys-workflow-process-index .ys-product-conditions .search{margin-left: 15px}
+.ys-workflow-process-index .ys-product-conditions .active{background: #808c92;color: #fff;box-shadow:none;border:1px solid #808c92}
+
+.ys-product-process-instance{}
+.ys-product-process-instance-toolbar{padding-bottom:15px;border-bottom: 1px solid #ddd}
+.ys-product-process-instance-toolbar .btn{width: 90px;padding:auto 0;float: left;margin-right: 10px}
+.ys-product-process-instance-subject{font-family: "宋体";font-weight: bold;font-size: 26px;line-height: 60px}
+.ys-product-process-instance-tips {background: #fee3cd;padding-left: 15px;padding-top: 20px}
+.ys-product-process-instance-tips ul{list-style: none;padding-left: 25px;padding-bottom: 0;margin-bottom: 0}
+.ys-product-process-instance-tips li{list-style-type: decimal;padding:0;line-height: 24px;color: #5a5a5a}
+.ys-product-process-instance-script-error{padding:20px;text-align: center;font-size: 24px;background: #f2dede;color: #a94442}
+
+/* 相关附件 */
+.ys-product-process-instance-attachment{border:1px solid #eee}
+.ys-product-process-instance-attachment .title{height:46px;font-size: 16px;background: #f5f5f5}
+.ys-product-process-instance-attachment .title .text{height: 16px;line-height:16px;border-left: 3px solid #e94d4e}
+.ys-product-process-instance-attachment table{margin-bottom: 0}
+.ys-product-process-instance-attachment table tr th,
+.ys-product-process-instance-attachment table tr td{border-top-color: #eee;border-left: 1px solid #eee;padding-left: 15px}
+.ys-product-process-instance-attachment tr th:first-child,
+.ys-product-process-instance-attachment tr td:first-child{padding-left: 34px;border-left: none}
+.ys-product-process-instance-attachment tr th{color: #999;border-top:1px solid #ddd!important}
+.ys-product-process-instance-attachment th{border-top: 1px solid #ddd!important;}
+.ys-product-process-instance-attachment svg{transition-duration:0.15s;}
+.ys-product-process-instance-attachment.up svg{transform:rotate(180deg);}
+.ys-product-process-instance-attachment .spr{font-family: "Microsoft YaHei";font-weight: bold;color: #1e5494}
+/* 流程图 */
+.ys-product-process-instance-diagram{border:1px solid #eee}
+.ys-product-process-instance-diagram .title{height:46px;font-size: 16px;border-bottom: 1px solid #ddd;background: #f5f5f5}
+.ys-product-process-instance-diagram .title .text{height: 16px;line-height:16px;border-left: 3px solid #e94d4e}
+.ys-product-process-instance-diagram .loading{font-size: 18px;line-height: 60px;color: #999;padding-top: 15px}
+.ys-product-process-instance-diagram .body{text-align: center}
+.ys-product-process-instance-diagram img{padding:0;margin:0px;border:0px solid #000;border:none;max-width: 100%}
+.ys-product-process-instance-diagram svg{transition-duration:0.15s;}
+.ys-product-process-instance-diagram.up svg{transform:rotate(180deg);}
+.ys-product-process-instance-diagram.up tr:nth-child(n+2){display: none}
+.ys-product-process-instance-diagram.up .title{border-bottom:none}
+/* 流转记录 */
+.ys-product-process-instance-jumps{border:1px solid #eee}
+.ys-product-process-instance-jumps .title{height:46px;font-size: 16px;background: #f5f5f5}
+.ys-product-process-instance-jumps .title .text{height: 16px;line-height:16px;border-left: 3px solid #e94d4e}
+.ys-product-process-instance-jumps table{margin-bottom: 0}
+.ys-product-process-instance-jumps table tr th,
+.ys-product-process-instance-jumps table tr td{border-top-color: #eee;border-left: 1px solid #eee;padding-left: 15px}
+.ys-product-process-instance-jumps tr th:first-child,
+.ys-product-process-instance-jumps tr td:first-child{padding-left: 34px;border-left: none}
+.ys-product-process-instance-jumps tr th{color: #999;border-top:1px solid #ddd!important}
+.ys-product-process-instance-jumps svg{transition-duration:0.15s;}
+.ys-product-process-instance-jumps.up svg{transform:rotate(180deg);}
+.ys-product-process-instance-jumps .spr{font-family: "Microsoft YaHei";font-weight: bold;color: #1e5494}
+/* 留言记录 */
+.ys-product-process-instance-comment{border:1px solid #eee;/*font-size: 16px;*/;}
+.ys-product-process-instance-comment .title{height:46px;font-size: 16px;background: #f5f5f5}
+.ys-product-process-instance-comment .title .text{height: 16px;line-height:16px;border-left: 3px solid #e94d4e}
+.ys-product-process-instance-comment table{margin-bottom: 0}
+.ys-product-process-instance-comment table tr th,
+.ys-product-process-instance-comment table tr td{border-top-color: #eee;border-left: 1px solid #eee;padding-left: 15px}
+.ys-product-process-instance-comment tr th:first-child,
+.ys-product-process-instance-comment tr td:first-child{padding-left: 34px;border-left: none}
+.ys-product-process-instance-comment tr th{color: #999;border-top:1px solid #ddd!important}
+.ys-product-process-instance-comment svg{transition-duration:0.15s;}
+.ys-product-process-instance-comment.up svg{transform:rotate(180deg);}
+.ys-product-process-instance-comment .spr{font-family: "Microsoft YaHei";font-weight: bold;color: #1e5494}
+/* 审批意见 */
+.ys-product-process-instance-approve{border:1px solid #eee;/*font-size: 16px;*/;}
+.ys-product-process-instance-approve .title{height:46px;font-size: 16px;background: #f5f5f5}
+.ys-product-process-instance-approve .title .text{height: 16px;line-height:16px;border-left: 3px solid #e94d4e}
+.ys-product-process-instance-approve table{margin-bottom: 0}
+.ys-product-process-instance-approve tr td{border-top-color: #eee!important;border-left: 1px solid #eee}
+.ys-product-process-instance-approve tr td{height: 46px;line-height: 46px!important;}
+.ys-product-process-instance-approve tr td:first-child{border-left: none;text-align: right;padding:0 15px 0 0!important;font-weight: bold}
+.ys-product-process-instance-approve tr td:last-child{padding:0 0 0 15px!important;}
+.ys-product-process-instance-approve tr:first-child td{border-top: 1px solid #ddd!important;}
+.ys-product-process-instance-approve .node{background: #FFFAF2;border:1px solid #888;border-radius: 0px;float: left;height:36px;width:140px;text-align:center;line-height:36px;padding:0 16px;box-sizing: content-box}
+.ys-product-process-instance-approve .error{border: 2px solid #E64E4D!important}
+.ys-product-process-instance-approve .select2-selection__rendered{padding-left: 13px!important;}
+.ys-product-process-instance-approve .ry .select2-selection__rendered{padding-left: 6px!important;}
+.ys-product-process-instance-approve .select2-container{display: block}
+.ys-product-process-instance-approve .select2-container--default.select2-container--focus .select2-selection--multiple{border:1px solid #ccc!important}
+.ys-product-process-instance-approve .select2-container--default .select2-selection--multiple{/*min-height: 38px!important;*/}
+.ys-product-process-instance-approve .select2-container--default .select2-search__field{height: 36px;}
+.ys-product-process-instance-approve .select2-container--default .select2-selection__rendered{/*height: 38px;*/display: block}
+.ys-product-process-instance-approve .select2-container--default{line-height: 36px;}
+/* 编辑或者发起 */
+.ys-product-process-instance-edit-start .toolbar .btn{width: 100px;margin-right: 15px}
+.ys-product-process-instance-edit-start .tips{font-size: 18px}
+.ys-product-process-instance-edit-start hr{}
+/* 编辑审批人 */
+.ys-product-process-instance-approve-user .task,
+.ys-product-process-instance-approve-user .approve{float: left;height: 38px;line-height: 38px;width: 300px;text-align: right;padding-right: 20px;margin-bottom: 15px}
+.ys-product-process-instance-approve-user .approve{width: 300px;text-align: left}
+.ys-product-process-instance-approve-user input{height: 38px;line-height: 38px;box-shadow: none;/*border:none;background: #f3f3f3;*/width: 300px;/*background-color:#fff!important;*/cursor: pointer}
+.ys-product-process-instance-approve-user input.readonly{background: #eee!important;}
+.ys-product-process-instance-approve-user .select2-container--default{width: 300px!important;}
+.ys-product-process-instance-approve-user select{height: 38px;line-height: 38px;padding-left:15px;border-radius:0;appearance:none;-webkit-appearance: none;background: #fff;border:1px solid #ddd;box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);width: 300px!important;}
+.ys-product-process-instance-approve-user select.require{border-left: 2px solid #E64E4D!important;padding-left: 13px;}
+.ys-product-process-instance-approve-user .select2-container--default.select2-container--focus .select2-selection--multiple{border-top:1px solid #ccc!important;border-right:1px solid #ccc!important;border-bottom:1px solid #ccc!important;}
+.ys-product-process-instance-approve-user .select2-container--default .select2-selection--multiple{/*min-height: 38px!important;*/}
+.ys-product-process-instance-approve-user .select2-container--default .select2-search__field{height: 36px;}
+.ys-product-process-instance-approve-user .select2-container--default .select2-selection__rendered{/*height: 38px;*/display: block}
+

@@ -1,0 +1,69 @@
+<div class="col-xs-12 p0 ys-dialog-layout-manager">
+    <div class="col-xs-12 p0 selector-header">
+        <div class="col-xs-10 pl20 title">
+            业态信息
+        </div>
+        <div class="col-xs-2 pr15">
+            <icon class="pull-right ys-framework-dialog-close" name="close-1" width="14px" height="50px"
+                  ng-click="close()"></icon>
+        </div>
+    </div>
+    <div class="col-xs-12 p0 select-body" style="overflow: hidden;">
+        <div class="col-xs-12 p0" style="width: 680px;">
+            <div class="col-xs-4 p0 selector-toolbar" style="width: 260px">
+                <div class="col-xs-12 p20 selector-content">
+                    <div treecontrol class="ys-framework-tree ys-framework-tree-simple" tree-model="trees"
+                         expanded-nodes="expandedNodes" selected-node="selectedNode"
+                         on-selection="onSelected">
+                        {{node.name}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-8 p0 selector-result" style="width: 420px">
+                <div class="title fs12">
+                    <span>{{input.id?'编辑':'新增'}}</span>
+                    <span class="pull-right text-danger pointer" ng-click="drop()" ng-if="input.id">删除</span>
+                </div>
+                <div class="col-xs-12 p0 pt20 selector-content form-horizontal">
+                    <div class="col-xs-10 p0 col-xs-offset-1">
+                        <div class="col-xs-12 mb10">
+                            <div class="col-xs-4 control-label">上级</div>
+                            <div class="col-xs-8 p0 lh34">
+                                <div class="col-xs-12 p0 path" error="{{input.errorCode}}" code="9001">
+                            <span class="text-primary pointer" ng-click="selectParentCategory()">
+                                {{input.parentId?$app.dictionary.LAYOUTS.hash[input.parentId].path:'-- 请选择 --'}}
+                            </span>
+                                </div>
+                                <!--<span ng-if="input.parentId">&#45;&#45;请选择&#45;&#45;</span>-->
+                            </div>
+                        </div>
+                        <div class="col-xs-12 mb10">
+                            <div class="col-xs-4 control-label">业态名称</div>
+                            <div class="col-xs-8 p0">
+                                <input type="text" class="form-control require" ng-model="input.name">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 mb10">
+                            <div class="col-xs-4 control-label">排序</div>
+                            <div class="col-xs-4 p0">
+                                <input type="text" class="form-control require" ng-model="input.sequence">
+                            </div>
+                            <div class="col-xs-9 col-xs-offset-3 text-invalid lh34">
+                                从大到小、数字越大越靠前
+                            </div>
+                        </div>
+                        <div class="col-xs-12 mb10">
+                            <div class="col-xs-4 col-xs-offset-4 p0">
+                                <button class="btn btn-primary" ng-click="submit()">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0 selector-footer">
+        <button class="btn btn-primary pull-right" ng-click="select({})">新增</button>
+        <button class="btn btn-default pull-right" ng-click="cancel()">取消</button>
+    </div>
+</div>

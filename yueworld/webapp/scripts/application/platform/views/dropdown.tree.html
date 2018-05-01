@@ -1,0 +1,29 @@
+<div class="ys-framework-dropdown-tree" ng-class="{'search':option.search}" ng-click="$event.stopPropagation();">
+    <div class="ys-framework-dropdown-tree-toggle">
+        <input class="form-control ys-framework-dropdown-tree-text" placeholder="{{option.placeholder}}" readonly
+               value="{{dictionary.hash[option.model[option.property]].text}}" ng-if="!isObjectToProperty"/>
+        <input class="form-control ys-framework-dropdown-tree-text" placeholder="{{option.placeholder}}" readonly
+               value="{{option.model[option.property.text]}}" ng-if="isObjectToProperty"/>
+        <span class="caret"></span>
+    </div>
+    <div class="ys-framework-dropdown-tree-container">
+        <div class="ys-framework-dropdown-tree-search">
+            <input class="form-control" placeholder="{{option.placeholder}}" ng-model="filter.term"/>
+        </div>
+        <!--<div class="ys-framework-dropdown-tree-items" ng-if="dictionary.options.length">
+            <div class="item" ng-repeat="item in dictionary.options" ng-click="select(item)"
+                 ng-class="{'active':active(item)}">
+                {{item.text}}
+            </div>
+        </div>-->
+        <div treecontrol class="ys-framework-tree ys-framework-tree-simple" tree-model="trees"
+             expanded-nodes="expandedNodes" selected-node="selectedNode"
+             on-selection="onSelected">
+            {{node.name}}
+        </div>
+        <div class="ys-framework-dropdown-tree-items text-center text-invalid" ng-if="!dictionary.options.length&&option.search" style="padding:10px;">
+            <span ng-if="!filter.term">请输入查询关键字!</span>
+            <span ng-if="filter.term">未查询到相关数据</span>
+        </div>
+    </div>
+</div>

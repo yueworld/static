@@ -1,0 +1,63 @@
+<div class="ys-dialog-user">
+    <div class="col-xs-12 p0 selector-header">
+        <div class="col-xs-4 pl20 title">
+            {{option.title||'请选择职位'}}
+        </div>
+        <div class="col-xs-6 p0">
+            <div class="pull-left search">
+                <input type="text" class="form-control" ng-model="filter.term" placeholder="快速搜索"><span></span>
+            </div>
+        </div>
+        <div class="col-xs-2 pr15">
+            <icon class="pull-right text-invalid" name="close-1" width="22px" height="50px"
+                  ng-click="submit(false)"></icon>
+        </div>
+    </div>
+    <div class="col-xs-12 p0 select-body">
+        <div class="col-xs-4 p0 selector-toolbar">
+            <div class="col-xs-12 title">组织机构</div>
+            <div class="col-xs-12 p20 selector-content ">
+                <div treecontrol class="ys-framework-tree user" tree-model="trees"
+                     expanded-nodes="expandedTrees" selected-node="selectedNode"
+                     on-selection="onSelected">
+                    {{node.name}}
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-8 p0 selector-result">
+            <div class="title fs12">
+                已选职位
+                <icon name="right-1" width="10px" height="40px"></icon>
+                {{selectedNode.name}}
+                <div class="pull-right" ng-if="option.multiple">
+                    <button class="btn btn-success">已选</button>
+                </div>
+            </div>
+            <div class="col-xs-12 p0 selector-content">
+                <ul ng-if="items.length">
+                    <li ng-repeat="item in items"
+                        ng-click="select(item)">
+                        <span>{{item.name}} <sup class="text-danger">({{item.realname}})</sup></span>
+                        <em class="ys-checkbox pull-right" style="margin-top: 7px;" ng-class="{'selected':isSelected(item)}"></em>
+                    </li>
+                </ul>
+                <ul ng-if="!items.length&&selecteds.length">
+                    <li ng-repeat="item in selecteds"
+                        ng-click="select(item)">
+                        <span>{{item.name}} <sup class="text-danger">({{item.realname}})</sup></span>
+                        <em class="ys-checkbox pull-right selected" style="margin-top: 7px;"></em>
+                    </li>
+                </ul>
+                <div class="col-xs-12 no-data" ng-if="!items.length&&!selecteds.length">
+                    <icon name="no-data-1" height="100px" width="28px"></icon>
+                    未查询到相关数据
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0 selector-footer">
+        <button class="btn btn-primary pull-right" ng-click="submit(true)">确认</button>
+        <button class="btn btn-default pull-right" ng-click="justLookSelected()" ng-if="!option.single&&selecteds.length">已选</button>
+        <button class="btn btn-default pull-right" ng-click="submit(false)">取消</button>
+    </div>
+</div>

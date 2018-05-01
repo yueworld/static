@@ -1,0 +1,247 @@
+html,body{
+    /*font-family: Arial, Helvetica, "Microsoft YaHei", "STHeiti";*/
+    /*font-family: 'PingFang SC', 'Helvetica Neue',"STHeitiSC-Light","Microsoft YaHei",sans-serif;*/
+    /*font-family:"Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, "Microsoft YaHei";*/
+    /*font-family: Arial, Helvetica, "Microsoft YaHei", "STHeiti";*/
+    /*font-size: 12px;*/
+    font-family: Arial, Helvetica, "Microsoft YaHei", "STHeiti";
+    font-size: 14px;
+    /*color: #222*/
+    color:#373c42;
+    /*text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;*/
+    /*text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;*/
+}
+
+/* 修改默认样式 */
+h3{font-size: 18px}
+a:hover,
+a:focus,
+a:active{text-decoration: none}
+textarea{resize: none}
+
+/* 工具类 */
+.wh100{width: 100%}
+.pointer{cursor: pointer}
+.red{color: red}
+.text-invalid{color:/*#777*/#999/*757575*/!important}
+.text-black{color: #000!important}
+.text-blue{color: blue!important}
+/*.text-info{color: #333}*/
+.text-primary{color: #2696dd!important}
+.text-primary:hover{color: #3071a9}
+.readonly{background:#fff!important;cursor: pointer}
+/*input[readonly]{}*/
+
+.w100p{width: 100%!important}
+.br0{border-radius: 0}
+.fs12{font-size: 12px}
+.fs14{font-size: 14px}
+.fs18{font-size: 18px}
+.fs24{font-size: 24px}
+.lh34{line-height: 34px}
+.lh38{line-height: 38px}
+.lh40{line-height: 40px}
+.fwb{font-weight: bold}
+.fz i{transform:rotate(180deg)}
+.text-ellipsis{text-overflow:ellipsis;overflow:hidden;white-space: nowrap}
+.shadow{box-shadow: 0 1px 1px rgba(0,0,0,0.15)}
+.no-select {-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+
+/* SVG ICON 样式 */
+svg:not(:root) {overflow: hidden}
+svg{display: inline-block;fill: currentColor;vertical-align: top;text-align: center}
+
+/* padding */
+.p0{padding:0px}
+.p10{padding:10px}
+.p15{padding:15px}
+.p20{padding:20px}
+.p30{padding:30px}
+.p40{padding:40px}
+.p45{padding:45px}
+.pl0{padding-left: 0px!important}
+.pl5{padding-left: 5px!important}
+.pl8{padding-left: 8px!important}
+.pl10{padding-left: 10px!important}
+.pl15{padding-left: 15px!important}
+.pl20{padding-left: 20px!important}
+.pl30{padding-left: 30px}
+.pl40{padding-left: 40px!important}
+.pl50{padding-left: 50px!important}
+.pl60{padding-left: 60px!important}
+.pl80{padding-left: 80px!important}
+.pr0{padding-right: 0px!important}
+.pr5{padding-right: 5px}
+.pr10{padding-right: 10px!important}
+.pr15{padding-right: 15px!important}
+.pr20{padding-right: 20px!important}
+.pr30{padding-right: 30px!important}
+.pr40{padding-right: 40px!important}
+.pr100{padding-right: 100px!important}
+.pb0{padding-bottom: 0px!important}
+.pb10{padding-bottom: 10px}
+.pb15{padding-bottom: 15px}
+.pb20{padding-bottom: 20px}
+.pb30{padding-bottom: 30px}
+.pb40{padding-bottom:40px}
+.pt0{padding-top:0px!important}
+.pt5{padding-top:5px}
+.pt10{padding-top:10px}
+.pt15{padding-top: 15px}
+.pt20{padding-top: 20px}
+.pt25{padding-top: 25px}
+.pt30{padding-top:30px}
+.pt40{padding-top:40px}
+
+/* margin */
+.m0{margint:0!important}
+.ml0{margint-left:0!important}
+.ml10{margin-left: 10px}
+.ml15{margin-left: 15px}
+.mt0{margin-top: 0px}
+.mt5{margin-top: 5px!important}
+.mt6{margin-top: 6px}
+.mt8{margin-top: 8px}
+.mt10{margin-top: 10px}
+.mt15{margin-top: 15px}
+.mt20{margin-top: 20px}
+.mt30{margin-top: 30px}
+.mt40{margin-top: 40px}
+.mb0{margin-bottom: 0px!important}
+.mb5{margin-bottom: 5px!important}
+.mb8{margin-bottom: 8px}
+.mb10{margin-bottom: 10px}
+.mb15{margin-bottom: 15px}
+.mb20{margin-bottom: 20px}
+.mr0{margin-right: 0px!important}
+.mr10{margin-right: 10px!important}
+.mr15{margin-right: 15px!important}
+.mr20{margin-right: 20px!important}
+
+/*border*/
+.bl0{border-left:0px;}
+
+/* from */
+.form-control{border-radius:0}
+.input-group-addon{border-radius: 0px;width: 48px}
+
+/* button */
+.btn{border-radius: 0px}
+.bg-gray{background: #eaedf1/*#f5f5f5*/}
+.bg-white{background: #fff}
+.btn-primary{background: #18b0e2;border-color: #18b0e2}
+.btn-success{background: #449139}
+.btn-success:hover{background: #006135}
+.btn-gray{background: #818c92;color: #fff}
+.btn-gray:hover{color: #fff}
+
+/* 分页 */
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span{border-radius: 0}
+.pagers {text-align: right}
+.pagers .summary{line-height: 34px;padding-right: 20px;font-size: 14px}
+.pagers .pagination-page{display: none}
+.pagers .goto{float: right;margin-left: 10px}
+.pagers .goto input{width: 44px;float: left;/*border-right:none*/}
+.pagers .goto button{float: left;border-left: none;margin-left: 0px}
+
+/* 下拉框 */
+.dropdown .btn-default:focus{background-color: #fff;border-color: #ccc}
+.dropdown-menu{border-radius: 0px;padding:0}
+.dropdown-menu > li > a{padding:8px 20px!important}
+
+/*table*/
+
+.simple-table tr:hover {background-color: #F3F3F3}
+.simple-table tr th,
+.simple-table tr:hover th{background: #f5f5f5;font-weight: normal;color:#757575!important}
+.simple-table tr th,
+.simple-table tr td{border:none!important;vertical-align: middle!important;height: 40px;padding-left: 20px!important}
+
+div.grid {padding:0}
+div.grid .tr{padding: 0}
+div.grid .td{padding: 0;height: 40px;line-height: 40px;padding-left: 20px;border:0px solid red}
+div.grid .header{background: #f9f9f9}
+div.grid-hover .tr:hover{background: #f9f9f9;cursor: pointer}
+div.grid .tr > .selected{background: #808C92!important}
+div.grid .tr > .selected .td{color: #fff;background: #808C92}
+
+
+/* 日历控件 */
+.uib-datepicker {padding: 8px;outline: none;box-shadow: none}
+.uib-datepicker thead .h6 th {padding-top: 8px}
+.uib-datepicker thead tr:last-child th{padding-top: 10px}
+.uib-datepicker tbody tr:first-child td {padding-top: 6px}
+.uib-datepicker  th,
+.uib-datepicker  td{height: 32px;width: 38px}
+.uib-datepicker  th button{height: 32px;margin-bottom: 7px}
+.uib-datepicker tbody .btn {border: 0px !important}
+.uib-datepicker tbody .btn:hover {background: #F3F3F3}
+.uib-datepicker tbody .btn-default {background: transparent}
+.uib-datepicker tbody .active,
+.uib-datepicker tbody .active:hover,
+.uib-datepicker tbody .active span {background: #3C0}
+.uib-datepicker tbody .btn[disabled="disabled"] .btn[disabled="disabled"] span {color: #CCC}
+/*.uib-datepicker tbody .btn .text-info{color:#fff !important}*/
+.uib-datepicker em {font-size: 12px;color: #ACD}
+.uib-datepicker .uib-daypicker:focus{outline: none}
+.uib-datepicker-popup .uib-button-bar{display: block;height: 48px;padding:10px 9px 10px;display: block}
+.uib-datepicker-popup .uib-button-bar .uib-clear{margin-left: 8px}
+
+.uib-tooltip-diy {position: absolute;z-index: 1030;display: block;font-size: 12px;line-height: 1.4;opacity: 0;filter: alpha(opacity=0);visibility: visible}
+.uib-tooltip-diy .tooltip-inner {max-width: 300px;padding: 12px 8px;color: #ffffff;text-align: center;text-decoration: none;border-radius: 0 0;background-color: #425160}
+.uib-tooltip-diy .tooltip-arrow {position: absolute;width: 0;height: 0;border-color: transparent;border-style: solid}
+.uib-tooltip-diy.in {opacity: 0.9;filter: alpha(opacity=90)}
+.uib-tooltip-diy.top {padding-bottom: 10px}
+.uib-tooltip-diy.top .tooltip-arrow {left: 50%;bottom: 5px;border-top-color: #425160;border-width: 5px 5px 0 5px}
+.uib-tooltip-diy.bottom {padding-bottom: 10px}
+.uib-tooltip-diy.bottom .tooltip-arrow {left: 44%;top: -5px;border-bottom-color: #425160;border-width: 0px 5px 5px 5px}
+.uib-tooltip-diy.right {padding-left: 10px}
+.uib-tooltip-diy.right .tooltip-arrow {top: 40%;left: 0px;border-right-color: #425160;border-width: 5px 5px 5px 5px}
+
+.select2{width: 100%!important;}
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple{border: 1px solid #ccc;box-shadow: inset 0 1px 1px rgba(0,0,0,.075);border-radius: 0px!important}
+.select2-container--default .select2-selection--single:focus,
+.select2-container--default .select2-selection--multiple:focus,
+.select2-container--default .select2-selection--single .select2-container--focus:focus,
+.select2-container--default .select2-selection--multiple .select2-container--focus:focus{outline: none}
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--single .select2-selection__arrow{height: 34px}
+.select2-container--default .select2-selection--single .select2-selection__rendered{line-height: 34px;/*padding-left: 15px;*/}
+.lh38 .select2-container--default .select2-selection--single,
+.lh38 .select2-container--default .select2-selection--single .select2-selection__arrow{height: 38px!important;}
+.lh38 .select2-container--default .select2-selection--single .select2-selection__rendered{line-height: 38px!important;}
+.select2-container--default .select2-results__option--highlighted[aria-selected]{background: #eee;color: #555}
+.select2-container .select2-results__option{padding:10px 5px}
+.select2-container .select2-results__group{font-weight: bold;color:#999}
+.select2-container .select2-search--inline .select2-search__field{margin-top: 0}
+.select2-container--default.select2-container--focus .select2-selection--multiple{border-color: #FFF}
+.select2-container--default .select2-selection--multiple .select2-selection__rendered{padding:0 8px}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{border-radius: 0;height: 25px;line-height: 25px;margin-top: 6px;}
+.select2-dropdown{border-color: #ccc;border-radius: 0px!important}
+.select2-search--dropdown .select2-search__field{padding:6px}
+.select2-search--dropdown .select2-search__field{padding:6px}
+
+.ys-checkbox,
+.ys-radio{background: url(../img/common/icon/box.png) no-repeat;width: 18px;height: 18px;display: inline-block;vertical-align: middle;cursor: pointer}
+.ys-checkbox.selected{background-position: -40px 0!important;}
+.ys-checkbox.half-selected{background:url(../img/common/icon/half-checked.png) 1px 1px}
+.ys-radio{background-position: -100px 0;}
+.ys-radio.selected{background-position: -140px 0;}
+
+.ys-cover{float: left;margin-right: 15px;/*height: 120px;width: 180px;*/position: relative}
+.ys-cover img{/*border:1px solid #ddd;padding:1px;*/}
+.ys-cover .drop,
+.ys-cover .zoom{position: absolute;left:10px;bottom:10px;height: 22px;width:22px;border-radius: 2px;overflow: hidden;color:#E64E4D;background:#fff;text-align:center;display: none;cursor: pointer;border:1px solid #ddd}
+.ys-cover .zoom{left:auto;right:10px;}
+.ys-cover:hover .drop,
+.ys-cover:hover .zoom{display: block}
+.mask-layer{position: fixed;z-index: 2000;top:0;right:0;bottom:0px;left:0;background:rgba(0, 0,0, 0.3);padding:0}
+.no-data{height: 100px;line-height: 100px;text-align: center;color: #999;font-size: 24px}
+
+
+.ys-calendar{display: block}
+

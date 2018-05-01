@@ -1,0 +1,14 @@
+/* 通用选择器 */
+.ys-dialog-brand-choose .select-body{/*height: 350px;*/}
+.ys-dialog-brand-choose .selector-content{height: 300px;/*border-top:1px solid #ccc*/}
+.ys-dialog-brand-choose .selector-toolbar > .title{line-height: 40px;height: 40px;background: #f3f3f3;font-size: 14px;color: #757575;padding-left: 20px}
+.ys-dialog-brand-choose .selector-toolbar > .title span{line-height: 40px;line-height: 40px;background:#808c92;color: #fff;display: inline-block}
+.ys-dialog-brand-choose .selector-toolbar .selector-content{overflow-y: scroll}
+.ys-dialog-brand-choose .selector-toolbar .selector-content i.tree-leaf-head:before{background-color: #fff!important;height: 0!important;}
+.ys-dialog-brand-choose .selector-result .title{line-height: 40px;height: 40px;background: #f3f3f3;font-size: 14px;color: #757575;border-left: 1px solid #ccc;padding-left: 20px}
+.ys-dialog-brand-choose .selector-result .selector-content{border-left: 1px solid #ccc;padding:20px;overflow-y: scroll}
+.ys-dialog-brand-choose .selector-result .selector-content ul{list-style: none;padding:0;margin: 0;border:1px solid #ccc }
+.ys-dialog-brand-choose .selector-result .selector-content li{padding:0 13px;height: 34px;line-height:34px;border-bottom: 1px solid #ddd}
+.ys-dialog-brand-choose .selector-result .selector-content li:last-child{border-bottom: none}
+.ys-dialog-brand-choose .selector-result .selector-content li icon{float: right;color: #E64E4D}
+.ys-dialog-brand-choose .selector-result .selector-content li:hover{background: #f3f3f3;cursor: pointer}

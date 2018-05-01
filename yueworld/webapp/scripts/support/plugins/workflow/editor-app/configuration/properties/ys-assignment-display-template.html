@@ -1,0 +1,15 @@
+<!--
+<span ng-if="property.value.assignment.assignee">{{'PROPERTY.ASSIGNMENT.ASSIGNEE_DISPLAY' | translate:property.value.assignment }} </span>
+<span ng-if="property.value.assignment.candidateUsers.length > 0">{{'PROPERTY.ASSIGNMENT.CANDIDATE_USERS_DISPLAY' | translate:property.value.assignment.candidateUsers}} </span>
+<span ng-if="property.value.assignment.candidateGroups.length > 0">{{'PROPERTY.ASSIGNMENT.CANDIDATE_GROUPS_DISPLAY' | translate:property.value.assignment.candidateGroups}} </span>
+<span ng-if="!property.value.assignment.assignee && (!property.value.assignment.candidateUsers || property.value.assignment.candidateUsers.length == 0) && (!property.value.assignment.candidateGroups || property.value.assignment.candidateGroups.length == 0)" translate>PROPERTY.ASSIGNMENT.EMPTY</span>-->
+<div ng-switch="property.value.identity.typeId">
+    <span ng-switch-when="1001">发起人</span>
+    <span ng-switch-when="1002">
+        固定职位 ({{posNames(property.value.identity.pos)}})
+    </span>
+    <span ng-switch-when="1003">审批人自定义职位</span>
+    <span ng-switch-when="1004">审批人所在部门下其他职位</span>
+    <span ng-switch-when="1005">审批人所在上级部门下职位</span>
+</div>
+<span ng-if="!property.value.identity.typeId">未配置</span>

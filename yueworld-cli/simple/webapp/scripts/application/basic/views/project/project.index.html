@@ -1,0 +1,66 @@
+<div class="col-xs-12 p0">
+    <div class="col-xs-12 pt20 pr20"
+         ng-class="{true:'pl10',false:'pl20'}[ysSidebarStatus=='unfold']">
+        <div class="col-xs-12 p0 ys-product-conditions">
+            <div class="btn-group">
+                <div class="btn-group">
+                    <div ys-framework-dropdown="{dictionary:'AREAS',model:filter,property:'areaId',width:120,placeholder:'请选择区域',theme:'caret'}"></div>
+                </div>
+                <div class="btn-group">
+                    <div ys-framework-dropdown="{dictionary:'PROJECT_OPERATE_STATUS',model:filter,property:'operateStatusId',width:130,placeholder:'请选运营状态',theme:'caret'}"></div>
+                </div>
+            </div>
+            <div class="search">
+                <input class="form-control" placeholder="请输入项目编号、名称" ys-framework-keyboard-enter="refresh()"
+                       ng-model="filter.termTemp" style="width: 220px;"/><span ng-click="refresh()"></span>
+            </div>
+        </div>
+        <div class="col-xs-12 p0 mt20">
+            <table class="table ys-framework-grid main">
+                <tr class="rs header">
+                    <th style="width: 200px">编码</th>
+                    <th>项目全称</th>
+                    <th>项目简称</th>
+                    <th>总面积 (m<sup>2</sup>)</th>
+                    <th>运营面积 (m<sup>2</sup>)</th>
+                    <th>商铺数量</th>
+                    <th>运营状态</th>
+                    <th>开业日期</th>
+                    <th>地址</th>
+                </tr>
+                <tbody project-publish pager="pager" refresh="refresh()" ng-if="pager.add"></tbody>
+                <tbody project-publish pager="pager" refresh="refresh()" model="item" ng-repeat="item in pager.results">
+                <tr class="rs pointer" ng-click="$app.form.row.slideToggle({event:$event,pager:pager,item:item})">
+                    <td>{{item.no}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.abbreviationName}}</td>
+                    <td>{{item.totalBuildingArea|number:2||'-'}}</sup></td>
+                    <td>{{item.totalServiceArea|number:2||'-'}}</td>
+                    <td>{{item.storeCount||'-'}}</td>
+                    <td>{{$app.dictionary.PROJECT_OPERATE_STATUS.hash[item.operateStatusId].text}}</td>
+                    <td>{{item.openingDate|date:'yyyy-MM-dd'}}</td>
+                    <td>{{item.address}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-xs-12 no-data" ng-if="!pager.results.length">
+                <icon name="no-data-1" height="100px" width="28px"></icon>
+                未查询到相关数据
+            </div>
+            <div class="col-xs-12 p0 pagers mt20" ng-if="pager.totalElements">
+                <span class="summary">共{{pager.totalElements}}条记录,当前{{pager.page}}/{{pager.totalPages}}页</span>
+                <span class="goto">
+                    <input class="text form-control" ng-model="filter.page"/>
+                </span>
+                <ul class="pull-right mt0"
+                    uib-pagination
+                    items-per-page="pager.size"
+                    total-items="pager.totalElements"
+                    ng-model="filter.page"
+                    max-size="filter.size"
+                    previous-text="上页" next-text="下页" first-text="首页" last-text="尾页"
+                    boundary-links="true"></ul>
+            </div>
+        </div>
+    </div>
+</div>

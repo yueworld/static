@@ -1,0 +1,18 @@
+<div class="col-xs-12 p0 ys-dialog-simple-selector">
+    <div class="col-xs-12 p0 selector-header">
+        <div class="col-xs-12 pl20 title" ng-bind="option.title"></div>
+    </div>
+    <div class="col-xs-12 p20 select-body">
+        <div class="col-xs-12 p0" style="border:1px solid #ddd">
+            <button type="button" class="col-xs-12 btn btn-default text-ellipsis" ng-class="{'selected':item.selected}"
+                    ng-click="setSelectedItem(item)" ng-repeat="item in items">
+                <span ng-bind-html="($index+1)+' . '+(item.text||item.name)"></span>
+                <icon name="ok-1" class="pull-right" width="18" height="38" ng-if="item.selected"></icon>
+            </button>
+        </div>
+    </div>
+    <div class="col-xs-12 p15 selector-footer">
+        <button class="btn btn-primary pull-right" ng-click="submit(true)">确认</button>
+        <button class="btn btn-default pull-right" ng-click="submit(true)">取消</button>
+    </div>
+</div>

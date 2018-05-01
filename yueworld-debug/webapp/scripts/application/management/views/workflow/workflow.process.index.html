@@ -1,0 +1,177 @@
+<div class="col-xs-12 p20 pr0 ys-workflow-process-index">
+    <div class="col-xs-12 p0 nav-title">
+        <span class="text-invalid">当前选择:</span>
+        <span class="text-invalid" ng-if="selectedNode.isCategory==1">请在左侧选择表单</span>
+        <span ng-if="selectedNode.isCategory!=1">{{selectedNode.name}}</span>
+        <button type="button" class="btn btn-primary pull-right add" ng-click="start()">
+            <icon name="add-2" width="14px" height="32px"></icon>
+            新增申请
+        </button>
+    </div>
+    <div class="col-xs-12 p0 pt15 ys-product-conditions">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-class="{'active':filter.operationId==1001}"
+                    ui-sref="management.workflow.process.index({operationId:1001})">待办事项
+            </button>
+            <button type="button" class="btn btn-default" ng-class="{'active':filter.operationId==1002}"
+                    ui-sref="management.workflow.process.index({operationId:1002})">我发起的
+            </button>
+            <button type="button" class="btn btn-default" ng-class="{'active':filter.operationId==1003}"
+                    ui-sref="management.workflow.process.index({operationId:1003})">我审批的
+            </button>
+            <button type="button" class="btn btn-default" ui-sref="management.workflow.process.index({operationId:1004})"
+                    ng-class="{'active':filter.operationId==1004}" ng-if="false">推送我的
+            </button>
+            <button type="button" class="btn btn-default" ng-class="{'active':filter.operationId==1005}"
+                    ui-sref="management.workflow.process.index({operationId:1005})">全部
+            </button>
+        </div>
+        <div class="search">
+            <input class="form-control" name="name" placeholder="网批号 / 标题"
+                   ng-model="filter.keyword"/><span style="border-right: none;"></span>
+            <button class="btn btn-default" ng-click="searchPanelActive=!searchPanelActive">高级搜索</button>
+        </div>
+    </div>
+    <div class="col-xs-12 p0">
+        <table class="table grid grid-bordered mt20">
+            <thead>
+            <tr class="rs header">
+                <td>网批类型</td>
+                <td>网批号</td>
+                <td>项目 / 中心</td>
+                <td ng-if="filter.operationId!=1001">状态</td>
+                <td>当前任务</td>
+                <td ng-if="filter.operationId==1001">已用时</td>
+                <td ng-if="filter.operationId!=1002">发起人</td>
+                <td ng-if="filter.operationId==1002">总用时</td>
+                <td>发起时间</td>
+            </tr>
+            </thead>
+            <tbody ng-if="searchPanelActive">
+            <tr>
+                <td colspan="7" style="padding:0!important;" class="animated fadeIn fadeOut">
+                    <div class="col-xs-12 p0 ys-form ys-publish">
+                        <div class="col-xs-12 p0 title">
+                            <span>高级搜索</span>
+                            <div class="pull-right">
+                                <button class="btn btn-default" ng-click="$parent.searchPanelActive=false">收起</button>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 body text-invalid">
+                            <div class="col-xs-10 col-xs-offset-1 pt20 pb15">
+                                <div class="col-xs-12 lh34 mb15">
+                                    <div class="col-xs-6 p0">
+                                        <div class="col-xs-4 p0 text-right">项目</div>
+                                        <div class="col-xs-8">
+                                            <select select2="pos" style="width: 100%" ng-model="filter.projectId"
+                                                    error="{{input.errorCode}}" code="9003"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 p0">
+                                        <div class="col-xs-4 p0 text-right">发起人</div>
+                                        <div class="col-xs-8">
+                                            <input type="text" class="form-control"
+                                                   placeholder=" -- 请选择 --" ng-model="filter.realname"
+                                                   ng-click="selectUser()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 lh34 mb10">
+                                    <div class="col-xs-6 p0">
+                                        <div class="col-xs-4 p0 text-right">发起开始时间</div>
+                                        <div class="col-xs-8">
+                                            <input type="text" class="form-control"
+                                                   placeholder=" -- 请选择 --"
+                                                   current-text="今天"
+                                                   clear-text="清空"
+                                                   close-text="关闭"
+                                                   is-open="filter.createStartDateOpen"
+                                                   ng-click="filter.createStartDateOpen=true"
+                                                   uib-datepicker-popup="yyyy-MM-dd"
+                                                   ng-model="filter.createStartDate">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 p0">
+                                        <div class="col-xs-4 p0 text-right">发起结束时间</div>
+                                        <div class="col-xs-8">
+                                            <input type="text" class="form-control"
+                                                   placeholder=" -- 请选择 --"
+                                                   current-text="今天"
+                                                   clear-text="清空"
+                                                   close-text="关闭"
+                                                   is-open="filter.createEndDateOpen"
+                                                   ng-click="filter.createEndDateOpen=true"
+                                                   uib-datepicker-popup="yyyy-MM-dd"
+                                                   readonly
+                                                   ng-model="filter.createEndDate">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr class="rs pointer" ng-repeat="item in pager.results" ng-click="detail(item)">
+                <td class="text-ellipsis">
+                    {{::item.processName}}
+                    <span ng-if="::item.title">/{{::item.title}}</span>
+                </td>
+                <td class="text-primary pointer">{{::item.displayNo}}</td>
+                <td>{{::item.orgName||"-"}}</td>
+                <td ng-if="filter.operationId!=1001">
+                    {{::$app.dictionary.WORKFLOW_APPROVAL_STATUS.hash[item.statusId].text}}
+                </td>
+                <td>
+
+                    <div ng-if="::item.statusId!=1006">
+                        {{::taskName(item.tasks)}}
+                        <span ng-if="filter.operationId!=1001">/ {{::taskApprovalUserRealname(item.tasks)}}</span>
+                    </div>
+                    <div ng-if="::item.statusId==1006">
+                        结束
+                    </div>
+                </td>
+                <td ng-if="filter.operationId==1001">
+                    <span ng-if="::item.statusId<=1003">-</span>
+                    <span ng-if="::item.statusId>1003">{{::$app.date.millisecondToCn(item.tasks[0].duration)}}</span>
+                </td>
+                <td ng-if="filter.operationId!=1002">
+                    <span ng-if="::item.statusId<=1003">-</span>
+                    <span ng-if="::item.statusId>1003">{{::item.applyUserRealname}}</span>
+                </td>
+                <td ng-if="filter.operationId==1002">
+                    <span ng-if="::item.statusId<=1003">-</span>
+                    <span ng-if="::item.statusId>1003">{{::$app.date.millisecondToCn(item.duration)}}</span>
+                </td>
+                <td>
+                    <span ng-if="::item.statusId<=1003">-</span>
+                    <span ng-if="::item.statusId>1003">{{::item.startDate|date:'yyyy-MM-dd HH:mm'}}</span>
+                </td>
+            </tr>
+            <tr ng-if="::!pager.results.length">
+                <td colspan="7" class="no-data" style="padding-left:0!important;line-height: 100px!important;">
+                    <icon name="no-data-1" height="100px" width="28px"></icon>
+                    未查询到相关数据
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="col-xs-12 p0 pagers mt20" ng-if="pager.totalElements">
+            <span class="summary">共{{::pager.totalElements}}条记录,当前{{::pager.page}}/{{::pager.totalPages}}页</span>
+            <span class="goto">
+                    <input class="text form-control" ng-model="filter.page"/>
+                </span>
+            <ul class="pull-right mt0"
+                uib-pagination
+                items-per-page="pager.size"
+                total-items="pager.totalElements"
+                ng-model="filter.page"
+                max-size="filter.size"
+                previous-text="上页" next-text="下页" first-text="首页" last-text="尾页"
+                boundary-links="true"></ul>
+        </div>
+    </div>
+</div>
