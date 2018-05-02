@@ -1,6 +1,16 @@
 module.exports = function ($app) {
     // 日期处理
     // ========================================== Date Helper ==========================================================
+    var regex = [
+        /^\d{8}$/,                                        // 20180502                     年月日
+        /^\d{10}$/,                                       // 1525271112                   秒值
+        /^\d{12}$/,                                       // 201805021232                 年月日时分秒
+        /^\d{13}$/,                                       // 1525271088641                毫秒值
+        /^\d{4}-\d{1,2}-\d{1,2}$/,                        // 2008-05-02                   年-月-日
+        /^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}$/,       // 2008-05-02 02:12             年-月-日
+        /^\d{4}年\d{1,2}月\d{1,2}日$/,                     // 2008年05月02                 年-月-日
+        /^\d{4}年\d{1,2}月\d{1,2}日\s\d{1,2}时\d{1,2}分$/   // 2008年05月02日 02时12分       年-月-日
+    ], toString = Object.prototype.toString;
 
     /**
      * string|number -> date
@@ -9,18 +19,34 @@ module.exports = function ($app) {
      * @returns {*}
      */
     function parse(value) {
-        if (!value) {
-            return null;
-        } else if (value instanceof Number) {
-            return new Date(value);
-        } else if (/^\d+$/.test(value)) {
-            return new Date(Number(value));
-        } else if (value instanceof String) {
-            var s = value.split("-");
-            return new Date(s[0], parseInt(s[1]) - 1, s[2]);
-        } else if (value instanceof Date) {
+        $app.assert.isTrue(!$app.valid.isDate(value), "参数格式错误、转换日期失败！", 1001);
+        if (toString.call(value) === '[object Date]') {
             return value;
         }
+        for (var i = 0; i < regex.length; i++) {
+            if (regex[i].test(value)) {
+                if (i == 0) {
+                    return new Date(value.substring(0, 3), value.substring(4, 5), value.substring(6, 7));
+                } else if (i == 1) {
+                    return new Date(value * 1000);
+                } else if (i == 2) {
+                    return new Date(value.substring(0, 3), value.substring(4, 5), value.substring(6, 7), value.substring(8, 9), value.substring(10, 11));
+                } else if (i == 3) {
+                    return new Date(value);
+                } else if (i == 4) {
+                    return new Date(value[0], value[1], value[2]);
+                } else if (i == 5) {
+                    var tmp1 = value.split(" ")[0].split("-"),
+                        tmp2 = value.split(" ")[1].split(":");
+                    return new Date(tmp1[0], tmp1[1], tmp1[2], tmp2[0], tmp2[1]);
+                } else if (i == 6) {
+                    return new Date(value.substring(0, 3), value.substring(5, 6), value.substring(8, 9));
+                } else if (i == 7) {
+                    return new Date(value.substring(0, 3), value.substring(5, 6), value.substring(8, 9), value.substring(12, 13), value.substring(15, 16));
+                }
+            }
+        }
+        $app.isTrue(true, "未被支持的日期格式：" + value, 1002);
     }
 
     /**
@@ -69,11 +95,7 @@ module.exports = function ($app) {
         $app.assert.isTrue(!/y|M|d|w|h|m|s|ms/.test(expr), "表达式格式错误、可选范围(y、M、d、w、h、m、s、ms)！");
         $app.assert.isTrue(!$app.valid.isNumber(value), "数值式格式错误、必须为数字！");
         expr = expr.toUpperCase();
-        if (/^\d+$/.test(date)) {
-            date = new Date(Number(date));
-        } else if (angular.isString(date)) {
-            date = this.parse(date);
-        }
+        date = parse(date);
         switch (expr) {
             case "y":
                 date.setFullYear(date.getFullYear() + value);
@@ -173,7 +195,7 @@ module.exports = function ($app) {
     }
 
     /**
-     * 获取间隔年周期
+     * 获取两个日期之间的时间周期
      * @param start
      * @param end
      * @returns [{start:date,end:date,index:number,year:number,day:number}]
@@ -235,7 +257,11 @@ module.exports = function ($app) {
         return d1.getTime() > d2.getTime() ? d1 : d2;
     }
 
-
+    /**
+     * 毫秒转文本
+     * @param duration
+     * @returns {string}
+     */
     function msToText(duration) {
         if (!duration) {
             return "-";

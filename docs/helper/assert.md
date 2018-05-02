@@ -5,21 +5,40 @@
 
 <!-- ============================== isTrue ========================== -->
 ## isTrue
-* 参数：`cond`、`code`、`message`
+* 参数：`cond`、`message`、`code`
 
-当`cond`为真时抛出代号为`code`、内容为`message`的异常、
+当`cond`为真时抛出内容为`message`、代号为`code`的异常、
 
 ```js
 // 示例
-var username='zhangsan';
-$app.assert.isEmpty(username,1001,'用户名不能为空！');
-$app.assert.isEmpty(username,1001,'用户名不能为空！');
+var username='yueworld';
+try{
+    $app.assert.isTrue(!$app.valid.eq(username,"yueworld"),'用户名不匹配！',1001);
+}catch(ex){
+    $app.tip.error({
+        message:$app.helper.tempalte("msg:${msg}、code:${code}",{
+            msg:ex.messge,code:ex.code
+        })
+    })
+}
 ```
 
 <!-- ============================== isEmpty ======================= -->
 ## isEmpty
-* `待述`
+* 参数：`content`、`message`、`code`
 
-<!-- ============================== isNotEmpty ======================= -->
-## isNotEmpty
-* `待述`
+当`content`为空时抛出内容为`message`、代号为`code`的异常、
+
+```js
+// 示例
+var username='';
+try{
+    $app.assert.isEmpty(username,'用户名为空！',1001);
+}catch(ex){
+    $app.tip.error({
+        message:$app.helper.tempalte("msg:${msg}、code:${code}",{
+            msg:ex.messge,code:ex.code
+        })
+    })
+}
+```

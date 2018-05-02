@@ -26,34 +26,10 @@ module.exports = function ($app) {
         isTrue($app.valid.isEmpty(value), message, code);
     }
 
-    /**
-     * 是否不为空
-     * @param value
-     * @param message
-     * @param code
-     */
-    function isNotEmpty(value, message, code) {
-        isTrue(!$app.valid.isEmpty(value), message, code);
-    }
-
-    /**
-     * 是否不为数字
-     * @param value
-     * @param message
-     * @param code
-     */
-    function isNotNumber(value, message, code) {
-        isTrue(!$app.valid.isNumber(value), message, code);
-    }
-
     $app.assert = {
         // 是否为真，为真、则抛异常
         isTrue: isTrue,
         // 是否为空
-        isEmpty: isEmpty,
-        // 是否不为空
-        isNotEmpty: isNotEmpty,
-        // 是否不为数字
-        isNotNumber: isNotNumber
+        isEmpty: isEmpty
     }
 }

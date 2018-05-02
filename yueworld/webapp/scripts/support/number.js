@@ -89,30 +89,32 @@ module.exports = function ($app) {
      * @returns {*}
      */
     function parse(value, precision) {
-        if (isNaN(value) || value == undefined || value == Infinity) {
+        if (!$app.valid.isNumber(value)) {
             return 0;
         } else {
-            return parseFloat(value).toFixed(precision);
+            return parseFloat(value).toFixed(precision | 0);
         }
     }
 
     $app.number = {
+        // 转为数字、小数位采用绝对值
+        parse: parse,
         // 加法
         add: function (v1, v2, precision /* 精度 */) {
-            return calc(v1, v2, precision, "add");
+
+            return calc(v1, v2, precision | 0, "add");
         },
         // 剑法
         subtract: function (n1, n2, precision /* 精度 */) {
-            return calc(n1, n2, precision, "subtract");
+            return calc(n1, n2, precision | 0, "subtract");
         },
         // 乘法
         multiply: function (n1, n2, precision /* 精度 */) {
-            return calc(n1, n2, precision, "multiply");
+            return calc(n1, n2, precision | 0, "multiply");
         },
         // 除法
         divide: function (n1, n2, precision /* 精度 */) {
-            return calc(n1, n2, precision, "divide");
-        },
-        parse: parse,
+            return calc(n1, n2, precision | 0, "divide");
+        }
     }
 }

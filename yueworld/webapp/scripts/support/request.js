@@ -48,7 +48,7 @@ module.exports = function ($app) {
                 if (_stk_) {
                     option.params["_stk_"] = _stk_;
                 }
-                if ($app.valid.eq(option.method, "post") || $app.data.valid(option.method, "put")) {
+                if ($app.valid.eq(option.method, "post") || $app.helper.valid(option.method, "put")) {
                     option.headers["Content-Type"] = "application/x-www-form-urlencoded;charset=utf-8";
                     option.data = $app.serialize(option.params);
                     delete option.params;

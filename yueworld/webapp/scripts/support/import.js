@@ -37,8 +37,6 @@ module.exports = function ($app) {
         require("./event"),
         // 日期
         require("./date"),
-        // 数据
-        require("./data"),
         // Url
         require("./url"),
         // Cookie
@@ -59,6 +57,8 @@ module.exports = function ($app) {
         require("./loading"),
         // 遮罩、背景
         require("./backdrop"),
+        // 其他
+        require("./helper")
     ].forEach(function (callback) {
         callback($app)
     })

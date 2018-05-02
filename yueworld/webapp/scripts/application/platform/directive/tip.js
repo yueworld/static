@@ -27,7 +27,7 @@ module.exports = function ($app) {
                                 }
                             }
                             $el.append(tooltip);
-                            tooltip.find("div.inner").html($app.data.format(option.template, message || "未定义！"));
+                            tooltip.find("div.inner").html($app.helper.format(option.template, message || "未定义！"));
                             if ($app.number.add(offset.left, tooltip.width() + 20, 2) > $app.window.width()) {
                                 tooltip.css({right: 0});
                             }

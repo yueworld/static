@@ -78,7 +78,7 @@ module.exports = function ($app) {
                     if (async) {
                         // 开启异步下啦框
                         if (angular.isString(handler)) {
-                            handler = $app.injector.get($app.data.firstUpperCase(handler) + "Service").quick;
+                            handler = $app.injector.get($app.helper.firstUpperCase(handler) + "Service").quick;
                         }
 
                         // 刷新/加载数据

@@ -79,11 +79,29 @@ module.exports = function ($app) {
         }
     }
 
+    /**
+     * URL 编码
+     * @param value
+     * @returns {string}
+     */
+    function encoder(value) {
+        return encodeURI(value);
+    }
+
+    /**
+     * URL 解码
+     * @param value
+     * @returns {*}
+     */
+    function decoder(value) {
+        return decodeURI(value);
+    }
+
 
     $app.url = {
         // 设置和获取 URL 地址
-        dynamicUrl: $app.$("base").attr("href"),
-        staticUrl: "http://static.powerlong.com/",
+        dynamicUrl: $app.$("base").attr("href") | "/",
+        staticUrl: "http://static.yeuworld.cn/",
         // 读取URL参数
         getParams: getParams,
         // 是否跨域
@@ -95,7 +113,11 @@ module.exports = function ($app) {
         // 设置静态URL
         setStaticUrl: setStaticUrl,
         // 动态URL根
-        getStaticUrl: getStaticUrl
+        getStaticUrl: getStaticUrl,
+        // URL 编码
+        encoder: encoder,
+        // URL 解码
+        decoder: decoder
     };
 
 }

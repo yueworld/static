@@ -150,7 +150,7 @@ module.exports = function ($app) {
      */
     function publishDrop(option) {
         option = angular.extend({message: "您正在删除信息<br/>该操作不可恢复、确定执行？"}, option);
-        var service = $app.injector.get($app.data.firstUpperCase(option.service) + "Service");
+        var service = $app.injector.get($app.helper.firstUpperCase(option.service) + "Service");
         $app.assert(!service, service + "Service" + "，服务未定义！");
         $app.dialog.confirm({message: option.message}).then(function (result) {
             if (result.execute) {
