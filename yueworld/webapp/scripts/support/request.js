@@ -11,21 +11,17 @@ module.exports = function ($app) {
                     response.ignoreErrorHandler = true;
                     return $q.reject(response);
                 } else if (data.code == -100) {
-                    $app.publish("needLogin", response.data.data, false);
+                    $app.publish("needLogin", response.data, false);
                     response.ignoreErrorHandler = true;
-                    return $q.reject(response);
-                } else if (data.code == -99) {
-                    response.ignoreErrorHandler = true;
-                    $app.publish("sessionTimeout", response, false);
                     return $q.reject(response);
                 }
                 return response || $q.when(response);
             }, requestError: function (error) {
-                // console.log("request error: " + error);
+                console.log("request error: " + error);
                 return $q.reject(error)
-            }, responseError: function (error) {
-                if (error.status == -1 || error.status == 504 || error.status == 502) {
-                    $app.publish("responseError");
+            }, responseError: function (response) {
+                if (response.status == -1 || response.status == 504 || response.status == 502) {
+                    $app.publish("responseError", response);
                 }
                 // console.log("response error: ", error);
                 return $q.reject(error)
@@ -52,7 +48,7 @@ module.exports = function ($app) {
                 if (_stk_) {
                     option.params["_stk_"] = _stk_;
                 }
-                if ($app.data.eq(option.method, "post") || $app.data.eq(option.method, "put")) {
+                if ($app.valid.eq(option.method, "post") || $app.data.valid(option.method, "put")) {
                     option.headers["Content-Type"] = "application/x-www-form-urlencoded;charset=utf-8";
                     option.data = $app.serialize(option.params);
                     delete option.params;

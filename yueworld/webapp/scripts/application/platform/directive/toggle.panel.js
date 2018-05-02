@@ -9,7 +9,7 @@ module.exports = function ($app) {
                 if (!$scope.show) {
                     $app.$($element).hide();
                 }
-                $app.autoDestroyEvent($scope, [$app.subscribe("/ys/toggle/panel", function (event, data) {
+                $app.tools.ade($scope, [$app.event.subscribe("/ys/toggle/panel", function (event, data) {
                     if ($attr.key == data.key) {
                         $scope.show = !$scope.show;
                         $app.$($element).slideToggle("fast");

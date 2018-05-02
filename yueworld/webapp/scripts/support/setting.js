@@ -51,8 +51,12 @@ module.exports = function ($app) {
         })
     }
 
-    $app.setting = {id: id, path: path, text: text, init: init};
-
+    $app.setting = {
+        id: id,
+        path: path,
+        text: text,
+        init: init
+    };
     // 实例
     // $app.settings.path("/")
 }

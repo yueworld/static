@@ -39,6 +39,7 @@ require("./support/plugins/snap.svg/import.js");
 module.exports = function ($app) {
     // 配置
     $app.setup = angular.extend({
+        title:"请稍候、系统正在努力加载中。",
         loading: false,
         // 开启 HTML5 URL 模式
         html5Mode: false,
@@ -46,7 +47,7 @@ module.exports = function ($app) {
         ready: angular.noop,
         session: {
             code: 200,
-            message: "默认配置！",
+            message: "已登录！",
             user: {username: "zhanggj", realname: "张高江"},
             settings: [
                 {path: "/ui/logo", value: "styles/img/logo/default.png"},
@@ -55,7 +56,7 @@ module.exports = function ($app) {
                 AREA: [{name: "北部区域", id: "1001"}, {name: "南部区域", id: "1002"}],
                 PROJECTS: [{name: "上海宝龙城市广场", id: "1001"}, {name: "上海宝龙城市广场", id: "1001"}],
             }
-        }, requestTimeout: function () {
+        }, requestTimeout: function ($app) {
             $app.loading(false);
             $app.dialog.error({
                 message: "很抱歉！<br/>由于您的网络原因、请求失败。",
@@ -63,7 +64,7 @@ module.exports = function ($app) {
             }).then(function () {
                 $state.reload();
             })
-        }, responseError: function () {
+        }, responseError: function ($app, message /* 错误内容 */) {
             $app.loading(false);
             $app.dialog.error({
                 message: "很抱歉！<br/>由于服务器内部错误、请求失败。",
@@ -71,15 +72,15 @@ module.exports = function ($app) {
             }).then(function () {
                 window.location.reload();
             })
-        }, needLogin: function (event, data) {
+        }, needLogin: function ($app, response) {
             $app.loading(false);
             $app.dialog.error({
                 message: "很抱歉！<br/>" + ($app.user.login ? "会话超时、请重新登陆！" : "您尚未登陆、请先去登陆！"),
                 buttons: [{text: "去登陆", result: true}]
             }).then(function () {
-                window.location.href = data.login.split("_srk_")[0] + "_srk_=" + encodeURIComponent(window.location.href);
+                window.location.href = response.data.login.split("_srk_")[0] + "_srk_=" + encodeURIComponent(window.location.href);
             })
-        }, stateChangeStart: function (event, toState, toParams, fromState, fromParams) {
+        }, stateChangeStart: function ($app, event, toState, toParams, fromState, fromParams) {
             // 未登陆前禁止路由执行
             if (!$app.user.login) {
                 event.preventDefault()
@@ -136,19 +137,29 @@ module.exports = function ($app) {
     $app.run(["$rootScope", "$templateCache", "$state", "$stateParams", "$location", "$q", "$timeout", "$animate", "$injector", function ($rootScope, $templateCache, $state, $stateParams, $location, $q, $timeout, $animate, injector, isFirstRouterComplete) {
 
         // 每次路由开始时执行
-        $rootScope.$on('$stateChangeStart', $app.setup.stateChangeStart)
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            $app.setup.stateChangeStart($app, event, toState, toParams, fromState, fromParams);
+        })
 
         // 每次路由成功时执行
-        $rootScope.$on('$stateChangeSuccess', $app.setup.stateChangeSuccess);
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+            $app.setup.stateChangeSuccess($app, event, toState, toParams, fromState, fromParams);
+        });
 
         // 请求超时
-        $app.subscribe("requestTimeout", $app.setup.requestTimeout);
+        $app.event.subscribe("requestTimeout", function () {
+            $app.setup.requestTimeout($app);
+        });
 
         // 响应异常
-        $app.subscribe("responseError", $app.setup.responseError);
+        $app.event.subscribe("responseError", function (event, message) {
+            $app.setup.responseError($app, message)
+        });
 
         // 未登陆
-        $app.subscribe("needLogin", $app.setup.needLogin);
+        $app.event.subscribe("needLogin", function (event, response) {
+            $app.setup.needLogin($app, response)
+        });
 
         if ($app.setup.session.code == 200) {
             // ======================================== 已登陆 ==========================================================

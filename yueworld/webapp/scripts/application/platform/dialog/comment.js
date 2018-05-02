@@ -13,7 +13,7 @@ module.exports = function ($app) {
                 template: require("../views/comment.html"),
                 controller: ["$scope", "$timeout", "$element", "CommentService", function ($scope, $timeout, $element, commentService) {
                     var option = $scope.option, input = $scope.input = {};
-                    $app.subscribe("/comment/publish", function (event, data) {
+                    $app.event.subscribe("/comment/publish", function (event, data) {
                         option = $scope.option = angular.extend({title: "添加留言"}, data);
                         if (!option.category) {
                             $app.tip.error({message: option.title + "失败、未提供留言类型参数！"})

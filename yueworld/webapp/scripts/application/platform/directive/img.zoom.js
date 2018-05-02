@@ -14,7 +14,7 @@ module.exports = function ($app) {
                 $scope.close = function (callback) {
                     $scope.active = false;
                 }
-                $app.subscribe("/img/zoom", function (event, data) {
+                $app.event.subscribe("/img/zoom", function (event, data) {
                     $scope.active = true;
                     option = $scope.option = angular.extend({}, data);
                 });
