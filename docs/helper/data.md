@@ -1,12 +1,7 @@
+<!-- ============================== 标题 ============================== -->
 # 数据处理
+* namespace：` $app.data `
 
-提供通用的数据处理函数
-
-```html
-<script>
-    $app.data.xxx
-</script>
-```
 
 ## eq
 
@@ -14,12 +9,9 @@
 
 比较内容是否相同 
 
-
 ```js
 // 示例
-if($app.data.eq('yueshang','yueshang')){
-    console.log("相同");   
-}else{
-    console.log("不相同");
-}
-```        
+console.log($app.data.eq(undefined,'yueworld'));        // 输出 false
+console.log($app.data.eq('yueshang','yueworld'));       // 输出 false
+console.log($app.data.eq('yueshang','yueshang'));       // 输出 true
+```

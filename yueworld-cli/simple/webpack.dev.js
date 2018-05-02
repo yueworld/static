@@ -57,7 +57,7 @@ module.exports = {
         ]
     }, devServer: {
         // web 服务
-        host: "127.0.0.1", port: 8080,
+        host: "127.0.0.1", port: 1024,
         contentBase: './dist/', quiet: true/*静默*/, inline: true,
         proxy: {
             '/sdk/*':

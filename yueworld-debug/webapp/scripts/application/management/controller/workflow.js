@@ -264,7 +264,7 @@ module.exports = {
                         },
                         command = $scope.command = {taskId: api.task ? api.task.id : "", jumpTypeId: 1001};
                     $scope.diagramUrl = $app.data.format($app.getDynamicUrl("sdk/workflow/diagram?processId={0}&insId={1}&_={2}"), api.process.id, api.instance.id, new Date().getTime());
-                    $app.autoDestroyEvent($scope, [$app.subscribe("/workflow/diagram-viewer/load", function (event, data) {
+                    $app.tools.ade($scope, [$app.event.subscribe("/workflow/diagram-viewer/load", function (event, data) {
                         var diagramEl = $element.find("div.ys-wf-process-diagram");
                         diagramEl.find("div.loading").hide()
                         diagramEl.find("iframe").height(data.height).show();
@@ -706,13 +706,13 @@ module.exports = {
 
                 // 注册全局事件、供流程设计器内angular程序调用
                 // autoDestroyEvent 函数会在 $scope销毁时一并销毁全局事件
-                $app.autoDestroyEvent($scope, [
+                $app.tools.ade($scope, [
                     // 获取设计器 SaveModel 函数 引用
-                    $app.subscribe("/workflow/set/saveRef", function (event, data) {
+                    $app.event.subscribe("/workflow/set/saveRef", function (event, data) {
                         $scope.saveModel = data.save;
                     }),
                     // 保存、部署流程
-                    $app.subscribe("/workflow/process/save", function (event, data) {
+                    $app.event.subscribe("/workflow/process/save", function (event, data) {
                         $timeout(function () {
                             // $app.loading(true);
                             workflowService.publishModel(angular.toJson(data.params)).then(function ($response) {
@@ -738,11 +738,11 @@ module.exports = {
                             })
                         })
                     }),
-                    $app.subscribe("/workflow/set/toggleFullscreen", function (event, data) {
+                    $app.event.subscribe("/workflow/set/toggleFullscreen", function (event, data) {
                         $container.toggleClass("fullscreen")
                     }),
                     // 挂载表单
-                    $app.subscribe("/workflow/process/form/selected", function (event, data) {
+                    $app.event.subscribe("/workflow/process/form/selected", function (event, data) {
                         workflowService.findFormByProcessId(process.id).then(function ($response) {
                             $app.dialog.simpleSelector({
                                 title: "挂载表单",
@@ -755,7 +755,7 @@ module.exports = {
                         })
                     }),
                     // 分配审批人
-                    $app.subscribe("/workflow/process/identity", function (event, data) {
+                    $app.event.subscribe("/workflow/process/identity", function (event, data) {
                         $app.dialog.modal({
                             title: "分配审批人",
                             items: [], values: [], single: true, width: 600,

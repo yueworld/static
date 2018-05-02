@@ -7,7 +7,7 @@ module.exports = merge(require('./webpack.config.common'), {
     mode: 'development',
     devServer: {
         // web 服务
-        host: "127.0.0.1", port: 8080,
+        host: "127.0.0.1", port: 1024,
         contentBase: './dist/', quiet: false /* 静默 */, inline: true,
         proxy: {
             '/sdk/*':

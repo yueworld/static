@@ -11,4 +11,4 @@ yueworld.js 是一个用于构建悦商系统的类库、集成众多第三方�
 查看[快速开始](quickstart.md)了解详情。
 
 * * ** *
-Powered by 悦商科技
+Powered by 上海悦商信息科技有限公司

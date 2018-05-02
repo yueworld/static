@@ -1,5 +1,6 @@
 * 入门
   * [快速开始](quickstart.md)
+  * [配置项](configuration.md)
   
 * 辅助功能
     * [校验](helper/valid.md)
