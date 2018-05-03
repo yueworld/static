@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/yueworld/dist/min.css" type="text/css">
+    <style>
+        button{
+            opacity: 0;transition: opacity .15s linear;
+        }
+        button.in {opacity: 1}
+    </style>
+</head>
+<body ng-controller="MainController" class="text-center">
+<h2 class="text-center">Wellcome {{message}}!</h2>
+<button ng-click="confirm()" class="btn btn-primary animated ">确认操作</button>
+<script type="text/javascript">
+    window.$app = {
+        init: function ($app) {
+            $app.controller("MainController", ["$scope", function ($scope) {
+                $scope.message = "、超级管理员";
+                $scope.confirm = function () {
+                    $app.dialog.confirm({message: "错误提示"}).then(function ($result) {
+                        console.log($result);
+                    })
+                }
+            }]);
+        },
+        bootstrap: function ($app) {
+            var $ = $app.$;
+
+
+            $app.$("button").one("bsTransitionEnd",function () {
+                console.log($.support.transition)
+                alert(1)
+            }).addClass("in");
+        }
+    }
+</script>
+<script type="text/javascript" src="https://unpkg.com/yueworld/dist/min.js"></script>
+</body>
+</html>

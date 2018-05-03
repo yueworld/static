@@ -48,9 +48,11 @@ module.exports = function ($app) {
         // 数据字典
         require("./dictionary"),
         // Tip
-        require("./tips"),
+        require("./tip"),
+        // 模态弹窗
+        require("./modal"),
         // 对话框
-        require("./dialog"),
+        require("./message"),
         // 统一 Request 封装
         require("./request"),
         // Loading
@@ -61,5 +63,5 @@ module.exports = function ($app) {
         require("./helper")
     ].forEach(function (callback) {
         callback($app)
-    })
+    });
 };

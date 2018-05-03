@@ -12,8 +12,9 @@
     * [cookie](helper/cookie.md)
     * [json](helper/json.md)
     * [helper](helper/helper.md)
-    * [Dialog (弹出窗)](helper/dialog.md)
-    * [Tip (消息提示)](helper/tip.md)
+    * [modal (模态窗)](helper/modal.md)
+    * [message (消息窗)](helper/message.md)
+    * [tip (消息提示)](helper/tip.md)
     
 * AngularJs
     * [路由](angularjs/router.md)

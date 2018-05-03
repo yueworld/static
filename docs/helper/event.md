@@ -5,7 +5,7 @@
 ## subscribe
 * 参数：`eventName`, `callback`
 
-发布名称为 `eventName` 的事件、 `callback` 为事件产生后的执行逻辑
+订阅名称为 `eventName` 的事件、 `callback` 为事件产生后的执行逻辑
 ```js
 // 示例
 $app.event.publish("__login__",function(event,data) {

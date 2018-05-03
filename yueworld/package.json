@@ -1,6 +1,6 @@
 {
   "name": "yueworld",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "悦商信息科技、通用类库",
   "main": "index.js",
   "scripts": {

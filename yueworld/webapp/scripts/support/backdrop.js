@@ -1,23 +1,37 @@
 module.exports = function ($app) {
 
-    // 遮罩、背景
-    $app.backdrop = function () {
-        var backdrop = $app.$('<div class="ys-framework-backdrop"></div>').appendTo($app.el.body),
-            $animate = $app.injector.get("$animate"),
-            $rootScope = $app.injector.get("$rootScope"),
-            promise = $animate.addClass(backdrop, "in");
-        $rootScope.$apply();
+    /**
+     * 遮罩、背景
+     * @param option
+     * @returns {{show: show, hide: hide}}
+     */
+    function backdrop(option) {
 
+        option = angular.extend({show: true}, option);
+        var backdrop = $app.$('<div class="ys-framework-backdrop"></div>').appendTo($app.el.body);
+
+        function show() {
+            return $app.injector.invoke(["$animate", "$timeout", function ($animate, $timeout) {
+                return $timeout(function () {
+                    return $animate.addClass(backdrop, "in");
+                });
+            }]);
+        }
         function hide() {
-            var _promise = $animate.removeClass(backdrop, "in").then(function () {
-                backdrop.remove();
-            })
-
-            $rootScope.$apply();
-            return _promise;
+            return $app.injector.invoke(["$animate", "$timeout", function ($animate, $timeout) {
+                return $timeout(function () {
+                    return $animate.removeClass(backdrop, "in").then(function () {
+                        backdrop.remove();
+                    })
+                });
+            }])
         }
 
-        return {hide: hide, promise: promise}
+        if (option.show) {
+            show();
+        }
+        return {show: show, hide: hide}
     }
 
+    $app.backdrop = backdrop;
 }

@@ -71,9 +71,10 @@ console.log($app.date.add("2018-05-03","m",-2))     // 输出 Date(2018-03-04)
 ```js
 // 示例
 var result=$app.date.compare(new Date(2018,05,04),new Date(2021,06,05));
+    // 输出结果
     result={
         start   :   new Date(2018,05,04)    ,
-        end     :   new Date(2021,05,03)    ,
+        end     :   new Date(2021,06,05)    ,
         year    :   3   ,
         month   :   1   ,
         day     :   2

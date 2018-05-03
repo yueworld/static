@@ -118,17 +118,17 @@ window.$app = {
 };
 ```
 
-## ready
+## bootstrap
 
 * 类型：`Function`
 * 默认值：`angular.noop`
 * 参数：`$app`
 
-这里主要是值 Angular Js 初始化完毕。
+启动完毕、这里值 Angular Js 初始化完成。
 
 ```js
 window.$app = {
-    ready: function($app) {
+    bootstrap: function($app) {
         // 可以获取之前定义的 service 对象。
         var userService=$app.injector.get("UserService");
     }

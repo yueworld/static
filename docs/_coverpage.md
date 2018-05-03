@@ -2,7 +2,7 @@
 
 # yueworld.js
 
-> 一个强大的前端 JavaScript 类库
+> 一个功能丰富的的 JavaScript 集合类库
 
 * 简单并且轻量 (~240kb js、gzipped / ~35kb css、gzipped)
 <!--

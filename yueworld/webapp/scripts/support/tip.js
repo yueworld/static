@@ -1,7 +1,11 @@
 module.exports = function ($app) {
     var $container, $timer;
 
-    function show(option) {
+    /**
+     * 消息提示
+     * @param option
+     */
+    function tip(option) {
         if (!$container) {
             $container = $app.$('<div class="ys-framework-tips"><div class="message-item-list"></div></div>').appendTo("body").find("div.message-item-list");
         }
@@ -35,15 +39,47 @@ module.exports = function ($app) {
         }]);
     }
 
-    $app.tip = {
-        error: function (option) {
-            return show(angular.extend({action: "error"}, option));
-        }, success: function (option) {
-            return show(angular.extend({action: "success"}, option));
-        }, warning: function (option) {
-            return show(angular.extend({action: "warning"}, option));
-        }, info: function (option) {
-            return show(angular.extend({action: "info"}, option));
-        }
+    /**
+     * 消息提示
+     * @param option
+     */
+    function info(option) {
+        tip(angular.extend({action: "info"}, option))
     }
+
+    /**
+     * 警告提示
+     * @param option
+     */
+    function warning(option) {
+        tip(angular.extend({action: "warning"}, option))
+    }
+
+    /**
+     * 错误提示
+     * @param option
+     */
+    function error(option) {
+        tip(angular.extend({action: "error"}, option))
+    }
+
+    /**
+     * 成功提示
+     * @param option
+     */
+    function success(option) {
+        tip(angular.extend({action: "success"}, option))
+    }
+
+    $app.tip = {
+        // 消息提示
+        info: info,
+        // 警告提示
+        warning: warning,
+        // 错误提示
+        error: error,
+        // 成功提示
+        success: success
+    }
+
 }

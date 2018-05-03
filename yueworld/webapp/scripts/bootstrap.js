@@ -39,12 +39,17 @@ require("./support/plugins/snap.svg/import.js");
 module.exports = function ($app) {
     // 配置
     $app.setup = angular.extend({
-        title:"请稍候、系统正在努力加载中。",
+        // 标题
+        title: "请稍候、系统正在努力加载中。",
+        // Loading
         loading: false,
         // 开启 HTML5 URL 模式
         html5Mode: false,
+        // 初始化
         init: angular.noop,
-        ready: angular.noop,
+        // 启动完毕
+        bootstrap: angular.noop,
+        // 会话
         session: {
             code: 200,
             message: "已登录！",
@@ -56,7 +61,9 @@ module.exports = function ($app) {
                 AREA: [{name: "北部区域", id: "1001"}, {name: "南部区域", id: "1002"}],
                 PROJECTS: [{name: "上海宝龙城市广场", id: "1001"}, {name: "上海宝龙城市广场", id: "1001"}],
             }
-        }, requestTimeout: function ($app) {
+        },
+        // 请求超时
+        requestTimeout: function ($app) {
             $app.loading(false);
             $app.dialog.error({
                 message: "很抱歉！<br/>由于您的网络原因、请求失败。",
@@ -64,7 +71,9 @@ module.exports = function ($app) {
             }).then(function () {
                 $state.reload();
             })
-        }, responseError: function ($app, message /* 错误内容 */) {
+        },
+        // 响应异常
+        responseError: function ($app, message /* 错误内容 */) {
             $app.loading(false);
             $app.dialog.error({
                 message: "很抱歉！<br/>由于服务器内部错误、请求失败。",
@@ -72,7 +81,9 @@ module.exports = function ($app) {
             }).then(function () {
                 window.location.reload();
             })
-        }, needLogin: function ($app, response) {
+        },
+        // 未登录或超时
+        needLogin: function ($app, response) {
             $app.loading(false);
             $app.dialog.error({
                 message: "很抱歉！<br/>" + ($app.user.login ? "会话超时、请重新登陆！" : "您尚未登陆、请先去登陆！"),
@@ -80,7 +91,9 @@ module.exports = function ($app) {
             }).then(function () {
                 window.location.href = response.data.login.split("_srk_")[0] + "_srk_=" + encodeURIComponent(window.location.href);
             })
-        }, stateChangeStart: function ($app, event, toState, toParams, fromState, fromParams) {
+        },
+        // 切换页面开始
+        stateChangeStart: function ($app, event, toState, toParams, fromState, fromParams) {
             // 未登陆前禁止路由执行
             if (!$app.user.login) {
                 event.preventDefault()
@@ -89,7 +102,9 @@ module.exports = function ($app) {
                 $app.loading(true);
             }
             $app.router.params = toParams;
-        }, stateChangeSuccess: function (event, toState, toParams, fromState, fromParams) {
+        },
+        // 切换页面成功
+        stateChangeSuccess: function (event, toState, toParams, fromState, fromParams) {
             // 首次路由完成、隐藏 预加载框
             if (!isFirstRouterComplete) {
                 isFirstRouterComplete = true;
@@ -105,12 +120,13 @@ module.exports = function ($app) {
             }
         }
     }, window.$app);
-
-    // 初始化
-    $app.setup.init($app)
+    window.$app = $app;
 
     // 绑定 jQuery
     $app.$ = jQuery;
+
+    // 初始化
+    $app.setup.init($app)
 
     // 绑定全局对象
     $app.run(["$rootScope", "$injector", "$state", function ($rootScope, $injector, $state) {
