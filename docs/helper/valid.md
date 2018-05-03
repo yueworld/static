@@ -17,6 +17,7 @@ console.log($app.valid.isEmpty('yueshang','yueshang'))  // 输出 true
 console.log($app.valid.isEmpty(1));                     // 输出 false
 console.log($app.valid.isEmpty('yueshang'))             // 输出 false
 ```
+[cinwell website](https://cinwell.com ':include :type=iframe width=100% height=400px')
 
 <!-- ============================== isNotEmpty ======================= -->
 ## isNotEmpty

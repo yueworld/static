@@ -177,7 +177,7 @@ window.$app = {
 window.$app = {
     requestTimeout:function() {
         $app.loading(false);
-        $app.dialog.error({
+        $app.message.error({
             message: "很抱歉！<br/>由于您的网络原因、请求失败。",
             buttons: [{text: "我要重试", result: true}]
         }).then(function () {
@@ -203,7 +203,7 @@ window.$app = {
     // response.data.code == 500
     responseError: function ($app, response /* 错误内容 */) {
         $app.loading(false);
-        $app.dialog.error({
+        $app.message.error({
             message: "很抱歉！<br/>由于服务器内部错误、请求失败。",
             buttons: [{text: "我要重试", result: true}]
         }).then(function () {
@@ -228,7 +228,7 @@ window.$app = {
     // response.data.code == -100
     needLogin: function ($app, response) {
         $app.loading(false);
-        $app.dialog.error({
+        $app.message.error({
             message: "很抱歉！<br/>" + ($app.user.login ? "会话超时、请重新登陆！" : "您尚未登陆、请先去登陆！"),
             buttons: [{text: "去登陆", result: true}]
         }).then(function () {

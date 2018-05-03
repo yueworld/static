@@ -66,7 +66,7 @@ module.exports = function ($app) {
         if (!source || !target) {
             return false;
         } else {
-            return $app.helper.trim(source).toUpperCase() == $app.data.trim(target).toUpperCase();
+            return $app.helper.trim(source).toUpperCase() == $app.helper.trim(target).toUpperCase();
         }
     }
 
