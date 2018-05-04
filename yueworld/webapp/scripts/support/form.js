@@ -164,7 +164,7 @@ module.exports = function ($app) {
                             });
                         }
                     } else {
-                        $app.dialog.error({message: response.message});
+                        $app.msgbox.error({message: response.message});
                         $app.loading(false);
                     }
                 })

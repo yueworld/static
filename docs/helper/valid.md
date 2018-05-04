@@ -2,6 +2,9 @@
 # 数据校验
 * namespace：` $app.valid `
 
+<!-- [](http://sandbox.runjs.cn/show/wdteo4jy ':include :type=iframe width=100% height=280px')
+[RunJs](http://runjs.cn/code/wdteo4jy ':target=_blank') -->
+
 <!-- ============================== isEmpty ========================== -->
 ## isEmpty
 * 参数：`content`、`nullValue` 
@@ -17,9 +20,8 @@ console.log($app.valid.isEmpty('yueshang','yueshang'))  // 输出 true
 console.log($app.valid.isEmpty(1));                     // 输出 false
 console.log($app.valid.isEmpty('yueshang'))             // 输出 false
 ```
-[cinwell website](https://cinwell.com ':include :type=iframe width=100% height=400px')
+[RunJs](http://runjs.cn/code/mpgexdbi ':target=_blank')
 
-<!-- ============================== isNotEmpty ======================= -->
 ## isNotEmpty
 * 参数：`content`、`nullValue`
 
@@ -42,6 +44,7 @@ console.log($app.valid.isNumber('1.1'));        // 输出 true
 console.log($app.valid.isNumber('1.1111'));     // 输出 true
 console.log($app.valid.isNumber('1.111a'));     // 输出 false
 ```
+[RunJs](http://runjs.cn/code/o7284wez ':target=_blank')
 
 <!-- ============================== isInt ========================= -->
 ## isInt
@@ -54,6 +57,7 @@ console.log($app.valid.isInt("1.23"));           // 输出 false
 console.log($app.valid.isInt("1.5"));           // 输出 false
 console.log($app.valid.isInt("1"));              // 输出 true 
 ```
+[RunJs](http://runjs.cn/code/i1tnctwm ':target=_blank')
 
 <!-- ============================== isDate ========================= -->
 ## isDate
@@ -74,6 +78,7 @@ console.log($app.valid.isDate("2018-05-02"));               // 输出 true
 console.log($app.valid.isDate("2018-05-02 12:12"));         // 输出 true
 console.log($app.valid.isDate("2018年05月02日 12时12分"));   // 输出 true
 ```
+[RunJs](http://runjs.cn/code/aahxrgdk ':target=_blank')
 
 <!-- ============================== isMobile ========================= -->
 ## isMobile
@@ -83,22 +88,22 @@ console.log($app.valid.isDate("2018年05月02日 12时12分"));   // 输出 true
 ```js
 // 示例
 console.log($app.valid.isMobile(''));                    // 输出 false
-console.log($app.valid.isDate(15316313953));             // 输出 true
-console.log($app.valid.isDate("15316313953"));           // 输出 true
+console.log($app.valid.isMobile(15316313953));             // 输出 true
+console.log($app.valid.isMobile("15316313953"));           // 输出 true
 ```
+[RunJs](http://runjs.cn/code/sqlvmgdb ':target=_blank')
 
-<!-- ============================== isEmail ========================= -->
 ## isEmail
 * 参数：`content`
 
 验证`content`是否为邮箱地址
 ```js
 // 示例
-console.log($app.valid.isEmail("zhanggj@yueworld"));         // 输出 false
-console.log($app.valid.isDate("zhanggj@yueworld.cn"));       // 输出 true
+console.log($app.valid.isEmail("zhanggj@yueworld"));           // 输出 false
+console.log($app.valid.isEmail("zhanggj@yueworld.cn"));        // 输出 true
 ```
+[RunJs](http://runjs.cn/code/ixtahjz0 ':target=_blank')
 
-<!-- ============================== eq ========================= -->
 ## eq
 * 参数：`source`, `target`
 
@@ -108,6 +113,7 @@ console.log($app.valid.isDate("zhanggj@yueworld.cn"));       // 输出 true
 console.log($app.valid.eq("zhanggj","yueworld"));           // 输出 false
 console.log($app.valid.eq("zhanggj","zhanggj"));            // 输出 true
 ```
+[RunJs](http://runjs.cn/code/r2clanmz ':target=_blank')
 
 <!-- ============================== isTextLength ========================= -->
 ## isTextLength
@@ -119,8 +125,8 @@ console.log($app.valid.eq("zhanggj","zhanggj"));            // 输出 true
 console.log($app.valid.isTextLength("zhanggj",10,30));      // 输出 false
 console.log($app.valid.isTextLength("zhanggj",6,30));       // 输出 true
 ```
+[RunJs](http://runjs.cn/code/rvk7usbo ':target=_blank')
 
-<!-- ============================== isNumberBetween ========================= -->
 ## isNumberBetween
 * 参数：`number`, `min`, `max`
 
@@ -131,8 +137,8 @@ console.log($app.valid.isTextLength("zhanggj",6,30));       // 输出 true
 console.log($app.valid.isNumberBetween(10,20,30));      // 输出 false
 console.log($app.valid.isNumberBetween(10,6,30));       // 输出 true
 ```
+[RunJs](http://runjs.cn/code/eeheso3f ':target=_blank')
 
-<!-- ============================== startsWith ========================= -->
 ## startsWith
 * 参数：`source`, `target`
 
@@ -142,7 +148,7 @@ console.log($app.valid.isNumberBetween(10,6,30));       // 输出 true
 console.log($app.valid.startsWith("yueworld","yw"));      // 输出 false
 console.log($app.valid.startsWith("yueworld","yuew"));    // 输出 true
 ```
-
+[RunJs](http://runjs.cn/code/3szvjiff ':target=_blank')
 
 <!-- ============================== endsWith ========================= -->
 ## endsWith
@@ -154,3 +160,4 @@ console.log($app.valid.startsWith("yueworld","yuew"));    // 输出 true
 console.log($app.valid.endsWith("yueworld","yw"));       // 输出 false
 console.log($app.valid.endsWith("yueworld","world"));    // 输出 true
 ```
+[RunJs](http://runjs.cn/code/cv09qyfe ':target=_blank')

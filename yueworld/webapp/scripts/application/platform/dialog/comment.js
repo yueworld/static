@@ -58,7 +58,7 @@ module.exports = function ($app) {
                     }
                 }]
             }, option);
-            return $app.dialog.modal(option);
+            return $app.modal(option);
         }
     }
 }

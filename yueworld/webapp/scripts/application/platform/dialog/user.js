@@ -14,7 +14,7 @@ module.exports = function ($app) {
         //     }
         // })
         choose: function (option) {
-            return $app.dialog.modal(angular.extend({
+            return $app.modal(angular.extend({
                 values: [], single: true, width: 680,
                 template: require("../views/user.choose.html"),
                 controller: ["$scope", "OrganizationService", "UserService", function ($scope, orgService, userService) {

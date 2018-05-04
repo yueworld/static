@@ -2,7 +2,7 @@ module.exports = function ($app) {
     // Dialog
     $app.dialog.organization = {
         choose: function (option) {
-            return $app.dialog.modal(angular.extend({
+            return $app.modal(angular.extend({
                 title: "机构", items: $app.dictionary.ORGANIZATIONS, values: [], single: false, width: 300, height: 300,
                 template: require("../views/organization.choose.html"),
                 controller: ["$scope", function ($scope) {

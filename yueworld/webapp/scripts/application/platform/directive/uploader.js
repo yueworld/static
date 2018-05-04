@@ -38,7 +38,7 @@ module.exports = function ($app) {
                                 $scope.uploader.complete && $scope.uploader.complete(response.data)
                             })
                         } else {
-                            $app.dialog.error({message: response.message});
+                            $app.msgbox.error({message: response.message});
                         }
                     })
                 })

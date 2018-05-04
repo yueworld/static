@@ -6,7 +6,7 @@ module.exports = function ($app) {
     $app.dialog.layout = {
         // 业态管理
         manager: function (option) {
-            return $app.dialog.modal({
+            return $app.modal({
                 width: 260, template: require("../views/layout/layout.manager.html"),
                 controller: ["$scope", "$timeout", "$element", "LayoutService", function ($scope, $timeout, $element, layoutService) {
                     $scope.trees = [$app.dictionary.LAYOUTS.root];
@@ -54,7 +54,7 @@ module.exports = function ($app) {
                                         $scope.trees = [$app.dictionary.LAYOUTS.root];
                                         $app.tip.success({message: "操作完成"});
                                     } else {
-                                        $app.dialog.error({message: $response.data.message});
+                                        $app.msgbox.error({message: $response.data.message});
                                     }
                                 }).finally(function () {
                                     $app.loading(false);
@@ -74,7 +74,7 @@ module.exports = function ($app) {
                                 $scope.selectedNode = $app.dictionary.LAYOUTS.hash[input.id];
                                 $app.tip.success({message: "操作完成"});
                             } else {
-                                $app.dialog.error({message: $response.data.message});
+                                $app.msgbox.error({message: $response.data.message});
                             }
                         }).finally(function () {
                             $app.loading(false);
@@ -85,7 +85,7 @@ module.exports = function ($app) {
         },
         // 业态选择
         choose: function (option) {
-            return $app.dialog.modal(angular.extend({
+            return $app.modal(angular.extend({
                 title: "业态",
                 items: $app.dictionary.LAYOUTS,
                 values: [],

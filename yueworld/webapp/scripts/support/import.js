@@ -41,18 +41,18 @@ module.exports = function ($app) {
         require("./url"),
         // Cookie
         require("./cookie"),
-        // Loading
-        require("./loading"),
         // 结构化配置
         require("./setting"),
         // 数据字典
         require("./dictionary"),
+        // Loading
+        require("./loading"),
         // Tip
         require("./tip"),
         // 模态弹窗
         require("./modal"),
         // 对话框
-        require("./message"),
+        require("./msgbox"),
         // 统一 Request 封装
         require("./request"),
         // Loading

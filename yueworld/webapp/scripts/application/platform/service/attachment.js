@@ -30,7 +30,7 @@ module.exports = function ($app) {
                                 files.remove(file);
                                 $app.tip.success({message: "操作完成"});
                             } else {
-                                $app.dialog.error({message: response.message});
+                                $app.msgbox.error({message: response.message});
                             }
                         }).finally(function () {
                             $app.loading(false);

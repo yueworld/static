@@ -7,23 +7,26 @@
 ## isTrue
 * 参数：`cond`、`message`、`code`
 
-当`cond`为真时抛出内容为`message`、代号为`code`的异常、
-
+当`cond`为真时抛出内容为`message`、代号为`code`的异常
 ```js
 // 示例
-var username='yueworld';
-try{
-    $app.assert.isTrue(!$app.valid.eq(username,"yueworld"),'用户名不匹配！',1001);
-}catch(ex){
+var username = 'admin';
+try {
+    // $app.assert.isTrue(username != "admin", '用户名不匹配！', 1001);
+    $app.assert.isTrue(username != "yueworld", '用户名不匹配！', 1001);
+    $app.tip.success({message: "Very God、没有发生任何错误！"});
+} catch (ex) {
+    // 捕获处理
     $app.tip.error({
-        message:$app.helper.tempalte("msg:${msg}、code:${code}",{
-            msg:ex.messge,code:ex.code
+        message: $app.helper.template("msg:${msg}、code:${code}", {
+            msg: ex.message, code: ex.code
         })
     })
 }
 ```
+[RunJs](http://runjs.cn/code/bkepuq8e ':target=_blank')
 
-<!-- ============================== isEmpty ======================= -->
+
 ## isEmpty
 * 参数：`content`、`message`、`code`
 

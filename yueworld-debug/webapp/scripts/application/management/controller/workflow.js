@@ -89,7 +89,7 @@ module.exports = {
                                 $state.go("management.workflow.process.instance", {taskId: $response.data.data});
                             } else {
                                 $app.loading(false);
-                                $app.dialog.error({message: $response.data.message});
+                                $app.msgbox.error({message: $response.data.message});
                             }
                         })
                     })
@@ -192,7 +192,7 @@ module.exports = {
                                     }
                                     deferred.resolve();
                                 } else {
-                                    $app.dialog.error({message: $response.data.message});
+                                    $app.msgbox.error({message: $response.data.message});
                                 }
                             }).finally(function () {
                                 $app.loading(false);
@@ -211,7 +211,7 @@ module.exports = {
                         },
                         // 查看进度
                         diagram: function () {
-                            $app.dialog.modal({
+                            $app.modal({
                                 title: data.instance.statusId == 1001 ? "查看流程" : "查看进度",
                                 width: 900,
                                 template: require("../views/workflow/workflow.process.diagram.html"),
@@ -301,7 +301,7 @@ module.exports = {
                                         $app.tip.success({message: "删除完成"});
                                         $app.router.go("management.workflow.process.index", {categoryId: api.instance.categoryId});
                                     } else {
-                                        $app.dialog.error({message: response.message});
+                                        $app.msgbox.error({message: response.message});
                                     }
                                 }).finally(function () {
                                     $app.loading(false);
@@ -325,7 +325,7 @@ module.exports = {
                                             $app.el.product.scrollTop($app.el.product.scrollTop() + 100);
                                         }, 600)
                                     } else {
-                                        $app.dialog.error({message: $response.data.message});
+                                        $app.msgbox.error({message: $response.data.message});
                                     }
                                 })
                             });
@@ -343,7 +343,7 @@ module.exports = {
                                 // 重新加载
                                 $app.router.reload();
                             } else {
-                                $app.dialog.error({message: $response.data.message});
+                                $app.msgbox.error({message: $response.data.message});
                             }
                         })
                     }
@@ -408,7 +408,7 @@ module.exports = {
                                 deferred.resolve();
                             }
                         } catch (ex) {
-                            $app.dialog.error({message: ex.message});
+                            $app.msgbox.error({message: ex.message});
                         }
                     }
                     // 是否有追回权限
@@ -546,7 +546,7 @@ module.exports = {
 
                 // 新增/修改分类
                 $scope.publishCategory = function (action, node) {
-                    $app.dialog.modal({
+                    $app.modal({
                         action: action,
                         template: require("../views/workflow/design/category.publish.html"),
                         controller: require("./workflow").category.publish($app),
@@ -561,7 +561,7 @@ module.exports = {
                 }
                 // 新增流程
                 $scope.addProcess = function () {
-                    $app.dialog.modal({
+                    $app.modal({
                         title: "新增流程",
                         width: 760,
                         template: require("../views/workflow/design/process.publish.html"),
@@ -576,7 +576,7 @@ module.exports = {
                 }
                 $scope.onDbSelection = function (node) {
                     if (node.node.id == "-1") {
-                        $app.dialog.error({message: "跟目录禁止编辑"});
+                        $app.msgbox.error({message: "跟目录禁止编辑"});
                     } else if (node.node.isCategory == 1) {
                         node.node.path = node.$path().map(function (path) {
                             return path.name;
@@ -633,7 +633,7 @@ module.exports = {
                     }
                 })
                 $scope.copy = function () {
-                    $app.dialog.modal({
+                    $app.modal({
                         width: 760, title: "复制为新流程",
                         template: require("../views/workflow/design/process.publish.html"),
                         controller: require("./workflow").design.copy($app),
@@ -722,7 +722,7 @@ module.exports = {
                                         if ($response.data.success) {
                                             $app.tip.success({message: "部署成功已生效！"});
                                         } else {
-                                            $app.dialog.error({
+                                            $app.msgbox.error({
                                                 /*"流程部署失败！<br/>" +*/
                                                 message: $response.data.message, buttons: [
                                                     {text: "知道啦"}
@@ -756,7 +756,7 @@ module.exports = {
                     }),
                     // 分配审批人
                     $app.event.subscribe("/workflow/process/identity", function (event, data) {
-                        $app.dialog.modal({
+                        $app.modal({
                             title: "分配审批人",
                             items: [], values: [], single: true, width: 600,
                             template: require("../views/workflow/design/identity.pos.selector.html"),
@@ -778,7 +778,7 @@ module.exports = {
                      if ($response.data.success) {
                      $app.tip.success({message: "流程部署成功已生效"});
                      } else {
-                     $app.dialog.error({message: $response.data.message});
+                     $app.msgbox.error({message: $response.data.message});
                      }
                      }).finally(function () {
                      $app.loading(false);
@@ -797,7 +797,7 @@ module.exports = {
                     })[0];
                 if (!forms.length) {
                     $app.router.go("management.workflow.design.process.diagram", {id: process.id});
-                    $app.dialog.error({message: "尚未部署流程！"});
+                    $app.msgbox.error({message: "尚未部署流程！"});
                 }
                 $scope.modify = function (form) {
                     input = $scope.input = form;
@@ -827,13 +827,13 @@ module.exports = {
                                 }
                                 $scope.refresh();
                             } else {
-                                $app.dialog.error({message: $response.data.message});
+                                $app.msgbox.error({message: $response.data.message});
                             }
                         }).finally(function () {
                             $app.loading(false);
                         })
                     } catch (ex) {
-                        $app.dialog.error({message: ex.message});
+                        $app.msgbox.error({message: ex.message});
                     }
                 }
                 $scope.submit = function () {
@@ -861,7 +861,7 @@ module.exports = {
                                     $app.tip.success({message: "操作完成"});
                                     $scope.refresh();
                                 } else {
-                                    $app.dialog.error({message: $response.data.message});
+                                    $app.msgbox.error({message: $response.data.message});
                                 }
                             }).finally(function () {
                                 $app.loading(false);
@@ -870,7 +870,7 @@ module.exports = {
                     })
                 }
                 $scope.showSampleCode = function (action) {
-                    $app.dialog.modal({
+                    $app.modal({
                         width: 730,
                         template: require("../views/workflow/design/form.sample.html"),
                         controller: ["$scope", "action", function ($scope, action) {
@@ -886,7 +886,7 @@ module.exports = {
                                             "</div>";
                                         $scope.close();
                                     } else {
-                                        $app.dialog.error({message: "为防止误操作、请先手动清空表单内的数据！"});
+                                        $app.msgbox.error({message: "为防止误操作、请先手动清空表单内的数据！"});
                                     }
                                 } else {
                                     if (!input.script) {
@@ -904,7 +904,7 @@ module.exports = {
                                             "}]";
                                         $scope.close();
                                     } else {
-                                        $app.dialog.error({message: "为防止误操作、请先手动清空表单内的数据！"});
+                                        $app.msgbox.error({message: "为防止误操作、请先手动清空表单内的数据！"});
                                     }
                                 }
 
@@ -954,13 +954,13 @@ module.exports = {
                                 }
                                 $scope.refresh();
                             } else {
-                                $app.dialog.error({message: $response.data.message});
+                                $app.msgbox.error({message: $response.data.message});
                             }
                         }).finally(function () {
                             $app.loading(false);
                         })
                     } catch (ex) {
-                        $app.dialog.error({message: ex.message});
+                        $app.msgbox.error({message: ex.message});
                     }
                 }
                 $scope.submit = function () {
@@ -988,7 +988,7 @@ module.exports = {
                                     $app.tip.success({message: "操作完成"});
                                     $scope.refresh();
                                 } else {
-                                    $app.dialog.error({message: $response.data.message});
+                                    $app.msgbox.error({message: $response.data.message});
                                 }
                             }).finally(function () {
                                 $app.loading(false);
@@ -997,7 +997,7 @@ module.exports = {
                     })
                 }
                 $scope.showSampleCode = function (action) {
-                    $app.dialog.modal({
+                    $app.modal({
                         width: 730,
                         template: require("../views/workflow/design/form.sample.html"),
                         controller: ["$scope", "action", function ($scope, action) {
@@ -1013,7 +1013,7 @@ module.exports = {
                                             "</div>";
                                         $scope.close();
                                     } else {
-                                        $app.dialog.error({message: "为防止误操作、请先手动清空表单内的数据！"});
+                                        $app.msgbox.error({message: "为防止误操作、请先手动清空表单内的数据！"});
                                     }
                                 } else {
                                     if (!input.script) {
@@ -1031,7 +1031,7 @@ module.exports = {
                                             "}]";
                                         $scope.close();
                                     } else {
-                                        $app.dialog.error({message: "为防止误操作、请先手动清空表单内的数据！"});
+                                        $app.msgbox.error({message: "为防止误操作、请先手动清空表单内的数据！"});
                                     }
                                 }
 
@@ -1121,7 +1121,7 @@ module.exports = {
                 }
                 // 添加特权人员
                 $scope.addPrivilege = function () {
-                    $app.dialog.modal({
+                    $app.modal({
                         template: require("../views/workflow/design/add.privilege.html"),
                         controller: ["$scope", function ($scope) {
                             var option = $scope.option, input = $scope.input = {};
@@ -1149,7 +1149,7 @@ module.exports = {
                                         option.deferred.resolve({execute: true, values: [input]});
                                     })
                                 } catch (ex) {
-                                    $app.dialog.error({message: ex.message});
+                                    $app.msgbox.error({message: ex.message});
                                 }
                             }
                         }]
@@ -1187,7 +1187,7 @@ module.exports = {
                         if ($response.data.success) {
                             $app.tip.success({message: "操作完成"});
                         } else {
-                            $app.dialog.error({message: $response.data.message});
+                            $app.msgbox.error({message: $response.data.message});
                         }
                     }).finally(function () {
                         $app.loading(false);
@@ -1225,7 +1225,7 @@ module.exports = {
                 }
                 $scope.submit = function (execute) {
                     if (execute && input.typeId == "1002"/*固定职位必须给定人员*/ && !input.pos.length) {
-                        $app.dialog.error({message: "固定职位必选、不能为空！"})
+                        $app.msgbox.error({message: "固定职位必选、不能为空！"})
                         return;
                     }
                     if (input.typeId != "1002") {

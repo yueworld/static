@@ -38,7 +38,7 @@ module.exports = function ($app) {
 
     /**
      * 确认窗
-     * $app.message.confirm({message:"xxx"})
+     * $app.msgbox.confirm({message:"xxx"})
      *
      * @param option
      * @returns {*}
@@ -55,7 +55,7 @@ module.exports = function ($app) {
 
     /**
      * 消息窗
-     * 实例： $app.message.info({message:"xxx"})
+     * 实例： $app.msgbox.info({message:"xxx"})
      * @param option
      * @returns {*}
      */
@@ -65,7 +65,7 @@ module.exports = function ($app) {
 
     /**
      * 警告窗
-     * 实例： $app.message.warning({message:"xxx"})
+     * 实例： $app.msgbox.warning({message:"xxx"})
      * @param option
      * @returns {*}
      */
@@ -80,7 +80,7 @@ module.exports = function ($app) {
 
     /**
      * 错误窗
-     * 实例： $app.message.error({message:"xxx"})
+     * 实例： $app.msgbox.error({message:"xxx"})
      * @param option
      * @returns {*}
      */
@@ -90,7 +90,7 @@ module.exports = function ($app) {
 
     /**
      * 成功窗
-     * 实例： $app.message.success({message:"xxx"})
+     * 实例： $app.msgbox.success({message:"xxx"})
      * @param option
      * @returns {*}
      */
@@ -98,7 +98,7 @@ module.exports = function ($app) {
         return message(angular.extend({/*title: "完成提示"*/}, option, {action: "success"}));
     }
 
-    $app.message = {
+    $app.msgbox = {
         // 确认窗
         confirm: confirm,
         // 消息窗

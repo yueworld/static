@@ -13,7 +13,7 @@ module.exports = function ($app) {
                 var $el = $app.$(element),
                     $scope = angular.extend(_$scope.$new(), {
                         watch: "model.isEdit",
-                        expression: "model.isEdit"
+                        expression: "model.isEdit",
                     }, _$scope.$eval(attrs.ysFrameworkEdit));
                 $scope.$watch($scope.watch, function (isEdit) {
                     isEdit = $scope.$eval($scope.expression);
@@ -30,7 +30,7 @@ module.exports = function ($app) {
                         $el.unbind("click").find(".ys-framework-dropdown").unbind("click");
                     }
                     if (isEdit && $scope.require) {
-                        $el.addClass("require")
+                        $el.addClass("ys-framework-require")
                     }
                 });
                 $scope.$on("$destroy", function () {

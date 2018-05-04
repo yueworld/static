@@ -4,7 +4,7 @@ module.exports = function ($app) {
     $app.dialog.select = {
         // 简洁版
         simple: function (option) {
-            return $app.dialog.modal(angular.extend({
+            return $app.modal(angular.extend({
                 title: "简单选择器", items: [], values: [], single: true, multiple: false, width: 260,
                 template: require("../views/select.simple.html"),
                 controller: ["$scope", function ($scope) {

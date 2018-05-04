@@ -4,7 +4,7 @@ module.exports = function ($app) {
     // Dialog
     $app.dialog.project = {
         choose: function (option) {
-            return $app.dialog.modal(angular.extend({
+            return $app.modal(angular.extend({
                 title: "项目", items: angular.copy($app.dictionary.PROJECTS.options),
                 values: [], single: true, width: 680,
                 template: require("../views/project/project.choose.html"),

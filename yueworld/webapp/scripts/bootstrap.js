@@ -65,7 +65,7 @@ module.exports = function ($app) {
         // 请求超时
         requestTimeout: function ($app) {
             $app.loading(false);
-            $app.dialog.error({
+            $app.msgbox.error({
                 message: "很抱歉！<br/>由于您的网络原因、请求失败。",
                 buttons: [{text: "我要重试", result: true}]
             }).then(function () {
@@ -75,7 +75,7 @@ module.exports = function ($app) {
         // 响应异常
         responseError: function ($app, message /* 错误内容 */) {
             $app.loading(false);
-            $app.dialog.error({
+            $app.msgbox.error({
                 message: "很抱歉！<br/>由于服务器内部错误、请求失败。",
                 buttons: [{text: "我要重试", result: true}]
             }).then(function () {
@@ -85,7 +85,7 @@ module.exports = function ($app) {
         // 未登录或超时
         needLogin: function ($app, response) {
             $app.loading(false);
-            $app.dialog.error({
+            $app.msgbox.error({
                 message: "很抱歉！<br/>" + ($app.user.login ? "会话超时、请重新登陆！" : "您尚未登陆、请先去登陆！"),
                 buttons: [{text: "去登陆", result: true}]
             }).then(function () {
@@ -191,7 +191,7 @@ module.exports = function ($app) {
             $app.dictionary.init($app.setup.session.dictionary);
         } else if ($app.setup.session.code == -100) {
             // ======================================== 未登陆 ==========================================================
-            $app.dialog.error({
+            $app.msgbox.error({
                 title: false,
                 message: "您尚未登陆、请先登陆！",
                 buttons: [{text: "我要登陆", result: true}]
@@ -200,14 +200,14 @@ module.exports = function ($app) {
             })
         } else if ($app.setup.session.code == 500) {
             // ======================================== 服务器错误 ======================================================
-            $app.dialog.error({
+            $app.msgbox.error({
                 message: "很抱歉！<br/>由于服务器内部错误、请求失败。",
                 buttons: [{text: "我要重试", result: true}]
             }).then(function () {
                 window.location.reload();
             })
         } else {
-            $app.dialog.error({message: $app.setup.session.message});
+            $app.msgbox.error({message: $app.setup.session.message});
         }
         // 执行启动完成
         if ($app.setup.bootstrap) {

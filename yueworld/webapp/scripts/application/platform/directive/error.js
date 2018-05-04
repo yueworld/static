@@ -6,7 +6,8 @@
  * @description 错误提示
  */
 module.exports = function ($app) {
-    $app.directive("error", ["$timeout", function ($timeout) {
+    require("../views/error.css");
+    /*$app.directive("error", ["$timeout", function ($timeout) {
         return {
             restrict: "A", controller: ["$scope", "$element", "$attrs", "$parse", function ($scope, $element, $attrs) {
                 var $el = $app.$($element);
@@ -26,13 +27,13 @@ module.exports = function ($app) {
                         if ($attrs.select2) {
                             $el.next().find("span.select2-selection").removeClass("error")
                         } else {
-                            $el.removeClass("error");
+                            $el.removeClass("ys-framework-error");
                         }
                     }
                 });
             }]
         };
-    }]);
+    }]);*/
     /**
      * 错误提示、定位
      */
@@ -54,11 +55,11 @@ module.exports = function ($app) {
                                 // console.log(elTop + ":" + top + "：" + verticalHeight);
                                 container.animate({scrollTop: top});
                                 $app.$($element).trigger("focus");
-                                $el.addClass("error");
+                                $el.addClass("ys-framework-error");
                             })
                         }
                     } else {
-                        $el.removeClass("error");
+                        $el.removeClass("ys-framework-error");
                     }
                 })
             }]

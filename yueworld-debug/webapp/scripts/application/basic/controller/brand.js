@@ -147,7 +147,7 @@ module.exports = {
                         $app.tip.success({message: "操作完成"});
                     } else {
                         input.errorCode = $response.data.code;
-                        $app.dialog.error({message: $response.data.message});
+                        $app.msgbox.error({message: $response.data.message});
                     }
                 }).finally(function () {
                     $app.loading(false);
@@ -163,7 +163,7 @@ module.exports = {
                                 $app.tip.success({message: "操作完成"});
                                 $scope.$parent.refresh();
                             } else {
-                                $app.dialog.error({message: response.message});
+                                $app.msgbox.error({message: response.message});
                             }
                         }).finally(function () {
                             $app.loading(false);
@@ -198,7 +198,7 @@ module.exports = {
                                     $app.tip.success({message: "操作完成"});
                                 } else {
                                     input.errorCode = $response.data.code;
-                                    $app.dialog.error({message: $response.data.message});
+                                    $app.msgbox.error({message: $response.data.message});
                                 }
                             }).finally(function () {
                                 $app.loading(false);

@@ -10,9 +10,9 @@ module.exports = function ($app) {
     $app.dialog.attachment = {
         manager: function (option) {
             if (!option.category) {
-                return $app.dialog.error({message: "未提供 category 参数！"})
+                return $app.msgbox.error({message: "未提供 category 参数！"})
             }
-            return $app.dialog.modal(angular.extend({
+            return $app.modal(angular.extend({
                 title: "附件管理",
                 files: [],
                 // 开启自动装载 附件列表逻辑、要求 targetId不能为空
@@ -54,7 +54,7 @@ module.exports = function ($app) {
                                         $app.tip.success({message: "操作完成"});
                                         option.deferred.notify({type: "drop", values: option.files});
                                     } else {
-                                        $app.dialog.error({message: $response.data.message});
+                                        $app.msgbox.error({message: $response.data.message});
                                     }
                                 }).finally(function () {
                                     $app.loading(false);

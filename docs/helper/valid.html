@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/yueworld/dist/min.css" type="text/css">
+</head>
+<body ng-controller="MainController">
+
+<div class="col-xs-12 pb15" style="border:1px solid #ddd">
+    <h2 class="text-center text-center">数据校验!</h2>
+    <hr/>
+    <div class="col-xs-12 pb15">
+        <div class="col-xs-4 text-right lh34">用户名 / admin:</div>
+        <div class="col-xs-6">
+            <input type="text" class="form-control ys-framework-require" ng-model="input.username"
+                   placeholder="请输入用户名"
+                   ys-framework-error="{model:input,code:1001}"/>
+        </div>
+    </div>
+    <div class="col-xs-12 pb15">
+        <div class="col-xs-4 text-right lh34">密码 / 123456:</div>
+        <div class="col-xs-6">
+            <input type="password" class="form-control ys-framework-require" ng-model="input.password"
+                   placeholder="请输入密码"
+                   ys-framework-error="{model:input,code:1002}"/>
+        </div>
+    </div>
+    <div class="col-xs-12 pb15">
+        <div class="col-xs-6 col-xs-offset-4 text-invalid">
+            表单信息: {{input}}}
+        </div>
+    </div>
+    <hr/>
+    <div class="col-xs-12">
+        <div class="col-xs-8 col-xs-offset-4">
+            <button class="btn btn-primary" ng-click="submit()">登录</button>
+        </div>
+    </div>
+</div>
+<!-- Loading 元素 -->
+<div class="ys-framework-loading in">
+    <div class="pre">
+        <div class="left-bar">
+            <div class="left-bar-top-bar"></div>
+            <div class="left-bar-bottom-bar"></div>
+        </div>
+        <div class="loader-spinner">
+            <div class="so"></div>
+            <div class="ul"></div>
+            <div class="te"></div>
+            <div class="ar"></div>
+            <div class="y"></div>
+        </div>
+        <div class="right-bar">
+            <div class="right-bar-top-bar"></div>
+            <div class="right-bar-bottom-bar"></div>
+        </div>
+    </div>
+    <div class="loader-text">请稍候、系统正在努力加载中。</div>
+</div>
+<script type="text/javascript">
+    // 配置 yueworld.js
+    window.$app = {
+        loading: true,
+        // 类库化
+        init: function ($app) {
+            // 注册 Angular Controller
+            $app.controller("MainController", ["$scope", "$timeout", function ($scope, $timeout) {
+                var input = $scope.input = {username: "", password: ""};
+                // 提交事件
+                $scope.submit = function () {
+                    input.errorCode = 0;
+                    $timeout(function () {
+                        try {
+                            $app.assert.isEmpty(input.username, '用户名为空！', 1001);
+                            $app.assert.isTrue(input.username != "admin", '未找到用户！', 1001);
+                            $app.assert.isEmpty(input.password, '密码为空！', 1002);
+                            $app.assert.isTrue(input.password != "123456", '密码不正确！', 1002);
+                            $app.tip.success({message: "登录成功！"});
+                        } catch (ex) {
+                            // 捕获处理
+                            input.errorCode = ex.code;
+                            $app.tip.error({message: ex.message});
+                        }
+                    });
+                }
+            }])
+        }, bootstrap: function () {
+            // 隐藏 Loading
+            $app.loading(false);
+        }
+    }
+</script>
+<script type="text/javascript" src="https://unpkg.com/yueworld/dist/min.js"></script>
+</body>
+</html>

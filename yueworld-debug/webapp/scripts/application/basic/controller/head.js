@@ -19,7 +19,7 @@ module.exports = {
                     $scope.refresh();
                 }
             })
-            /*$app.dialog.modal({
+            /*$app.modal({
                 title: "asdf", resolve: {
                     projectService: ["$timeout", function ($timeout) {
                         return $timeout(function () {

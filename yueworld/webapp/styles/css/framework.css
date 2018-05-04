@@ -258,6 +258,7 @@ body{margin: 0}
 .ys-framework-zoom .quit{position: fixed;bottom: 20px;left:calc((100vm - 50px)/2);text-align: center}
 .ys-framework-zoom .quit div{width: 80px;margin: auto;display: block;height:80px;border-radius: 45px;background: #fff;line-height: 80px;opacity: 0.6;cursor: pointer}
 
+.ys-framework-require{border-left: 2px solid #E64E4D!important}
 
 /* 动画 */
 .fade {opacity: 0;transition: opacity .18s linear}

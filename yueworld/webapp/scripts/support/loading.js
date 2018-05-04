@@ -2,14 +2,20 @@ module.exports = function ($app) {
     // Loading
     $app.loading = function (show) {
         if (show) {
-            $app.el.loading.show().addClass("in");
+            $app.injector.invoke(["$animate", "$timeout", function ($animate, $timeout) {
+                $timeout(function () {
+                    $animate.addClass($app.el.loading.show(), "in")
+                })
+            }])
+            // $app.el.loading.show().addClass("in");
         } else {
-            $app.injector.get("$animate").removeClass($app.el.loading, "in").then(function () {
-                $app.el.loading.hide();
-            });
-            $app.injector.get("$timeout")(function () {
-                $app.injector.get("$rootScope").$apply();
-            })
+            $app.injector.invoke(["$animate", "$timeout", function ($animate, $timeout) {
+                $timeout(function () {
+                    $animate.removeClass($app.el.loading, "in").then(function () {
+                        $app.el.loading.hide();
+                    });
+                })
+            }])
         }
     }
     if ($app.el.loading.length == 0) {

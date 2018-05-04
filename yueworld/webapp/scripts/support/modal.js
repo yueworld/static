@@ -26,7 +26,7 @@ module.exports = function ($app) {
      */
     // 自定义模态对话框
     // 实例：
-    // $app.dialog.modal({
+    // $app.modal({
     //     template: require("xx.html"),
     //     controller: require("xxx")($app),
     //     resolve: {

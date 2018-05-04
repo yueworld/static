@@ -33,17 +33,16 @@ module.exports = function ($app) {
     function isEmpty(value, nullValue) {
         if (null == value || undefined == value || 0 == value) {
             return true;
-        } else if (value instanceof String) {
+        } else if (toString.call(value) === '[object ArrayBuffer]') {
+            return value.length == 0;
+        } else {
             var tmp = $app.helper.trim(value);
             if (tmp == "") {
                 return true;
             } else {
                 return $app.valid.eq(value, nullValue);
             }
-        } else if (value instanceof Array) {
-            return value.length == 0;
         }
-        return false;
     }
 
     /**
@@ -63,7 +62,9 @@ module.exports = function ($app) {
      * @returns {boolean}
      */
     function equals(source, target) {
-        if (!source || !target) {
+        if (source === target) {
+            return true;
+        } else if (!source || !target) {
             return false;
         } else {
             return $app.helper.trim(source).toUpperCase() == $app.helper.trim(target).toUpperCase();
@@ -76,7 +77,7 @@ module.exports = function ($app) {
      * @returns {boolean}
      */
     function isInt(value) {
-        return Math.floor(value) === value;
+        return Math.floor(value) == value;
     }
 
     // ========================================== String Helper ========================================================
@@ -198,6 +199,8 @@ module.exports = function ($app) {
         isDate: isDate,
         // 是否手机号
         isMobile: isMobile,
+        // 是否邮箱地址
+        isEmail:isEmail,
         // 比较是否相等
         eq: equals,
         // 是否整数

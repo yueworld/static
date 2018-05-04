@@ -3,7 +3,7 @@ module.exports = function ($app) {
     $app.dialog.head = {
         // 添加、修改公司抬头
         publish: function (input, refresh) {
-            return $app.dialog.modal({
+            return $app.modal({
                 title: "公司抬头",
                 input: input,
                 width: 800,
@@ -20,7 +20,7 @@ module.exports = function ($app) {
                                     refresh && refresh();
                                 })
                             } else {
-                                $app.dialog.error({message: response.message});
+                                $app.msgbox.error({message: response.message});
                             }
                         })
                     }
@@ -37,7 +37,7 @@ module.exports = function ($app) {
                                             refresh && refresh();
                                         })
                                     } else {
-                                        $app.dialog.error({message: response.message});
+                                        $app.msgbox.error({message: response.message});
                                     }
                                 })
                             }

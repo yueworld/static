@@ -106,10 +106,10 @@ module.exports = function ($app) {
     // option={promise:function(){},trigger:function(){}}
     function lazyExecute(option) {
         if (!angular.isFunction(option.promise)) {
-            $app.dialog.error({message: "$app.lazyExecute promise 必须为 Function"})
+            $app.msgbox.error({message: "$app.lazyExecute promise 必须为 Function"})
         }
         if (!angular.isFunction(option.trigger)) {
-            $app.dialog.error({message: "$app.lazyExecute trigger 必须为 Function"})
+            $app.msgbox.error({message: "$app.lazyExecute trigger 必须为 Function"})
         }
         return function () {
             try {
