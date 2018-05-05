@@ -30,31 +30,27 @@ $app.bootstrap = {
     // 显示
     loading: true
 };
-// 动态配置
+// 代码里动态控制
 // 隐藏
 $app.loading(false);
 // 显示
 $app.loading(false);
 ```
 
-> 由于js加载优先级较低(相对html、css而言),故而loading显示滞后会出现页面闪烁的问题。  
-解决办法，在页面植入以代码预先生成loading元素。  
+> 有页面闪烁的问题？请在页面植入以代码提前生成html元素。  
 同时可以自定义提示语
 
 ```html
 <div class="ys-framework-loading in">
     <div class="pre">
         <div class="left-bar">
-            <div class="left-bar-top-bar"></div>
-            <div class="left-bar-bottom-bar"></div>
+            <div class="left-bar-top-bar"></div><div class="left-bar-bottom-bar"></div>
         </div>
         <div class="loader-spinner">
-            <div class="so"></div><div class="ul"></div>
-            <div class="te"></div><div class="ar"></div><div class="y"></div>
+            <div class="so"></div><div class="ul"></div><div class="te"></div><div class="ar"></div><div class="y"></div>
         </div>
         <div class="right-bar">
-            <div class="right-bar-top-bar"></div>
-            <div class="right-bar-bottom-bar"></div>
+            <div class="right-bar-top-bar"></div><div class="right-bar-bottom-bar"></div>
         </div>
     </div>
     <div class="loader-text">请稍候、系统正在努力加载中。</div>

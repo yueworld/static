@@ -7,4 +7,9 @@
  */
 // 初始化
 require("../yueworld/export");
-$app.bootstrap({})
+$app.bootstrap({
+    loading:true,
+    ready:function ($app) {
+        // $app.loading(false);
+    }
+})

@@ -21,4 +21,5 @@ module.exports = function ($app) {
     if ($app.el.loading.length == 0) {
         $app.el.loading = $app.$(require("../application/platform/views/loading.html")).appendTo($app.el.body);
     }
+    $app.el.loading.hide();
 }

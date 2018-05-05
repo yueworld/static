@@ -171,8 +171,8 @@ $app.run(["$rootScope", "$templateCache", "$state", "$stateParams", "$location",
  */
 function init($app) {
     // 隐藏 Loading
-    if (!$app.setup.loading) {
-        $app.el.loading.hide().removeClass("in");
+    if ($app.setup.loading) {
+        $app.el.loading.show();
     }
 }
 

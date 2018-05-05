@@ -37,12 +37,14 @@ npm install
     <link rel="stylesheet" href="https://unpkg.com/yueworld/dist/min.css" type="text/css">
 </head>
 <body>
-    <h2 class="text-center">Wellcome!</h2>
+    <h2 class="text-center">welcome、见浏览器标题!</h2>
     <script type="text/javascript" src="https://unpkg.com/yueworld/dist/min.js"></script>
     <script type="text/javascript">
-        // 配置并启动应用
+        // 启动应用
         $app.bootstrap({
             title:"My First Yueworld App ！",
+            // 试试去掉注视、详情 见左侧配置项菜单
+            // loading:true 
         })
     </script>
 </body>
