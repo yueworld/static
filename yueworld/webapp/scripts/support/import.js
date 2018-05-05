@@ -19,8 +19,9 @@ module.exports = function ($app) {
     $app.el = {
         document: $app.$(document),
         html: $app.$("html"),
-        body: $app.$("body"),
-        loading: $app.$('div.ys-framework-loading')
+        title: $app.$("html head title"),
+        body: $app.$("html body"),
+        loading: $app.$("html body div.ys-framework-loading")
     };
     [
         // 原生对象扩展
@@ -53,12 +54,16 @@ module.exports = function ($app) {
         require("./modal"),
         // 对话框
         require("./msgbox"),
+        // 表单
+        require("./form"),
         // 统一 Request 封装
         require("./request"),
         // Loading
         require("./loading"),
         // 遮罩、背景
         require("./backdrop"),
+        // JSON
+        require("./json"),
         // 其他
         require("./helper")
     ].forEach(function (callback) {

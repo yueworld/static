@@ -30,7 +30,7 @@
                 </tr>
                 <tbody project-publish pager="pager" refresh="refresh()" ng-if="pager.add"></tbody>
                 <tbody project-publish pager="pager" refresh="refresh()" model="item" ng-repeat="item in pager.results">
-                <tr class="rs pointer" ng-click="$app.form.row.slideToggle({event:$event,pager:pager,item:item})">
+                <tr class="rs pointer" ng-click="$app.form.publish.toggle({event:$event,pager:pager,item:item})">
                     <td>{{item.no}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.abbreviationName}}</td>

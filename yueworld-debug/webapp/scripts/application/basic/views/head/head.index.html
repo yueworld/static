@@ -25,7 +25,7 @@
                 <tbody head-publish pager="pager" refresh="refresh()" ng-if="pager.add"></tbody>
                 <tbody head-publish pager="pager" refresh="refresh()" model="item" ng-repeat="item in pager.results">
                 <tr class="rs pointer no-select"
-                    ng-click="$app.form.row.slideToggle({event:$event,pager:pager,item:item})">
+                    ng-click="$app.form.publish.toggle({event:$event,pager:pager,item:item})">
                     <td>{{::item.no}}</td>
                     <td>{{::item.name}}</td>
                     <td>{{::item.taxpayerIdentificationNumber}}</td>

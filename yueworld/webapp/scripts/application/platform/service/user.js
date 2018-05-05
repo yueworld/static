@@ -19,7 +19,7 @@ module.exports = function ($app) {
         // 退出
         logout: function () {
             $app.injector.invoke(["UserService", "$timeout", function (userService, $timeout) {
-                $app.dialog.confirm({message: "确定要退出系统吗？", width: 400}).then(function (result) {
+                $app.msgbox.confirm({message: "确定要退出系统吗？", width: 400}).then(function (result) {
                     if (result.execute) {
                         userService.logout().then(function ($response) {
                             if ($response.data.success) {

@@ -4,7 +4,7 @@ module.exports = {
             var foldingStatus = $scope.foldingStatus = $app.cookie.get("ys-basic-brand-folding-status", "2"),
                 // 业态展开状态
                 ysBasicBrandExpandedStatus = $app.cookie.get("ys-basic-brand-expanded-status", "").split(","),
-                filter = $scope.filter = $app.extend({likeNameTemp: $state.params ? $state.params.likeName : ""}, $state.params, true);
+                filter = $scope.filter = $app.helper.extend({likeNameTemp: $state.params ? $state.params.likeName : ""}, $state.params, true);
             // 全屏
             $scope.folding = function () {
                 $app.cookie.set({
@@ -154,7 +154,7 @@ module.exports = {
                 })
             }
             $scope.drop = function () {
-                $app.dialog.confirm({message: "您正在删除品牌信息<br/>该操作不可恢复、确定执行？"}).then(function (result) {
+                $app.msgbox.confirm({message: "您正在删除品牌信息<br/>该操作不可恢复、确定执行？"}).then(function (result) {
                     if (result.execute) {
                         $app.loading(true);
                         brandService.drop(input.id).then(function ($response) {
@@ -183,7 +183,7 @@ module.exports = {
                 } else if (approvalStatusId == "1004") {
                     message = "您正在驳回提交<br/>提交后不能修改、确定执行？";
                 }
-                $app.dialog.confirm({message: message}).then(function (result) {
+                $app.msgbox.confirm({message: message}).then(function (result) {
                     if (result.execute) {
                         if (approvalStatusId == 1002) {
                             $scope.submit(true);

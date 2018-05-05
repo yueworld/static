@@ -1,0 +1,36 @@
+// 待整理指令
+
+ys-edit						//  编辑
+ys-error					//  错误提示
+ys-dropdown-dictionary		//  数据字典下拉
+ys-dropdown-quick-search	//  选择框 + 查询
+ys-dropdown-tree	        //  选择框 + 树
+ys-tree                     //  树形控件
+ys-keyboard-enter           //  回车事件
+ys-tip                      //  tip
+ys-uploader                 //  上传
+ys-number                   //  必须输入数字
+ys-img-zoom                 //  图片放大器
+ys-icon                     //  图标
+ys-list-table               //
+ys-table-simple				//  简单、常规表格
+
+
+
+# 在线代码编辑器
+https://stackblitz.com/
+
+
+
+
+
+启动方式整理
+
+
+支持引用方式
+
+1：类库方式、类似 jQuery
+
+
+// $app.
+

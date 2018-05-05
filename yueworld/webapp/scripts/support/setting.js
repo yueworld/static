@@ -30,7 +30,7 @@ module.exports = function ($app) {
         // ID 映射
         angular.forEach(settings, function (setting) {
             if (setting.name) {
-                setting.name = $app.decodeUnicode(setting.name);
+                setting.name = $app.url.decoder(setting.name);
             }
             ids[setting.id] = setting;
         });

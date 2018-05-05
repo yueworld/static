@@ -24,7 +24,7 @@ module.exports = function ($app) {
                     data.append("targetId", $scope.uploader.targetId || "")
                     $http({
                         method: 'POST',
-                        url: $app.getDynamicUrl("sdk/platform/attachment"),
+                        url: $app.url.getDynamicUrl("sdk/platform/attachment"),
                         data: data,
                         headers: {'Content-Type': undefined},
                         transformRequest: angular.identity

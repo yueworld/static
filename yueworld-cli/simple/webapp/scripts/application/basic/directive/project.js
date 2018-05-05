@@ -13,7 +13,7 @@ module.exports = function ($app) {
                 };
                 input.isEdit = true;
                 $scope.setOrganization = function () {
-                    $app.dialog.organization.choose({values: [input.orgId]}).then(function (result) {
+                    $app.platform.organization.choose({values: [input.orgId]}).then(function (result) {
                         if (result.execute) {
                             angular.forEach(result.values, function (value) {
                                 input.orgId = value.id;
@@ -80,7 +80,7 @@ module.exports = function ($app) {
                     input.charges.remove(charge);
                 }
                 $scope.setUser = function (charge) {
-                    $app.dialog.user.choose({title: "选择项目负责人", values: [charge.userId]}).then(function (resrult) {
+                    $app.platform.user.choose({title: "选择项目负责人", values: [charge.userId]}).then(function (resrult) {
                         if (resrult.execute) {
                             if (resrult.values.length) {
                                 charge.userId = resrult.values[0].id;

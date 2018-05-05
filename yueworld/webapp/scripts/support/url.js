@@ -38,9 +38,9 @@ module.exports = function ($app) {
      */
     function setDynamicUrl(url) {
         if (url.indexOf("http://") == -1) {
-            $app.url.dynamicUrl = "http://" + location.host + url;
+            $app.setup.dynamicUrl = "http://" + location.host + url;
         } else {
-            $app.url.dynamicUrl = url;
+            $app.setup.dynamicUrl = url;
         }
     }
 
@@ -51,31 +51,31 @@ module.exports = function ($app) {
      */
     function getDynamicUrl(url) {
         if (!url) {
-            return $app.url.dynamicUrl
+            return $app.setup.dynamicUrl
         } else if (url.indexOf("http://") != -1) {
             return url;
         } else {
-            return $app.url.dynamicUrl + url;
+            return $app.setup.dynamicUrl + url;
         }
     }
 
     // 设置静态URL
     function setStaticUrl(url) {
         if (url.indexOf("http://") == -1) {
-            $app.url.staticUrl = "http://" + location.host + url;
+            $app.setup.staticUrl = "http://" + location.host + url;
         } else {
-            $app.url.staticUrl = url;
+            $app.setup.staticUrl = url;
         }
     }
 
     // 动态URL根
     function getStaticUrl(url) {
         if (!url) {
-            return $app.url.staticUrl
+            return $app.setup.staticUrl
         } else if (url.indexOf("http://") != -1) {
             return url;
         } else {
-            return $app.url.staticUrl + url;
+            return $app.setup.staticUrl + url;
         }
     }
 
@@ -94,14 +94,10 @@ module.exports = function ($app) {
      * @returns {*}
      */
     function decoder(value) {
-        return decodeURI(value);
+        return decodeURI(value.replace(/\\/g, "%"));
     }
 
-
     $app.url = {
-        // 设置和获取 URL 地址
-        dynamicUrl: $app.$("base").attr("href") | "/",
-        staticUrl: "http://static.yeuworld.cn/",
         // 读取URL参数
         getParams: getParams,
         // 是否跨域
@@ -112,7 +108,7 @@ module.exports = function ($app) {
         getDynamicUrl: getDynamicUrl,
         // 设置静态URL
         setStaticUrl: setStaticUrl,
-        // 动态URL根
+        // 获取静态URL根
         getStaticUrl: getStaticUrl,
         // URL 编码
         encoder: encoder,

@@ -9,8 +9,8 @@ module.exports = function ($app) {
      * @param _option
      */
     function bind($scope, method /*方法名*/, _option /*{loading:"等待提示",slide:"滑动特效",invoke:"待执行逻辑"}*/) {
-        var $q = $app.injector.get("$q"), $timeout = $app.injector.get("$timeout"),
-            option = angular.extend({
+        $app.injector.invoke(["$q", "$timeout", function ($q, $timeout) {
+            var option = angular.extend({
                 loading: true, slide: true, assert: angular.noop, invoke: function () {
                     var deferred = $q.defer();
                     deferred.resolve({data: {success: false, error: "未定义 invoke 逻辑！"}});
@@ -26,56 +26,57 @@ module.exports = function ($app) {
                 }, error: function (data) {
                     $app.tip.error({message: data.message});
                 }
-            }, _option)
-        $scope[method] = function () {
-            var args = Array.prototype.slice.call(arguments, 0);
-            option.loading && $app.loading(true);
-            try {
-                // 清理历史异常信息
-                if ($scope.input) {
-                    $scope.input.errorCode = undefined;
-                }
-                // 验证
-                option.assert();
-                option.invoke.apply(this, args).then(function ($response) {
-                    var response = $response.data;
-                    if (response.success) {
-                        if (option.slide && $scope.pager) {
-                            if ($scope.input && $scope.input.id) {
-                                $app.form.row.slideToggle({
-                                    event: args[0], pager: $scope.pager, item: $scope.input
-                                }).then(function () {
-                                    option.success({args: args, message: "操作完成"});
-                                });
+            }, _option);
+            $scope[method] = function () {
+                var args = Array.prototype.slice.call(arguments, 0);
+                option.loading && $app.loading(true);
+                try {
+                    // 清理历史异常信息
+                    if ($scope.input) {
+                        $scope.input.errorCode = undefined;
+                    }
+                    // 验证
+                    option.assert();
+                    option.invoke.apply(this, args).then(function ($response) {
+                        var response = $response.data;
+                        if (response.success) {
+                            if (option.slide && $scope.pager) {
+                                if ($scope.input && $scope.input.id) {
+                                    $app.form.publish.toggle({
+                                        event: args[0], pager: $scope.pager, item: $scope.input
+                                    }).then(function () {
+                                        option.success({args: args, message: "操作完成"});
+                                    });
+                                } else {
+                                    $app.form.publish.toggle({event: args[0], pager: $scope.pager}).then(function () {
+                                        option.success({args: args, message: "操作完成"});
+                                    });
+                                }
                             } else {
-                                $app.form.row.slideToggle({event: args[0], pager: $scope.pager}).then(function () {
-                                    option.success({args: args, message: "操作完成"});
-                                });
+                                option.success({args: args, message: response.message});
                             }
                         } else {
-                            option.success({args: args, message: response.message});
+                            if ($scope.input) {
+                                $timeout(function () {
+                                    $scope.input.errorCode = response.code;
+                                })
+                            }
+                            option.error({args: args, message: response.message});
                         }
-                    } else {
-                        if ($scope.input) {
-                            $timeout(function () {
-                                $scope.input.errorCode = response.code;
-                            })
-                        }
-                        option.error({args: args, message: response.message});
-                    }
-                }).finally(function () {
-                    $app.loading(false);
-                })
-            } catch (ex) {
-                if ($scope.input) {
-                    $timeout(function () {
-                        $scope.input.errorCode = ex.code;
+                    }).finally(function () {
+                        $app.loading(false);
                     })
+                } catch (ex) {
+                    if ($scope.input) {
+                        $timeout(function () {
+                            $scope.input.errorCode = ex.code;
+                        })
+                    }
+                    $app.loading(false);
+                    option.error({args: args, message: ex});
                 }
-                $app.loading(false);
-                option.error({args: args, message: ex});
             }
-        }
+        }]);
     }
 
     /**
@@ -103,7 +104,7 @@ module.exports = function ($app) {
                             //  console.log("1.1--------------------")
                         } else {
                             option.pager.add = option.pager.editorSelectedItem = undefined;
-                            $app.form.row.slideToggle(option).then(function () {
+                            $app.form.publish.toggle(option).then(function () {
                                 deferred.resolve();
                             });
                             // console.log("1.2--------------------")
@@ -117,7 +118,7 @@ module.exports = function ($app) {
                         } else {
                             // console.log("2.2--------------------")
                             option.pager.add = option.pager.editorSelectedItem = undefined;
-                            $app.form.row.slideToggle(option).then(function () {
+                            $app.form.publish.toggle(option).then(function () {
                                 deferred.resolve();
                             });
                         }
@@ -152,7 +153,7 @@ module.exports = function ($app) {
         option = angular.extend({message: "您正在删除信息<br/>该操作不可恢复、确定执行？"}, option);
         var service = $app.injector.get($app.helper.firstUpperCase(option.service) + "Service");
         $app.assert(!service, service + "Service" + "，服务未定义！");
-        $app.dialog.confirm({message: option.message}).then(function (result) {
+        $app.msgbox.confirm({message: option.message}).then(function (result) {
             if (result.execute) {
                 $app.loading(true);
                 service.drop(option.id).then(function ($response) {

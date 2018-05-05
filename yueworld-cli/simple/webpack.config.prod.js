@@ -12,7 +12,7 @@ module.exports = merge(require('./webpack.config.common'), {
             new UglifyJsPlugin({
                 cache: true,
                 parallel: true,
-                sourceMap: false // set to true if you want JS source maps
+                // sourceMap: true // set to true if you want JS source maps
             }),
             new OptimizeCSSAssetsPlugin({})
         ]

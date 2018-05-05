@@ -7,26 +7,27 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
 module.exports = {
     entry: {
         // 入口文件
-        "bootstrap": "./bootstrap"
+        "bootstrap": "./webapp/scripts/bootstrap",
     }, plugins: [
         // 清理目录
         new CleanWebpackPlugin(['dist',"npm-debug.log"]),
         new HtmlWebpackPlugin({
-            filename: "index.html", template: "./bootstrap.html",
-            favicon: '../yueworld/webapp/styles/img/common/favicon.ico',
+            filename: "index.html",
+            template: "node_modules/yueworld/webapp/index.html"/*, chunks: ["library", "bootstrap"]*/,
+            favicon: 'node_modules/yueworld/webapp/styles/img/common/favicon.ico',
             minify: {
                 removeComments: true, collapseWhitespace: true
             }
         }), new HtmlWebpackPlugin({
-            filename: "browser.err.html", template: "../yueworld/webapp/browser.err.html",
-            favicon: '../yueworld/webapp/styles/img/common/favicon.ico',
+            filename: "browser.err.html", template: "node_modules/yueworld/webapp/browser.err.html",
+            favicon: 'node_modules/yueworld/webapp/styles/img/common/favicon.ico',
             minify: {
                 removeComments: true, collapseWhitespace: true
             }
         }), new MiniCssExtractPlugin({
             filename: "[name].css", allChunks: true
         }), new CopyWebpackPlugin([
-            {from: "../yueworld/webapp/styles/img/logo", to: "styles/img/logo"}
+            {from: "node_modules/yueworld/webapp/styles/img/logo", to: "styles/img/logo"}
         ])
     ], module: {
         rules: [

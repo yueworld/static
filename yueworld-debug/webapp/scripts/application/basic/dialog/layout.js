@@ -45,7 +45,7 @@ module.exports = function ($app) {
                         })
                     }
                     $scope.drop = function () {
-                        $app.dialog.confirm({message: "您正在删除业态<br/>该操作不可恢复、确定执行？"}).then(function (result) {
+                        $app.msgbox.confirm({message: "您正在删除业态<br/>该操作不可恢复、确定执行？"}).then(function (result) {
                             if (result.execute) {
                                 $app.loading(true);
                                 layoutService.drop($scope.input.id).then(function ($response) {

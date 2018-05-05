@@ -12,7 +12,7 @@ module.exports = merge(require('./webpack.config.common'), {
         proxy: {
             '/sdk/*':
                 {
-                    target: 'http://127.0.0.1:7070/basic_web/',
+                    target: 'http://127.0.0.1:9090/billing_web/',
                     changeOrigin: true,
                     secure: false
                 }
@@ -22,4 +22,5 @@ module.exports = merge(require('./webpack.config.common'), {
             ]
         }
     }
+
 });

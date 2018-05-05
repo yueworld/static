@@ -1,13 +1,12 @@
 {
   "name": "yueworld-cli",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "悦商前端项目脚手架",
   "main": "index.js",
   "bin": {
     "yueworld-cli": "./index.js"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC"
 }

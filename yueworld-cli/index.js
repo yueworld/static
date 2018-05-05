@@ -70,9 +70,9 @@ var copyFolder = function (srcDir, tarDir, cb) {
 
 if (argv.init) {
     console.log("=============== 初始化项目 --------------");
-    var source = path.resolve(__dirname, "../simple"),
+    var source = path.resolve(__dirname, "simple"),
         target = path.join(process.cwd());
-    helper.copyFolder(source, target);
+    copyFolder(source, target);
     console.log("创建完成！");
 } else {
     console.log("请尝试以下命令")

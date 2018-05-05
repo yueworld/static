@@ -59,7 +59,7 @@ module.exports = {
         index: function ($app) {
             return ["$scope", "$state", "$q", "$timeout", "$response", "WorkflowService", function ($scope, $state, $q, $timeout, $response, workflowService) {
                 var pager = $scope.pager = {};//$response.instants.data.data,
-                    filter = $scope.filter = $app.extend({operationId: 1001, size: 10}, $app.router.params, true),
+                    filter = $scope.filter = $app.helper.extend({operationId: 1001, size: 10}, $app.router.params, true),
                     projects = $scope.projects = $app.buildOption($response.projects), timer = 0;
 
                 // 项目
@@ -216,7 +216,7 @@ module.exports = {
                                 width: 900,
                                 template: require("../views/workflow/workflow.process.diagram.html"),
                                 controller: ["$scope", "$element", function ($scope) {
-                                    $scope.url = $app.data.format($app.getDynamicUrl("sdk/workflow/diagram?processId={0}&insId={1}&_={2}"), data.process.id, data.instance.id, new Date().getTime());
+                                    $scope.url = $app.data.format($app.url.getDynamicUrl("sdk/workflow/diagram?processId={0}&insId={1}&_={2}"), data.process.id, data.instance.id, new Date().getTime());
                                 }]
                             })
                         },
@@ -263,7 +263,7 @@ module.exports = {
                             }
                         },
                         command = $scope.command = {taskId: api.task ? api.task.id : "", jumpTypeId: 1001};
-                    $scope.diagramUrl = $app.data.format($app.getDynamicUrl("sdk/workflow/diagram?processId={0}&insId={1}&_={2}"), api.process.id, api.instance.id, new Date().getTime());
+                    $scope.diagramUrl = $app.data.format($app.url.getDynamicUrl("sdk/workflow/diagram?processId={0}&insId={1}&_={2}"), api.process.id, api.instance.id, new Date().getTime());
                     $app.tools.ade($scope, [$app.event.subscribe("/workflow/diagram-viewer/load", function (event, data) {
                         var diagramEl = $element.find("div.ys-wf-process-diagram");
                         diagramEl.find("div.loading").hide()
@@ -292,7 +292,7 @@ module.exports = {
 
                     // 删除实例
                     $scope.drop = function () {
-                        $app.dialog.confirm({message: "您正在删除申请<br/>该操作不可恢复、确定执行？"}).then(function (result) {
+                        $app.msgbox.confirm({message: "您正在删除申请<br/>该操作不可恢复、确定执行？"}).then(function (result) {
                             if (result.execute) {
                                 $app.loading(true);
                                 workflowService.dropInstance(api.instance.id).then(function ($response) {
@@ -667,7 +667,7 @@ module.exports = {
                     })
                 }
                 $scope.drop = function () {
-                    $app.dialog.confirm({message: "您正在删除流程<br/>该操作不可恢复、确定执行？"}).then(function (result) {
+                    $app.msgbox.confirm({message: "您正在删除流程<br/>该操作不可恢复、确定执行？"}).then(function (result) {
                         if (result.execute) {
                             $app.loading(true);
                             workflowService.dropProcess(process.id).then(function ($response) {
@@ -694,7 +694,7 @@ module.exports = {
                 // 加载流程图设计器
                 $app.loading(true);
                 $app.$("<iframe/>", {
-                    src: $app.getDynamicUrl("scripts/support/plugins/workflow/editor.html?modelId=" + $response.modelId),
+                    src: $app.url.getDynamicUrl("scripts/support/plugins/workflow/editor.html?modelId=" + $response.modelId),
                     scrolling: "no",
                     border: 0,
                     style: "padding:0;margin:0px;float:left;width: 100%;border:0px solid #000;height: calc(100vh - 163px)"
@@ -852,7 +852,7 @@ module.exports = {
                     })
                 }
                 $scope.drop = function () {
-                    $app.dialog.confirm({message: "您正在删除表单信息<br/>该操作不可恢复、确定执行？"}).then(function (result) {
+                    $app.msgbox.confirm({message: "您正在删除表单信息<br/>该操作不可恢复、确定执行？"}).then(function (result) {
                         if (result.execute) {
                             $app.loading(true);
                             workflowService.dropForm(input.id).then(function ($response) {
@@ -979,7 +979,7 @@ module.exports = {
                     })
                 }
                 $scope.drop = function () {
-                    $app.dialog.confirm({message: "您正在删除表单信息<br/>该操作不可恢复、确定执行？"}).then(function (result) {
+                    $app.msgbox.confirm({message: "您正在删除表单信息<br/>该操作不可恢复、确定执行？"}).then(function (result) {
                         if (result.execute) {
                             $app.loading(true);
                             workflowService.dropForm(input.id).then(function ($response) {
@@ -1332,7 +1332,7 @@ module.exports = {
                     })
                 }
                 $scope.drop = function () {
-                    $app.dialog.confirm({message: "您正在删除流程目录信息<br/>该操作不可恢复、确定执行？"}).then(function (result) {
+                    $app.msgbox.confirm({message: "您正在删除流程目录信息<br/>该操作不可恢复、确定执行？"}).then(function (result) {
                         if (result.execute) {
                             $app.loading(true);
                             workflowService.dropCategory(input.id).then(function ($response) {

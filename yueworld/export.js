@@ -5,13 +5,7 @@
  *   styles/*.*
  */
 // =========================================================
-
-(function ($app) {
-    // 启动 Angular Js;
-    angular.bootstrap(document, ["$app"]);
-    return window.$app = $app;
-})(require("./index")(angular.module("$app", ["ngLocale", "ngAnimate", "ngSanitize", "pasvaz.bindonce", "ui.bootstrap", "ui.router"])));
-
+window.$app = require("./index");
 
 
 

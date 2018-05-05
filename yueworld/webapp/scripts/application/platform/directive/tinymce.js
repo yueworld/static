@@ -14,7 +14,7 @@ module.exports = function ($app) {
                     theme: "modern",
                     plugins: ["table fullscreen contextmenu code preview print"],
                     toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code  preview print | fullscreen | save',
-                    content_css: [$app.getDynamicUrl("scripts/support/plugins/tinymce/css/content.min.css")],
+                    content_css: [$app.url.getDynamicUrl("scripts/support/plugins/tinymce/css/content.min.css")],
                     branding: false,
                     plugin_preview_width: 1024,
                     plugin_preview_height: 600,

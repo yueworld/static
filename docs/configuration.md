@@ -1,25 +1,16 @@
 # 配置项
 
-你可以配置在 `window.$app` 里。
-
-```html
-<script type="text/javascript">
-    window.$app = {
-        title:"上海悦商科技信息有限公司",
-        loading:true
-    }
-</script>
-```
+请放置在 `$app.bootstrap({})` 里。
 
 ## title
 
 * 类型：`String`
 * 默认值：`请稍候、系统正在努力加载中。`
 
-设置标题。
+浏览器标题
 
 ```js
-window.$app = {
+$app.bootstrap = {
     title: '上海悦商科技信息有限公司'
 };
 ```
@@ -29,21 +20,27 @@ window.$app = {
 * 类型：`Boolean`
 * 默认值：`false`
 
-* 方法一
-
- 简洁
+页面载入动效
+ 
 ```js
-window.$app = {
+// 预先配置
+$app.bootstrap = {
     // 隐藏
     loading: false,
     // 显示
     loading: true
 };
+// 动态配置
+// 隐藏
+$app.loading(false);
+// 显示
+$app.loading(false);
 ```
 
-* 方法二
+> 由于js加载优先级较低(相对html、css而言),故而loading显示滞后会出现页面闪烁的问题。  
+解决办法，在页面植入以代码预先生成loading元素。  
+同时可以自定义提示语
 
- 植入以下`html`片段到页面、可自定义提示信息。
 ```html
 <div class="ys-framework-loading in">
     <div class="pre">
@@ -64,76 +61,6 @@ window.$app = {
 </div>
 ```
 
->:动态控制、隐藏与显示
-
-```js
-// 隐藏
-$app.loading(false);
-// 显示
-$app.loading(false);
-```
-
-## html5Mode
-
-* 类型：`Boolean`
-* 默认值：`false`
-
-开启 Angular Js Router Html5 模式、优化 Url 效果。
-
-```js
-window.$app = {
-    // 禁用 = http://xxx.xxx.com/#projet.html
-    html5Mode: false,
-    // 启用 = http://xxx.xxx.com/project.html
-    html5Mode: true
-};
-```
-
-## init
-
-* 类型：`Function`
-* 默认值：`angular.noop`
-* 参数：`$app`
-
-可以做一些 Angular Js 的初始工作！
-```js
-window.$app = {
-  init: function($app) {
-        // Angular Service 注册
-        $app.service("UserService",["RequestService",function(requestService) {
-            // Do Something
-            // 具体示例参照 Angular Js Service 定义
-        }])
-        // Angular Directive 注册
-        $app.directive("ys-framework-dropdown",[function() {
-            // Do Something
-            // 具体示例参照 Angular Js Directive 定义
-        }])
-        // Angular Controller 注册
-        $app.controller("MainController",["$scope",function($scope) {
-            // Do Something
-            // 具体示例参照 Angular Js Controller 定义
-        }])
-  }
-};
-```
-
-## bootstrap
-
-* 类型：`Function`
-* 默认值：`angular.noop`
-* 参数：`$app`
-
-启动完毕、这里值 Angular Js 初始化完成。
-
-```js
-window.$app = {
-    bootstrap: function($app) {
-        // 可以获取之前定义的 service 对象。
-        var userService=$app.injector.get("UserService");
-    }
-};
-```
 
 ## session
 
@@ -143,28 +70,46 @@ window.$app = {
 会话信息，包含用户登录状态，和 统一配置、数据字典等信息
 
 ```js
-window.$app = {
+$app.bootstrap( {
     session:{
         code: 200,
         message:'已登录！',
-        // 参见 辅助功能下 / 统一配置
-        settings: [
-            {path: "/ui/logo", value: "styles/img/logo/default.png"},
-            {path: "/ui/title/full", value: "测试系统"}
-        ],
-        // 参见 辅助功能下 / 数据字典 
-        dictionary: {
-            AREA: [
-                {name: "北部区域", id: "1001"}, {name: "南部区域", id: "1002"}
+        data:{
+            // 参见 辅助功能下 / 统一配置
+            settings: [
+                {path: "/ui/logo", value: "styles/img/logo/default.png"},
+                {path: "/ui/title/full", value: "测试系统"}
             ],
-            PROJECTS: [
-                {name: "上海宝龙城市广场", id: "1001"}, {name: "上海宝龙城市广场", id: "1001"}
-            ]
+            // 参见 辅助功能下 / 数据字典 
+            dictionary: {
+                AREA: [
+                    {name: "北部区域", id: "1001"}, {name: "南部区域", id: "1002"}
+                ],
+                PROJECTS: [
+                    {name: "上海宝龙城市广场", id: "1001"}, {name: "上海宝龙城市广场", id: "1001"}
+                ]
+            }
         }
     }
-};
+});
 ```
 
+
+## ready
+
+* 类型：`Function`
+* 默认值：`angular.noop`
+* 参数：`$app`
+
+准备完成
+
+```js
+$app.bootstrap({
+    ready: function($app) {
+        // Do Something
+    }
+})
+```
 ## requestTimeout
 
 * 类型：`Function`
@@ -174,8 +119,8 @@ window.$app = {
 请求超时钩子
 
 ```js
-window.$app = {
-    requestTimeout:function() {
+$app.bootstrap({
+    requestTimeout:function($app) {
         $app.loading(false);
         $app.msgbox.error({
             message: "很抱歉！<br/>由于您的网络原因、请求失败。",
@@ -185,7 +130,7 @@ window.$app = {
             $app.router.reload();
         })
     }
-};
+});
 ```
 
 ## responseError
@@ -197,7 +142,7 @@ window.$app = {
 响应异常钩子
 
 ```js
-window.$app = {
+$app.bootstrap({
     // http 状态
     // response.status == -1 || response.status == 504 || response.status == 502
     // response.data.code == 500
@@ -211,7 +156,7 @@ window.$app = {
             window.location.reload();
         })
     }
-};
+});
 ```
 
 
@@ -224,7 +169,7 @@ window.$app = {
 未登录或会话超时钩子
 
 ```js
-window.$app = {
+$app.bootstrap({
     // response.data.code == -100
     needLogin: function ($app, response) {
         $app.loading(false);
@@ -235,7 +180,7 @@ window.$app = {
             window.location.href = response.data.login.split("_srk_")[0] + "_srk_=" + encodeURIComponent(window.location.href);
         })
     }
-};
+});
 ```
 
 ## 登录示例

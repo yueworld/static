@@ -31,7 +31,7 @@ module.exports = function ($app, $state) {
             "$response": ["$rootScope", "$q", "ProjectService", "WorkflowService", function ($rootScope, $q, projectService, workflowService) {
                 /*return $q.all([
                     projectService.quick(),
-                    workflowService.findInstancePager($app.extend({
+                    workflowService.findInstancePager($app.helper.extend({
                         operationId: 1001,
                         size: 10
                     }, $app.router.params, true))

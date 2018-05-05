@@ -48,9 +48,9 @@ module.exports = function ($app) {
                 if (_stk_) {
                     option.params["_stk_"] = _stk_;
                 }
-                if ($app.valid.eq(option.method, "post") || $app.helper.valid(option.method, "put")) {
+                if ($app.valid.eq(option.method, "post") || $app.valid.eq(option.method, "put")) {
                     option.headers["Content-Type"] = "application/x-www-form-urlencoded;charset=utf-8";
-                    option.data = $app.serialize(option.params);
+                    option.data = $app.json.serialize(option.params);
                     delete option.params;
                 } else {
                     for (var i in option.params) {
@@ -101,23 +101,23 @@ module.exports = function ($app) {
             get: function (url, option) {
                 option = option || {};
                 option.method = "get";
-                return RequestService($app.getDynamicUrl(url), option);
+                return RequestService($app.url.getDynamicUrl(url), option);
             }, delete: function (url, option) {
                 option = option || {};
                 option.method = "delete";
-                return RequestService($app.getDynamicUrl(url), option);
+                return RequestService($app.url.getDynamicUrl(url), option);
             }, post: function (url, option) {
                 option = option || {};
                 option.method = "post";
-                return RequestService($app.getDynamicUrl(url), option);
+                return RequestService($app.url.getDynamicUrl(url), option);
             }, put: function (url, option) {
                 option = option || {};
                 option.method = "put";
-                return RequestService($app.getDynamicUrl(url), option);
+                return RequestService($app.url.getDynamicUrl(url), option);
             }, jsonp: function (url, option) {
                 option = option || {};
                 option.method = "jsonp";
-                return RequestService($app.getDynamicUrl(url), option);
+                return RequestService($app.url.getDynamicUrl(url), option);
             }
         };
     }]);

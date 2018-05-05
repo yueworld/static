@@ -2165,9 +2165,9 @@ if (!ORYX) var ORYX = {};
 
 ORYX = Object.extend(ORYX, {
 
-    //set the path in the config.js file!!!!
+    //set the path in the defaults.js file!!!!
     PATH: ORYX.CONFIG.ROOT_PATH,
-    //CONFIGURATION: "config.js",
+    //CONFIGURATION: "defaults.js",
 
     URLS: [],
 
@@ -2264,7 +2264,7 @@ ORYX = Object.extend(ORYX, {
 
     /**
      * Second bootstrapping layer. The oryx configuration is checked. When not
-     * yet loaded, config.js is being requested from the server. A repeated
+     * yet loaded, defaults.js is being requested from the server. A repeated
      * error in retrieving the configuration will result in an error to be
      * thrown after a certain time of retries. Once the configuration is there,
      * all urls that are registered with oryx loading are being requested from

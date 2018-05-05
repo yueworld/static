@@ -2,11 +2,11 @@ module.exports = {
     index: function ($app) {
         return ["$scope", "$state", "$timeout", "$response", function ($scope, $state, $timeout, $response) {
             var pager = $scope.pager = $response.data.data,
-                filter = $scope.filter = $app.extend({termTemp: $app.router.params.term}, $app.router.params, true);
+                filter = $scope.filter = $app.helper.extend({termTemp: $app.router.params.term}, $app.router.params, true);
             // 添加菜单
             $app.setTopSubBarMenus([{
                 text: "新增公司", icon: "add-1", click: function ($event) {
-                    $app.form.row.slideToggle({event: $event, pager: pager});
+                    $app.form.publish.toggle({event: $event, pager: pager});
                 }
             }])
             // 刷新数据

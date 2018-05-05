@@ -25,7 +25,7 @@ module.exports = function ($app) {
                         })
                     }
                     $scope.drop = function () {
-                        $app.dialog.confirm({message: "您正在删除合同抬头信息<br/>该操作不可恢复、确定执行？"}).then(function (result) {
+                        $app.msgbox.confirm({message: "您正在删除合同抬头信息<br/>该操作不可恢复、确定执行？"}).then(function (result) {
                             if (result.execute) {
                                 $app.loading(true);
                                 headService.drop(input.id).then(function ($response) {

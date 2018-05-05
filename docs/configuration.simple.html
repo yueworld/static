@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://unpkg.com/yueworld/dist/min.css" type="text/css">
+    <base href="/">
 </head>
 <body ng-controller="MainController">
 <div class="col-xs-12 pb15" style="border:1px solid #ddd">
@@ -56,39 +57,38 @@
     </div>
     <div class="loader-text">请稍候、系统正在努力加载中。</div>
 </div>
+<script type="text/javascript" src="https://unpkg.com/yueworld/dist/min.js"></script>
 <script type="text/javascript">
     // 配置 yueworld.js
-    window.$app = {
+    $app.bootstrap({
         loading: true,
-        // 类库化
-        init: function ($app) {
-            // 注册 Angular Controller
-            $app.controller("MainController", ["$scope", "$timeout", function ($scope, $timeout) {
-                var input = $scope.input = {username: "", password: ""};
-                // 提交事件
-                $scope.submit = function () {
-                    input.errorCode = 0;
-                    $timeout(function () {
-                        try {
-                            $app.assert.isEmpty(input.username, '用户名为空！', 1001);
-                            $app.assert.isTrue(input.username != "admin", '未找到用户！', 1001);
-                            $app.assert.isEmpty(input.password, '密码为空！', 1002);
-                            $app.assert.isTrue(input.password != "123456", '密码不正确！', 1002);
-                            $app.tip.success({message: "登录成功！"});
-                        } catch (ex) {
-                            // 捕获处理
-                            input.errorCode = ex.code;
-                            $app.tip.error({message: ex.message});
-                        }
-                    });
-                }
-            }])
-        }, bootstrap: function () {
+        ready: function () {
             // 隐藏 Loading
             $app.loading(false);
         }
-    }
+    }, [function ($app) {
+        // 注册 Angular Controller
+        $app.controller("MainController", ["$scope", "$timeout", function ($scope, $timeout) {
+            var input = $scope.input = {username: "", password: ""};
+            // 提交事件
+            $scope.submit = function () {
+                input.errorCode = 0;
+                $timeout(function () {
+                    try {
+                        $app.assert.isEmpty(input.username, '用户名为空！', 1001);
+                        $app.assert.isTrue(input.username != "admin", '未找到用户！', 1001);
+                        $app.assert.isEmpty(input.password, '密码为空！', 1002);
+                        $app.assert.isTrue(input.password != "123456", '密码不正确！', 1002);
+                        $app.tip.success({message: "登录成功！"});
+                    } catch (ex) {
+                        // 捕获处理
+                        input.errorCode = ex.code;
+                        $app.tip.error({message: ex.message});
+                    }
+                });
+            }
+        }])
+    }])
 </script>
-<script type="text/javascript" src="https://unpkg.com/yueworld/dist/min.js"></script>
 </body>
 </html>

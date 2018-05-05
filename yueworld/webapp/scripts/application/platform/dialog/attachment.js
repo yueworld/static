@@ -45,7 +45,7 @@ module.exports = function ($app) {
                         $scope.selected = node.selected ? node.node : undefined;
                     }
                     $scope.drop = function (file) {
-                        $app.dialog.confirm({message: "您正在删除附件<br/>该操作不可恢复、确定执行？"}).then(function (result) {
+                        $app.msgbox.confirm({message: "您正在删除附件<br/>该操作不可恢复、确定执行？"}).then(function (result) {
                             if (result.execute) {
                                 $app.loading(true);
                                 attachmentService.drop(file.id).then(function ($response) {
