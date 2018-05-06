@@ -14,6 +14,7 @@ require("./support/plugins/angular-ui-bootstrap/2.5.0.css");
 require("../styles/css/animate.css");
 require("../styles/css/bootstrap.css");
 require("../styles/css/framework.css");
+require("../styles/css/platform.css");
 
 // 引入通用类库
 var jQuery = window.__jq__ = require("./support/plugins/jquery.easing/1.4.1.js")(require("./support/plugins/jquery/3.1.1"));
@@ -181,7 +182,6 @@ function init($app) {
  * @param option
  */
 $app.bootstrap = function (option, imports) {
-
     // 配置信息
     $app.setup = angular.extend(require("./support/defaults")($app), option);
 

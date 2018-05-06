@@ -44,7 +44,8 @@ module.exports = {
         ]
     }, output: {
         // 输出文件
-        path: __dirname + "/dist",
+        // path: __dirname + "/dist",
+        path:"/data/work/yueworld/zhongjiao/static/static/yueworld",
         filename: '[name].js'
     }
 };

@@ -1,15 +1,12 @@
 html,body{
-    /*font-family: Arial, Helvetica, "Microsoft YaHei", "STHeiti";*/
-    /*font-family: 'PingFang SC', 'Helvetica Neue',"STHeitiSC-Light","Microsoft YaHei",sans-serif;*/
-    /*font-family:"Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, "Microsoft YaHei";*/
-    /*font-family: Arial, Helvetica, "Microsoft YaHei", "STHeiti";*/
-    /*font-size: 12px;*/
     font-family: Arial, Helvetica, "Microsoft YaHei", "STHeiti";
     font-size: 14px;
-    /*color: #222*/
     color:#373c42;
+    height:100%;
     /*text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;*/
     /*text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;*/
+    margin:0;
+    padding:0;
 }
 
 /* 修改默认样式 */
@@ -39,6 +36,7 @@ textarea{resize: none}
 .fs18{font-size: 18px}
 .fs24{font-size: 24px}
 .lh34{line-height: 34px}
+.lh36{line-height: 36px}
 .lh38{line-height: 38px}
 .lh40{line-height: 40px}
 .fwb{font-weight: bold}

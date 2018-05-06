@@ -630,7 +630,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
 }(jQuery);
 
 /* ========================================================================
- * Bootstrap: dropdown.js v3.1.1
+ * Bootstrap: dropdown.old.js v3.1.1
  * http://getbootstrap.com/javascript/#dropdowns
  * ========================================================================
  * Copyright 2011-2014 Twitter, Inc.

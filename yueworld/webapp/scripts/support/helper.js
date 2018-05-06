@@ -163,6 +163,17 @@ module.exports = function ($app) {
         }
     }
 
+    /**
+     * 返回已执行的 promise 对象
+     */
+    function promise(callback) {
+        return $app.injector.invoke(["$q", function ($q) {
+            var deferred = $q.defer();
+            deferred.resolve(callback())
+            return deferred.promise;
+        }]);
+    }
+
     $app.helper = {
         // 剔除空格
         trim: trim,
@@ -187,7 +198,9 @@ module.exports = function ($app) {
         ade: autoDestroyEvent,
         autoDestroyEvent: autoDestroyEvent,
         // 延迟响应 watch
-        watch: watch
+        watch: watch,
+        // 返回已执行的 promise 对象
+        promise: promise
     }
 
 }

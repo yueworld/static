@@ -1,3 +1,4 @@
+require("../application/platform/views/loading.css")
 module.exports = function ($app) {
     // Loading
     $app.loading = function (show) {

@@ -1,24 +1,24 @@
-<div class="ys-framework-dropdown" ng-class="{'search':option.search}" ng-click="$event.stopPropagation();">
-    <div class="ys-framework-dropdown-toggle">
-        <input class="form-control ys-framework-dropdown-text" placeholder="{{option.placeholder}}" readonly
-               value="{{dictionary.hash[option.model[option.property]].text}}" ng-if="!isObjectToProperty"/>
-        <input class="form-control ys-framework-dropdown-text" placeholder="{{option.placeholder}}" readonly
-               value="{{option.model[option.property.text]}}" ng-if="isObjectToProperty"/>
+<div class="ys-platform-dropdown" ng-class="{'search':option.search}" ng-click="$event.stopPropagation();">
+    <div class="ys-platform-dropdown-toggle">
+        <input class="form-control ys-platform-dropdown-text" placeholder="{{option.placeholder}}" readonly
+               value="{{dictionary.hash[option.model[option.set.id]][option.textField]}}"/>
         <span class="caret"></span>
     </div>
-    <div class="ys-framework-dropdown-container">
-        <div class="ys-framework-dropdown-search">
-            <input class="form-control" placeholder="{{option.placeholder}}" ng-model="filter.term"/>
+    <div class="ys-platform-dropdown-container">
+        <div class="ys-platform-dropdown-search">
+            <input class="form-control" placeholder="{{option.placeholder}}" ng-model="option.filter.term"/>
         </div>
-        <div class="ys-framework-dropdown-items" ng-if="dictionary.options.length">
+        <div class="ys-platform-dropdown-items" ng-if="dictionary.options.length">
             <div class="item" ng-repeat="item in dictionary.options" ng-click="select(item)"
                  ng-class="{'active':active(item)}">
                 {{item.text}}
             </div>
         </div>
-        <div class="ys-framework-dropdown-items text-center text-invalid" ng-if="!dictionary.options.length&&option.search" style="padding:10px;">
-            <span ng-if="!filter.term">请输入查询关键字!</span>
-            <span ng-if="filter.term">未查询到相关数据</span>
+        <div class="ys-platform-dropdown-items text-center text-invalid" ng-if="!dictionary.options.length"
+             style="padding:10px;">
+            <span ng-if="!option.filter.term&&option.search">请输入查询关键字!</span>
+            <span ng-if="(option.filter.term||!option.search)&&loading">查询中...</span>
+            <span ng-if="(option.filter.term||!option.search)&&!loading">未查询到相关数据</span>
         </div>
     </div>
 </div>

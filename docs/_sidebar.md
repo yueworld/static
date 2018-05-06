@@ -18,7 +18,7 @@
     
 * AngularJs
     * [路由](angularjs/router.md)
-    * [指令 / 组件](angularjs/component.md)
+    * [指令](angularjs/component.md)
     
   
 

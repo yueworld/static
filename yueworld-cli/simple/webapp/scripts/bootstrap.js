@@ -6,8 +6,7 @@
  * @description Bootstrap App
  */
 // 初始化
-window.$app = require("yueworld");
-$app.bootstrap({
+window.$app = require("yueworld").bootstrap({
     // 找不到任何路由、最后的选择
     otherwise: "/basic/info/project/index.html",
     loading: true,

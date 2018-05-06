@@ -4,5 +4,13 @@
 <body>
 <div class="loading"></div>
 <h2 class="text-center">Wellcome!</h2>
+<div style="width: 500px; margin: auto" ng-controller="MainController">
+    <input type="text" ng-model="input.statusId"/>
+    <hr/>
+    <div ys-platform-dropdown-dynamic="{model:input,theme:'caret',handler:quickSearch,watchReload:{model:input,property:'statusId'}}"></div>
+    <select>
+        <!--<option>1</option>-->
+    </select>
+</div>
 </body>
 </html>

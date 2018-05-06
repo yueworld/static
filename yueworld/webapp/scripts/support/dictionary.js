@@ -30,6 +30,8 @@ module.exports = function ($app) {
                     option.text = option.name;
                 } else if (option.title) {
                     option.text = option.title;
+                } else {
+                    option.text = "未知(name、title不存在)"
                 }
             }
         })

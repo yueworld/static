@@ -11,6 +11,7 @@ module.exports = function ($app) {
         require("./uploader"),
         require("./select"),
         require("./dropdown"),
+        require("./dropdown.old"),
         require("./dropdown.tree"),
         require("./edit"),
         require("./number"),
