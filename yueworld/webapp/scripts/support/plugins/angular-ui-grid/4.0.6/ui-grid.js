@@ -4356,7 +4356,7 @@ angular.module('ui.grid')
    * @description refreshes the grid when a column refresh
    * is notified, which triggers handling of the visible flag.
    * This is called on uiGridConstants.dataChange.COLUMN, and is
-   * registered as a dataChangeCallback in grid.js
+   * registered as a dataChangeCallback in list.js
    * @param {object} grid The grid object.
    * @param {object} options Any options passed into the callback.
    */

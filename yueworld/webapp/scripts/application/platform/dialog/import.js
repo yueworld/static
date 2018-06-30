@@ -12,7 +12,9 @@ module.exports = function ($app) {
         // 选择
         // require("./select"),
         // 图片缩放
-        // require("./zoom")
+        require("./zoom"),
+        // 合同
+        require("./contract")
     ].forEach(function (callback) {
         callback($app)
     });

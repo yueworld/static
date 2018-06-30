@@ -52,7 +52,7 @@ module.exports = function ($app) {
     function getDynamicUrl(url) {
         if (!url) {
             return $app.setup.dynamicUrl
-        } else if (url.indexOf("http://") != -1) {
+        } else if (url.indexOf("http://") != -1 || $app.valid.startsWith(url, "//")) {
             return url;
         } else {
             return $app.setup.dynamicUrl + url;
@@ -97,6 +97,11 @@ module.exports = function ($app) {
         return decodeURI(value.replace(/\\/g, "%"));
     }
 
+    function decodeUnicode(str) {
+        str = str.replace(/\\/g, "%");
+        return unescape(str);
+    }
+
     $app.url = {
         // 读取URL参数
         getParams: getParams,
@@ -113,7 +118,9 @@ module.exports = function ($app) {
         // URL 编码
         encoder: encoder,
         // URL 解码
-        decoder: decoder
+        decoder: decoder,
+        // Unicode 解码
+        decodeUnicode: decodeUnicode
     };
 
 }

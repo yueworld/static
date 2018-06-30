@@ -1,0 +1,26 @@
+/* 图片缩放 */
+.ys-platform-img-zoom{
+    position: fixed;z-index: 2002;left:0;top:0;right:0;bottom:0;transition: opacity 0.15s linear;opacity:0;
+    &.in{opacity: 1;}
+    .img{
+        padding:0!important;position: fixed;top:0;right:0;bottom:0;left:0;
+        img{width: 500px;cursor: move;position: absolute;}
+    }
+    .quit{
+        position: fixed;bottom: 20px;left:calc((100vm - 50px)/2);text-align: center;
+        div{
+            width: 80px;margin: auto;display: block;height:80px;border-radius: 45px;background: #fff;line-height: 80px;
+            opacity: 0.6;cursor: pointer;box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+        }
+    }
+    .toolbar{
+        position: fixed;top:calc(100vh - 50%);
+        bottom: 20px;right:20px;width: 40px;padding-top: 5px;
+        div{cursor: pointer;color: #ccc}
+        div:hover{color: #fff}
+    }
+}
+
+
+
+

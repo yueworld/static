@@ -1,0 +1,21 @@
+<div class="ys-platform-dropdown-static" ng-class="{'search':option.search}" ng-click="$event.stopPropagation();">
+    <div class="ys-platform-dropdown-toggle">
+        <input class="ys-platform-input ys-platform-dropdown-text" type="button"
+               value="{{dictionary.hash[option.model[option.set.id]][option.textField]||option.placeholder}}"/>
+        <span class="caret"></span>
+    </div>
+    <div class="ys-platform-dropdown-container">
+        <div class="ys-platform-dropdown-container-items" ng-if="dictionary.options.length">
+            <div class="item" ng-repeat="item in dictionary.options" ng-click="select(item)"
+                 ng-class="{'active':active(item),'text-invalid':item[option.idField]==-1}">
+                {{item[option.idField]==-1?item[option.textField]:item[option.textField]}}
+            </div>
+        </div>
+        <div class="ys-platform-dropdown-container-items text-center text-invalid" ng-if="!dictionary.options.length"
+             style="padding:10px;">
+            <span ng-if="!option.filter.term&&option.search">请输入查询关键字!</span>
+            <span ng-if="(option.filter.term||!option.search)&&loading">查询中...</span>
+            <span ng-if="(option.filter.term||!option.search)&&!loading">无相关数据<!--未查询到相关数据--></span>
+        </div>
+    </div>
+</div>

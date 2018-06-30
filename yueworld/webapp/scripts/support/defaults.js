@@ -4,19 +4,19 @@
  * @param $bootstrap
  * @returns {Object}
  */
-var isFirstRouterComplete = false;
+var isFirstRouterComplete = false, loadingTask;
 module.exports = function ($app) {
-    return {
+    $app.setup = {
         // 获取会话地址
         sessionUrl: undefined,// "sdk/platform/init",
         // 默认跳转地址
-        indexURL: "/index.html",
+        otherwise: "", //"/index.html",
         // 异步请求地址
         dynamicUrl: $app.$("base").attr("href") || "/",
         // 静态请求地址
         staticUrl: "http://static.yeuworld.cn/",
         // 标题
-        title: "请稍候、系统正在努力加载中。",
+        title: $app.el.title.text(), _title: "请稍候、系统正在努力加载中。",
         // Loading
         loading: false,
         // 开启 HTML5 URL 模式
@@ -33,8 +33,12 @@ module.exports = function ($app) {
                     {path: "/ui/logo", value: "styles/img/logo/default.png"},
                     {path: "/ui/title/full", value: "测试系统"}
                 ], dictionary: {
-                    AREA: [{name: "北部区域", id: "1001"}, {name: "南部区域", id: "1002"}],
-                    PROJECTS: [{name: "上海宝龙城市广场", id: "1001"}, {name: "上海宝龙城市广场", id: "1001"}],
+                    AREAS: [{name: "北部区域", id: "1001"}, {name: "南部区域", id: "1002"}],
+                    PROJECTS: [{name: "上海宝龙城市广场", id: "1002", areaId: "1001"}, {
+                        name: "上海万科城市广场",
+                        id: "1001",
+                        areaId: "1002"
+                    }],
                 }
             }
         },
@@ -45,7 +49,7 @@ module.exports = function ($app) {
             $app.loading(false);
             $app.msgbox.error({
                 message: "很抱歉！<br/>由于您的网络原因、请求失败。",
-                buttons: [{text: "我要重试", result: true}]
+                buttons: [{text: "我要重试", result: true, class: 'ys-platform-btn-danger'}]
             }).then(function () {
                 $app.router.reload();
             })
@@ -54,8 +58,8 @@ module.exports = function ($app) {
         responseError: function ($app, message /* 错误内容 */) {
             $app.loading(false);
             $app.msgbox.error({
-                message: "很抱歉！<br/>由于服务器内部错误、请求失败。",
-                buttons: [{text: "我要重试", result: true}]
+                message: $app.helper.template("很抱歉！<br/>${message}", {message: message || "由于服务器内部错误、请求失败。"}),
+                buttons: [{text: "我要重试", result: true, class: 'ys-platform-btn-danger'}]
             }).then(function () {
                 window.location.reload();
             })
@@ -65,7 +69,7 @@ module.exports = function ($app) {
             $app.loading(false);
             $app.msgbox.error({
                 message: "很抱歉！<br/>" + ($app.user.login ? "会话超时、请重新登陆！" : "您尚未登陆、请先去登陆！"),
-                buttons: [{text: "去登陆", result: true}]
+                buttons: [{text: "去登陆", result: true, class: 'ys-platform-btn-danger'}]
             }).then(function () {
                 window.location.href = response.data.login.split("_srk_")[0] + "_srk_=" + encodeURIComponent(window.location.href);
             })
@@ -75,27 +79,29 @@ module.exports = function ($app) {
             // 未登陆前禁止路由执行
             if (!$app.user.login) {
                 event.preventDefault()
-            } else {
+            } else if (isFirstRouterComplete) {
                 // 显示loading
-                $app.loading(true);
+                loadingTask = $app.loading(true);
             }
+            $app.router.name = toState.name;
+            $app.router.url = toState.url;
             $app.router.params = toParams;
         },
         // 切换页面成功
-        stateChangeSuccess: function (event, toState, toParams, fromState, fromParams) {
+        stateChangeSuccess: function ($app, event, toState, toParams, fromState, fromParams) {
             // 首次路由完成、隐藏 预加载框
             if (!isFirstRouterComplete) {
                 isFirstRouterComplete = true;
                 $app.removeClass($app.el.loading, "in").then(function () {
                     $app.el.loading.hide();
                     $app.el.loading.addClass("complete");
-                })
+                });
             } else {
                 // 隐藏loading
-                $app.loading(false);
+                loadingTask.then(function () {
+                    $app.loading(false);
+                });
             }
-        },
-        // Extend Angular Module
-        eam: []
+        }
     }
 };

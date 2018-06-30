@@ -1,0 +1,54 @@
+<div class="ys-platform-dropdown-contract">
+    <div class="ys-platform-dropdown-contract-header">
+        <input class="form-control" placeholder="{{option.placeholder}}" ng-model="filter.term"/>
+    </div>
+    <div class="ys-platform-dropdown-contract-container">
+        <div class="ys-platform-dropdown-contract-result area">
+            <ul>
+                <li ng-repeat="item in $app.dictionary.AREAS.options" ng-click="selectArea(item)"
+                    ng-class="{'selected':filter.areaId==item.id}">{{item.text}}
+                </li>
+            </ul>
+        </div>
+        <div class="ys-platform-dropdown-contract-result project"><!-- ng-if="!filter.term"-->
+            <ul>
+                <li class="title">项目</li>
+                <li ng-repeat="item in projects" ng-click="selectProject(item)"
+                    ng-class="{'selected':filter.projectId==item.id}">{{item.text}}
+                </li>
+                <li ng-if="projects.length==0">
+                    <div class="error-tip ys-platform-mt0 text-invalid">{{!filter.areaId?'请选择区域':'暂无数据...'}}</div>
+                </li>
+            </ul>
+        </div>
+        <div class="ys-platform-dropdown-contract-result tenant" ng-if="!filter.term">
+            <ul>
+                <li class="title">租户</li>
+                <li ng-repeat="item in tenants" ng-click="selectTenant(item)"
+                    ng-class="{'selected':filter.tenantId==item.id}">{{item.name}}
+                </li>
+                <li ng-if="tenants.length==0">
+                    <div class="error-tip ys-platform-mt0 text-invalid">{{!filter.projectId?'请选择项目':'暂无数据...'}}</div>
+                </li>
+            </ul>
+        </div>
+        <div class="ys-platform-dropdown-contract-result contract" ng-class="{'full':filter.term}">
+            <ul>
+                <li class="title">合同</li>
+                <li ng-repeat="item in contracts" ng-click="selectContract(item)"
+                    ng-class="{'selected':selectedItem==item}">{{item.name}}
+                </li>
+                <li ng-if="contracts.length==0">
+                    <div class="error-tip ys-platform-mt0 text-invalid">{{!filter.term?'请选择租户':'暂无数据...'}}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-xs-12 ys-platform-dropdown-contract-footer">
+        <div class="pull-left" style="line-height: 28px;width:400px;" ng-if="selectedItem">
+            <span class="fwb">已选合同：</span><span class="text-primary">{{selectedItem.name}}</span></span>
+        </div>
+        <button class="btn btn-default pull-right" ng-click="submit(false)">取消</button>
+        <button class="btn btn-primary pull-right ys-platform-mr15" ng-click="submit(true)">确定</button>
+    </div>
+</div>

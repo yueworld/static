@@ -1,5 +1,5 @@
 <div class="ys-dialog-user-choose">
-    <div class="col-xs-12 p0 selector-header">
+    <div class="col-xs-12 ys-platform-p0 selector-header">
         <div class="col-xs-4 pl20 title">
             {{option.title||'请选择人员'}}
         </div>
@@ -9,22 +9,22 @@
             </div>
         </div>
         <div class="col-xs-2 pr15">
-            <icon class="pull-right ys-framework-dialog-close" name="close-1" width="16px" height="50px"
+            <icon class="pull-right ys-platform-dialog-close" name="close-1" width="16px" height="50px"
                   ng-click="submit(false)"></icon>
         </div>
     </div>
-    <div class="col-xs-12 p0 ys-dialog-body select-body">
-        <div class="col-xs-4 p0 selector-toolbar">
+    <div class="col-xs-12 ys-platform-p0 ys-dialog-body select-body">
+        <div class="col-xs-4 ys-platform-p0 selector-toolbar">
             <div class="col-xs-12 title">组织机构</div>
             <div class="col-xs-12 p20 selector-content ">
-                <div treecontrol class="ys-framework-tree ys-framework-tree-simple" tree-model="trees"
+                <div treecontrol class="ys-platform-tree ys-platform-tree-simple" tree-model="trees"
                      expanded-nodes="expandedNodes" selected-node="selectedNode"
                      on-selection="onSelected">
                     {{node.name}}
                 </div>
             </div>
         </div>
-        <div class="col-xs-8 p0 selector-result">
+        <div class="col-xs-8 ys-platform-p0 selector-result">
             <div class="title fs12">
                 已选人员
                 <icon name="right-1" width="10px" height="40px"></icon>
@@ -33,7 +33,7 @@
                     <button class="btn btn-success">已选</button>
                 </div>
             </div>
-            <div class="col-xs-12 p0 selector-content">
+            <div class="col-xs-12 ys-platform-p0 selector-content">
                 <ul ng-if="users.length!=0">
                     <li ng-repeat="user in users"
                         ng-click="select(user)">
@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 p0 ys-dialog-footer selector-footer">
+    <div class="col-xs-12 ys-platform-p0 ys-dialog-footer selector-footer">
         <button class="btn btn-primary pull-right" ng-click="submit(true)">确认</button>
         <button class="btn btn-default pull-right" ng-click="justLookSelected()"
                 ng-if="!option.single&&selectedUsers.length">已选

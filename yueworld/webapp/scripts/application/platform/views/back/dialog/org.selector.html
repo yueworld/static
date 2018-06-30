@@ -1,5 +1,5 @@
 <div class="ys-dialog ys-org-selector animated fadeIn fadeOut">
-    <div class="col-xs-12 p0 container animated">
+    <div class="col-xs-12 ys-platform-p0 container animated">
         <div class="col-xs-12 selector-header">
             <h3 class="pull-left m0" ng-if="$parent.option.action=='user'">人员选择</h3>
             <h3 class="pull-left m0" ng-if="$parent.option.action=='pos'">职位选择</h3>
@@ -10,12 +10,12 @@
             <icon class="pull-right text-invalid" name="close-1" width="26px" height="50px"
                   ng-click="$parent.close()"></icon>
         </div>
-        <div class="col-xs-12 p0 select-body">
-            <div class="col-xs-5 p0 selector-toolbar">
+        <div class="col-xs-12 ys-platform-p0 select-body">
+            <div class="col-xs-5 ys-platform-p0 selector-toolbar">
                 <div class="title">
                     <span class="col-xs-5 fs12" style="text-align: center">按部门选择</span>
                 </div>
-                <div class="col-xs-12 p0 selector-content">
+                <div class="col-xs-12 ys-platform-p0 selector-content">
                     <div treecontrol class="ys-framework-tree user" tree-model="$parent.trees"
                          expanded-nodes="$parent.expandedTrees" selected-node="$parent.selectedNode"
                          on-selection="$parent.onSelected">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-7 p0 selector-result">
+            <div class="col-xs-7 ys-platform-p0 selector-result">
                 <div class="title fs12" ng-if="$parent.option.action=='user'">
                     {{$parent.$parent.option.action=='user'?'已选人员':'已选职位'}}
                     <icon name="right-1" width="10px" height="40px"></icon>
@@ -36,7 +36,7 @@
                     已选职位
                     <icon name="right-1" width="12px" height="40px"></icon>
                 </div>
-                <div class="col-xs-12 p0 selector-content">
+                <div class="col-xs-12 ys-platform-p0 selector-content">
                     <ul ng-if="$parent.items.length!=0">
                         <li ng-repeat="item in $parent.$parent.items"
                             ng-click="$parent.$parent.$parent.select(item)">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 p0 selector-footer">
+        <div class="col-xs-12 ys-platform-p0 selector-footer">
             <button class="btn btn-primary pull-right" ng-click="$parent.submit(true)">确认</button>
             <button class="btn btn-default pull-right" ng-click="$parent.submit(false)">取消</button>
         </div>

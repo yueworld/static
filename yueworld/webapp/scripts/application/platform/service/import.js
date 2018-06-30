@@ -1,6 +1,8 @@
 module.exports = function ($app) {
     // ============================================== 平台 ===============================================
     [
+        // 统一 Request 封装
+        require("./request"),
         // 组织机构
         require("./organization"),
         // 用户

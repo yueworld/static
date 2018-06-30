@@ -6,7 +6,7 @@
  * @description 编辑
  */
 module.exports = function ($app) {
-    $app.directive("ysFrameworkNumber", [function () {
+    $app.directive("ysPlatformNumber", [function () {
         return {
             restrict: "A",
             replace: true,
@@ -16,56 +16,39 @@ module.exports = function ($app) {
                     var $scope = _$scope.$new(),
                         $el = $app.$($element), option = $scope.option = angular.extend({
                             model: {}, scale: 2
-                        }, _$scope.$eval($attrs.ysFrameworkNumber)),
+                        }, _$scope.$eval($attrs.ysPlatformNumber)),
                         model = option.model, timer = 0;
                     if ($el.is("input")) {
-                        var placeholder = $el.attr("placeholder");
-                        // 还原/重置 placeholder
-                        $el.focus(function () {
+                        /*$el.focus(function () {
                             // 回显
-                            $el.val(model[option.property]);
-                            // 默认
-                            $el.attr("placeholder", "/");
-                            // 焦点
-                            $el.css({outline: "2px solid #91c0f1", backgroundColor: "#f3f4f8"});
-                        });
+                            // $el.val($app.number.parse(model[option.property]) != 0 ? model[option.property] : undefined);
+                        });*/
                         // 错误提示
                         $el.blur(function () {
                             var before = $el.val()/*原始内容*/,
-                                after = $filter("number")($el.val(), option.scale)/*格式化后的内容*/;
-                            // 默认
-                            $el.attr("placeholder", placeholder);
-                            // 去除焦点
-                            $el.css({outline: "0px solid #91c0f1", backgroundColor: ""});
-                            // 设值
-                            if (before == "") {
-                                $el.val("");
-                            } else {
-                                $el.val(after);
-                                if (after <= 0 && before != "0"/*原始内容输入的就是0则不提示错误*/) {
-                                    // 格式错误
-                                    $timeout(function () {
-                                        $app.tip.error({message: "格式错误！"});
-                                    })
+                                after = $app.number.parse(before, option.scale)/*格式化后的内容*/;
+                            if ($app.helper.trim(before)) {
+                                if (before != "0" && after == 0) {
+                                    $app.tip.error({message: "格式错误！"})
+                                    $el.val("");
+                                } else {
+                                    $el.val(after);
                                 }
+                            } else {
+                                $el.val("");
                             }
                         });
                         // 回写模型
                         $el.keyup(function () {
-                            var value = $filter("number")($el.val(), option.scale).replace(new RegExp(",", "gm"), "");
-                            $timeout.cancel(timer);
-                            timer = $timeout(function () {
-                                model[option.property] = value > -1 ? value : undefined;
-                            }, 100)
+                            model[option.property] = $app.number.parse($el.val(), option.scale);
                         })
                         // 初始值
-                        $el.val(model[option.property]);
+                        $el.val($app.number.parse(model[option.property], option.scale) != 0 ? model[option.property] : undefined);
                     }
                 } catch (ex) {
-                    console.log("数字指令 ysFrameworkNumber Error：" + ex.message);
+                    console.log("数字指令 ysPlatformNumber Error：" + ex.message);
                 }
             }]
         };
-
     }]);
 }

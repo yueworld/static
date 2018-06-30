@@ -26,26 +26,28 @@ module.exports = {
                             plugins: [require('autoprefixer')({/*add: true,browsers: []*/})]
                         }
                     }]
-            },
-            { // html 装载
-                test: /\.html$/, loader: 'html-loader'
+            }, { // html 装载
+                test: /\.html$/,
+                loader: 'html-loader',
+                options: {
+                    minimize: true, removeComments: true, collapseWhitespace: true
+                }
             }, { // 图片处理
                 test: /\.(png|jpg|gif)$/,
-                loader: 'url-loader?limit=1&name=styles/img/[name].[md5:hash:hex:7].[ext]'
+                loader: 'url-loader',
+                options: {
+                    limit: 1024,
+                    name: "assets/[name].[hash:8].[ext]"
+                }
             }, { // URL 装载
                 test: /\.(ttf|eot|svg|woff|woff2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: "url-loader",
                 options: {
                     limit: 8192,
                     minetype: "application/font-woff",
-                    name: "styles/fonts/[name].[md5:hash:hex:7].[ext]",
+                    name: "assets/[name].[hash:8].[ext]"
                 }
             }
         ]
-    }, output: {
-        // 输出文件
-        // path: __dirname + "/dist",
-        path:"/data/work/yueworld/zhongjiao/static/static/yueworld",
-        filename: '[name].js'
     }
 };

@@ -1,0 +1,16 @@
+<div class="ys-platform-img-zoom">
+    <div class="col-xs-12 img ys-platform-no-select"><img ng-src="{{option.url}}" ys-platform-drag/></div>
+    <div class="col-xs-12 quit">
+        <div ng-click="close()">
+            <i ys-platform-icon="{name:'error-1',width:50,height:80}"></i>
+        </div>
+    </div>
+    <div class="toolbar">
+        <div class="zoom-out" ng-click="out()">
+            <i ys-platform-icon="{name:'zoom-out',width:40,height:28}"></i>
+        </div>
+        <div class="zoom-in ys-platform-mt40" ng-click="in()">
+            <i ys-platform-icon="{name:'zoom-in',width:40,height:28}"></i>
+        </div>
+    </div>
+</div>

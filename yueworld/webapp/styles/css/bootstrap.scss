@@ -1,0 +1,181 @@
+/*
+    Bootstrap 3 样式重写
+*/
+/* 分页 */
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span{border-radius: 0}
+.pagination > li > a,
+.pagination > li > span {padding: 5px 12px;}
+.pagers {text-align: right}
+.pagers .summary{line-height: 32px;padding-right: 20px;font-size: 14px}
+.pagers .pagination-page{display: none}
+.pagers .goto{float: right;margin-left: 10px}
+.pagers .goto input{width: 44px;float: left;/*border-right:none*/}
+.pagers .goto button{float: left;border-left: none;margin-left: 0px}
+
+/* 日历控件 */
+
+.uib-datepicker-popup{
+    border-radius: 0!important;padding: 0!important;
+    .uib-button-bar{display: block;height: 48px;padding:10px 9px 10px;display: block}
+    .uib-button-bar .uib-clear{margin-left: 8px}
+    .btn{border-radius: 0!important;}
+    th{padding-top: 0!important;}
+    thead .h6 th {padding-top: 8px}
+    thead tr:last-child th{padding-top: 10px}
+    tbody tr:first-child td {padding-top: 6px}
+    th,td{height: 32px;width: 38px}
+    th button{height: 32px;margin-bottom: 7px}
+    tbody {
+        .btn {border: 0px !important}
+        .btn:hover {background: #F3F3F3}
+        .btn-default {background: transparent}
+        .active,
+        .active:hover,
+        .active span {background: #3C0}
+        .btn[disabled="disabled"] .btn[disabled="disabled"] span {color: #CCC}
+    }
+    em {font-size: 12px;color: #ACD}
+    .uib-daypicker:focus,
+    .uib-yearpicker:focus,
+    .uib-monthpicker:focus{outline: none!important;}
+    .uib-datepicker{padding: 8px;box-shadow: none;padding-bottom: 0!important;}
+    .uib-datepicker-current{background-color: #5bc0de;border-color: #46b8da;}
+    .uib-clear{background-color: #d9534f;border-color: #d43f3a;}
+    .uib-close{background-color: #5cb85c;border-color: #4cae4c;}
+}
+
+
+
+/* 工具类 */
+/*
+.wh100{width: 100%}
+.pointer{cursor: pointer}
+.red{color: red}
+.text-invalid{color:!*#777*!#999!*757575*!!important}
+.text-black{color: #000!important}
+.text-blue{color: blue!important}
+.text-primary{color: #2696dd!important}
+.text-primary:hover{color: #3071a9}
+.readonly{background:#fff!important;cursor: pointer}
+.w100p{width: 100%!important}
+.br0{border-radius: 0}
+.fs12{font-size: 12px}
+.fs14{font-size: 14px}
+.fs18{font-size: 18px}
+.fs24{font-size: 24px}
+.lh34{line-height: 34px}
+.lh36{line-height: 36px}
+.lh38{line-height: 38px}
+.lh40{line-height: 40px}
+.fwb{font-weight: bold}
+.fz i{transform:rotate(180deg)}
+.text-ellipsis{text-overflow:ellipsis;overflow:hidden;white-space: nowrap}
+.no-select {-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+*/
+/* padding */
+/*.p0{padding:0px}
+.p10{padding:10px}
+.p15{padding:15px}
+.p20{padding:20px}
+.p30{padding:30px}
+.p40{padding:40px}
+.p45{padding:45px}
+.pl0{padding-left: 0px!important}
+.pl5{padding-left: 5px!important}
+.pl8{padding-left: 8px!important}
+.pl10{padding-left: 10px!important}
+.pl15{padding-left: 15px!important}
+.pl20{padding-left: 20px!important}
+.pl30{padding-left: 30px}
+.pl40{padding-left: 40px!important}
+.pl50{padding-left: 50px!important}
+.pl60{padding-left: 60px!important}
+.pl80{padding-left: 80px!important}
+.pr0{padding-right: 0px!important}
+.pr5{padding-right: 5px}
+.pr10{padding-right: 10px!important}
+.pr15{padding-right: 15px!important}
+.pr20{padding-right: 20px!important}
+.pr30{padding-right: 30px!important}
+.pr40{padding-right: 40px!important}
+.pr100{padding-right: 100px!important}
+.pb0{padding-bottom: 0px!important}
+.pb10{padding-bottom: 10px}
+.pb15{padding-bottom: 15px}
+.pb20{padding-bottom: 20px}
+.pb30{padding-bottom: 30px}
+.pb40{padding-bottom:40px}
+.pt0{padding-top:0px!important}
+.pt5{padding-top:5px}
+.pt10{padding-top:10px}
+.pt15{padding-top: 15px}
+.pt20{padding-top: 20px}
+.pt25{padding-top: 25px}
+.pt30{padding-top:30px}
+.pt40{padding-top:40px}*/
+
+/* margin */
+/*.m0{margint:0!important}
+.ml0{margint-left:0!important}
+.ml10{margin-left: 10px}
+.ml15{margin-left: 15px}
+.mt0{margin-top: 0px}
+.mt5{margin-top: 5px!important}
+.mt6{margin-top: 6px}
+.mt8{margin-top: 8px}
+.mt10{margin-top: 10px}
+.mt15{margin-top: 15px}
+.mt20{margin-top: 20px}
+.mt30{margin-top: 30px}
+.mt40{margin-top: 40px}
+.mb0{margin-bottom: 0px!important}
+.mb5{margin-bottom: 5px!important}
+.mb8{margin-bottom: 8px}
+.mb10{margin-bottom: 10px}
+.mb15{margin-bottom: 15px}
+.mb20{margin-bottom: 20px}
+.mr0{margin-right: 0px!important}
+.mr10{margin-right: 10px!important}
+.mr15{margin-right: 15px!important}
+.mr20{margin-right: 20px!important}*/
+
+/*border*/
+//.bl0{border-left:0px;}
+
+/* from */
+//.form-control{border-radius:0}
+//.input-group-addon{border-radius: 0px;width: 48px}
+
+/* button */
+/*.btn{border-radius: 0px}
+.bg-gray{background: #eaedf1!*#f5f5f5*!}
+.bg-white{background: #fff}
+.btn-primary{background: #18b0e2;border-color: #18b0e2}
+.btn-success{background: #449139}
+.btn-success:hover{background: #006135}
+.btn-gray{background: #818c92;color: #fff}
+.btn-gray:hover{color: #fff}*/
+/*
+
+.uib-tooltip-diy {position: absolute;z-index: 1030;display: block;font-size: 12px;line-height: 1.4;opacity: 0;filter: alpha(opacity=0);visibility: visible}
+.uib-tooltip-diy .tooltip-inner {max-width: 300px;padding: 12px 8px;color: #ffffff;text-align: center;text-decoration: none;border-radius: 0 0;background-color: #425160}
+.uib-tooltip-diy .tooltip-arrow {position: absolute;width: 0;height: 0;border-color: transparent;border-style: solid}
+.uib-tooltip-diy.in {opacity: 0.9;filter: alpha(opacity=90)}
+.uib-tooltip-diy.top {padding-bottom: 10px}
+.uib-tooltip-diy.top .tooltip-arrow {left: 50%;bottom: 5px;border-top-color: #425160;border-width: 5px 5px 0 5px}
+.uib-tooltip-diy.bottom {padding-bottom: 10px}
+.uib-tooltip-diy.bottom .tooltip-arrow {left: 44%;top: -5px;border-bottom-color: #425160;border-width: 0px 5px 5px 5px}
+.uib-tooltip-diy.right {padding-left: 10px}
+.uib-tooltip-diy.right .tooltip-arrow {top: 40%;left: 0px;border-right-color: #425160;border-width: 5px 5px 5px 5px}
+
+.ys-cover{float: left;margin-right: 15px;!*height: 120px;width: 180px;*!position: relative}
+.ys-cover img{!*border:1px solid #ddd;padding:1px;*!}
+.ys-cover .drop,
+.ys-cover .zoom{position: absolute;left:10px;bottom:10px;height: 22px;width:22px;border-radius: 2px;overflow: hidden;color:#E64E4D;background:#fff;text-align:center;display: none;cursor: pointer;border:1px solid #ddd}
+.ys-cover .zoom{left:auto;right:10px;}
+.ys-cover:hover .drop,
+.ys-cover:hover .zoom{display: block}
+*/

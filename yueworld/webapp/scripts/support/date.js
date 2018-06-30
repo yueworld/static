@@ -2,14 +2,14 @@ module.exports = function ($app) {
     // 日期处理
     // ========================================== Date Helper ==========================================================
     var regex = [
-        /^\d{8}$/,                                        // 20180502                     年月日
+        /^\d{8}$/,                                        // 20180502                     yyyyMMdd
         /^\d{10}$/,                                       // 1525271112                   秒值
-        /^\d{12}$/,                                       // 201805021232                 年月日时分秒
+        /^\d{12}$/,                                       // 201805021232                 yyyyMMddHHmm
         /^\d{13}$/,                                       // 1525271088641                毫秒值
-        /^\d{4}-\d{1,2}-\d{1,2}$/,                        // 2008-05-02                   年-月-日
-        /^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}$/,       // 2008-05-02 02:12             年-月-日
-        /^\d{4}年\d{1,2}月\d{1,2}日$/,                     // 2008年05月02                 年-月-日
-        /^\d{4}年\d{1,2}月\d{1,2}日\s\d{1,2}时\d{1,2}分$/   // 2008年05月02日 02时12分       年-月-日
+        /^\d{4}-\d{1,2}-\d{1,2}$/,                        // 2008-05-02                   yyyy-MM-dd
+        /^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}$/,       // 2008-05-02 02:12             yyyy-MM-dd HH:mm
+        /^\d{4}年\d{1,2}月\d{1,2}日$/,                     // 2008年05月02日                yyyy年MM月dd日
+        /^\d{4}年\d{1,2}月\d{1,2}日\s\d{1,2}时\d{1,2}分$/   // 2008年05月02日 02时12分       yyyy年MM月dd日 HH时mm分
     ], toString = Object.prototype.toString;
 
     /**
@@ -23,26 +23,36 @@ module.exports = function ($app) {
         if (toString.call(value) === '[object Date]') {
             return value;
         }
+        value = String(value);
         for (var i = 0; i < regex.length; i++) {
             if (regex[i].test(value)) {
                 if (i == 0) {
-                    return new Date(value.substring(0, 3), value.substring(4, 5), value.substring(6, 7));
+                    // 20180502
+                    return new Date(value.substring(0, 4), parseInt(value.substring(4, 6)) - 1, value.substring(6, 8));
                 } else if (i == 1) {
+                    // 1525271112
                     return new Date(value * 1000);
                 } else if (i == 2) {
-                    return new Date(value.substring(0, 3), value.substring(4, 5), value.substring(6, 7), value.substring(8, 9), value.substring(10, 11));
+                    // 201805021232
+                    return new Date(value.substring(0, 4), parseInt(value.substring(4, 6)) - 1, value.substring(6, 8), value.substring(8, 10), value.substring(10, 12));
                 } else if (i == 3) {
-                    return new Date(value);
+                    // 1525271088641
+                    return new Date(Number(value));
                 } else if (i == 4) {
-                    return new Date(value[0], value[1], value[2]);
+                    // 2008-05-02
+                    value = value.split("-");
+                    return new Date(value[0], parseInt(value[1]) - 1, value[2]);
                 } else if (i == 5) {
+                    // 2008-05-02 02:12
                     var tmp1 = value.split(" ")[0].split("-"),
                         tmp2 = value.split(" ")[1].split(":");
                     return new Date(tmp1[0], tmp1[1], tmp1[2], tmp2[0], tmp2[1]);
                 } else if (i == 6) {
-                    return new Date(value.substring(0, 3), value.substring(5, 6), value.substring(8, 9));
+                    // 2008年05月02
+                    return new Date(value.substring(0, 4), value.substring(5, 7), value.substring(8, 10));
                 } else if (i == 7) {
-                    return new Date(value.substring(0, 3), value.substring(5, 6), value.substring(8, 9), value.substring(12, 13), value.substring(15, 16));
+                    // 2008年05月02日 02时12分
+                    return new Date(value.substring(0, 4), value.substring(5, 7), value.substring(8, 10), value.substring(12, 14), value.substring(15, 17));
                 }
             }
         }
@@ -56,31 +66,26 @@ module.exports = function ($app) {
      * @returns {*}
      */
     function format(expr, date) {
-        if (date) {
-            if (/^\d+$/.test(date)) {
-                date = new Date(Number(date));
-            }
-            var o = {
-                "M+": date.getMonth() + 1, //月份
-                "d+": date.getDate(), //日
-                "h+": date.getHours(), //小时
-                "m+": date.getMinutes(), //分
-                "s+": date.getSeconds(), //秒
-                "q+": Math.floor((date.getMonth() + 3) / 3), //季度
-                "ms": date.getMilliseconds(),//毫秒
-                // 当月最后一天
-                "md": new Date(date.getFullYear(), date.getMonth(), 0).getDate()
-            }
-            if (/(y+)/.test(expr)) {
-                expr = expr.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
-            }
-            for (var k in o) {
-                if (new RegExp("(" + k + ")").test(expr)) {
-                    expr = expr.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-                }
-            }
-            return expr;
+        date = parse(date);
+        var o = {
+            "ms": date.getMilliseconds(), // 毫秒
+            "md": new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(), // 当月最后一天 MaxDay
+            "M+": date.getMonth() + 1, // 月份
+            "d+": date.getDate(), // 日
+            "H+": date.getHours(), // 小时
+            "m+": date.getMinutes(), // 分
+            "s+": date.getSeconds(), // 秒
+            "q+": Math.floor((date.getMonth() + 3) / 3) // 季度
         }
+        if (/(y+)/.test(expr)) {
+            expr = expr.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(expr)) {
+                expr = expr.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return expr;
     }
 
     /**
@@ -92,9 +97,8 @@ module.exports = function ($app) {
      */
     function add(date, expr, value) {
         $app.assert.isTrue(!$app.valid.isDate(date), "日期格式错误！");
-        $app.assert.isTrue(!/y|M|d|w|h|m|s|ms/.test(expr), "表达式格式错误、可选范围(y、M、d、w、h、m、s、ms)！");
+        $app.assert.isTrue(!/y|M|d|w|H|m|s|ms/.test(expr), "表达式格式错误、可选范围(y、M、d、w、H、m、s、ms)！");
         $app.assert.isTrue(!$app.valid.isNumber(value), "数值式格式错误、必须为数字！");
-        expr = expr.toUpperCase();
         date = parse(date);
         switch (expr) {
             case "y":
@@ -109,7 +113,7 @@ module.exports = function ($app) {
             case "w":
                 date.setDate(date.getDate() + 7 * value);
                 break;
-            case "h":
+            case "H":
                 date.setHours(date.getHours() + value);
                 break;
             case "m":
@@ -140,14 +144,15 @@ module.exports = function ($app) {
             min = parse(end);
             max = parse(start);
         }
+
         var result = {min: min, max: max};
         var year = format("yyyy", max) - format("yyyy", min),
             month = format("MM", max) - format("MM", min),
-            day = format("dd", max) - format("dd", min);
+            day = parseInt(format("dd", max)) - parseInt(format("dd", min)) + 1; // 可能为负数
         if (day < 0) {
             month -= 1;
             max = add(max, "M", -1);
-            day = day + format("md", max);
+            day = parseInt(format("md", min)) - parseInt(format("dd", min)) + 1 + parseInt(format("dd", max))
         }
         // 如果day==最后一个月最大天数，则month+1,day=0
         if (day == format("md", max)) {

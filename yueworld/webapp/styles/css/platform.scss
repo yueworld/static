@@ -1,0 +1,324 @@
+@import "variables";
+
+// ================================================== BASE ============================================================
+
+// 修改默认样式
+html,body{
+    //font-family: Arial, Helvetica, "Microsoft YaHei", "STHeiti";
+    font-family: 'PingFang SC', 'Helvetica Neue', "STHeitiSC-Light", "Microsoft YaHei", sans-serif;
+    //font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, "Microsoft YaHei";
+    font-size: 14px;color:#333;height:100%;margin:0;padding:0;
+    //text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;
+}
+h3{font-size: 18px}
+a{&:hover,&:focus,&:active{text-decoration: none}}
+textarea{resize: none}
+svg:not(:root) {overflow: hidden}
+svg{display: inline-block;fill: currentColor;vertical-align: top;text-align: center}
+
+// ================================================== TOOLS ============================================================
+
+// other
+.ys-platform-pointer{cursor: pointer}
+.ys-platform-readonly{background:#fff!important;cursor: pointer}
+.ys-platform-fw{font-weight: bold}
+.ys-platform-no-data {height: 100px;line-height: 100px;text-align: center;/*color: #999;*/font-size: 14px;letter-spacing: 5px;color: #333;}
+.ys-platform-no-select {-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+.ys-platform-text-ellipsis{text-overflow:ellipsis;overflow:hidden;white-space: nowrap}
+.ys-platform-container:after,
+.ys-platform-container:before{display: table;content: " ";clear:both}
+
+// error
+input.ys-platform-error{border: 2px solid #E64E4D!important}
+div.ys-platform-error{
+    .ys-platform-dropdown-text{border: 2px solid #E64E4D!important}
+    &.ys-platform-require .ys-platform-dropdown{
+        background:url(../img/common/icon/require.png) no-repeat right 3px top 3px;
+    }
+    .ys-platform-error-border{border: 2px solid #E64E4D!important}
+}
+// require
+input.ys-platform-require{background:url(../img/common/icon/require.png) no-repeat right 1px top 1px;}
+.ys-platform-require{
+    .ys-platform-dropdown{background:url(../img/common/icon/require.png) no-repeat right 2px top 2px;}
+}
+.ys-platform-shadow{box-shadow: 0 1px 1px rgba(0,0,0,0.15)}
+.ys-platform-w100{width: 100%}
+
+// border width position radius
+.ys-platform-b{
+    &w0{border-width:0px!important}
+    &wl0{border-left:0px;}
+    &r0{border-radius:0!important;}
+}
+
+// line-height
+.ys-platform-lh{
+    &34{line-height: 34px}
+    &32{line-height: 32px}
+    &36{line-height: 36px}
+    &38{line-height: 38px}
+    &40{line-height: 40px}
+}
+
+// text color
+.ys-platform-text-{
+    &warning{color: $color-warning!important}
+    &warning:hover{color: $color-warning-hover!important}
+    &warning-2{color: $color-warning-2!important;}
+    &invalid{color: $color-invalid!important}
+    &primary{color: $color-primary!important}
+    &primary:hover{color: $color-primary-hover!important;}
+    &primary-2{color: $color-primary-2!important}
+    &primary-2:hover{color: $color-primary-hover-2!important;}
+    &black{color: #000!important;}
+    &danger{color: $color-danger!important;}
+    &info{color: #333!important;}
+    &success{color: $color-success!important}
+    &success:hover{color: $color-success-hover!important;}
+    &success-2{color: $color-success-2!important}
+}
+
+// font size
+.ys-platform-fs{
+    &18{font-size: 18px}
+    &12{font-size: 12px}
+}
+
+// bg color
+.ys-platform-bg-{
+    &white{background: #fff}
+    &gray{background: #eaedf1}
+    &f3{background: #f3f3f3}
+}
+
+// input
+.ys-platform-input{
+    position: relative;
+    display: block;width: 100%;height: 32px;padding:5px 12px;font-size: 14px;color: #555;background-color: #fff;border: 1px solid #dae1e7;transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    &:focus{/*border-color: #66afe9;*//*box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);*/
+        border-color: #32aaff!important;
+        outline:solid 1px #3aabf3;outline-offset: -1px;z-index: 2;
+    }
+    &::placeholder {color: #999;opacity: 1;}
+}
+
+// icon
+.ys-platform-icon{
+    &-date{
+       position: relative;height: 32px;cursor: pointer;
+       &:after{
+           content: "";position: absolute;top:1px;right:1px;bottom:1px;display: block;width: 32px;
+           background: url(../img/common/icon/calendar.png) no-repeat center center;
+           background-size: 20px 15px;border-left: 1px solid #eff1f4;z-index: 10;
+       }
+    }
+    &-project-bg{background: #21acff url(../img/common/icon/project_bg_icon.png) center center;background-size: contain;}
+    &-more-1{
+       background:url(../img/common/icon/more-1.png) no-repeat right center;
+       &:hover{
+           color:#e64e4d;
+           background-image:url(../img/common/icon/more-1-hover.png);
+       }
+    }
+    &-ok-1{background-image: url(../img/common/icon/ok-1.png);height: 16px;width: 16px;vertical-align: sub;}
+    &-add-2{background: url(../img/common/icon/add-2.png) no-repeat;}
+    &-add-2:hover{background: url(../img/common/icon/add-2-hover.png) no-repeat;}
+    &-subtract-2{background: url(../img/common/icon/subtract-2.png) no-repeat;}
+}
+
+// button
+.ys-platform-btn{
+    &-default{
+        border: 1px solid #dae1e7!important;
+        &:hover{color: #333!important;background-color: #e6e6e6!important;border-color: #adadad!important;}
+        &:focus{text-decoration: none!important;outline:none!important;}
+    }
+    &-primary{
+        background-color:$color-primary!important;color: #fff!important;border-color: $color-primary!important;
+        &:hover,&:focus,&:active,&:hover:active,&:hover:focus,&:active:focus {background-color:$color-primary-hover!important;color:#fff!important;border-color:$color-primary-hover!important;}
+    }
+    &-success{
+        background-color: #449139!important;
+        &:hover{
+            background-color: #006135!important;
+        }
+    }
+    &-danger{
+        background-color:$color-danger!important;color:#fff!important;border-color: $color-danger!important;
+        &:hover,&:focus,&:active,&:hover:active,&:hover:focus,&:active:focus {background-color:$color-danger-hover!important;color:#fff!important;border-color:$color-danger-hover!important;}
+    }
+    &-gray{background-color: #818c92!important;color: #fff!important;border-color:#818c92!important;}
+    &-gray:hover{color: #fff!important}
+    &-default,&-primary,&-success,&-danger,&-gray{
+        border-radius: 0px!important;outline:none!important;outline-offset: -2px!important;padding: 5px 15px!important;min-width: 80px!important;
+    }
+    &-group{
+        &>.btn{
+            &.active{
+                background-color: #808c92!important;color: #fff!important;border-color: #808c92!important;
+            }
+        }
+    }
+}
+
+// padding
+.ys-platform-p{
+    &0{padding:0px!important;}
+    &8{padding:8px!important;}
+    &10{padding:10px!important;}
+    &15{padding:15px!important;}
+    &20{padding:20px!important;}
+    &40{padding:40px!important;}
+    &t0{padding-top:0px!important}&r0{padding-right:0px!important}&b0{padding-bottom:0px!important}&l0{padding-left:0px!important}
+    &t5{padding-top:5px!important}&r5{padding-right:5px!important}&b5{padding-bottom:5px!important}&l5{padding-left:5px!important}
+    &t8{padding-top:8px!important}&r8{padding-right:8px!important}&b8{padding-bottom:8px!important}&l8{padding-left:8px!important}
+    &t10{padding-top:10px!important}&r10{padding-right:10px!important}&b10{padding-bottom:10px!important}&l10{padding-left:10px!important}
+    &t15{padding-top:15px!important}&r15{padding-right:15px!important}&b15{padding-bottom:15px!important}&l15{padding-left:15px!important}
+    &t20{padding-top:20px!important}&r20{padding-right:20px!important}&b20{padding-bottom:20px!important}&l20{padding-left:20px!important}
+    &t30{padding-top:30px!important}&r30{padding-right:30px!important}&b30{padding-bottom:30px!important}&l30{padding-left:30px!important}
+    &t40{padding-top:40px!important}&r40{padding-right:40px!important}&b40{padding-bottom:40px!important}&l40{padding-left:40px!important}
+    &t45{padding-top:45px!important}&r45{padding-right:45px!important}&b45{padding-bottom:45px!important}&l45{padding-left:45px!important}
+    &t50{padding-top:50px!important}&r50{padding-right:50px!important}&b50{padding-bottom:50px!important}&l50{padding-left:50px!important}
+    &t60{padding-top:60px!important}&r60{padding-right:60px!important}&b60{padding-bottom:60px!important}&l60{padding-left:60px!important}
+    &t80{padding-top:80px!important}&r80{padding-right:80px!important}&b80{padding-bottom:80px!important}&l80{padding-left:80px!important}
+    &t100{padding-top:100px!important}&r100{padding-right:100px!important}&b100{padding-bottom:100px!important}&l100{padding-left:100px!important}
+}
+
+// margin
+.ys-platform-m{
+    &0{margin:0px!important;}
+    &t0{margin-top:0px!important}&r0{margin-right:0px!important}&b0{margin-bottom:0px!important}&l0{margin-left:0px!important}
+    &t5{margin-top:5px!important}&r5{margin-right:5px!important}&b5{margin-bottom:5px!important}&l5{margin-left:5px!important}
+    &t8{margin-top:8px!important}&r8{margin-right:8px!important}&b8{margin-bottom:8px!important}&l8{margin-left:8px!important}
+    &t10{margin-top:10px!important}&r10{margin-right:10px!important}&b10{margin-bottom:10px!important}&l10{margin-left:10px!important}
+    &t15{margin-top:15px!important}&r15{margin-right:15px!important}&b15{margin-bottom:15px!important}&l15{margin-left:15px!important}
+    &t20{margin-top:20px!important}&r20{margin-right:20px!important}&b20{margin-bottom:20px!important}&l20{margin-left:20px!important}
+    &t30{margin-top:30px!important}&r30{margin-right:30px!important}&b30{margin-bottom:30px!important}&l30{margin-left:30px!important}
+    &t40{margin-top:40px!important}&r40{margin-right:40px!important}&b40{margin-bottom:40px!important}&l40{margin-left:40px!important}
+    &t45{margin-top:45px!important}&r45{margin-right:45px!important}&b45{margin-bottom:45px!important}&l45{margin-left:45px!important}
+    &t50{margin-top:50px!important}&r50{margin-right:50px!important}&b50{margin-bottom:50px!important}&l50{margin-left:50px!important}
+    &t60{margin-top:60px!important}&r60{margin-right:60px!important}&b60{margin-bottom:60px!important}&l60{margin-left:60px!important}
+    &t80{margin-top:80px!important}&r80{margin-right:80px!important}&b80{margin-bottom:80px!important}&l80{margin-left:80px!important}
+    &t100{margin-top:100px!important}&r100{margin-right:100px!important}&b100{margin-bottom:100px!important}&l100{margin-left:100px!important}
+}
+
+// tips
+.ys-platform-{
+    &tiptool{
+        position: absolute;z-index: 2009;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 12px;font-style: normal;
+        font-weight: normal;line-height: 1.42857143;text-align: left;text-decoration: none;text-shadow: none;text-transform: none;letter-spacing: normal;
+        word-break: normal;word-spacing: normal;word-wrap: normal;white-space: normal;line-break: auto;
+        transition: opacity 0.15s linear;opacity: 0;
+        .inner {max-width: 200px;padding: 3px 8px;color: #fff;text-align: center;background-color: #000;border-radius: 4px;font-size:18px;}
+        &.in{opacity: 1}
+    }
+    &tipmsg{
+        position: fixed;z-index: 2010;top: 20px;right:0px;left:0;text-align: center;height:0;
+        .message-item-{
+            &list{display:inline-block;min-width:300px}
+            &item{
+                height:58px;line-height: 58px;margin: auto;margin-bottom:10px;border-radius: 4px;font-size:18px;color:#fff;padding:0 20px 0 68px;background-size:contain;text-align: left;cursor:pointer;min-width:300px;
+                /*transition:opacity 0.15s linear,transform 0.15s linear;*/
+                transition: all .15s cubic-bezier(.215, .61, .355, 1);
+                opacity: 0;transform: translateY(-50%);
+                &:first-child{margin-top: -10px}
+                &.in{opacity: 1;transform: translateY(0px)}
+            }
+        }
+        .alert-{
+            &success{
+                background:rgba(31, 174, 255,0.8) url(../img/common/icon/message-success.png) no-repeat 25px center;
+                &:hover{background-color:rgba(31, 174, 255,1)}
+            }
+            &warning{
+                background:rgba(138,109,59,0.8) url(../img/common/icon/message-warning.png) no-repeat 25px center;
+                &:hover{background-color:rgba(138,109,59,1)}
+            }
+            &danger{
+                background:rgba(25, 25, 25,0.8) url(../img/common/icon/message-error.png) no-repeat 25px center;
+                &:hover{background-color:rgba(25, 25, 25,1)}
+            }
+            &info{
+                background:rgba(49,112,143,0.8) url(../img/common/icon/message-warning.png) no-repeat 25px center;
+                &:hover{background-color:rgba(49,112,143,1)}
+            }
+        }
+    }
+}
+
+// checkbox radio
+.ys-platform-{
+        &checkbox,
+        &radio{background: url(../img/common/icon/box2.png) no-repeat;width: 18px;height: 18px;display: inline-block;vertical-align: middle;cursor: pointer;-webkit-background-size: 200px 20px;background-size: 200px 20px;}
+        &checkbox{
+            background-position: 0 0;
+            &:hover{background-position: -20px 0;}
+            &.selected{background-position: -40px 0;}
+            &.disabled{background-position: -60px 0;}
+            &.selected.disabled{background-position: -80px 0;}
+        }
+        &radio{
+            background-position: -100px 0;
+            &:hover{background-position: -120px 0;}
+            &.selected{background-position: -140px 0;}
+            &.disabled{background-position: -160px 0;}
+            &.selected.disabled {background-position: -180px 0;}
+        }
+}
+
+// ================================================== Component ========================================================
+// backdrop 遮罩、背景
+.ys-platform-backdrop{
+    background-color:#000;position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 2001;opacity:0;transition: opacity 0.15s linear;
+    &.in{opacity: 0.5!important}
+}
+// modal 模态对话框
+.ys-platform-modal{
+    position: fixed;z-index: 2001;top:0;left:0;right:0;bottom:0;transition: opacity 0.15s linear;
+    .ys-platform-container{
+        position: relative;background: #fff;background-clip: padding-box;margin: 30px auto;float:initial!important;transform: translate(0, -25%);
+        transition: transform .3s ease-out,opacity 0.15s ease-out,width 0.15s;opacity: 0;
+        border: 1px solid rgba(0, 0, 0, .2);box-shadow: 0 5px 15px rgba(0, 0, 0, .5);/*border-radius: 6px;*/
+        /*overflow: hidden;*/
+        &.in{transform: translate(0, calc((100vh - 100%) /2 ));opacity: 1;}
+    }
+    .header{
+        height:56px;line-height: 56px;border-bottom: 1px solid #e5e5e5;
+        h4{margin:0px;float: left;line-height: 56px;/*font-size: 14px;*/font-weight: normal}
+        .close{
+            padding-right: 7px;float: right;
+            i{cursor: pointer;color: #000;opacity:.5;&:hover{opacity: 0.8}}
+        }
+    }
+    .footer{
+        height: auto;padding: 15px;text-align: right;border-top: 1px solid #e5e5e5;
+        .btn{margin-left: 10px;float: right}
+    }
+    // ys-platform-dialog-msg：confirm、success、info、error
+    &-msgbox{
+        padding:0!important;
+        .body{padding:0px;}
+        .body>div{line-height: 30px;font-size: 16px;padding:20px 40px;text-align: left;margin-bottom: 0px}
+        &.error {
+            .body>div{color: #a94442;background-color: #f2dede;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+            .footer{border-top:1px solid #ebccd1}
+        }
+        &.confirm {
+            .body>div{color:#8a6d3b;background-color: #fcf8e3;}
+            .footer{border-top:1px solid #faebcc;}
+        }
+        &.warning{
+            .body>div{color: #8a6d3b;background-color: #fcf8e3;}
+            .footer{border-top:1px solid #faebcc;}
+        }
+        &.info{
+            .body>div{color: #31708f;background-color: #d9edf7;}
+            .footer{border-top:1px solid #bce8f1;}
+        }
+        &.success {
+            .body>div{color: #3c763d;background-color: #dff0d8;}
+            .footer{border-top:1px solid #d6e9c6;}
+        }
+    }
+}

@@ -4,7 +4,7 @@ module.exports = function ($app) {
     // 基础常用函数扩展
     var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,
         // 占位符
-        placeholder = /\$\{([^{}]+)\}/g;
+        placeholder = /(\${([^{}]+)})/ig;
 
     /**
      * 剔除空格
@@ -13,6 +13,17 @@ module.exports = function ($app) {
      */
     function trim(value) {
         return value == null ? "" : (value + "").replace(rtrim, "")
+    }
+
+    /**
+     * 全局替换
+     * @param source        源
+     * @param target        目标
+     * @param content       替换内容
+     * @returns {string}
+     */
+    function replaceAll(source, target, content) {
+        return (source || "").replace(new RegExp(target, "gm"), content)
     }
 
     /**
@@ -32,17 +43,21 @@ module.exports = function ($app) {
      * @returns {*}
      */
     function template(expr, parameters) {
-        var value;
-        while ((value = placeholder.exec(expr))) {
-            expr = expr.replace(value[0], parameters[value[1]] ? parameters[value[1]] : "${" + value[1] + " -> 未定义}");
+        var value, result = expr;
+        while ((value = placeholder.exec(expr)) != null) {
+            result = result.replace(value[0], parameters[value[2]] || $app.valid.isNumber(parameters[value[2]]) ? parameters[value[2]] : ""/*value[0] + " -> 未定义"*/);
         }
-        return expr;
+        return result;
     }
 
 
-    // 返回随机内容
+    /**
+     *
+     * @param option
+     * @returns {*}
+     */
     function random(option) {
-        option = angular.extend({seed: 10, fractional: 0, size: 1, start: 1}, option);
+        option = angular.extend({seed: 10, fractional: 0, size: 1, start: 0}, option);
         var sp = option.seed - option.start;
         if (option.size == 1) {
             return parseFloat(Math.random() * sp + option.start).toFixed(option.fractional);
@@ -64,7 +79,7 @@ module.exports = function ($app) {
      */
     function joinProperty(items, joinProperty, join) {
         return items.map(function (item) {
-            return item[property];
+            return item[joinProperty];
         }).join(join);
     }
 
@@ -164,6 +179,13 @@ module.exports = function ($app) {
     }
 
     /**
+     * 跳转重定向
+     */
+    function redirect(url) {
+        window.location.href = url;
+    }
+
+    /**
      * 返回已执行的 promise 对象
      */
     function promise(callback) {
@@ -174,9 +196,54 @@ module.exports = function ($app) {
         }]);
     }
 
+    /**
+     * 生成一个固定范围数组
+     * @param length
+     * @returns {Array}
+     */
+    function range(length) {
+        var value = [];
+        for (var i = 0; i < length; i++) {
+            value.push(i);
+        }
+        return value;
+    }
+
+    // 上传
+    function uploader() {
+        return $app.injector.invoke(["$q", function ($q) {
+            var file = $("<input/>", {type: "file", name: "fileuplaoder", style: "display:none"}).appendTo("body"),
+                deferred = $q.defer();
+            deferred.promise.finally(function () {
+                file.remove();
+            });
+            return deferred.promise;
+        }]);
+        file.change(function () {
+            var formData = new FormData();
+            formData.append("myfile", file.get(0).files[0]);
+            $app.$.ajax({
+                url: enrolmentWeb_Path + 'financial/importUploadFile.htm',
+                type: 'POST', data: formData, processData: false, contentType: false, dataType: 'json',
+                success: function ($response) {
+                    if ($response.success) {
+                        alert("导入成功");
+                        location.reload();
+                    } else {
+                        alert($response.message);
+                    }
+                }
+            });
+        });
+        file.trigger("click");
+    }
+
     $app.helper = {
+        range: range,
         // 剔除空格
         trim: trim,
+        // 全局替换
+        replaceAll: replaceAll,
         // 首字母大写
         firstUpperCase: firstUpperCase,
         // 编译格式化字符串、
@@ -200,7 +267,11 @@ module.exports = function ($app) {
         // 延迟响应 watch
         watch: watch,
         // 返回已执行的 promise 对象
-        promise: promise
+        promise: promise,
+        // 跳转
+        redirect: redirect,
+        // 上传
+        uploader: uploader
     }
 
 }

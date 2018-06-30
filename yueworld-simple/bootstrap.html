@@ -1,16 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+    <title></title>
+</head>
 <body>
-<div class="loading"></div>
-<h2 class="text-center">Wellcome!</h2>
-<div style="width: 500px; margin: auto" ng-controller="MainController">
-    <input type="text" ng-model="input.statusId"/>
-    <hr/>
-    <div ys-platform-dropdown-dynamic="{model:input,theme:'caret',handler:quickSearch,watchReload:{model:input,property:'statusId'}}"></div>
-    <select>
-        <!--<option>1</option>-->
-    </select>
+<div id="app">
+    <h2 class="text-center">Wellcome!</h2>
+    <div style="width: 500px; margin: auto" ng-controller="MainController">
+        <input type="text" ng-model="input.id"/>
+        <hr/>
+        <div ys-platform-dropdown-dynamic="{model:input,theme:'caret',handler:quickSearch,watchReload:{model:input,property:'statusId'}}"></div>
+        <hr/>
+        <button class="btn ys-platform-btn-primary" ng-click="chooseContract()">选择合同</button>
+
+        <button class="btn ys-platform-btn-primary" ng-click="tip()">tip优化</button>
+
+        <div class="col-xs-12 ys-platform-p20" style="background: #f5f5f5">
+            <i ys-platform-icon="{name:'no-data-1',width:100,height:100}"></i>
+        </div>
+
+        <div class="col-xs-12 ys-platform-p0 ys-platform-list-conditions">
+            <div class="btn-group">
+                <div class="btn-group">
+                    <div ys-platform-dropdown-static="{dictionary:'AREAS',model:filter,set:{id:'areaId'},width:120,placeholder:'区域',theme:'caret'}"></div>
+                </div>
+            </div>
+            <div class="search">
+                <input class="ys-platform-input" placeholder="请输入编码、项目名称" ng-model="filter.term"
+                       ys-platform-enter="reload()"/><span></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ys-platform-loading in">
+    <div class="pre">
+        <div class="left-bar">
+            <div class="left-bar-top-bar"></div>
+            <div class="left-bar-bottom-bar"></div>
+        </div>
+        <div class="loader-spinner">
+            <div class="so"></div>
+            <div class="ul"></div>
+            <div class="te"></div>
+            <div class="ar"></div>
+            <div class="y"></div>
+        </div>
+        <div class="right-bar">
+            <div class="right-bar-top-bar"></div>
+            <div class="right-bar-bottom-bar"></div>
+        </div>
+    </div>
+    <div class="loader-text">请稍候、系统正在努力加载中。</div>
 </div>
 </body>
 </html>

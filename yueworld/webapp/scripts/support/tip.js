@@ -7,7 +7,7 @@ module.exports = function ($app) {
      */
     function tip(option) {
         if (!$container) {
-            $container = $app.$('<div class="ys-framework-tips"><div class="message-item-list"></div></div>').appendTo("body").find("div.message-item-list");
+            $container = $app.$('<div class="ys-platform-tipmsg"><div class="message-item-list"></div></div>').appendTo($app.el.container).find("div.message-item-list");
         }
         return $app.injector.invoke(["$q", "$animate", "$timeout", function ($q, $animate, $timeout) {
             var $message = $app.$('<div class="message-item-item">' + option.message + '</div>').appendTo($container),
@@ -44,7 +44,7 @@ module.exports = function ($app) {
      * @param option
      */
     function info(option) {
-        tip(angular.extend({action: "info"}, option))
+        return tip(angular.extend({action: "info"}, option))
     }
 
     /**
@@ -52,7 +52,7 @@ module.exports = function ($app) {
      * @param option
      */
     function warning(option) {
-        tip(angular.extend({action: "warning"}, option))
+        return tip(angular.extend({action: "warning"}, option))
     }
 
     /**
@@ -60,7 +60,7 @@ module.exports = function ($app) {
      * @param option
      */
     function error(option) {
-        tip(angular.extend({action: "error"}, option))
+        return tip(angular.extend({action: "error"}, option))
     }
 
     /**
@@ -68,7 +68,7 @@ module.exports = function ($app) {
      * @param option
      */
     function success(option) {
-        tip(angular.extend({action: "success"}, option))
+        return tip(angular.extend({action: "success"}, option))
     }
 
     $app.tip = {

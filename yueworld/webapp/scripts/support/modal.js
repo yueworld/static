@@ -74,35 +74,34 @@ module.exports = function ($app) {
 
             function open(resolveObj) {
                 var $backdrop = $app.backdrop(),
-                    $modal = $app.$('<div class="ys-framework-dialog ys-framework-dialog-modal"><div class="col-xs-12 p0 container"></div></div>'),
-                    $container = $modal.find(".container").css({width: option.width});
+                    $modal = $app.$('<div class="ys-platform-modal"><div class="col-xs-12 ys-platform-p0 ys-platform-container"></div></div>'),
+                    $container = $modal.find(".ys-platform-container").css({width: option.width}).addClass(option.class ? option.class : "");
                 $scope.close = function ($callback) {
-                    $animate.removeClass($container, "in");
-                    $timeout(function () {
-                        $backdrop.hide().then(function () {
-                            if (angular.isFunction($callback)) {
-                                $callback();
-                            }
-                            $scope.$destroy();
-                            $scopes = $scopes.filter(function (_$scope) {
-                                return $scope != _$scope;
-                            })
-                        });
-                    }, 75)
+                    $animate.removeClass($container, "in").then(function () {
+                        $scope.$destroy();
+                        $scopes = $scopes.filter(function (_$scope) {
+                            return $scope != _$scope;
+                        })
+                    })
+                    $backdrop.hide().then(function () {
+                        if (angular.isFunction($callback)) {
+                            $callback();
+                        }
+                    });
                 }
                 var locals = angular.extend({$element: $container}, resolveObj, {$scope: angular.extend($scope.$new(), option)});
                 try {
                     $controller(option.controller, locals);
                 } catch (ex) {
-                    console.debug(ex.message)
+                    console.log(ex.message)
                 }
                 $container.append($compile(option.template)(locals.$scope));
-                $modal.appendTo($app.el.body)
+                $modal.appendTo($app.el.container)
                 $timeout(function () {
                     $animate.addClass($container, "in").then(function () {
                         option.deferred.notify("show");
                     })
-                }, 75);
+                });
                 $scope.$on("$destroy", function () {
                     $modal.remove();
                 })

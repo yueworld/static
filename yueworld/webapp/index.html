@@ -10,13 +10,12 @@
     <base href="/">
     <script type="text/javascript">var match = /(msie\s|trident.*rv:)([\w.]+)/.exec(navigator.userAgent.toLowerCase());
     if (match && match[2] && parseFloat(match[2]) < 10) {
-        window.location.href = "/browser.err.html"
+        window.location.href = "/assets/browser.err.html"
     }</script>
 </head>
 <body>
-<div ng-include="'scripts/application/platform/views/icons.html'"></div>
-<div main-framework></div>
-<div class="ys-framework-loading in">
+<div ys-platform-app></div>
+<div class="ys-platform-loading in">
     <div class="pre">
         <div class="left-bar">
             <div class="left-bar-top-bar"></div>

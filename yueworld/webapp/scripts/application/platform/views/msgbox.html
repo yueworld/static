@@ -1,0 +1,19 @@
+<div class="col-xs-12 ys-platform-modal-msgbox" ng-class="option.action">
+    <div class="col-xs-12 header" ng-if="option.title">
+        <h4>{{option.title}}</h4>
+        <icon class="close" name="close-1" width="16px" height="56px" ng-click="close()"></icon>
+    </div>
+    <div class="col-xs-12 body">
+        <div>
+            <i ys-platform-icon="{name:'warning-1',width:30,height:30}" style="color: #F90"
+               ng-if="option.action=='confirm'"></i>
+            <div class="ys-platform-pl10" style="display: inline-block" ng-bind-html="option.message"></div>
+        </div>
+    </div>
+    <div class="col-xs-12 footer">
+        <button class="btn" ng-class="btnClass(btn)"
+                ng-repeat="btn in option.buttons" ng-click="submit(btn.result)">
+            {{btn.text}}
+        </button>
+    </div>
+</div>

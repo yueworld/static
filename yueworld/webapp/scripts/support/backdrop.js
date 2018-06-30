@@ -8,7 +8,7 @@ module.exports = function ($app) {
     function backdrop(option) {
 
         option = angular.extend({show: true}, option);
-        var backdrop = $app.$('<div class="ys-framework-backdrop"></div>').appendTo($app.el.body);
+        var backdrop = $app.$('<div class="ys-platform-backdrop"></div>').appendTo($app.el.container);
 
         function show() {
             return $app.injector.invoke(["$animate", "$timeout", function ($animate, $timeout) {

@@ -21,7 +21,8 @@ module.exports = function ($app) {
         html: $app.$("html"),
         title: $app.$("html head title"),
         body: $app.$("html body"),
-        loading: $app.$("html body div.ys-framework-loading")
+        container: $app.$("html body"),
+        loading: $app.$("html body div.ys-platform-loading"),
     };
     [
         // 原生对象扩展
@@ -38,6 +39,8 @@ module.exports = function ($app) {
         require("./event"),
         // 日期
         require("./date"),
+        // 数字
+        require("./number"),
         // Url
         require("./url"),
         // Cookie
@@ -56,14 +59,14 @@ module.exports = function ($app) {
         require("./msgbox"),
         // 表单
         require("./form"),
-        // 统一 Request 封装
-        require("./request"),
         // Loading
         require("./loading"),
         // 遮罩、背景
         require("./backdrop"),
         // JSON
         require("./json"),
+        // Session
+        require("./session"),
         // 其他
         require("./helper")
     ].forEach(function (callback) {

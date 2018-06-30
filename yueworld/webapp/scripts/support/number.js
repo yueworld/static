@@ -10,12 +10,11 @@ module.exports = function ($app) {
      * @return {object} {times:100, num: 314}
      */
     function toInt(value) {
-        var ret = {times: 1, num: 0};
-        var isNegative = value < 0;
-        if ($app.valid.isInt(value)) {
-            ret.num = value;
+        var ret = {times: 1, num: $app.valid.isNumber(value) ? Number(value) : 0};
+        if ($app.valid.isNumber(ret.num) || $app.valid.isInt(ret.ret)) {
             return ret;
         }
+        var isNegative = value < 0;
         var strfi = value + '';
         var dotPos = strfi.indexOf('.');
         var len = strfi.substr(dotPos + 1).length;
@@ -96,12 +95,31 @@ module.exports = function ($app) {
         }
     }
 
+    /**
+     * 取最小值
+     * @param v1
+     * @param v2
+     * @returns {number}
+     */
+    function min(v1, v2) {
+        return Math.min(v1, v2);
+    }
+
+    /**
+     * 取最大值
+     * @param v1
+     * @param v2
+     * @returns {number}
+     */
+    function max(v1, v2) {
+        return Math.max(v1, v2);
+    }
+
     $app.number = {
         // 转为数字、小数位采用绝对值
         parse: parse,
         // 加法
         add: function (v1, v2, precision /* 精度 */) {
-
             return calc(v1, v2, precision | 0, "add");
         },
         // 剑法
@@ -115,6 +133,10 @@ module.exports = function ($app) {
         // 除法
         divide: function (n1, n2, precision /* 精度 */) {
             return calc(n1, n2, precision | 0, "divide");
-        }
+        },
+        // 取最小值
+        min: min,
+        // 取最大值
+        max: max
     }
 }

@@ -1,4 +1,7 @@
 module.exports = function ($app) {
+    $app.platform = {
+        dialog: {}
+    }
     // ============================================== 管理后台 ===============================================
     // 服务
     require("./service/import")($app);

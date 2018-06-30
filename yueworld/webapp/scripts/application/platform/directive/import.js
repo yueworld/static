@@ -1,22 +1,27 @@
 module.exports = function ($app) {
-    // ============================================== 基础数据 ===============================================
+    // ============================================== Angular 指令扩展 ==================================================
     [
-        require("./main.framework"),
+        // app 主入口
+        require("./app"),
+        require("./dropdown.static"),
+        require("./dropdown.dynamic"),
+        require("./dropdown.project"),
+        require("./list"),
+        require("./tree"),
+        // 功能型
         require("./icon"),
-        require("./toggle.panel"),
+        require("./error"),
+        require("./edit"),
+        require("./enter"),
+        require("./tip"),
+        require("./drag"),
+        require("./number"),
+        require("./zoom"),
         // require("./select2"),
         // require("./tinymce"),
-        require("./error"),
-        require("./tree"),
-        require("./uploader"),
-        require("./select"),
-        require("./dropdown"),
-        require("./dropdown.old"),
-        require("./dropdown.tree"),
-        require("./edit"),
-        require("./number"),
-        require("./tip"),
-        require("./keyboard"),
+        // require("./uploader"),
+        // require("./select"),
+        //require("./dropdown.tree"),
     ].forEach(function (callback) {
         callback($app)
     });

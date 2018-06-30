@@ -6,7 +6,7 @@
  * @description 编辑
  */
 module.exports = function ($app) {
-    $app.directive("ysFrameworkEdit", ["$parse", function ($parse) {
+    $app.directive("ysPlatformEdit", ["$parse", "$timeout", function ($parse, $timeout) {
         return {
             restrict: 'A',
             link: function (_$scope, element, attrs) {
@@ -14,7 +14,7 @@ module.exports = function ($app) {
                     $scope = angular.extend(_$scope.$new(), {
                         watch: "model.isEdit",
                         expression: "model.isEdit",
-                    }, _$scope.$eval(attrs.ysFrameworkEdit));
+                    }, _$scope.$eval(attrs.ysPlatformEdit));
                 $scope.$watch($scope.watch, function (isEdit) {
                     isEdit = $scope.$eval($scope.expression);
                     if ($el.is("input") || $el.is("textarea")) {
@@ -27,10 +27,10 @@ module.exports = function ($app) {
                         }
                     }
                     if (!isEdit) {
-                        $el.unbind("click").find(".ys-framework-dropdown").unbind("click");
+                        $el.unbind("click").find(".ys-platform-dropdown-static,.ys-platform-dropdown-dynamic").unbind("click");
                     }
                     if (isEdit && $scope.require) {
-                        $el.addClass("ys-framework-require")
+                        $el.addClass("ys-platform-require")
                     }
                 });
                 $scope.$on("$destroy", function () {

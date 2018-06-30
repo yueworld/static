@@ -1,5 +1,5 @@
 /**
- * dialog.js
+ * msgbox.js
  * @author zhanggj
  * @version 1.0.0
  * @time 2017-06-012 21:31:38
@@ -11,22 +11,18 @@ module.exports = function ($app) {
     function message($option) {
         return $app.modal(angular.extend({
             title: false, message: false, width: 480, buttons: [{text: "知道啦", result: true}],
-            template: "<div class='col-xs-12 p0 ys-framework-dialog-msg'>" +
-            "   <div class=\"col-xs-12 p0 header\" ng-if=\"option.title\" ng-bind=\"option.title\"></div>\n" +
-            "        <div class=\"col-xs-12 p0 body\" ng-bind-html=\"option.message\"\n" +
-            "        ng-class=\"{'error':'alert-danger','confirm':'alert-warning','warning':'alert-warning','info':'alert-info','success':'alert-success'}[option.action]\"></div>\n" +
-            "        <div class=\"col-xs-12 footer p0\" ng-if=\"option.buttons.length==2\">\n" +
-            "            <div class=\"col-xs-6\" ng-repeat=\"bt in option.buttons\" ng-bind=\"bt.text\"\n" +
-            "                 ng-click=\"submit(bt.result)\"></div>\n" +
-            "        </div>\n" +
-            "        <div class=\"col-xs-12 footer p0\" ng-if=\"option.buttons.length==1\">\n" +
-            "            <div class=\"col-xs-12\" ng-bind=\"option.buttons[0].text\"\n" +
-            "                 ng-click=\"submit(option.buttons[0].result)\"></div>\n" +
-            "        </div>\n" +
-            "    </div>" +
-            "</div>",
+            template: require("../application/platform/views/msgbox.html"),
             controller: ["$scope", function ($scope) {
                 var option = $scope.option;
+                $scope.btnClass = function (btn) {
+                    if (btn.class) {
+                        return btn.class;
+                    } else if (option.action == "error") {
+                        return "ys-platform-btn-danger"
+                    } else {
+                        return "ys-platform-btn-default";
+                    }
+                }
                 $scope.submit = function (execute) {
                     $scope.close(function () {
                         option.deferred.resolve({execute: execute});
@@ -45,10 +41,11 @@ module.exports = function ($app) {
      */
     function confirm(option) {
         return message(angular.extend({
-            buttons: [{text: "取消", result: false}, {
-                text: "确定",
-                result: true
-            }]
+            // title:"操作提示",
+            buttons: [
+                {text: "取消", result: false, class: 'ys-platform-btn-default'},
+                {text: "确定", result: true, class: 'ys-platform-btn-primary'}
+            ]
         }, option, {action: "confirm"}));
     }
 
@@ -60,7 +57,9 @@ module.exports = function ($app) {
      * @returns {*}
      */
     function info(option) {
-        return message(angular.extend({/*title: "消息提示"*/}, option, {action: "info"}));
+        return message(angular.extend({
+            /*title: "消息提示"*/
+        }, option, {action: "info"}));
     }
 
     /**
@@ -71,10 +70,9 @@ module.exports = function ($app) {
      */
     function warning(option) {
         return message(angular.extend({
-            buttons: [{text: "取消", result: false}, {
-                text: "确定",
-                result: true
-            }]
+            buttons: [
+                {text: "取消", result: false}, {text: "确定", result: true}
+            ]
         }, option, {action: "warning"}));
     }
 
@@ -85,7 +83,11 @@ module.exports = function ($app) {
      * @returns {*}
      */
     function error(option) {
-        return message(angular.extend({/*title: "错误提示"*/}, option, {action: "error"}));
+        return message(angular.extend({
+            buttons: [
+                {text: "取消", result: true}
+            ]
+        }, option, {action: "error"}));
     }
 
     /**
@@ -95,7 +97,9 @@ module.exports = function ($app) {
      * @returns {*}
      */
     function success(option) {
-        return message(angular.extend({/*title: "完成提示"*/}, option, {action: "success"}));
+        return message(angular.extend({
+            /*title: "完成提示"*/
+        }, option, {action: "success"}));
     }
 
     $app.msgbox = {
