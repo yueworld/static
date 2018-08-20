@@ -1,5 +1,5 @@
 module.exports = function ($app) {
-    $app.directive("ysPlatformTip", ["$timeout", "$filter", "$uibPosition", function ($timeout, $filter, uibPosition) {
+    $app.register.directive("ysPlatformTip", ["$timeout", "$filter", "$uibPosition", function ($timeout, $filter, uibPosition) {
         return {
             restrict: "A",
             replace: true,

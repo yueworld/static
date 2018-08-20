@@ -2,7 +2,7 @@
 //============================= NEW 2016-01-29 ============================
 //=========================================================================
 module.exports = function ($app) {
-    $app.factory("BrandService", ["RequestService", function (requestService) {
+    $app.register.factory("BrandService", ["RequestService", function (requestService) {
         return {
             publish: function (input) {
                 return requestService.post("sdk/basic/brand", {params: angular.extend({action: 1002}, {input: input})});

@@ -2,7 +2,7 @@
 //============================= NEW 2016-01-29 ============================
 //=========================================================================
 module.exports = function ($app) {
-    $app.factory("LayoutService", ["$q", "RequestService", function ($q, requestService) {
+    $app.register.factory("LayoutService", ["$q", "RequestService", function ($q, requestService) {
         return {
             publish: function (input) {
                 var self = this, deferred = $q.defer()

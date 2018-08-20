@@ -36,8 +36,8 @@ module.exports = merge(require('./webpack.config.common'), {
         ]
     }, output: {
         // 输出文件
-        path: __dirname + "/dist",
-        // path: "/data/work/yueworld/zhongjiao/static/static/yueworld",
+        // path: __dirname + "/dist",
+        path: "/data/workspace/zhongjiao/static/static/yueworld",
         // path:"/data/work/yueworld/yinli/amp/static/static/yueworld/library",
         filename: '[name].js'
     }

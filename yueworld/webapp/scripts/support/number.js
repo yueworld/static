@@ -78,7 +78,7 @@ module.exports = function ($app) {
         var times = Math.pow(10, precision);
         var des = result * times + 0.5;
         des = parseInt(des, 10) / times;
-        return des + ''
+        return $app.valid.isNumber(des) ? des + '' : "0";
     };
 
     /**

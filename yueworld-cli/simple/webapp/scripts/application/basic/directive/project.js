@@ -1,6 +1,6 @@
 module.exports = function ($app) {
     // Directive
-    $app.directive("projectPublish", ["$timeout", "$q", "ProjectService", function ($timeout, $q, projectService) {
+    $app.register.directive("projectPublish", ["$timeout", "$q", "ProjectService", function ($timeout, $q, projectService) {
         return {
             restrict: "AE", replace: true, transclude: true,
             template: require("../views/project/project.publish.html"),

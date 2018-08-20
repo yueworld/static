@@ -5,194 +5,181 @@
  * @time 2017-06-012 21:31:38
  * @description 下拉选择框
  */
-module.exports = function ($app) {
+// 引入样式
+require("../views/dropdown.tree.scss");
 
-    // 加载样式
-    require("../views/dropdown.tree.css");
+module.exports = function ($app) {
+    var template = require("../views/dropdown.tree.html");
     /**
-     * 数据字典、自动查询
-     *
-     * ys-framework-dropdown={modal:input,property:{id:'projectId',text:'projectName'}|'',...}
-     *
+     * 业态选择
      */
-    $app.directive("ysFrameworkDropdownTree", ["$timeout", function ($timeout) {
+    $app.register.directive("ysPlatformDropdownTree", [function () {
         return {
+            restrict: "A", replace: true, transclude: true,
             controller: ["$scope", "$q", "$compile", "$element", "$attrs", function (_$scope, $q, $compile, $element, $attrs) {
-                var $container = $app.$(require("../views/dropdown.tree.html")),
+                var $container = $app.$(template),
                     $scope = _$scope.$new(),
                     option = $scope.option = angular.extend({
-                        // 字典名称
-                        dictionary: "",
-                        // 模型
-                        model: undefined,
-                        // 操作属性
-                        property: undefined /* 支持 {dictionaryProperty:"modelProperty"} */,
-                        // 开启查询
-                        search: false,
-                        // 异步加载
-                        async: false,
-                        // 加载条数
-                        size: 6,
-                        width: "auto",
-                        // 及联刷新。示例：当前为楼层选择框、模型的 projectId 属性发生 变动时 自动 重新执行 handler 逻辑
-                        watchReloadProperty: '',
-                        // 异步查询实现、可以是 Service 名称 例如 ProjectService -> project 、 StoreService -> store
-                        handler: function (filter) {
-                            return $q.defer().promise;
+                        // 待操作的模型
+                        model: {},
+                        // 值字段名、唯一编号
+                        idField: "id",
+                        // 显示文本字段名
+                        textField: "text",
+                        // 选中item后、针对model的赋值关系
+                        set: {
+                            /* key 为 选中 对象的属性、value 为要设置给 model 的属性、示例：    id:"projectId"、id:"companyId" */
+                            /* selectedItem.property: model.property */
+                            id: "id"
                         },
-                        // 选中以后的回掉事件、参数：select(selectedItem、model)
+                        // 默认宽度
+                        width: "100%",
+                        // 选中回调事件、参数：select(selectedItem、model)
                         select: angular.noop,
-                        theme: "default" /* default、caret */
-                    }, $scope.$eval($attrs.ysFrameworkDropdownTree)),
-                    property = option.property,
-                    // 如果 property 为 object 需要做特殊处理
-                    isObjectToProperty = $scope.isObjectToProperty = angular.isObject(property),
-                    // 启用异步查询
-                    async = option.async,
-                    // 过滤条件
-                    filter = $scope.filter = {term: "", dq/*不进行查询*/: false},
-                    // 异步查询实现
-                    handler = option.handler,
-                    // 数据字典（可以是静态 或 异步加载过来的 ）
-                    dictionary = undefined;
-                // 默认提示
-                option.placeholder = option.placeholder || (option.search ? "-- 请输入关键字 --" : "-- 请选择 --")
-                // 必要参数检测
-                if (isObjectToProperty && (!property.id || !property.text)) {
-                    $app.$($element).addClass("col-xs-12 pointer lh36").css({color: "red"}).text("-- Error：Object Property 格式错误！ --");
-                    $app.tip.error({message: "ysFrameworkDropdown Init Error: 对象型  id、text 字段不能为空！"})
+                        theme: "default", /* default、caret */
+                        filter: {},
+                        // 允许选择目录
+                        dirSelectable: false,
+                        // 允许多选
+                        multi: false,
+                        // 允许取消选择
+                        allowDeselect: true,
+                        dictionary: [],
+                        search: false,
+                        // 允许操作
+                        isSelectable: function (item) {
+                            return item.id != -9999;
+                        }
+                    }, $scope.$eval($attrs.ysPlatformDropdownTree)),
+                    treeOptions = $scope.treeOptions = {
+                        nodeChildren: "children",
+                        // 能否选择目录
+                        dirSelectable: option.dirSelectable,
+                        // 是否可以多选
+                        multiSelection: option.multi,
+                        // 允许取消选择
+                        allowDeselect: option.allowDeselect,
+                        // 是否允许选择
+                        isSelectable: option.isSelectable,
+                        injectClasses: {/*  ul: "a1",li: "a2",liSelected: "a7",iExpanded: "a3",iCollapsed: "a4",iLeaf: "a5",label: "a6",labelSelected: "a8"*/}
+                    },
+                    treeModel = $scope.treeModel = [],
+                    // 默认提示
+                    placeholder = option.placeholder = option.placeholder || "-- 请选择 --",
+                    placeholder = option.placeholder = $app.valid.startsWith(placeholder, "-") ? placeholder : "所有" + placeholder;
+                // 测试数据
+                if (angular.isArray(option.dictionary) && option.dictionary.length == 0) {
+                    option.dictionary.push({id: -1, name: "全部业态"});
+                    option.dictionary.push({id: 1003, name: "中餐", parentId: -1});
+                    option.dictionary.push({id: 10031, name: "粤菜", parentId: 1003});
+                    option.dictionary.push({id: 10032, name: "茶餐厅", parentId: 1003});
+                    option.dictionary.push({id: 10033, name: "川菜", parentId: 1003});
+                    option.dictionary.push({id: 100331, name: "重庆小面", parentId: 10033});
+                }
+                // option.dictionary.push({id: 1005, name: "日料", parentId: -1});
+                if (!option.dictionary.length) {
+                    option.dictionary.push({id: -1, name: "未添加任何可选项！"})
+                }
+
+                if (angular.isString(option.dictionary)) {
+                    option.dictionary = $app.dictionary[option.dictionary];
+                } else if (angular.isArray(option.dictionary)) {
+                    // 使用入参作为数据字典
+                    /*$scope.$watch("option.dictionary", function () {
+                        $scope.dictionary = $app.dictionary.build(option.dictionary, true);
+                        console.log(1)
+                    }, true);*/
+                    option.dictionary = $app.dictionary.build(option.dictionary, true);
+                    // console.log(2)
+                    /*if (angular.isArray(option.dictionary)) {
+                        option.dictionary = $app.dictionary.build(option.dictionary, true);
+                    }*/
+                } else {
+                    $app.$($element).addClass("col-xs-12 pointer lh36 ys-platform-error").css({color: "red"}).text("-- Error：dictionary 类型错误！ --");
                     return;
                 }
+                treeModel.push(option.dictionary.root);
+                // 设置选中项
+                $scope.selectedNode = option.dictionary.hash[option.model[option.set.id]];
+                // 设置展开项
+                $scope.expandedNodes = $app.dictionary.parents(option.dictionary, option.model[option.set.id]);
+
+                // 查询
+                $scope.$watch("option.filter.term", function (n, o) {
+                    if (n != o) {
+                        treeModel.splice(0, treeModel.length)
+                        if (!n) {
+                            treeModel.push(option.dictionary.root);
+                        } else {
+                            angular.forEach(option.dictionary.options, function (item) {
+                                if (!item.children && item.text.indexOf(n) != -1) {
+                                    treeModel.push(item)
+                                }
+                            })
+                        }
+                    }
+                    if (treeModel.length == 0) {
+                        treeModel.push({id: -9999, name: "未查询到可选项"});
+                    }
+                });
+
                 // 清理数据
                 function clear() {
-                    if (isObjectToProperty) {
-                        angular.forEach(property, function (key, value) {
-                            option.model[key] = "";
-                        })
-                    } else {
-                        option.model[property] = "";
-                    }
+                    angular.forEach(option.set, function (key, value) {
+                        delete option.model[key];
+                    })
                 }
 
-                if (async) {
-                    // 开启异步下啦框
-                    if (angular.isString(handler)) {
-                        handler = $app.injector.get($app.helper.firstUpperCase(handler) + "Service").quick;
-                    }
-
-                    // 刷新/加载数据
-                    function refresh(filter) {
-                        handler(angular.extend({size: option.size}, filter)).then(function ($response) {
-                            dictionary = $scope.dictionary = $app.dictionary.build([{
-                                // 初始化一条默认记录、并copy 字典
-                                text: option.placeholder, id: -1
-                            }].concat($response.data.data));
-                        })
-                    }
-
-                    // 快速搜索
-                    $scope.$watch("filter.term", $app.watch(function (nv, ov) {
-                        if (nv != ov && !filter.dq) {
-                            refresh(filter);
-                        } else {
-                            filter.dq = false;
-                        }
-                    }, 180));
-                    if (!option.search) {
-                        refresh(filter);
-                    } else if (isObjectToProperty) {
-                        if (option.model[property.id]) {
-                            refresh(angular.extend({id: option.model[property.id]}, filter));
-                        }
-                    } else if (option.model[property]) {
-                        refresh(angular.extend({id: option.model[property]}, filter));
-                    }
-                    // 及联刷新
-                    if (option.watchReloadProperty) {
-                        var watchProperty = angular.isObject(option.watchReloadProperty) ? "option.watchReloadProperty.model." + option.watchReloadProperty.property : "option.model." + option.watchReloadProperty;
-                        $scope.$watch(watchProperty, function (nv, ov) {
-                            if (nv != ov) {
-                                // 清理历史 设值
-                                clear();
-                                filter.term = "";
-                                // 禁止自动载入数据
-                                filter.dq = true;
-                                // 手动载入数据
-                                refresh(filter);
-                            }
-                        })
-                    }
-                } else {
-                    if (angular.isString(option.dictionary)) {
-                        // 开启本地字典项 ($app.dictionary.xxx) 下拉框
-                        dictionary = $scope.dictionary = $app.dictionary.build([{
-                            // 初始化一条默认记录、并copy 字典
-                            text: option.placeholder, id: -1
-                        }].concat($app.dictionary[option.dictionary] ? $app.dictionary[option.dictionary].options : []));
-                    } else if (angular.isArray(option.dictionary)) {
-                        // 开启本地字典项 ($app.dictionary.xxx) 下拉框
-                        function refresh() {
-                            dictionary = $scope.dictionary = $app.dictionary.build([{
-                                // 初始化一条默认记录、并copy 字典
-                                text: option.placeholder, id: -1
-                            }].concat(option.dictionary));
-                        }
-
-                        $scope.$watch("option.dictionary", refresh, true);
-                    } else {
-                        $app.tip.error({message: "ysFrameworkDropdown Init Error: dictionary 类型错误！"})
-                        return;
-                    }
-
-                    $scope.trees = [$app.dictionary.LAYOUTS.root];
-                    $scope.expandedNodes = [$scope.trees[0]];
-                    $scope.selectedNode = $scope.trees[0];
-                }
-                // 是否选中
-                $scope.active = function (item) {
-                    if (isObjectToProperty) {
-                        return item.id == option.model[option.property.id] || (!option.model[option.property.id] && item.id == '-1')
-                    } else {
-                        return item.id == option.model[option.property] || (!option.model[option.property] && item.id == '-1');
-                    }
-                }
                 // 选中
                 $scope.select = function (item) {
-                    if (item.id != "-1") {
-                        if (isObjectToProperty) {
-                            angular.forEach(property, function (key, value) {
-                                option.model[key] = item[value];
-                            })
-                        } else {
-                            option.model[property] = item.id;
-                        }
+                    /*if (item[option.idField] != "-1") {
+                        angular.forEach(option.set, function (key, value) {
+                            option.model[key] = item[value];
+                        })
                     } else {
                         clear();
-                    }
+                        option.model[option.set[option.idField]] = "";
+
+                    }*/
+                    angular.forEach(option.set, function (key, value) {
+                        option.model[key] = item[value];
+                    })
                     if (angular.isFunction(option.select)) {
                         option.select(item, option.model);
                     }
-                    filter.dq = true;
+                    $container.removeClass("open");
+                }
+                $scope.onSelection = function (item, selected) {
+                    if (!option.multi) {
+                        $scope.select(item);
+                    } else if (selected) {
+
+                    }
+                }
+                $scope.cancel = function () {
+                    $container.removeClass("open");
+                }
+                $scope.submit = function () {
                     $container.removeClass("open");
                 }
                 if (option.theme == "caret") {
                     $container.addClass("theme-caret");
+                    option.width = "initial";
                 }
                 // 显示 与 隐藏 dropdown
-                $container.on("click", ".ys-framework-dropdown-tree-toggle", function () {
-                    $app.$("div.ys-framework-dropdown-tree").not($container).removeClass("open")
+                $container.on("click", ".ys-platform-dropdown-toggle", function () {
+                    $app.$("div.ys-platform-dropdown").not($container).removeClass("open")
                     $container.toggleClass("open");
                     if ($container.hasClass("open")) {
-                        $container.find(".ys-framework-dropdown-tree-search input").trigger("focus");
+                        $container.find(".ys-platform-dropdown-search input").trigger("focus");
                         $app.el.body.one("click", function () {
                             $container.removeClass("open");
                         })
                     }
                 });
-                $container.find("input.ys-framework-dropdown-tree-text").width(option.width);
+                $container.width(option.width);
                 $element.append($compile($container)($scope));
-            }],
-            restrict: "A", replace: true, transclude: true
+            }]
         };
     }]);
 }

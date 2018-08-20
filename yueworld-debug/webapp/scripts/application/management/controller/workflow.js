@@ -286,7 +286,7 @@ module.exports = {
                                 api.service.temporary(true).then(function () {
                                     $app.tip.success({message: $app.data.format("已与 {0} 自动保存！", $filter("date")(new Date(), "HH:mm:ss"))})
                                 })
-                            }, $app.setting.path("/workflow/intervalInMillis").value);
+                            }, $app.config.path("/workflow/intervalInMillis").value);
                         }
                     }
 

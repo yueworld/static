@@ -6,7 +6,7 @@
  * @description 编辑
  */
 module.exports = function ($app) {
-    $app.directive("ysFrameworkEdit", ["$parse", function ($parse) {
+    $app.register.directive("ysFrameworkEdit", ["$parse", function ($parse) {
         return {
             restrict: 'A',
             link: function (_$scope, element, attrs) {
@@ -39,7 +39,7 @@ module.exports = function ($app) {
             }
         };
     }]);
-    $app.directive("ysPlatformEdit", ["$parse", function ($parse) {
+    $app.register.directive("ysPlatformEdit", ["$parse", function ($parse) {
         return {
             restrict: 'A',
             link: function (_$scope, element, attrs) {

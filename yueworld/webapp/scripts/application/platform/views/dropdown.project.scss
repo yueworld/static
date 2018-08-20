@@ -3,13 +3,13 @@
     .ys-platform-dropdown{
       &-text {
         cursor: pointer;background:transparent url(../../../../styles/img/common/icon/select-black-down-icon.png) no-repeat right  10px center!important;user-select: none;/*box-shadow:none;border:1px solid #dbdede*/transition:none;
-        width: 100%;border:1px solid #eff1f4;box-shadow:none;text-align:left;
+        width: 100%;text-align:left;height: 32px;line-height: 30px;padding-top: 0px; padding-bottom: 0px;
         &::placeholder{color: #333!important}
       }
       &-container {position: absolute;top: 100%;margin-top:2px;left: 0;z-index: 1000;width: 100%;float: left;display: none;font-size: 14px;background: #fff}
     }
     .ys-platform-dropdown-container {
-        position: absolute;top: 100%;left: 0;z-index: 1000;float: left;display: none;font-size: 14px;background: #fff;width:420px;border: 1px solid rgba(0,0,0,.15);
+        position: absolute;top: 100%;left: 0;z-index: 1000;float: left;display: none;font-size: 14px;background: #fff;min-width:420px;width:100%;border: 1px solid rgba(0,0,0,.15);
         box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
         &-header{
           padding:20px;border-bottom:solid 1px #d8e0e7;
@@ -26,7 +26,7 @@
           .ys-platform-dropdown-container-result-title{margin-left:-20px;margin-right:-20px;padding-left: 20px;background:#f8faf9;color:#8b97a7}
         }
         &-result.area{width: 40%;}
-        &-result.project{width:60%;border-left:solid 1px #d8e0e7;margin-left: -1px}
+        &-result.project{width:60%;border-left:solid 1px #d8e0e7;margin-left: -1px;}
         &-result:last-child{
           border-right:none;
         }

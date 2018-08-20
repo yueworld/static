@@ -4,10 +4,11 @@
         <icon class="close" name="close-1" width="16px" height="56px" ng-click="close()"></icon>
     </div>
     <div class="col-xs-12 body">
-        <div>
-            <i ys-platform-icon="{name:'warning-1',width:30,height:30}" style="color: #F90"
-               ng-if="option.action=='confirm'"></i>
-            <div class="ys-platform-pl10" style="display: inline-block" ng-bind-html="option.message"></div>
+        <div class="clearfix">
+            <div ng-if="option.action=='confirm'" style="float: left">
+                <i ys-platform-icon="{name:'warning-1',width:30,height:30}" style="color: #F90"></i>
+            </div>
+            <div class="ys-platform-pl10" style="float: left" ng-bind-html="option.message"></div>
         </div>
     </div>
     <div class="col-xs-12 footer">

@@ -7,7 +7,7 @@
  */
 module.exports = function ($app) {
 
-    $app.directive("ysPlatformError", [function () {
+    $app.register.directive("ysPlatformError", [function () {
         return {
             restrict: "A",
             controller: ["$scope", "$element", "$attrs", "$timeout", function ($scope, $element, $attrs, $timeout) {
@@ -18,14 +18,14 @@ module.exports = function ($app) {
                         option.expression = option.expr ? option.expr : option.expression;
                         if (option.expression == undefined || $scope.$eval(option.expression)) {
                             $timeout(function () {
-                                var container = $app.el.body.find("div.ys-platform-product-container"),
+                                var container = $app.el.body.find("div.ys-platform-product-scrollbar"),
                                     cTop = container.scrollTop(),
                                     elTop = $el.offset().top,
                                     verticalHeight = $app.screen.height / 2,
                                     top = cTop + elTop - verticalHeight;
                                 // console.log(elTop + ":" + top + "：" + verticalHeight);
                                 container.animate({scrollTop: top});
-                                $app.$($element).trigger("focus");
+                                $el.trigger("focus");
                                 $el.addClass("ys-platform-error");
                             })
                         }

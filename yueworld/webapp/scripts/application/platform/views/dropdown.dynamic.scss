@@ -3,12 +3,15 @@
     .ys-platform-dropdown{
         &-text {
           cursor: pointer;background:transparent url(../../../../styles/img/common/icon/select-black-down-icon.png) no-repeat right  10px center!important;user-select: none;/*box-shadow:none;border:1px solid #dbdede*/transition:none;
-          width: 100%;border:1px solid #eff1f4;box-shadow:none;text-align:left;
+          width: 100%;text-align:left;
           &::placeholder{color: #333!important}
         }
-        &-container {position: absolute;top: 100%;margin-top:2px;left: 0;z-index: 1000;width: 100%;min-width:160px;float: left;display: none;font-size: 14px;background: #fff;/*background:#f6f6f6;*/}
+        &-container {position: absolute;top: 100%;/*margin-top:2px;*/left: 0;z-index: 1000;width: 100%;min-width:160px;float: left;display: none;font-size: 14px;background: #fff;/*background:#f6f6f6;*/}
         &-search{width: 100%;display: none}
-        &-search input{background:transparent url(../../../../styles/img/common/icon/select-black-up-icon.png) no-repeat right  10px center!important;/*border:1px solid #aaa!important;*/width: 100%!important;}
+        &-search input{
+          background:transparent url(../../../../styles/img/common/icon/select-black-up-icon.png) no-repeat right  10px center!important;/*border:1px solid #aaa!important;*/width: 100%!important;
+          width: 100%;text-align:left;height: 32px;line-height: 30px;padding-top: 0px; padding-bottom: 0px;
+        }
         &-items{padding: 5px 0;box-shadow: 0 6px 12px rgba(0, 0, 0, .175);max-height: 380px;width: 100%;/*border: 1px solid #dfe5e9;*/overflow-y: scroll;text-align: left;}
         &-container .item{
             display: block;padding: 0px 12px;height:32px;line-height:32px;clear: both;font-weight: normal;color: #333;white-space: nowrap;cursor: pointer;

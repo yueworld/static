@@ -1,6 +1,6 @@
 module.exports = function ($app) {
     // Directive
-    $app.directive("headPublish", ["$timeout", "HeadService", function ($timeout, headService) {
+    $app.register.directive("headPublish", ["$timeout", "HeadService", function ($timeout, headService) {
         return {
             restrict: "A", replace: true, transclude: true,
             template: require("../views/head/head.publish.html"),

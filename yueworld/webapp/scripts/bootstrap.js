@@ -14,6 +14,7 @@ require("./support/plugins/animate/animate.css");
 // require("./support/plugins/swiper/4.0.1/swiper.css");
 require("../styles/css/variables.scss");
 require("../styles/css/bootstrap.scss");
+require("../styles/css/animation.scss");
 require("../styles/css/platform.scss");
 
 // 引入通用类库
@@ -39,21 +40,13 @@ require("./support/plugins/snap.svg/import.js");
 var $app = {
         $: jQuery /* 绑定 jQuery*/
     },
-    app = angular.module("$app", ["ngLocale", "ngAnimate", "ngSanitize", "pasvaz.bindonce", "ui.bootstrap", "ui.router"]),
-    $controller = require("./support/controller"),
-    register = require("./support/register");
+    app = angular.module("$app", ["ngLocale", "ngAnimate", "ngSanitize", "pasvaz.bindonce", "ui.bootstrap", "ui.router"]);
 
 /**
- * 代理 AngularJs 核心方法
+ * 注册器
+ * @type {{wrapDirective, wrapRouter, wrapService}}
  */
-$app.config = app.config;
-$app.factory = app.factory;
-$app.directive = app.directive;
-$app.constant = app.constant;
-$app.run = app.run;
-$app.controller = register.wrapController(app);
-$app.router = register.wrapRouter(app);
-$app.service = register.wrapService($app, app);
+$app.register = require("./support/register")($app, app)
 
 // 导入工具函数
 require("./support/import")($app);
@@ -61,51 +54,44 @@ require("./support/import")($app);
 require("./support/defaults")($app)
 
 // 通用 异常信息拦截
-$app.config(["$provide", "$stateProvider", "$urlRouterProvider", "$locationProvider", "$qProvider", function ($provide, $stateProvider, $urlRouterProvider, $locationProvider, $qProvider) {
-
+$app.register.config(["$provide", "$stateProvider", "$urlRouterProvider", "$locationProvider", "$qProvider", function ($provide, $stateProvider, $urlRouterProvider, $locationProvider, $qProvider) {
     $provide.decorator("$exceptionHandler", ["$delegate", function ($delegate) {
         return function (exception, cause) {
             // 调用默认行为
             $delegate(exception, cause);
             // 异常输出
-            console.log(exception);
+            console.error(exception);
         }
     }]);
 
     // 注册默认 地址
     $urlRouterProvider.otherwise(function () {
-        if ($app.user.login) {
-            return $app.setup.otherwise;
+        if ($app.session.login) {
+            return $app.defaults.otherwise;
         }
     });
 
     // 开启H5路由模式
-    $locationProvider.html5Mode($app.setup.html5Mode);
+    $locationProvider.html5Mode($app.defaults.html5Mode);
 
 }]);
 
 
 // 启动初始化
-$app.run(["$rootScope", "$templateCache", "$state", "$stateParams", "$location", "$q", "$timeout", "$animate", "$injector", function ($rootScope, $templateCache, $state, $stateParams, $location, $q, $timeout, $animate, $injector, isFirstRouterComplete) {
+$app.register.run(["$rootScope", "$location", "$q", "$timeout", "$animate", function ($rootScope, $location, $q, $timeout, $animate, isFirstRouterComplete) {
     try {
         // 绑定全局作用域
         $rootScope.$app = $app
 
         // 每次路由开始时执行
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-            $app.setup.stateChangeStart($app, event, toState, toParams, fromState, fromParams);
+            $app.defaults.stateChangeStart($app, event, toState, toParams, fromState, fromParams);
         })
 
         // 每次路由成功时执行
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-            $app.setup.stateChangeSuccess($app, event, toState, toParams, fromState, fromParams);
+            $app.defaults.stateChangeSuccess($app, event, toState, toParams, fromState, fromParams);
         });
-
-        // 绑定注入器
-        $app.injector = $injector;
-
-        // 绑定路由
-        $app.router = {go: $state.go, is: $state.is, includes: $state.includes, reload: $state.reload};
 
         // 增加 Class
         $app.addClass = function (el, className) {
@@ -123,46 +109,46 @@ $app.run(["$rootScope", "$templateCache", "$state", "$stateParams", "$location",
 
         // 请求超时
         $app.event.subscribe("requestTimeout", function () {
-            $app.setup.requestTimeout($app);
+            $app.defaults.requestTimeout($app);
         });
 
         // 响应异常
         $app.event.subscribe("responseError", function (event, message) {
-            $app.setup.responseError($app, message)
+            $app.defaults.responseError($app, message)
         });
 
         // 未登陆
         $app.event.subscribe("needLogin", function (event, response) {
-            $app.setup.needLogin($app, response)
+            $app.defaults.needLogin($app, response)
         });
 
         // ============================================================================================================
         // 初始化 Title
-        $app.el.title.text($app.setup.title || $app.setup._title);
+        $app.el.title.text($app.defaults.title || $app.defaults._title);
 
         // 会话
-        if ($app.setup.session.code == 200) {
+        if ($app.defaults.session.code == 200) {
             // ======================================== 已登陆 ==========================================================
             // 调整 loading 遮罩级别
             $app.el.loading.css({zIndex: 2002})
             // 移除 单点登陆 票据参数
             $location.search(angular.extend($location.search(), {_stk_: undefined}));
-            // 设置用户信息
-            $app.user = angular.extend($app.user, $app.setup.session.data.user, {login: true});
+            // 设置会话信息
+            $app.session = angular.extend($app.session, $app.defaults.session.data.user, {login: true});
             // 远端配置
-            $app.setting.init($app.setup.session.data.settings);
+            $app.config.init($app.defaults.session.data.configs);
             // 数据字典
-            $app.dictionary.init($app.setup.session.data.dictionary);
-        } else if ($app.setup.session.code == -100) {
+            $app.dictionary.init($app.defaults.session.data.dictionary);
+        } else if ($app.defaults.session.code == -100) {
             // ======================================== 未登陆 ==========================================================
             $app.msgbox.error({
                 title: false,
                 message: "您尚未登陆、请先登陆！",
                 buttons: [{text: "我要登陆", result: true}]
             }).then(function () {
-                window.location.href = $app.setup.session.data.login.split("_srk_")[0] + "_srk_=" + encodeURIComponent(window.location.href);
+                window.location.href = $app.defaults.session.data.login.split("_srk_")[0] + "_srk_=" + encodeURIComponent(window.location.href);
             })
-        } else if ($app.setup.session.code == 500) {
+        } else if ($app.defaults.session.code == 500) {
             // ======================================== 服务器错误 ======================================================
             $app.msgbox.error({
                 message: "很抱歉！<br/>由于服务器内部错误、请求失败。",
@@ -171,11 +157,11 @@ $app.run(["$rootScope", "$templateCache", "$state", "$stateParams", "$location",
                 window.location.reload();
             })
         } else {
-            $app.msgbox.error({message: $app.setup.session.message});
+            $app.msgbox.error({message: $app.defaults.session.message});
         }
 
         // 执行启动完成
-        $app.setup.ready($app);
+        $app.defaults.ready($app);
 
     } catch (ex) {
         console.log(ex)
@@ -187,12 +173,11 @@ $app.run(["$rootScope", "$templateCache", "$state", "$stateParams", "$location",
  * 初始动作
  */
 function init($app) {
-
     // 初始化 Title
     // 暂存自定义标题
-    $app.el.title.text($app.setup._title);
-    if ($app.setup.container) {
-        $app.el.container = $app.$($app.setup.container);
+    $app.el.title.text($app.defaults._title);
+    if ($app.defaults.container) {
+        $app.el.container = $app.$($app.defaults.container);
     }
     if ($app.el.loading.length == 0) {
         $app.el.loading = $app.$(require("./application/platform/views/loading.html")).appendTo($app.el.container);
@@ -200,7 +185,7 @@ function init($app) {
     // Svg Icon
     $app.el.container.prepend("<div ng-include=\"'scripts/application/platform/views/icons.html'\"></div>");
     // 默认显示、隐藏 Loading
-    $app.el.loading.css({display: $app.setup.loading ? "block" : "none"});
+    $app.el.loading.css({display: $app.defaults.loading ? "block" : "none"});
 }
 
 /**
@@ -209,23 +194,22 @@ function init($app) {
  */
 $app.bootstrap = function (option, imports) {
     // 配置信息
-    var setup = $app.setup = angular.extend($app.setup, option);
-
+    var defaults = $app.defaults = angular.extend($app.defaults, option);
     // 引入子系统
-    angular.forEach(setup.imports.concat(imports), function (childSystem) {
+    angular.forEach(defaults.imports.concat(imports), function (childSystem) {
         childSystem && childSystem($app);
     });
 
     // 初始动作
     init($app)
 
-    if (setup.sessionUrl) {
+    if (defaults.sessionUrl) {
         // 获取会话
         var _stk_ = $app.url.getParams("_stk_");
-        $app.$.getJSON($app.url.getDynamicUrl(setup.sessionUrl), _stk_ ? {_stk_: _stk_} : {}).then(function ($response) {
-            $app.setup = angular.extend(setup, {session: $response});
+        $app.$.getJSON($app.url.getDynamicUrl(defaults.sessionUrl), _stk_ ? {_stk_: _stk_} : {}).then(function ($response) {
+            $app.defaults = angular.extend(defaults, {session: $response});
         }).fail(function () {
-            $app.setup = angular.extend(setup, {session: {success: false, code: 500}});
+            $app.defaults = angular.extend(defaults, {session: {success: false, code: 500}});
         }).always(function () {
             angular.bootstrap($app.el.container.is("body") ? document : $app.el.container.get(0), ["$app"]);
         });

@@ -274,7 +274,7 @@ module.exports = function ($app) {
 
 
     // =================================================================================================================
-    $app.directive('ysPlatformDrag', function () {
+    $app.register.directive('ysPlatformDrag', function () {
         return {
             restrict: 'A',
             link: function (scope, elem) {
@@ -287,7 +287,7 @@ module.exports = function ($app) {
         };
     });
 
-    $app.directive('ysPlatformDragHandle', function () {
+    $app.register.directive('ysPlatformDragHandle', function () {
         return {
             restrict: 'A',
             link: function (scope, elem) {

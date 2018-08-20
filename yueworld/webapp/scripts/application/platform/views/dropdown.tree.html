@@ -1,3 +1,38 @@
+<div class="ys-platform-dropdown ys-platform-dropdown-tree" ng-click="$event.stopPropagation();">
+    <div class="ys-platform-dropdown-toggle">
+        <input class="ys-platform-input ys-platform-dropdown-text" type="button"
+               value="{{option.dictionary.hash[option.model[option.set.id]].path||option.placeholder}}"/>
+        <span class="caret"></span>
+    </div>
+    <div class="ys-platform-dropdown-container">
+        <div class="ys-platform-dropdown-container-header" ng-if="option.search">
+            <!--{{option.placeholder}}-->
+            <input class="ys-platform-input" placeholder="-- 请输入查询关键字 --" ng-model="option.filter.term"/>
+        </div>
+        <div class="ys-platform-dropdown-container-body ys-platform-pt5 ys-platform-pb5" ng-class="{'ys-platform-pb5':!option.multi}">
+            <div ys-platform-tree class="tree-simple" tree-model="treeModel"
+                 expanded-nodes="expandedNodes"
+                 selected-node="selectedNode" on-selection="onSelection(node, selected)" options="treeOptions"><!-- menu-id="ctxMenu" -->
+                {{node.name}}
+            </div>
+        </div>
+        <div class="col-xs-12 ys-platform-dropdown-container-footer" ng-if="option.multi">
+            <button class='btn ys-platform-btn-default' ng-click='cancel()'>取消</button>
+            <button class='btn ys-platform-btn-primary' ng-click='submit()'>确认</button>
+        </div>
+    </div>
+
+
+    <!--<ul id="ctxMenu" class="dropdown-menu" ng-click="$event.stopPropagation();">
+        <li><a>Cook {{selectedFood.name}}</a></li>
+        <li class="divider"></li>
+        <li><a >Orange...</a></li>
+        <li><a >Green...</a></li>
+    </ul>-->
+
+</div>
+
+<!--
 <div class="ys-platform-dropdown-tree" ng-class="{'search':option.search}" ng-click="$event.stopPropagation();">
     <div class="ys-platform-dropdown-tree-toggle">
         <input class="form-control ys-platform-dropdown-tree-text" placeholder="{{option.placeholder}}" readonly
@@ -10,12 +45,12 @@
         <div class="ys-platform-dropdown-tree-search">
             <input class="form-control" placeholder="{{option.placeholder}}" ng-model="filter.term"/>
         </div>
-        <!--<div class="ys-platform-dropdown-tree-items" ng-if="dictionary.options.length">
+        &lt;!&ndash;<div class="ys-platform-dropdown-tree-items" ng-if="dictionary.options.length">
             <div class="item" ng-repeat="item in dictionary.options" ng-click="select(item)"
                  ng-class="{'active':active(item)}">
                 {{item.text}}
             </div>
-        </div>-->
+        </div>&ndash;&gt;
         <div treecontrol class="ys-platform-tree ys-platform-tree-simple" tree-model="trees"
              expanded-nodes="expandedNodes" selected-node="selectedNode"
              on-selection="onSelected">
@@ -26,4 +61,4 @@
             <span ng-if="filter.term">未查询到相关数据</span>
         </div>
     </div>
-</div>
+</div>-->

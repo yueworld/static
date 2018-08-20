@@ -32,6 +32,8 @@ module.exports = function ($app) {
         // 设置属性
         setAttr: setAttr,
         // 获取属性
-        getAttr: getAttr
+        getAttr: getAttr,
+        // 未登录、默认未登录
+        login: false
     }
 }

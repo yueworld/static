@@ -1,5 +1,5 @@
 module.exports = function ($app) {
-    $app.directive("tinymce", ["$timeout", function ($timeout) {
+    $app.register.directive("tinymce", ["$timeout", function ($timeout) {
         return {
             restrict: "A",
             scope: {

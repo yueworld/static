@@ -7,7 +7,7 @@
  */
 // 初始化
 (function ($app) {
-    $app.config(["$urlRouterProvider", function ($urlRouterProvider) {
+    $app.register.config(["$urlRouterProvider", function ($urlRouterProvider) {
         // 注册默认跳转页面
         $urlRouterProvider.otherwise(function () {
             if ($app.user.login) {

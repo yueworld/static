@@ -1,10 +1,10 @@
-<div class="ys-platform-dropdown-project" ng-click="$event.stopPropagation();">
+<div class="ys-platform-dropdown ys-platform-dropdown-project" ng-click="$event.stopPropagation();">
     <div class="ys-platform-dropdown-toggle">
         <input class="ys-platform-input ys-platform-dropdown-text" type="button"
                value="{{$app.dictionary.PROJECTS.hash[option.model[option.set.id]][option.textField]||option.placeholder}}"/>
         <span class="caret"></span>
     </div>
-    <div class="ys-platform-dropdown-container">
+    <div class="ys-platform-dropdown-container ys-platform-anim ys-platform-anim-upbit">
         <div class="ys-platform-dropdown-container-header">
             <input class="ys-platform-input" placeholder="{{option.placeholder}}" ng-model="option.filter.term"/>
         </div>

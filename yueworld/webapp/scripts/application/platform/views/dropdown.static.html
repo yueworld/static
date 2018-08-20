@@ -1,21 +1,17 @@
-<div class="ys-platform-dropdown-static" ng-class="{'search':option.search}" ng-click="$event.stopPropagation();">
-    <div class="ys-platform-dropdown-toggle">
-        <input class="ys-platform-input ys-platform-dropdown-text" type="button"
-               value="{{dictionary.hash[option.model[option.set.id]][option.textField]||option.placeholder}}"/>
-        <span class="caret"></span>
+<div class="ys-platform-dropdown ys-platform-dropdown-static">
+    <div class="ys-platform-dropdown-title">
+        <div class="placeholder"></div>
+        <div class="text"></div>
+        <div class="tags"></div>
+        <i/>
     </div>
-    <div class="ys-platform-dropdown-container">
-        <div class="ys-platform-dropdown-container-items" ng-if="dictionary.options.length">
-            <div class="item" ng-repeat="item in dictionary.options" ng-click="select(item)"
-                 ng-class="{'active':active(item),'text-invalid':item[option.idField]==-1}">
-                {{item[option.idField]==-1?item[option.textField]:item[option.textField]}}
-            </div>
+    <div class="ys-platform-dropdown-body ys-platform-anim ys-platform-anim-upbit">
+        <div class="ys-platform-dropdown-body-tips">没有选项</div>
+        <div class="ys-platform-dropdown-body-search">
+            <i class="ys-platform-icon ys-platform-icon-search"></i>
+            <input class="ys-platform-input" type="text" placeholder="请搜索"/>
         </div>
-        <div class="ys-platform-dropdown-container-items text-center text-invalid" ng-if="!dictionary.options.length"
-             style="padding:10px;">
-            <span ng-if="!option.filter.term&&option.search">请输入查询关键字!</span>
-            <span ng-if="(option.filter.term||!option.search)&&loading">查询中...</span>
-            <span ng-if="(option.filter.term||!option.search)&&!loading">无相关数据<!--未查询到相关数据--></span>
-        </div>
+        <div class="ys-platform-dropdown-body-options">
+            <!--<div class="option ys-platform-checkbox"><i/>阿斯顿发</div>--></div>
     </div>
 </div>

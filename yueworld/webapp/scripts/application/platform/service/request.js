@@ -7,7 +7,7 @@ module.exports = function ($app) {
         502: "Bad Gateway",
         504: "Gateway timeout"
     }
-    $app.factory("RequestInterceptor", ["$q", function ($q) {
+    $app.register.factory("RequestInterceptor", ["$q", function ($q) {
         return {
             // 可选，拦截成功的请求
             request: function (config) {
@@ -60,10 +60,10 @@ module.exports = function ($app) {
             }
         }
     }]);
-    $app.config(["$httpProvider", function ($http) {
+    $app.register.config(["$httpProvider", function ($http) {
         // $http.interceptors.push("RequestInterceptor")
     }]);
-    $app.factory("RequestService", ["$http", "$q", "$location", function ($http, $q, $location) {
+    $app.register.factory("RequestService", ["$http", "$q", "$location", function ($http, $q, $location) {
         function RequestService(url, option) {
             if (!url) {
                 throw new Error("RequestService -> url -> isEmpty");

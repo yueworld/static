@@ -10757,7 +10757,6 @@
                 }
 
                 instance = $injector.instantiate(expression, locals, constructor);
-
                 if (identifier) {
                     addIdentifier(locals, identifier, instance, constructor || expression.name);
                 }

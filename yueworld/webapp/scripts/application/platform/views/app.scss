@@ -69,7 +69,7 @@
 
   // ys-platform-sidebar
   .ys-platform-sidebar{
-      position: fixed;left:0;top:44px;z-index:10;bottom: 0px;user-select: none;width: 200px;background-color: #FFF/*333744*//*42485B*/ /*#4b5368*/;padding:10px; padding-top: 12px;transition: transform .3s ease-out,opacity .1s linear;transform-origin: top left;transform: scale(0);opacity: 0;
+      position: absolute;left:0;top:44px;z-index:10;bottom: 0px;user-select: none;width: 200px;background-color: #FFF/*333744*//*42485B*/ /*#4b5368*/;padding:10px; padding-top: 12px;transition: transform .3s ease-out,opacity .1s linear;transform-origin: top left;transform: scale(0);opacity: 0;
       &-container{border:1px solid #dbdbdb;padding: 8px 0;font-size: 14px;}
       &-container:after,&-container:before{
         position: absolute;display: block;top: 4px;right: 18px;border-bottom: solid 8px #dbdbdb;border-left: solid 6px transparent;border-right: solid 6px transparent;content: " ";
@@ -105,10 +105,10 @@
       .item i.icon-property{background-position: -2px -204px;}
       .item.active i.icon-property{background-position: -30px -204px;}
       // marketing
-      .item i.icon-marketing{background-position: -1px -288px;}
+      .item i.icon-marketing{background-position: -2px -288px;}
       .item.active i.icon-marketing{background-position: -29px -288px;}
       // billing
-      .item i.icon-billing{background-position: -1px -327px}
+      .item i.icon-billing{background-position: -2px -327px}
       .item.active i.icon-billing{background-position: -30px -327px}
       // trs、营业额上报平台
       .item i.icon-trs{background-position: -1px -287px;}
@@ -171,12 +171,17 @@
                   }
               }
           }
-          &-right{float:left;width:calc(100vw - 460px);border-left: 1px solid #e9eef5;min-height:calc( 100vh - 88px);transition: width .3s ease-out}
+          &-right{
+              float:left;width:calc(100vw - 440px);border-left: 1px solid #e9eef5;min-height:calc( 100vh - 88px);transition: width .3s ease-out;
+              position:relative;
+              .ys-platform-product-scrollbar{left:20px!important;}
+          }
           &.folding .ys-platform-product-body-left{width: 0;opacity: 0}
-          &.folding .ys-platform-product-body-right{width:calc(100vw - 220px)}
+          &.folding .ys-platform-product-body-right{width:calc(100vw - 200px)}
       }
       &-scrollbar{
-          position: absolute;width: auto;height:calc(100vh - 160px);overflow:hidden;left:0;top: 72px;bottom: 0px;right:20px;overflow-y:auto;
+          position: absolute;width: auto;height:calc(100vh - 160px);overflow:hidden;top: 72px;bottom: 0px;right:20px;overflow-y:auto;
+          left:10px;
           transition: left 0.3s ease-out;
       }
   }
@@ -185,7 +190,6 @@
       .ys-platform-sidebar {transform: scale(1);opacity: 1}
       .ys-platform-product{padding-left: 200px!important;}
       .ys-platform-list-container{padding-left: 10px!important;}
-      .ys-platform-product-scrollbar{left: 10px!important;}
   }
   &.fold {
       .ys-platform-product-body-left > *{margin-left: 20px}
@@ -194,8 +198,12 @@
           left: 220px;
           &.fold{left: 1px}
       }
-      .ys-platform-product-body-right{width: calc(100vw - 260px)}
-      .ys-platform-product-body.folding .ys-platform-product-body-right{width:calc(100vw - 20px)}
+      .ys-platform-product-body{
+          &-right{width: calc(100vw - 240px);}
+          &.folding .ys-platform-product-body-right{
+              width:calc(100vw);
+          }
+      }
       .ys-platform-list-container{padding-left: 20px!important;}
       .ys-platform-product-scrollbar{left: 20px!important;}
   }

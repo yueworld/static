@@ -71,7 +71,8 @@ module.exports = function ($app) {
     function warning(option) {
         return message(angular.extend({
             buttons: [
-                {text: "取消", result: false}, {text: "确定", result: true}
+                {text: "取消", result: false, class: 'ys-platform-btn-default'},
+                {text: "确定", result: true, class: 'ys-platform-btn-primary'}
             ]
         }, option, {action: "warning"}));
     }

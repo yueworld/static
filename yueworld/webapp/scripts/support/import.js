@@ -45,8 +45,8 @@ module.exports = function ($app) {
         require("./url"),
         // Cookie
         require("./cookie"),
-        // 结构化配置
-        require("./setting"),
+        // 统一配置
+        require("./config"),
         // 数据字典
         require("./dictionary"),
         // Loading
@@ -67,6 +67,8 @@ module.exports = function ($app) {
         require("./json"),
         // Session
         require("./session"),
+        // 视图
+        require("./view"),
         // 其他
         require("./helper")
     ].forEach(function (callback) {

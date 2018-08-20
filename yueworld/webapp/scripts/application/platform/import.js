@@ -9,4 +9,5 @@ module.exports = function ($app) {
     require("./dialog/import")($app);
     // 指令
     require("./directive/import")($app);
+    
 }

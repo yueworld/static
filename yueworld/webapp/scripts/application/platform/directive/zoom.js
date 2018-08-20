@@ -6,7 +6,7 @@
  * @description 错误提示
  */
 module.exports = function ($app) {
-    $app.directive("ysPlatformZoom", [function () {
+    $app.register.directive("ysPlatformZoom", [function () {
         return {
             restrict: "A",
             controller: ["$scope", "$element", "$attrs", "$timeout", function ($scope, $element, $attrs, $timeout) {

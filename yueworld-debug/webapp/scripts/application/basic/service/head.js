@@ -2,7 +2,7 @@
 //============================= 2017-7-02 ============================
 //=========================================================================
 module.exports = function ($app) {
-    $app.factory("HeadService", ["RequestService", function (requestService) {
+    $app.register.factory("HeadService", ["RequestService", function (requestService) {
         // 甲方合同抬头
         return {
             publish: function (input) {

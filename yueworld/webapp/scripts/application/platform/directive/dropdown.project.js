@@ -3,23 +3,20 @@
  * @author zhanggj
  * @version 1.0.0
  * @time 2017-06-012 21:31:38
- * @description 动态下拉选择框
+ * @description 项目选择框
  */
 // 引入样式
 require("../views/dropdown.project.scss");
 
 module.exports = function ($app) {
-
     var template = require("../views/dropdown.project.html");
-
     /**
-     * 静态数据字典
+     * 项目选择
      */
-    $app.directive("ysPlatformDropdownProject", [function () {
+    $app.register.directive("ysPlatformDropdownProject", [function () {
         return {
             restrict: "A", replace: true, transclude: true,
             controller: ["$scope", "$q", "$compile", "$element", "$attrs", function (_$scope, $q, $compile, $element, $attrs) {
-
                 var $container = $app.$(template),
                     $scope = _$scope.$new(),
                     option = $scope.option = angular.extend({
@@ -53,7 +50,7 @@ module.exports = function ($app) {
                 placeholder = option.placeholder = $app.valid.startsWith(placeholder, "-") ? placeholder : "所有" + placeholder;
                 if ($app.dictionary.PROJECTS.hash[option.model[option.set.id]]) {
                     option.filter.areaId = $app.dictionary.PROJECTS.hash[option.model[option.set.id]].areaId;
-                    console.log(option.filter.areaId)
+                    // console.log(option.filter.areaId)
                 }
 
                 // 选择区域、加载项目
@@ -101,7 +98,7 @@ module.exports = function ($app) {
                 }
                 // 显示 与 隐藏 dropdown
                 $container.on("click", ".ys-platform-dropdown-toggle", function () {
-                    $app.$("div.ys-platform-dropdown-static,div.ys-platform-dropdown-dynamic,div.ys-platform-dropdown-project").not($container).removeClass("open")
+                    $app.$("div.ys-platform-dropdown").not($container).removeClass("open");
                     $container.toggleClass("open");
                     if ($container.hasClass("open")) {
                         $container.find(".ys-platform-dropdown-search input").trigger("focus");

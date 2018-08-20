@@ -1,14 +1,14 @@
-<div class="ys-platform-app" ng-class="{'unfold':ysSidebarStatus!='fold','fold':ysSidebarStatus=='fold'}">
+<div bindonce class="ys-platform-app" ng-class="{'unfold':ysSidebarStatus!='fold','fold':ysSidebarStatus=='fold'}">
     <div class="ys-platform-topbar">
         <div class="logo pull-left pointer" ui-sref="operations.situation.index">
-            <!--<img ng-src="{{::$app.setting.text('/ui/logo')}}" alt="{{::$app.setting.text('/ui/title/full')}}"/>-->
+            <!--<img ng-src="{{::$app.config.text('/ui/logo')}}" alt="{{::$app.config.text('/ui/title/full')}}"/>-->
             <img src="../../../../styles/img/logo/default.png">
         </div>
         <div class="fold" ng-click="toggleSidebar()">
-            <icon name="menus-3" height="44px" width="16px"></icon>
+            <i ys-platform-icon="{name:'menus-3',height:44,width:16}"></i>
         </div>
         <div class="channel pull-left">
-            <div class="item" ui-sref="{{item.state}}" ng-repeat="item in topBarMenus"
+            <div class="item" ui-sref="{{::item.state}}" ng-repeat="item in $app.defaults.topbar"
                  ng-class="{'active':$app.router.includes(item.includes)}" ng-bind="::item.text">
             </div>
         </div>
@@ -39,15 +39,15 @@
                     <div class="arrow"></div>
                     <div class="list">
                         <div class="entrance">
-                            <icon name="suo-1" width="80px" height="20px"></icon>
+                            <i ys-platform-icon="{name:'suo-1',height:20,width:80}"></i>
                             <span>修改密码</span>
                         </div>
                         <div class="entrance">
-                            <icon name="zhuti-1" width="80px" height="20px"></icon>
+                            <i ys-platform-icon="{name:'zhuti-1',height:20,width:80}"></i>
                             <span>专业主题</span>
                         </div>
                         <div class="entrance" ui-sref="admin.situation.index">
-                            <icon name="setting-1" width="80px" height="20px"></icon>
+                            <i ys-platform-icon="{name:'setting-1',height:20,width:80}"></i>
                             <span>进入后台</span>
                         </div>
                     </div>
@@ -87,10 +87,10 @@
     <div class="ys-platform-sidebar">
         <div class="ys-platform-sidebar-container">
             <!--ui-sref="operations.situation.index" ng-class="{'active':$app.router.includes('operations')}"-->
-            <div class="item" ng-repeat="item in sideBarMenus" ui-sref="{{item.state}}"
+            <div class="item" ng-repeat="item in $app.defaults.menus" ui-sref="{{::item.state}}"
                  ng-class="{'active':$app.router.includes(item.includes)}">
-                <i class="{{'icon-'+item.icon}}"></i>
-                {{item.text}}
+                <i class="{{::'icon-'+item.icon}}"></i>
+                {{::item.text}}
             </div>
             <div class="line hidden"></div>
             <!--<div class="manager">

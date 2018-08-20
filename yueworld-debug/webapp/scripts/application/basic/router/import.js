@@ -1,5 +1,5 @@
 module.exports = function ($app) {
-    $app.config(["$stateProvider", function ($state) {
+    $app.register.config(["$stateProvider", function ($state) {
         // 数据中心
         $state.state("basic", {
             url: "/basic", "abstract": true,

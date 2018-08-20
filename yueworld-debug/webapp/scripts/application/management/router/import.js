@@ -1,9 +1,9 @@
 module.exports = function ($app, $state) {
     // Angular Run 事件 优先级 2
-    $app.run(["$templateCache", function ($templateCache) {
+    $app.register.run(["$templateCache", function ($templateCache) {
         $templateCache.put("management/views/workflow/workflow.design.header.html", require("../views/workflow/workflow.design.header.html"));
     }]);
-    $app.config(["$provide", "$stateProvider", "$locationProvider", function ($provide, $state, $locationProvider) {
+    $app.register.config(["$provide", "$stateProvider", "$locationProvider", function ($provide, $state, $locationProvider) {
         // 管理
         $state.state("management", {
             url: "/management", "abstract": true, template: '<div ui-view></div>',

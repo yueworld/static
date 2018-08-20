@@ -1,11 +1,11 @@
 @import "variables";
 
 // ================================================== BASE ============================================================
-
 // 修改默认样式
 html,body{
     //font-family: Arial, Helvetica, "Microsoft YaHei", "STHeiti";
-    font-family: 'PingFang SC', 'Helvetica Neue', "STHeitiSC-Light", "Microsoft YaHei", sans-serif;
+    //font-family: 'PingFang SC', 'Helvetica Neue', "STHeitiSC-Light", "Microsoft YaHei", sans-serif;
+    font-family: 'Helvetica Neue',Helvetica,Arial,"STHeitiSC-Light","Microsoft YaHei",sans-serif;
     //font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, "Microsoft YaHei";
     font-size: 14px;color:#333;height:100%;margin:0;padding:0;
     //text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;
@@ -20,28 +20,33 @@ svg{display: inline-block;fill: currentColor;vertical-align: top;text-align: cen
 
 // other
 .ys-platform-pointer{cursor: pointer}
-.ys-platform-readonly{background:#fff!important;cursor: pointer}
-.ys-platform-fw{font-weight: bold}
-.ys-platform-no-data {height: 100px;line-height: 100px;text-align: center;/*color: #999;*/font-size: 14px;letter-spacing: 5px;color: #333;}
+.ys-platform-readonly{
+    &,input{outline: none!important;background:#fff!important;}
+}
+
+.ys-platform-fwb{font-weight: bold!important;}
+.ys-platform-no-data {height: 100px!important;line-height: 100px!important;text-align: center;/*color: #999;*/font-size: 14px;letter-spacing: 5px;color: #333;}
 .ys-platform-no-select {-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
 .ys-platform-text-ellipsis{text-overflow:ellipsis;overflow:hidden;white-space: nowrap}
+.ys-platform-text-center{text-align: center!important;}
 .ys-platform-container:after,
 .ys-platform-container:before{display: table;content: " ";clear:both}
 
 // error
-input.ys-platform-error{border: 2px solid #E64E4D!important}
+button.ys-platform-error,
+input.ys-platform-error{/*border: 2px solid #E64E4D!important;*/outline: 2px solid #E64E4D!important;outline-offset:-2px;}
 div.ys-platform-error{
-    .ys-platform-dropdown-text{border: 2px solid #E64E4D!important}
+    >.ys-platform-dropdown .ys-platform-dropdown-title,
+    >.ys-platform-dropdown .ys-platform-dropdown-text{outline: 2px solid #E64E4D!important;outline-offset:-2px;}
     &.ys-platform-require .ys-platform-dropdown{
         background:url(../img/common/icon/require.png) no-repeat right 3px top 3px;
     }
     .ys-platform-error-border{border: 2px solid #E64E4D!important}
 }
+
 // require
-input.ys-platform-require{background:url(../img/common/icon/require.png) no-repeat right 1px top 1px;}
-.ys-platform-require{
-    .ys-platform-dropdown{background:url(../img/common/icon/require.png) no-repeat right 2px top 2px;}
-}
+input.ys-platform-require{background:url(../img/common/icon/require.png) no-repeat right 2px top 2px;}
+.ys-platform-require .ys-platform-dropdown{background:url(../img/common/icon/require.png) no-repeat right 3px top 3px;}
 .ys-platform-shadow{box-shadow: 0 1px 1px rgba(0,0,0,0.15)}
 .ys-platform-w100{width: 100%}
 
@@ -54,13 +59,14 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
 
 // line-height
 .ys-platform-lh{
-    &34{line-height: 34px}
-    &32{line-height: 32px}
-    &36{line-height: 36px}
-    &38{line-height: 38px}
-    &40{line-height: 40px}
+    &24{line-height: 24px!important;}
+    &32{line-height: 32px!important;}
+    &34{line-height: 34px!important;}
+    &35{line-height: 35px!important;}
+    &36{line-height: 36px!important;}
+    &38{line-height: 38px!important;}
+    &40{line-height: 40px!important;}
 }
-
 // text color
 .ys-platform-text-{
     &warning{color: $color-warning!important}
@@ -74,6 +80,7 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
     &black{color: #000!important;}
     &danger{color: $color-danger!important;}
     &info{color: #333!important;}
+    &black{color: #333!important;}
     &success{color: $color-success!important}
     &success:hover{color: $color-success-hover!important;}
     &success-2{color: $color-success-2!important}
@@ -94,17 +101,18 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
 
 // input
 .ys-platform-input{
-    position: relative;
-    display: block;width: 100%;height: 32px;padding:5px 12px;font-size: 14px;color: #555;background-color: #fff;border: 1px solid #dae1e7;transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    position: relative;text-overflow: ellipsis;overflow: hidden;
+    display: block;width: 100%;height: 32px;line-height:initial;padding:5px 12px;padding-right:20px;font-size: 14px;color: #555;background-color: #fff;border: 1px solid #dae1e7;transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     &:focus{/*border-color: #66afe9;*//*box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);*/
         border-color: #32aaff!important;
-        outline:solid 1px #3aabf3;outline-offset: -1px;z-index: 2;
+        outline:solid 1px #3aabf3!important;outline-offset: -1px;z-index: 2;
     }
     &::placeholder {color: #999;opacity: 1;}
 }
 
 // icon
 .ys-platform-icon{
+    display: inline-block;background-repeat: no-repeat;background-position: center center;
     &-date{
        position: relative;height: 32px;cursor: pointer;
        &:after{
@@ -125,6 +133,7 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
     &-add-2{background: url(../img/common/icon/add-2.png) no-repeat;}
     &-add-2:hover{background: url(../img/common/icon/add-2-hover.png) no-repeat;}
     &-subtract-2{background: url(../img/common/icon/subtract-2.png) no-repeat;}
+    &-search{background-image: url(../img/common/icon/grey_search.png);height: 16px;width: 16px;vertical-align: sub;}
 }
 
 // button
@@ -139,10 +148,12 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
         &:hover,&:focus,&:active,&:hover:active,&:hover:focus,&:active:focus {background-color:$color-primary-hover!important;color:#fff!important;border-color:$color-primary-hover!important;}
     }
     &-success{
-        background-color: #449139!important;
-        &:hover{
-            background-color: #006135!important;
-        }
+        background-color:$color-success!important;color: #fff!important;
+        &:hover{background-color:$color-success-hover!important;}
+    }
+    &-warning{
+        background-color: $color-warning!important;color: #fff!important;
+        &:hover{background-color: $color-warning-hover!important;}
     }
     &-danger{
         background-color:$color-danger!important;color:#fff!important;border-color: $color-danger!important;
@@ -150,7 +161,7 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
     }
     &-gray{background-color: #818c92!important;color: #fff!important;border-color:#818c92!important;}
     &-gray:hover{color: #fff!important}
-    &-default,&-primary,&-success,&-danger,&-gray{
+    &-default,&-primary,&-success,&-warning,&-danger,&-gray{
         border-radius: 0px!important;outline:none!important;outline-offset: -2px!important;padding: 5px 15px!important;min-width: 80px!important;
     }
     &-group{
@@ -165,6 +176,7 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
 // padding
 .ys-platform-p{
     &0{padding:0px!important;}
+    &5{padding:5px!important;}
     &8{padding:8px!important;}
     &10{padding:10px!important;}
     &15{padding:15px!important;}
@@ -174,6 +186,7 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
     &t5{padding-top:5px!important}&r5{padding-right:5px!important}&b5{padding-bottom:5px!important}&l5{padding-left:5px!important}
     &t8{padding-top:8px!important}&r8{padding-right:8px!important}&b8{padding-bottom:8px!important}&l8{padding-left:8px!important}
     &t10{padding-top:10px!important}&r10{padding-right:10px!important}&b10{padding-bottom:10px!important}&l10{padding-left:10px!important}
+    &t12{padding-top:12px!important}&r12{padding-right:12px!important}&b12{padding-bottom:12px!important}&l12{padding-left:12px!important}
     &t15{padding-top:15px!important}&r15{padding-right:15px!important}&b15{padding-bottom:15px!important}&l15{padding-left:15px!important}
     &t20{padding-top:20px!important}&r20{padding-right:20px!important}&b20{padding-bottom:20px!important}&l20{padding-left:20px!important}
     &t30{padding-top:30px!important}&r30{padding-right:30px!important}&b30{padding-bottom:30px!important}&l30{padding-left:30px!important}
@@ -194,6 +207,7 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
     &t10{margin-top:10px!important}&r10{margin-right:10px!important}&b10{margin-bottom:10px!important}&l10{margin-left:10px!important}
     &t15{margin-top:15px!important}&r15{margin-right:15px!important}&b15{margin-bottom:15px!important}&l15{margin-left:15px!important}
     &t20{margin-top:20px!important}&r20{margin-right:20px!important}&b20{margin-bottom:20px!important}&l20{margin-left:20px!important}
+    &t25{margin-top:25px!important}&r25{margin-right:25px!important}&b25{margin-bottom:25px!important}&l25{margin-left:25px!important}
     &t30{margin-top:30px!important}&r30{margin-right:30px!important}&b30{margin-bottom:30px!important}&l30{margin-left:30px!important}
     &t40{margin-top:40px!important}&r40{margin-right:40px!important}&b40{margin-bottom:40px!important}&l40{margin-left:40px!important}
     &t45{margin-top:45px!important}&r45{margin-right:45px!important}&b45{margin-bottom:45px!important}&l45{margin-left:45px!important}
@@ -221,7 +235,7 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
                 height:58px;line-height: 58px;margin: auto;margin-bottom:10px;border-radius: 4px;font-size:18px;color:#fff;padding:0 20px 0 68px;background-size:contain;text-align: left;cursor:pointer;min-width:300px;
                 /*transition:opacity 0.15s linear,transform 0.15s linear;*/
                 transition: all .15s cubic-bezier(.215, .61, .355, 1);
-                opacity: 0;transform: translateY(-50%);
+                opacity: 0;transform: translateY(-50%);max-width: 800px;overflow: hidden;
                 &:first-child{margin-top: -10px}
                 &.in{opacity: 1;transform: translateY(0px)}
             }
@@ -249,50 +263,59 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
 
 // checkbox radio
 .ys-platform-{
-        &checkbox,
-        &radio{background: url(../img/common/icon/box2.png) no-repeat;width: 18px;height: 18px;display: inline-block;vertical-align: middle;cursor: pointer;-webkit-background-size: 200px 20px;background-size: 200px 20px;}
-        &checkbox{
-            background-position: 0 0;
-            &:hover{background-position: -20px 0;}
-            &.selected{background-position: -40px 0;}
-            &.disabled{background-position: -60px 0;}
+        &checkbox i,
+        &radio i{background: url(../img/common/icon/box2.png) no-repeat;width: 18px;height: 18px;display: inline-block;vertical-align: middle;cursor: pointer;-webkit-background-size: 200px 20px;background-size: 200px 20px;margin-right: 8px;}
+        &checkbox {
+            i{background-position: 0 0;}
+            &:hover i{background-position: -20px 0;}
+            &.selected i{background-position: -40px 0;}
+            &.disabled i{background-position: -60px 0;}
             &.selected.disabled{background-position: -80px 0;}
         }
         &radio{
-            background-position: -100px 0;
-            &:hover{background-position: -120px 0;}
-            &.selected{background-position: -140px 0;}
-            &.disabled{background-position: -160px 0;}
-            &.selected.disabled {background-position: -180px 0;}
+            i{background-position: -100px 0;}
+            &:hover i{background-position: -120px 0;}
+            &.selected i{background-position: -140px 0;}
+            &.disabled i{background-position: -160px 0;}
+            &.selected.disabled i{background-position: -180px 0;}
         }
+        &checkbox,
+        &radio{display: inline-block;}
 }
 
 // ================================================== Component ========================================================
 // backdrop 遮罩、背景
 .ys-platform-backdrop{
     background-color:#000;position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 2001;opacity:0;transition: opacity 0.15s linear;
+    /*pointer-events: none;*/
     &.in{opacity: 0.5!important}
 }
+
 // modal 模态对话框
 .ys-platform-modal{
     position: fixed;z-index: 2001;top:0;left:0;right:0;bottom:0;transition: opacity 0.15s linear;
     .ys-platform-container{
-        position: relative;background: #fff;background-clip: padding-box;margin: 30px auto;float:initial!important;transform: translate(0, -25%);
+        position: relative;background: #fff;/*background-clip: padding-box;*/margin: 30px auto;float:initial!important;transform: translate(0, -25%);
         transition: transform .3s ease-out,opacity 0.15s ease-out,width 0.15s;opacity: 0;
-        border: 1px solid rgba(0, 0, 0, .2);box-shadow: 0 5px 15px rgba(0, 0, 0, .5);/*border-radius: 6px;*/
+        //border: 1px solid rgba(0, 0, 0, .2);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);/*border-radius: 6px;*/
         /*overflow: hidden;*/
         &.in{transform: translate(0, calc((100vh - 100%) /2 ));opacity: 1;}
     }
-    .header{
+    div.header{
         height:56px;line-height: 56px;border-bottom: 1px solid #e5e5e5;
         h4{margin:0px;float: left;line-height: 56px;/*font-size: 14px;*/font-weight: normal}
-        .close{
+        icon.close{
             padding-right: 7px;float: right;
             i{cursor: pointer;color: #000;opacity:.5;&:hover{opacity: 0.8}}
         }
+        i.close{
+            padding-right: 7px;float: right;
+            cursor: pointer;color: #000;opacity:.5;&:hover{opacity: 0.8}
+        }
     }
-    .footer{
-        height: auto;padding: 15px;text-align: right;border-top: 1px solid #e5e5e5;
+    div.footer{
+        height: auto;padding: 20px;text-align: right;border-top: 1px solid #e5e5e5;
         .btn{margin-left: 10px;float: right}
     }
     // ys-platform-dialog-msg：confirm、success、info、error
@@ -301,24 +324,90 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
         .body{padding:0px;}
         .body>div{line-height: 30px;font-size: 16px;padding:20px 40px;text-align: left;margin-bottom: 0px}
         &.error {
-            .body>div{color: #a94442;background-color: #f2dede;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-            .footer{border-top:1px solid #ebccd1}
+            .body>div{color: #721c24;background-color: #f5c6cb;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+            .footer{border-top-color:#f5c6cb}
         }
         &.confirm {
             .body>div{color:#8a6d3b;background-color: #fcf8e3;}
-            .footer{border-top:1px solid #faebcc;}
+            .footer{border-top-color:#faebcc;}
         }
         &.warning{
             .body>div{color: #8a6d3b;background-color: #fcf8e3;}
-            .footer{border-top:1px solid #faebcc;}
+            .footer{border-top-color:#faebcc;}
         }
         &.info{
-            .body>div{color: #31708f;background-color: #d9edf7;}
-            .footer{border-top:1px solid #bce8f1;}
+            .body>div{color: #856404;background-color: #fff3cd;}
+            .footer{border-top-color:#ffeeba;}
         }
         &.success {
-            .body>div{color: #3c763d;background-color: #dff0d8;}
-            .footer{border-top:1px solid #d6e9c6;}
+            .body>div{color: #155724;background-color: #d4edda;}
+            .footer{border-top-color:#c3e6cb;}
         }
     }
+}
+
+// form
+.ys-platform-grid {
+    > table{
+        > tbody{
+            > tr >th,
+            > tr >td{border: solid 1px #eff1f4;/*height: 36px;line-height: 35px;*/}
+            > tr {
+                > th{background: #f8fafa;color: #7e8c9e;padding: 8px 15px 7px 15px;line-height: initial!important;font-weight: normal;vertical-align:middle!important;}
+                > td{
+                    padding:0px;
+                    > .ys-platform-input{height:35px;border:none;}
+                    &.title{background-color: #f8fafa;}
+                    &.title h3{
+                        float: left;padding-left: 13px;font-size: 15px;margin:0;line-height: 35px;
+                        border: 1px solid #eff1f4;
+                        border-left: 2px solid #32aaff;border-right: none;
+                        background-color: #f8fafa;
+                        margin-left: -1px;
+                        margin-top: -1px;
+                        margin-bottom: -1px;
+                    }
+                    //input{padding:0 15px 0 15px;}
+                }
+            }
+        }
+        svg {-webkit-transition-duration: .15s;transition-duration: .15s}
+        &.up svg {-webkit-transform: rotate(180deg);transform: rotate(180deg)}
+        &.up tr:nth-child(n+2) {display: none}
+    }
+    .ys-platform-dropdown{
+        .ys-platform-dropdown-toggle input,
+        .ys-platform-dropdown-search input{height:35px;border:none;/*padding:0px 0 0 12px !important;*/}
+        &.ys-platform-readonly .ys-platform-dropdown-toggle input{outline: none;background-image: none!important}
+        .disabled{color: #999}
+    }
+ /*   .bt6 {border-top: 6px solid #818c92}
+    .lh36 {height: 36px;line-height: 36px}
+    .title {height: 40px;line-height: 40px;color: #333;font-size: 16px;padding: 0 0 0 20px}
+    .ys-radio {height: 20px}
+    .table{border: solid 1px #eff1f4!important;}
+    td,
+    th {vertical-align: middle !important;height: 36px;color: #757575;font-weight: 400}
+    td.p0 {padding: 0 !important}
+    td.pl10 {padding-left: 20px !important}
+
+    th strong {color: #333}
+    td input,
+    td textarea {border: 0;resize: none;-webkit-box-shadow: none;box-shadow: none;padding-left: 15px}
+    .table input {height: 36px;line-height: 36px}
+    .table .require {border-left: 2px solid #e64e4d !important}
+    .table .table {border: none !important;margin-bottom: 0;table-layout: fixed}
+    .table .table td,
+    .table .table th {border-left: 0 !important;border-top: 0 !important}
+    .table .table td:last-child,
+    .table .table th:last-child {border-right: 0 !important}
+    .table .table tr:last-child td,
+    .table .table tr:last-child th {border-bottom: 0}
+    .table .single-img {margin-bottom: 8px;width: 206px;margin-top: 5px}
+    .table .ys-cover {margin-bottom: 8px;margin-top: 5px}
+    .table .error {border: 2px solid #e64e4d !important}
+    .table .attach.error {padding-left: 12px}
+    .table tbody {border-top: 1px solid #ddd}
+    .uib-datepicker-popup tbody {border: none}
+    .uib-datepicker-popup th {background: none}*/
 }

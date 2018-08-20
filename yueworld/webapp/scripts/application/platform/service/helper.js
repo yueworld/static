@@ -2,7 +2,7 @@
 //============================= 2017-7-02 ============================
 //=========================================================================
 module.exports = function ($app) {
-    $app.factory("HelperService", ["RequestService", function (requestService) {
+    $app.register.factory("HelperService", ["RequestService", function (requestService) {
         // 异步辅助逻辑
         return {
             getLastDayOfCycleId: function (cycleId, date) {

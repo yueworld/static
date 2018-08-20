@@ -1,6 +1,7 @@
-require("../views/img.scss");
-var template = require("../views/img.html");
+// 放大
 module.exports = function ($app) {
+    require("../views/zoom.scss");
+    var template = require("../views/zoom.html");
 
     /**
      * 图片放大器

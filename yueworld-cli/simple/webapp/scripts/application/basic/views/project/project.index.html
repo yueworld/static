@@ -7,7 +7,7 @@
                     <div ys-framework-dropdown="{dictionary:'AREAS',model:filter,property:'areaId',width:120,placeholder:'请选择区域',theme:'caret'}"></div>
                 </div>
                 <div class="btn-group">
-                    <div ys-framework-dropdown="{dictionary:'PROJECT_OPERATE_STATUS',model:filter,property:'operateStatusId',width:130,placeholder:'请选运营状态',theme:'caret'}"></div>
+                    <div ys-framework-dropdown="{dictionary:'OPERATE_STATUS',model:filter,property:'operateStatusId',width:130,placeholder:'请选运营状态',theme:'caret'}"></div>
                 </div>
             </div>
             <div class="search">
@@ -37,7 +37,7 @@
                     <td>{{item.totalBuildingArea|number:2||'-'}}</sup></td>
                     <td>{{item.totalServiceArea|number:2||'-'}}</td>
                     <td>{{item.storeCount||'-'}}</td>
-                    <td>{{$app.dictionary.PROJECT_OPERATE_STATUS.hash[item.operateStatusId].text}}</td>
+                    <td>{{$app.dictionary.OPERATE_STATUS.hash[item.operateStatusId].text}}</td>
                     <td>{{item.openingDate|date:'yyyy-MM-dd'}}</td>
                     <td>{{item.address}}</td>
                 </tr>

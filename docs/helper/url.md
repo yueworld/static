@@ -56,7 +56,7 @@ console.log($app.url.getDynamicUrl());          // 输出 /enrolment_web/
 
 ```js
 // 示例
-$app.url.setStaticUrl("http://static.yeuworld.cn/static");
+$app.url.setStaticUrl("http://static.yueworld.cn/static");
 ```
 
 ## getStaticUrl
@@ -68,9 +68,9 @@ $app.url.setStaticUrl("http://static.yeuworld.cn/static");
 
 ```js
 // 示例
-console.log($app.url.getStaticUrl());                       // 输出 http://static.yeuworld.cn/
-$app.url.setStaticUrl("http://static.yeuworld.cn/static");  
-console.log($app.url.getStaticUrl());                       // 输出 http://static.yeuworld.cn/static
+console.log($app.url.getStaticUrl());                       // 输出 http://static.yueworld.cn/
+$app.url.setStaticUrl("http://static.yueworld.cn/static");  
+console.log($app.url.getStaticUrl());                       // 输出 http://static.yueworld.cn/static
 ```
 
 ## encoder

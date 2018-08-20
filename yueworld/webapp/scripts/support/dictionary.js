@@ -56,10 +56,23 @@ module.exports = function ($app) {
         return result;
     }
 
+    // 取所有父元素
+    function parents(dictionary, id, expandeds) {
+        var current = dictionary.hash[id],
+            expandeds = expandeds ? expandeds : (current ? [] : [dictionary.root]);
+        if (current) {
+            expandeds.push(current);
+            if (dictionary.hash[current.parentId]) {
+                return parents(dictionary, current.parentId, expandeds);
+            }
+        }
+        return expandeds;
+    }
+
     // 初始数据字典
     function init(dictionary) {
-        if ($app.setting.path("/dictionary")) {
-            angular.forEach($app.setting.path("/dictionary").children, function (dictionary) {
+        if ($app.config.path("/dictionary")) {
+            angular.forEach($app.config.path("/dictionary").children, function (dictionary) {
                 var options = [];
                 angular.forEach(dictionary.children, function (option) {
                     options.push({text: option.name, id: option.property, name: option.name});
@@ -72,5 +85,5 @@ module.exports = function ($app) {
         })
     }
 
-    $app.dictionary = {path: path, build: build, init: init};
+    $app.dictionary = {build: build, parents: parents, path: path, init: init};
 }

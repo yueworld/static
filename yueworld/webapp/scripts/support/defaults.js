@@ -6,15 +6,16 @@
  */
 var isFirstRouterComplete = false, loadingTask;
 module.exports = function ($app) {
-    $app.setup = {
+
+    $app.defaults = {
         // 获取会话地址
-        sessionUrl: undefined,// "sdk/platform/init",
+        sessionUrl: undefined,//"sdk/platform/core/init",
         // 默认跳转地址
         otherwise: "", //"/index.html",
         // 异步请求地址
         dynamicUrl: $app.$("base").attr("href") || "/",
         // 静态请求地址
-        staticUrl: "http://static.yeuworld.cn/",
+        staticUrl: "http://static.yueworld.cn/",
         // 标题
         title: $app.el.title.text(), _title: "请稍候、系统正在努力加载中。",
         // Loading
@@ -42,6 +43,41 @@ module.exports = function ($app) {
                 }
             }
         },
+        // 主菜单配置
+        menus: [
+            /*{
+                text: "基础数据", icon: "basic", state: "basic.info.project.index", includes: "basic",
+                child: [
+                    {
+                        text: "项目信息", state: "basic.info.project.index", includes: "basic.info",
+                        child: [
+                            {text: "项目维护", state: "basic.info.project.index", includes: "basic.info.project"},
+                            {text: "楼栋维护", state: "basic.info.building.index", includes: "basic.info.building"},
+                            {text: "楼层维护", state: "basic.info.floor.index", includes: "basic.info.floor"},
+                            {text: "产权维护", state: "basic.info.property-ownership.index", includes: "basic.info.property-ownership"},
+                            {text: "空间维护", state: "basic.info.space.index", includes: "basic.info.space"},
+                            {text: "一铺一价", state: "basic.info.space-package.index", includes: "basic.info.space-package"},
+                            {text: "车场信息", state: "basic.info.park.index", includes: "basic.info.park"},
+                            {text: "品牌管理", state: "basic.info.brand.index", includes: "basic.info.brand"},
+                            {text: "租户管理", state: "basic.info.tenant.index", includes: "basic.info.tenant"}
+                        ]
+                    },
+                    {
+                        text: "其他信息", state: "basic.other.area.index", includes: "basic.other",
+                        child: [
+                            {text: "区域维护", state: "basic.other.area.index", includes: "basic.other.area"},
+                            {text: "公司维护", state: "basic.other.company.index", includes: "basic.other.company"}
+                        ]
+                    }
+                ]
+            }*/
+        ],
+        // 头部菜单
+        topbar: [],
+        // 头部左侧子菜单
+        topbarLeftSub: [],
+        // 头部右侧子菜单
+        topbarRightSub: [],
         // 准备完毕
         ready: angular.noop,
         // 请求超时
@@ -68,7 +104,7 @@ module.exports = function ($app) {
         needLogin: function ($app, response) {
             $app.loading(false);
             $app.msgbox.error({
-                message: "很抱歉！<br/>" + ($app.user.login ? "会话超时、请重新登陆！" : "您尚未登陆、请先去登陆！"),
+                message: "很抱歉！<br/>" + ($app.session.login ? "会话超时、请重新登陆！" : "您尚未登陆、请先去登陆！"),
                 buttons: [{text: "去登陆", result: true, class: 'ys-platform-btn-danger'}]
             }).then(function () {
                 window.location.href = response.data.login.split("_srk_")[0] + "_srk_=" + encodeURIComponent(window.location.href);
@@ -77,7 +113,7 @@ module.exports = function ($app) {
         // 切换页面开始
         stateChangeStart: function ($app, event, toState, toParams, fromState, fromParams) {
             // 未登陆前禁止路由执行
-            if (!$app.user.login) {
+            if (!$app.session.login) {
                 event.preventDefault()
             } else if (isFirstRouterComplete) {
                 // 显示loading
@@ -86,6 +122,17 @@ module.exports = function ($app) {
             $app.router.name = toState.name;
             $app.router.url = toState.url;
             $app.router.params = toParams;
+            // 菜单
+            angular.forEach($app.defaults.menus, function (menu) {
+                angular.forEach(menu.child, function (child) {
+                    if (toState.name.indexOf(child.includes) != -1) {
+                        $app.defaults.topbar = menu.child;
+                        $app.defaults.topbarLeftSub = child.child;
+                        // $app.defaults.topbarRightSub = child.child;
+                    }
+                })
+            })
+
         },
         // 切换页面成功
         stateChangeSuccess: function ($app, event, toState, toParams, fromState, fromParams) {
@@ -102,6 +149,7 @@ module.exports = function ($app) {
                     $app.loading(false);
                 });
             }
+
         }
     }
 };

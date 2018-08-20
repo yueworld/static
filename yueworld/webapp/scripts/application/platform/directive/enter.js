@@ -9,7 +9,7 @@ module.exports = function ($app) {
     /**
      * 回车事件  ys-platform-enter="refresh()"
      */
-    $app.directive("ysPlatformEnter", [function () {
+    $app.register.directive("ysPlatformEnter", [function () {
         return {
             restrict: "A",
             controller: ["$scope", "$timeout", "$element", "$attrs", function ($scope, $timeout, $element, $attrs) {

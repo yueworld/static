@@ -1,5 +1,5 @@
 module.exports = function ($app) {
-    $app.directive("ywCalendar", ["$timeout", function ($timeout) {
+    $app.register.directive("ywCalendar", ["$timeout", function ($timeout) {
         return {
             restrict: "AE",
             replace: true,

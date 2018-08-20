@@ -2,7 +2,7 @@
 //============================= 2017-7-02 ============================
 //=========================================================================
 module.exports = function ($app) {
-    $app.factory("ProjectService", ["RequestService", "$q", function (requestService, $q) {
+    $app.register.factory("ProjectService", ["RequestService", "$q", function (requestService, $q) {
         // 项目信息
         return {
             publish: function (input) {

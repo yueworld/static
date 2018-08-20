@@ -38,9 +38,9 @@ module.exports = function ($app) {
      */
     function setDynamicUrl(url) {
         if (url.indexOf("http://") == -1) {
-            $app.setup.dynamicUrl = "http://" + location.host + url;
+            $app.defaults.dynamicUrl = "http://" + location.host + url;
         } else {
-            $app.setup.dynamicUrl = url;
+            $app.defaults.dynamicUrl = url;
         }
     }
 
@@ -51,31 +51,31 @@ module.exports = function ($app) {
      */
     function getDynamicUrl(url) {
         if (!url) {
-            return $app.setup.dynamicUrl
+            return $app.defaults.dynamicUrl
         } else if (url.indexOf("http://") != -1 || $app.valid.startsWith(url, "//")) {
             return url;
         } else {
-            return $app.setup.dynamicUrl + url;
+            return $app.defaults.dynamicUrl + url;
         }
     }
 
     // 设置静态URL
     function setStaticUrl(url) {
         if (url.indexOf("http://") == -1) {
-            $app.setup.staticUrl = "http://" + location.host + url;
+            $app.defaults.staticUrl = "http://" + location.host + url;
         } else {
-            $app.setup.staticUrl = url;
+            $app.defaults.staticUrl = url;
         }
     }
 
     // 动态URL根
     function getStaticUrl(url) {
         if (!url) {
-            return $app.setup.staticUrl
+            return $app.defaults.staticUrl
         } else if (url.indexOf("http://") != -1) {
             return url;
         } else {
-            return $app.setup.staticUrl + url;
+            return $app.defaults.staticUrl + url;
         }
     }
 

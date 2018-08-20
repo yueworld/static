@@ -3,12 +3,12 @@ module.exports = function ($app) {
     [
         // 统一 Request 封装
         require("./request"),
+        // 附件
+        require("./file"),
         // 组织机构
         require("./organization"),
         // 用户
         require("./user"),
-        // 附件
-        require("./attachment"),
         // 留言、评论
         require("./comment")
     ].forEach(function (callback) {

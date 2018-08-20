@@ -1,6 +1,6 @@
 # 快速开始
 
-推荐安装`yueworld-cli`工具，快速构建一个基于`Webpack 4`并集成了`yeuworld.js`的项目。
+推荐安装`yueworld-cli`工具，快速构建一个基于`Webpack 4`并集成了`yueworld.js`的项目。
 
 ```bash
 npm i yueworld-cli -g

@@ -15,7 +15,7 @@ module.exports = function ($app) {
     /**
      * 动态数据字典
      */
-    $app.directive("ysPlatformDropdownDynamic", [function () {
+    $app.register.directive("ysPlatformDropdownDynamic", [function () {
         return {
             restrict: "A", replace: true, transclude: true,
             controller: ["$scope", "$q", "$compile", "$element", "$attrs", function (_$scope, $q, $compile, $element, $attrs) {
@@ -164,7 +164,7 @@ module.exports = function ($app) {
                 }
                 // 显示 与 隐藏 dropdown
                 $container.on("click", ".ys-platform-dropdown-toggle", function () {
-                    $app.$("div.ys-platform-dropdown-static,div.ys-platform-dropdown-dynamic,div.ys-platform-dropdown-project").not($container).removeClass("open")
+                    $app.$("div.ys-platform-dropdown").not($container).removeClass("open");
                     $container.toggleClass("open");
                     if ($container.hasClass("open")) {
                         $container.find(".ys-platform-dropdown-search input").trigger("focus");

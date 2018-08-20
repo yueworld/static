@@ -1,7 +1,7 @@
 module.exports = function ($app) {
 
     // 注册路由
-    $app.config(["$stateProvider", function ($state) {
+    $app.register.config(["$stateProvider", function ($state) {
         // 数据中心、一级目录
         $state.state("basic", {
             url: "/basic", "abstract": true,

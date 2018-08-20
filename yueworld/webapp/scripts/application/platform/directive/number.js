@@ -6,7 +6,7 @@
  * @description 编辑
  */
 module.exports = function ($app) {
-    $app.directive("ysPlatformNumber", [function () {
+    $app.register.directive("ysPlatformNumber", [function () {
         return {
             restrict: "A",
             replace: true,
@@ -40,7 +40,9 @@ module.exports = function ($app) {
                         });
                         // 回写模型
                         $el.keyup(function () {
-                            model[option.property] = $app.number.parse($el.val(), option.scale);
+                            $timeout(function () {
+                                model[option.property] = $app.number.parse($el.val(), option.scale);
+                            })
                         })
                         // 初始值
                         $el.val($app.number.parse(model[option.property], option.scale) != 0 ? model[option.property] : undefined);

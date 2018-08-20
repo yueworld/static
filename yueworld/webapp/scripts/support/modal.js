@@ -54,7 +54,7 @@ module.exports = function ($app) {
         });
     }
 
-    function modal($option) {
+    function modal(config, overwrite) {
         return $app.injector.invoke(["$rootScope", "$animate", "$q", "$timeout", "$compile", "$controller", function ($rootScope, $animate, $q, $timeout, $compile, $controller) {
             var // 新作用域
                 $scope = $rootScope.$new(),
@@ -69,8 +69,7 @@ module.exports = function ($app) {
                     width: 600,
                     // 异步通知对象
                     deferred: $q.defer()
-                }, $option);
-
+                }, config, overwrite);
 
             function open(resolveObj) {
                 var $backdrop = $app.backdrop(),
@@ -93,7 +92,7 @@ module.exports = function ($app) {
                 try {
                     $controller(option.controller, locals);
                 } catch (ex) {
-                    console.log(ex.message)
+                    console.error(ex)
                 }
                 $container.append($compile(option.template)(locals.$scope));
                 $modal.appendTo($app.el.container)

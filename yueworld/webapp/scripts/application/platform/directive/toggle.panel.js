@@ -1,6 +1,6 @@
 module.exports = function ($app) {
     // 隐藏显示面板
-    $app.directive("togglePanel", ["$timeout", function ($timeout) {
+    $app.register.directive("togglePanel", ["$timeout", function ($timeout) {
         return {
             restrict: "A", transclude: true,
             template: "<div ng-transclude></div>",

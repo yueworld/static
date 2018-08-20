@@ -4,7 +4,7 @@
 module.exports = function ($app) {
 
     // 工作流
-    $app.factory("WorkflowService", ["RequestService", function (requestService) {
+    $app.register.factory("WorkflowService", ["RequestService", function (requestService) {
         return {
             // ============================== 目录 =====================================================================
             // 新增修改

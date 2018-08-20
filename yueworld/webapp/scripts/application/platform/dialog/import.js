@@ -13,6 +13,8 @@ module.exports = function ($app) {
         // require("./select"),
         // 图片缩放
         require("./zoom"),
+        // 文件
+        require("./file.manager"),
         // 合同
         require("./contract")
     ].forEach(function (callback) {

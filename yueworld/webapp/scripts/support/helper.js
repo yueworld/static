@@ -238,6 +238,40 @@ module.exports = function ($app) {
         file.trigger("click");
     }
 
+    /**
+     * 驼峰命名转字符串
+     */
+    function humpNamespaceToStr(hump) {
+        return hump.replace(/([A-Z])/g, "-$1").toLowerCase()
+    }
+
+    /**
+     * 字符串转驼峰命名
+     * @param str
+     */
+    function strToHumpNamespace(str) {
+        return str.replace(/-(\w)/g, function (all, letter) {
+            return letter.toUpperCase();
+        })
+    }
+
+    /**
+     * 转换为数组
+     */
+    function toArray(val, split) {
+        if (angular.isArray(val)) {
+            return val.filter(function (val) {
+                return !!val;
+            });
+        } else if (angular.isString(val)) {
+            return val.split(split || ",").filter(function (val) {
+                return !!val;
+            });
+        } else {
+            return [];
+        }
+    }
+
     $app.helper = {
         range: range,
         // 剔除空格
@@ -271,7 +305,13 @@ module.exports = function ($app) {
         // 跳转
         redirect: redirect,
         // 上传
-        uploader: uploader
+        uploader: uploader,
+        // 驼峰命名转字符串
+        humpNamespaceToStr: humpNamespaceToStr,
+        // 字符串转驼峰命名
+        strToHumpNamespace: strToHumpNamespace,
+        // 转换为数组
+        toArray: toArray
     }
 
 }
