@@ -1,6 +1,0 @@
-.ys-dialog-layout-manager .select-body{}
-.ys-dialog-layout-manager .selector-toolbar{overflow: hidden}
-.ys-dialog-layout-manager .selector-toolbar .selector-content{height: 340px;overflow-y: scroll}
-.ys-dialog-layout-manager .selector-toolbar .selector-content i.tree-leaf-head:before{background-color: #fff!important;height: 0!important;}
-.ys-dialog-layout-manager .selector-result .title{line-height: 40px;height: 40px;background: #f3f3f3;font-size: 14px;border-left: 1px solid #ccc;padding:0 20px/*;font-weight: bold*/}
-.ys-dialog-layout-manager .selector-result .selector-content{height: 300px;border-left: 1px solid #ccc;}

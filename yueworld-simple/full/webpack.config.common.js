@@ -1,32 +1,34 @@
-// 资源仓库本地路径
+// 引入类库
 const HtmlWebpackPlugin = require('html-webpack-plugin'),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
-    CopyWebpackPlugin = require("copy-webpack-plugin");
+    CopyWebpackPlugin = require("copy-webpack-plugin"),
+    // yueworld path
+    yueworld = "../../yueworld";
 
 module.exports = {
     entry: {
         // 入口文件
-        "bootstrap": "./bootstrap"
+        "bootstrap": "./webapp/scripts/bootstrap",
     }, plugins: [
         // 清理目录
-        new CleanWebpackPlugin(['dist',"npm-debug.log"]),
+        new CleanWebpackPlugin(['dist', "npm-debug.log"]),
         new HtmlWebpackPlugin({
-            filename: "index.html", template: "./bootstrap.html",
-            favicon: '../yueworld/webapp/styles/img/common/favicon.ico',
+            filename: "index.html", template: "./webapp/index.html",
+            favicon: yueworld + '/webapp/styles/img/common/favicon.ico',
             minify: {
                 removeComments: true, collapseWhitespace: true
             }
         }), new HtmlWebpackPlugin({
-            filename: "browser.err.html", template: "../yueworld/webapp/browser.err.html",
-            favicon: '../yueworld/webapp/styles/img/common/favicon.ico',
+            filename: "browser.err.html", template: yueworld + "/webapp/browser.err.html",
+            favicon: yueworld + '/webapp/styles/img/common/favicon.ico',
             minify: {
                 removeComments: true, collapseWhitespace: true
             }
         }), new MiniCssExtractPlugin({
             filename: "[name].css", allChunks: true
         }), new CopyWebpackPlugin([
-            {from: "../yueworld/webapp/styles/img/logo", to: "styles/img/logo"}
+            // {from: yueworld + "/webapp/styles/img/logo", to: "styles/img/logo"}
         ])
     ], module: {
         rules: [

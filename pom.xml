@@ -12,6 +12,6 @@
 
     <groupId>com.yueworld</groupId>
     <artifactId>static</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
 </project>
