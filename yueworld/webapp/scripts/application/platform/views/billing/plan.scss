@@ -1,0 +1,26 @@
+.ys-platform-billing-plan-fee{
+  width: 100%;
+  > tbody{
+    > tr >th,
+    > tr >td{border: solid 1px #eff1f4;/*height: 36px;line-height: 35px;*/text-align: center}
+    > tr {
+      > th{background: #f8fafa;color: #7e8c9e;/*padding: 8px 15px 7px 15px;*/font-weight: normal;vertical-align:middle!important;padding-top: 5px;padding-bottom: 5px;}
+      > td{
+        padding:0px;
+        > .ys-platform-input{height:35px;border:none;}
+        input{padding:0 15px 0 15px;}
+      }
+      > th:first-child,> td:first-child{border-left:none}
+      > th:last-child,> td:last-child{border-right:none}
+    }
+    > tr:first-child th{border-top:none;}
+    > tr:last-child td{border-bottom:none;}
+  }
+  &.algorithm{
+      cursor: pointer;
+      border-bottom:2px solid #f8fafa;
+      th{font-weight: bold}
+      tr:hover{font-weight: bold;/*font-size: 16px;*/}
+      tr td{    padding: 8px 0px 7px 0px;}
+  }
+}

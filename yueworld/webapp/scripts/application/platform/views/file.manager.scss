@@ -1,0 +1,10 @@
+// 文件
+.ys-platform-dialog-file-manager{
+    .body{max-height: 380px;overflow-y: scroll;overflow-x: hidden;padding: 0px!important;}
+    button.uploader{height: 50px;line-height: 50px;padding:0!important;}
+    .list{border:1px solid #ddd;margin-top: 10px;margin-bottom: 15px}
+    .list .col-xs-2,
+    .list .col-xs-3,
+    .list .col-xs-4{height: 36px;line-height: 36px}
+    .list .drop{cursor: pointer}
+}

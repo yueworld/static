@@ -1,0 +1,427 @@
+<div class="col-xs-12 ys-platform-p0 ys-platform-pt20 ys-platform-grid">
+
+    <!-- 项目及商家信息 -->
+    <table class="col-xs-12 ys-platform-no-select ys-platform-mb15" ng-class="{'up':s1}">
+        <colgroup>
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="15%">
+        </colgroup>
+        <tr>
+            <td colspan="8" class="title">
+                <h3>项目及商家信息</h3>
+                <div class="ys-platform-pointer pull-right ys-platform-pr5" ng-click="s1=!s1">
+                    <i ys-platform-icon="{name:'down-1',height:34,width:30}" style="float: right"></i>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>申报项目</th>
+            <td colspan="3">
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-error="{model:input,code:9001}"
+                     ys-platform-dropdown-project="{model:input,set:{id:'projectId'},placeholder:'-- 请选择项目 --'}"></div>
+            </td>
+            <th>合同名称</th>
+            <td colspan="3">
+                <input ys-platform-edit="{model:input,require:true}" class="ys-platform-input" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <th>租户</th>
+            <td colspan="3"></td>
+            <th>品牌</th>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <th>签约业态</th>
+            <td colspan="3">
+                <input class="ys-platform-input" ys-platform-edit="{model:{isEdit:false}}" type="text" placeholder="-- 自动带出 --"/>
+            </td>
+            <th>经营状态</th>
+            <td colspan="3">
+                <input class="ys-platform-input" ys-platform-edit="{model:{isEdit:false}}" type="text" placeholder="-- 自动带出 --"/>
+            </td>
+        </tr>
+        <tr>
+            <th>计税类型</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:[{text:'含税',id:1001},{text:'不含税',id:1002}]}"/>
+            </td>
+            <th>统收类型</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:[{text:'统收',id:1001},{text:'非统收',id:1002}]}"/>
+            </td>
+            <th>合同属性</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:[{text:'对内',id:1001},{text:'对外',id:1002}]}"/>
+            </td>
+            <th>合同签署</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:[{text:'两方',id:1001},{text:'三方',id:1002}]}"/>
+            </td>
+        </tr>
+    </table>
+
+    <!-- 商务基本信息 -->
+    <table class="col-xs-12 ys-platform-no-select ys-platform-mb15" ng-class="{'up':s2}">
+        <colgroup>
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="15%">
+        </colgroup>
+        <tr>
+            <td colspan="8" class="title">
+                <h3>商务基本信息</h3>
+                <div class="ys-platform-pointer pull-right ys-platform-pr5" ng-click="s2=!s2">
+                    <i ys-platform-icon="{name:'down-1',height:34,width:30}" style="float: right"></i>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="1">租赁区域</th>
+            <td colspan="3"></td>
+            <th>分铺计租</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:[{text:'不分铺',id:1001},{text:'按铺位分铺',id:1002},{text:'按置换分铺',id:1003}]}"/>
+            </td>
+            <th>计租面积</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:[{text:'建筑面积',id:1001},{text:'使用面积',id:1002}]}"/>
+            </td>
+        </tr>
+        <tr>
+            <th>规划业态</th>
+            <td colspan="3"></td>
+            <th>建筑面积</th>
+            <td></td>
+            <th>使用面积</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>交付日</th>
+            <td class="ys-platform-icon-date" ng-click="deliveryDate=true">
+                <input ng-readonly type="text" class="ys-platform-input ys-platform-readonly" ng-model="$ctrl.input.deliveryDate.value"
+                       current-text="今天" clear-text="清空" close-text="关闭" readonly
+                       is-open="deliveryDate"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="$ctrl.input.deliveryDate.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+            <th>开业日</th>
+            <td class="ys-platform-icon-date" ng-click="openingDate=true">
+                <input type="text" class="ys-platform-input ys-platform-readonly" ng-model="$ctrl.input.openingDate.value"
+                       current-text="今天" clear-text="清空" close-text="关闭" readonly
+                       is-open="openingDate"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="$ctrl.input.openingDate.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+            <th>装修进场日</th>
+            <td class="ys-platform-icon-date" ng-click="decorateStartDate=true">
+                <input type="text" class="ys-platform-input ys-platform-readonly" ng-model="$ctrl.input.decorateStartDate.value"
+                       current-text="今天" clear-text="清空" close-text="关闭" readonly
+                       is-open="decorateStartDate"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="$ctrl.input.decorateStartDate.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+            <th>装修结束日</th>
+            <td class="ys-platform-icon-date" ng-click="decorateEndDate=true">
+                <input type="text" class="ys-platform-input ys-platform-readonly" ng-model="$ctrl.input.decorateEndDate.value"
+                       current-text="今天" clear-text="清空" close-text="关闭" readonly
+                       is-open="decorateEndDate"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="$ctrl.input.decorateEndDate.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+        </tr>
+        <tr>
+            <th>合同开始日</th>
+            <td class="ys-platform-icon-date" ng-click="startDate=true">
+                <input type="text" class="ys-platform-input ys-platform-readonly" ng-model="$ctrl.input.startDate.value"
+                       current-text="今天" clear-text="清空" close-text="关闭" readonly
+                       is-open="startDate"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="$ctrl.input.startDate.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+            <th>合同结束日</th>
+            <td class="ys-platform-icon-date" ng-click="endDate=true">
+                <input type="text" class="ys-platform-input ys-platform-readonly" ng-model="$ctrl.input.endDate.value"
+                       current-text="今天" clear-text="清空" close-text="关闭" readonly
+                       is-open="endDate"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="$ctrl.input.endDate.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+            <th>装修期</th>
+            <td colspan="3">
+                <input class="ys-platform-input" ys-platform-edit="{model:{isEdit:false}}" type="text" placeholder="-- 自动带出 --"/>
+            </td>
+        </tr>
+        <tr>
+            <th>租期</th>
+            <td colspan="3">
+                <input class="ys-platform-input" ys-platform-edit="{model:{isEdit:false}}" type="text" placeholder="-- 自动带出 --"/>
+            </td>
+            <th>计租起始日</th>
+            <td class="ys-platform-icon-date" ng-click="meterRentBeginDate=true">
+                <input type="text" class="ys-platform-input ys-platform-readonly" ng-model="$ctrl.input.meterRentBeginDate.value"
+                       current-text="今天" clear-text="清空" close-text="关闭" readonly
+                       is-open="meterRentBeginDate"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="$ctrl.input.meterRentBeginDate.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+            <th>计费起始日</th>
+            <td class="ys-platform-icon-date" ng-click="meterFeeBeginDate=true">
+                <input type="text" class="ys-platform-input ys-platform-readonly" ng-model="$ctrl.input.meterFeeBeginDate.value"
+                       current-text="今天" clear-text="清空" close-text="关闭" readonly
+                       is-open="meterFeeBeginDate"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="$ctrl.input.meterFeeBeginDate.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+        </tr>
+        <tr>
+            <th>平面图</th>
+            <td colspan="7" class="ys-platform-pl12">
+                <a class="text-primary" href="javascript:void(0)" ys-platform-uploader="logos">上传文件</a>
+                可上传小于5M的常用图片格式文件
+            </td>
+        </tr>
+    </table>
+
+    <!-- 免租期 -->
+    <table class="col-xs-12 ys-platform-no-select ys-platform-mb15 text-center" ng-class="{'up':s3}">
+        <colgroup>
+            <col width="10%"/>
+            <col width="14%"/>
+            <col/>
+            <col width="16%"/>
+            <col width="16%"/>
+            <col width="7%"/>
+            <col width="6%"/>
+        </colgroup>
+        <tr>
+            <td colspan="8" class="title">
+                <h3>免租期</h3>
+                <div class="ys-platform-pointer pull-right ys-platform-pr5" ng-click="s3=!s3">
+                    <i ys-platform-icon="{name:'down-1',height:34,width:30}" style="float: right"></i>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>分铺</th>
+            <th>租赁期、免租标准</th>
+            <th>免租范围</th>
+            <th>免租期起</th>
+            <th>免租期止</th>
+            <th>天数</th>
+            <th>操作</th>
+        </tr>
+        <tbody ng-repeat="rule in $ctrl.input.free.rules">
+        <tr ng-repeat="cycle in rule.cycles">
+            <td rowspan="{{rule.cycles.length}}" ng-if="$index==0">A1002</td>
+            <td>第一期、13天</td>
+            <td>租金</td>
+            <td class="ys-platform-icon-date" ng-click="cycle._applyStart=true">
+                <input type="text" class="ys-platform-input ys-platform-readonly" ng-model="cycle.applyStart.value"
+                       current-text="今天" clear-text="清空" close-text="关闭"
+                       is-open="cycle._applyStart"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="cycle.applyStart.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+            <td class="ys-platform-icon-date" ng-click="cycle._applyEnd=true">
+                <input type="text" class="ys-platform-input ys-platform-readonly" ng-model="cycle.applyEnd.value"
+                       current-text="今天" clear-text="清空" close-text="关闭"
+                       is-open="cycle._applyEnd"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="cycle.applyEnd.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+            <td><span class="text-danger">365</span> 天</td>
+            <td>
+                <i class="ys-platform-text-primary ys-platform-pointer" ng-if="$index==0"
+                   ys-platform-icon="{name:'add-1',width:20,height:24}" ng-click="rule.cycles.push({})"></i>
+                <i class="ys-platform-text-primary ys-platform-pointer" ng-if="$index!=0"
+                   ys-platform-icon="{name:'subtract-1',width:18,height:24}" ng-click="rule.cycles.remove(cycle)"></i>
+            </td>
+        </tr>
+        </tbody>
+        <tr ng-if="!$ctrl.input.free.rules.length">
+            <td colspan="7" class="ys-platform-no-data">
+                <i ys-platform-icon="{name:'no-data-1',width:16,height:100}"></i>
+                请先完善商务基本信息！
+            </td>
+        </tr>
+    </table>
+
+    <!-- 费项 -->
+    <table class="col-xs-12 ys-platform-no-select" ng-class="{'up':s4}" ng-repeat="fee in $ctrl.input.fees">
+        <colgroup>
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="15%">
+        </colgroup>
+        <tr>
+            <td colspan="8" class="title">
+                <h3>租金</h3>
+                <div class="ys-platform-pointer pull-right ys-platform-pr5" ng-click="s4=!s4">
+                    <i ys-platform-icon="{name:'down-1',height:34,width:30}" style="float: right"></i>
+                </div>
+            </td>
+        </tr>
+        <!--<tr>
+            <th class="ys-platform-pl15 ys-platform-fwb ys-platform-text-black" colspan="8">品牌资料</th>
+        </tr>-->
+        <tr>
+            <th>计租方式</th>
+            <td colspan="3">
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:'BILLING_ALGORITHMS_TYPES'}"/>
+            </td>
+            <th>账期模式</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:'BILLING_COLLECT_TYPES'}"/>
+            </td>
+            <th>单价</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:'BILLING_PAYMENT_UNIT_TYPES'}"/>
+            </td>
+        </tr>
+        <tr>
+            <th tooltip-placement="right"
+                tooltip-append-to-body="true" class="ys-platform-pointer"
+                uib-tooltip-html="'<div class=ys-platform-p8>只针对提成计租方式有效</div>'">销售额 <br/>计租方式
+            </th>
+            <td>
+                <div ys-platform-dropdown-static="{dictionary:'BILLING_SALES_CALC_TYPES'}"/>
+            </td>
+            <th>销售额<br/>税率(%)</th>
+            <td>
+                <input class="ys-platform-input" placeholder="-- 请填写 --"/>
+            </td>
+            <th>固定<br/>支付周期</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:'BILLING_PAYMENT_CYCLE_TYPES'}"/>
+            </td>
+            <th>提成<br/>支付周期</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:'BILLING_PAYMENT_CYCLE_TYPES'}"/>
+            </td>
+        </tr>
+        <tr>
+            <th>最迟缴费日</th>
+            <td>
+                <div ys-platform-edit="{model:input,require:true}"
+                     ys-platform-dropdown-static="{dictionary:'BILLING_LATEST_PAYMENT_DATE_TYPES'}"/>
+            </td>
+            <th>首期缴费日</th>
+            <td class="ys-platform-icon-date" ng-click="fee._latestPaymentDate=true">
+                <input type="text" class="ys-platform-input ys-platform-readonly" ng-model="fee.latestPaymentDate.value"
+                       current-text="今天" clear-text="清空" close-text="关闭" readonly
+                       is-open="fee._latestPaymentDate"
+                       datepicker-append-to-body="true"
+                       uib-datepicker-popup="yyyy-MM-dd" datepicker-options="fee.latestPaymentDate.options"
+                       ys-platform-edit="{model:input,require:true}"
+                       ys-platform-error="{model:input,code:9009}" placeholder="-- 请选择 --"/>
+            </td>
+            <th>税率</th>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <th>票据类型</th>
+            <td colspan="7">
+                <div ys-platform-dropdown-static="{dictionary:'BILLING_INVOICE_TYPES'}"/>
+            </td>
+        </tr>
+        <tr>
+            <th>折扣原因</th>
+            <td colspan="3">
+                <input type="text" class="ys-platform-input" placeholder="-- 请填写 --"/>
+            </td>
+            <th>补充说明</th>
+            <td colspan="3">
+                <input type="text" class="ys-platform-input" placeholder="-- 请填写 --"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="8" style="padding:8px;">
+                <table class="ys-platform-billing-plan-fee" style="border:1px solid #eee;background: #fff;box-shadow: 2px 2px 5px #eee;">
+                    <colgroup>
+                        <col width="7%">
+                        <col width="8%">
+                        <col width="">
+                        <col width="5%">
+                        <col width="4%">
+                        <col width="58%">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th>分铺<br/>计租</th>
+                        <th class="ys-platform-pointer" tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip-html="'<div class=ys-platform-p10>预览账单！</div>'">分期<br/>单价</th>
+                        <th>租赁<br/>期间</th>
+                        <!--<th>天数</th>-->
+                        <th>租金<br>方式</th>
+                        <th>租金<br/>税率</th>
+                        <th>
+                            <div class="pull-right ys-platform-text-primary ys-platform-pointer" style="height: 40px;display: block">
+                                <i ys-platform-icon="{name:'zhangdan-1',width:22,height:40}" class="ys-platform-mr5"
+                                   tooltip-placement="left" tooltip-append-to-body="true" uib-tooltip-html="'<div class=ys-platform-p10>预览账单！</div>'"></i>
+                                <i ys-platform-icon="{name:'edit-1',width:21,height:40}" class="ys-platform-mr15"
+                                   tooltip-placement="left" tooltip-append-to-body="true" uib-tooltip-html="'<div class=ys-platform-p10>编辑申请条件！</div>'"></i>
+                            </div>
+                            申请<br/>条件
+                        </th>
+                    </tr>
+                    <tbody ys-platform-billing-plan-rule/>
+                </table>
+            </td>
+        </tr>
+
+    </table>
+
+    <div class="col-xs-12 ys-platform-p20 text-center">
+        <i ys-platform-icon="{name:'add-1',height:25,width:25}" class="ys-platform-text-primary ys-platform-pointer"
+           tooltip-placement="top" uib-tooltip-html="'<div class=ys-platform-p10>添加费项！</div>'"></i>
+    </div>
+
+</div>

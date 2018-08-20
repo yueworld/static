@@ -1,0 +1,43 @@
+<div class="ys-platform-dialog-file-manager">
+    <div class="col-xs-12 header">
+        <h4>附件管理</h4>
+        <icon class="close" name="close-1" width="16px" height="56px" ng-click="close()"></icon>
+    </div>
+    <div class="col-xs-12 body">
+        <div class="col-xs-12 ys-platform-p20">
+            <button type="button" class="col-xs-4 col-xs-offset-4 btn ys-platform-btn-primary uploader"
+                    ys-platform-uploader="attachments">
+                <icon name="add-2" width="16px" height="49px"></icon>
+                上传附件
+            </button>
+        </div>
+        <div class="col-xs-12">
+            <div class="alert-info text-center" style="padding: 8px;margin-bottom: 15px">
+                可上传小于 {{attachments.maxSize/1024}}M 的常用文件
+            </div>
+        </div>
+        <div class="col-xs-12" ng-if="option.files.length">
+            <!--<div class="col-xs-12 ys-platform-p0"><b>附件列表</b></div>-->
+            <div class="col-xs-12 ys-platform-p0 list">
+                <div class="col-xs-12 ys-platform-p0" ng-repeat="file in option.files">
+                    <div class="col-xs-4 ys-platform-text-ellipsis">
+                        <i ys-platform-icon="{name:'kouzhen-1',width:16,height:36}"></i>
+                        <a ng-href="{{$app.url.getStaticUrl(file.path)}}" target="_blank">{{file.originalName}}</a>
+                    </div>
+                    <div class="col-xs-3 text-center">
+                        {{file.realname}}
+                    </div>
+                    <div class="col-xs-3 ys-platform-p0 text-center">
+                        {{file.createdDate|date:'yyyy-MM-dd HH:mm:ss'}}
+                    </div>
+                    <div class="col-xs-2 text-center text-danger drop"
+                         ng-click="drop(file)">删除
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 footer">
+        <button class="btn ys-platform-btn-default" ng-click="submit()">关闭</button>
+    </div>
+</div>

@@ -1,0 +1,257 @@
+<tr>
+    <td rowspan="{{::rule.sectionsMergeSize}}" ng-if="::ruleIndex==0&&sectionIndex==0&&cycleIndex==0">
+        A1002<br>
+        4274 m<sup>2</sup><br/>
+    </td>
+    <td rowspan="{{::section.cycles.length}}" ng-if="::cycleIndex==0">第一期<br/>12.52</td>
+    <td>
+        <small>{{::cycle.start}} 至 {{::cycle.end}}</small>
+        <br/>合计：<span class="text-danger" ng-bind="::cycle.gapDay"></span> 天
+    </td>
+    <td class="text-danger"><!--固定- -->
+        <span ng-if="::cycle.algorithmId==1001">固定</span>
+        <span ng-if="::cycle.algorithmId==1002">固定<br/>提成</span>
+        <span ng-if="::cycle.algorithmId==1003">阶梯<br/>提成</span>
+        <span ng-if="::cycle.algorithmId==1004">两者<br/>取高<br/>固定<br/>提成</span>
+        <span ng-if="::cycle.algorithmId==1005">两者<br/>取高<br/>阶梯<br/>提成</span>
+        <span ng-if="::cycle.algorithmId==1006">多费项<br/>两者取<br/>高固定<br/>提成</span>
+        <span ng-if="::cycle.algorithmId==1007">多费项<br/>两者取<br/>高阶梯<br/>提成</span>
+        <span ng-if="::cycle.algorithmId==1008">固定<br/>+<br/>提成</span>
+        <span ng-if="::cycle.algorithmId==1009">一次<br/>性</span>
+    </td>
+    <td>{{::cycle.taxRate.value}}%</td>
+    <td style="padding:0px!important;">
+
+        <!-- 1001 固定-->
+        <table class="ys-platform-billing-plan-fee algorithm" ng-if="::cycle.algorithmId==1001">
+            <colgroup>
+                <col width="13%">
+                <col width="10%">
+                <col width="14%">
+                <col/>
+                <col width="10%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th>申请<br/>月单价</th>
+                <th>达成率</th>
+                <th>每月<br/>总额</th>
+                <th>每月不<br/>含税总额</th>
+                <th>每月<br/>税额</th>
+            </tr>
+            <tr>
+                <td class="text-danger">13.54</td>
+                <td>113%</td>
+                <td>30242</td>
+                <td>30000</td>
+                <td>3242</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 1002 固定提成-->
+        <table class="ys-platform-billing-plan-fee algorithm" ng-if="::cycle.algorithmId==1002">
+            <colgroup>
+                <!--品类/申请扣率-->
+                <col/>
+                <col width="10%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th>品类</th>
+                <th>申请<br/>扣率</th>
+            </tr>
+            <tr>
+                <td>餐饮</td>
+                <td class="text-danger">10%</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 1003 阶梯提成 -->
+        <table class="ys-platform-billing-plan-fee algorithm" ng-if="::cycle.algorithmId==1003">
+            <colgroup>
+                <col width="70.7%">
+                <col>
+                <col width="10%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th>品类</th>
+                <th>营业额<br/>起止区间</th>
+                <th>申请<br/>扣率</th>
+            </tr>
+            <tr>
+                <td>餐饮</td>
+                <td>5.22<sup>万</sup> - 10.43<sup>万</sup></td>
+                <td class="text-danger">10%</td>
+            </tr>
+            <tr>
+                <td rowspan="2">服装</td>
+                <td>5.22<sup>万</sup> - 10.43<sup>万</sup></td>
+                <td class="text-danger">8%</td>
+            </tr>
+            <tr>
+                <td>5.22<sup>万</sup> - 10.43<sup>万</sup></td>
+                <td class="text-danger">6%</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 1004|1006 两者取高固定提成/多费项两者取高固定提成 -->
+        <table class="ys-platform-billing-plan-fee algorithm" ng-if="::cycle.algorithmId==1004||cycle.algorithmId==1006">
+            <colgroup>
+                <col width="13%">
+                <col width="10%">
+                <col width="14%">
+                <col width="14%">
+                <col width="10%">
+                <col>
+                <col width="10%">
+                <col width="10%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th>申请<br/>月单价</th>
+                <th>达成率</th>
+                <th>每月<br/>总额</th>
+                <th>每月不<br/>含税总额</th>
+                <th>每月<br/>税额</th>
+                <th>品类</th>
+                <th>申请<br/>扣率</th>
+            </tr>
+            <tr>
+                <td class="text-danger" rowspan="3">13.54</td>
+                <td rowspan="2">113%</td>
+                <td rowspan="2">30,242.32</td>
+                <td rowspan="2">30000</td>
+                <td rowspan="2">242</td>
+                <td>餐饮</td>
+                <td class="text-danger">10%</td>
+            </tr>
+            <tr>
+                <td>服装</td>
+                <td class="text-danger">8%</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 1005|1007 两者取高阶梯提成/多费项两者取高阶梯提成 -->
+        <table class="ys-platform-billing-plan-fee algorithm" ng-if="::cycle.algorithmId==1005||cycle.algorithmId==1007">
+            <colgroup>
+                <col width="13%">
+                <col width="10%">
+                <col width="14%">
+                <col width="14%">
+                <col width="10%">
+                <col width="10%">
+                <col>
+                <col width="10%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th>申请<br/>月单价</th>
+                <th>达成率</th>
+                <th>每月<br/>总额</th>
+                <th>每月不<br/>含税总额</th>
+                <th>每月<br/>税额</th>
+                <th>品类</th>
+                <th>营业额<br/>起止区间</th>
+                <th>申请<br/>扣率</th>
+            </tr>
+            <tr>
+                <td class="text-danger" rowspan="3">13.54</td>
+                <td rowspan="3">113%</td>
+                <td rowspan="3">30,242.32</td>
+                <td rowspan="3">30000</td>
+                <td rowspan="3">242</td>
+                <td>餐饮</td>
+                <td>3.52<sup>万</sup> - 5.32<sup>万</sup></td>
+                <td class="text-danger">10%</td>
+            </tr>
+            <tr>
+                <td rowspan="2">服装</td>
+                <td>5.21<sup>万</sup> - 10<sup>万</sup></td>
+                <td class="text-danger">8%</td>
+            </tr>
+            <tr>
+                <td>10.32<sup>万</sup> - 20.32<sup>万</sup></td>
+                <td class="text-danger">8%</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 1008 固定+提成  -->
+        <table class="ys-platform-billing-plan-fee algorithm" ng-if="::cycle.algorithmId==1008">
+            <colgroup>
+                <col width="13%">
+                <col width="10%">
+                <col width="14%">
+                <col width="14%">
+                <col width="10%">
+                <col width="10%">
+                <col>
+                <col width="10%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th>申请<br/>月单价</th>
+                <th>达成率</th>
+                <th>每月<br/>总额</th>
+                <th>每月不<br/>含税总额</th>
+                <th>每月<br/>税额</th>
+                <th>品类</th>
+                <th>提成<br/>起计营业额</th>
+                <th>申请<br/>扣率</th>
+            </tr>
+            <tr>
+                <td class="text-danger" rowspan="3">13.54</td>
+                <td rowspan="3">113%</td>
+                <td rowspan="3">30,242.32</td>
+                <td rowspan="3">30000</td>
+                <td rowspan="3">242</td>
+                <td>餐饮</td>
+                <td>3.54<sup>万</sup></td>
+                <td class="text-danger">10%</td>
+            </tr>
+            <tr>
+                <td rowspan="2">服装</td>
+                <td>8.54<sup>万</sup></td>
+                <td class="text-danger">8%</td>
+            </tr>
+            <tr>
+                <td>10<sup>万</sup></td>
+                <td class="text-danger">8%</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 1009  一次性  -->
+        <table class="ys-platform-billing-plan-fee algorithm" ng-if="::cycle.algorithmId==1009">
+            <colgroup>
+                <col width="13%">
+                <col width="10%">
+                <col width="14%">
+                <col/>
+                <col width="10%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th>申请<br/>租金</th>
+                <th>达成率</th>
+                <th>每月<br/>总额</th>
+                <th>每月不<br/>含税总额</th>
+                <th>每月<br/>税额</th>
+            </tr>
+            <tr>
+                <td class="text-danger">13.54</td>
+                <td>113%</td>
+                <td>30,242.32</td>
+                <td>30000</td>
+                <td>242</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </td>
+</tr>
