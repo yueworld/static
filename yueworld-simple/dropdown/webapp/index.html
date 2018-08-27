@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        .simple {
+            border: 1px solid #ddd;
+            background: #fafafa;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h2 class="text-center">下拉控件</h2>
+    <div style="margin: auto;width:1224px;min-height: 1300px" ng-controller="MainController">
+        <div class="col-xs-12 ys-platform-p20 ys-platform-mt10 simple">
+            <div class="col-xs-12 ys-platform-p0 ys-platform-pb5">
+                动态内容、handler
+            </div>
+            <div class="col-xs-12 ys-platform-p0">
+                <div class="col-xs-6 ys-platform-p0">
+                    <input type="text" ng-model="input.companyId" class="ys-platform-input" placeholder="默认样式"/>
+                    <div ys-platform-dropdown-dynamic="{model:input,set:{id:'companyId'},handler:quickSearchCompany,search:true}"></div>
+                </div>
+                <div class="col-xs-6 ys-platform-p0 ys-platform-pl15">
+                    <input type="text" ng-model="input.companyId" class="ys-platform-input" placeholder="搜索栏样式"/>
+                    <div ys-platform-dropdown-dynamic="{model:input,set:{id:'companyId'},handler:quickSearchCompany,search:true,theme:'caret',width:'100%'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 ys-platform-p20 ys-platform-mt10 simple">
+            <div class="col-xs-12 ys-platform-p0 ys-platform-pb5">
+                静态内容
+            </div>
+            <div class="col-xs-12 ys-platform-p0">
+                <div class="col-xs-6 ys-platform-p0">
+                    <input type="text" ng-model="input.peopleId" class="ys-platform-input" placeholder="默认样式"/>
+                    <div ys-platform-dropdown-static="{model:input,dictionary:[{id:1,text:'刘德华'},{id:2,text:'周润发'}],set:{id:'peopleId'}}"></div>
+                </div>
+                <div class="col-xs-6 ys-platform-p0 ys-platform-pl15">
+                    <input type="text" ng-model="input.peopleId" class="ys-platform-input" placeholder="搜索栏样式"/>
+                    <div ys-platform-dropdown-static="{model:input,dictionary:[{id:1,text:'刘德华'},{id:2,text:'周润发'}],set:{id:'peopleId'},theme:'caret',width:'100%'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 ys-platform-p20 ys-platform-mt10 simple">
+            <div class="col-xs-12 ys-platform-p0 ys-platform-pb5">
+                静态多选
+            </div>
+            <div class="col-xs-12 ys-platform-p0">
+                <div class="col-xs-6 ys-platform-p0">
+                    <input type="text" ng-model="input.peopleIds" class="ys-platform-input" placeholder="默认样式"/>
+                    <div ys-platform-dropdown-static="{model:input,dictionary:[{id:1,text:'刘德华'},{id:2,text:'周润发'}],set:{id:'peopleIds'},multi:true}"></div>
+                </div>
+                <div class="col-xs-6 ys-platform-p0 ys-platform-pl15">
+                    <input type="text" ng-model="input.peopleIds" class="ys-platform-input" placeholder="搜索栏样式"/>
+                    <div ys-platform-dropdown-static="{model:input,dictionary:[{id:1,text:'刘德华'},{id:2,text:'周润发'}],set:{id:'peopleIds'},theme:'caret',width:'100%',multi:true}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 ys-platform-p20 ys-platform-mt10 simple">
+            <div class="col-xs-12 ys-platform-p0 ys-platform-pb5">
+                树
+            </div>
+            <div class="col-xs-12 ys-platform-p0">
+                <div class="col-xs-6 ys-platform-p0">
+                    <input type="text" ng-model="input.layoutId" class="ys-platform-input" placeholder="默认样式"/>
+                    <div ys-platform-dropdown-tree="{dictionary:'LAYOUTS',model:input,set:{id:'layoutId'},placeholder:'业态',search:true}"></div>
+                </div>
+                <div class="col-xs-6 ys-platform-p0 ys-platform-pl15">
+                    <input type="text" ng-model="input.projectId" class="ys-platform-input" placeholder="搜索栏样式"/>
+                    <div ys-platform-dropdown-tree="{dictionary:'LAYOUTS',model:input,set:{id:'layoutId'},theme:'caret',width:'100%',placeholder:'业态',search:true}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 ys-platform-p20 ys-platform-mt10 simple">
+            <div class="col-xs-12 ys-platform-p0 ys-platform-pb5">
+                项目
+            </div>
+            <div class="col-xs-12 ys-platform-p0">
+                <div class="col-xs-6 ys-platform-p0">
+                    <input type="text" ng-model="input.projectId" class="ys-platform-input" placeholder="默认样式"/>
+                    <div ys-platform-dropdown-project="{model:input,set:{id:'projectId'}}"></div>
+                </div>
+                <div class="col-xs-6 ys-platform-p0 ys-platform-pl15">
+                    <input type="text" ng-model="input.projectId" class="ys-platform-input" placeholder="搜索栏样式"/>
+                    <div ys-platform-dropdown-project="{model:input,set:{id:'projectId'},theme:'caret',width:'100%',placeholder:'业态',search:true}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 ys-platform-p20 ys-platform-mt10 simple">
+            <div class="col-xs-12 ys-platform-p0 ys-platform-pb5">
+                空间单选
+            </div>
+            <div class="col-xs-12 ys-platform-p0">
+                <div class="col-xs-6 ys-platform-p0">
+                    <input type="text" ng-model="input.tenantId" class="ys-platform-input" placeholder="默认样式"/>
+                    <div ys-platform-dropdown-space="{model:input,set:{id:'tenantId'},filter:{projectId:1001}}"></div>
+                </div>
+                <div class="col-xs-6 ys-platform-p0 ys-platform-pl15">
+                    <input type="text" ng-model="input.tenantId" class="ys-platform-input" placeholder="搜索栏样式"/>
+                    <div ys-platform-dropdown-space="{model:input,set:{id:'tenantId'},filter:{projectId:1001},theme:'caret',width:'100%',placeholder:'业态',search:true}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 ys-platform-p20 ys-platform-mt10 simple">
+            <div class="col-xs-12 ys-platform-p0 ys-platform-pb5">
+                空间多选
+            </div>
+            <div class="col-xs-12 ys-platform-p0">
+                <div class="col-xs-6 ys-platform-p0">
+                    <input type="text" ng-model="input.tenantIds" class="ys-platform-input" placeholder="默认样式"/>
+                    <div ys-platform-dropdown-space="{model:input,set:{id:'tenantIds'},filter:{projectId:1001},multi:true}"></div>
+                </div>
+                <div class="col-xs-6 ys-platform-p0 ys-platform-pl15">
+                    <input type="text" ng-model="input.tenantIds" class="ys-platform-input" placeholder="搜索栏样式"/>
+                    <div ys-platform-dropdown-space="{model:input,set:{id:'tenantIds'},filter:{projectId:1001},multi:true,theme:'caret',width:'100%',placeholder:'业态',search:true}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ys-platform-loading in">
+    <div class="pre">
+        <div class="left-bar">
+            <div class="left-bar-top-bar"></div>
+            <div class="left-bar-bottom-bar"></div>
+        </div>
+        <div class="loader-spinner">
+            <div class="so"></div>
+            <div class="ul"></div>
+            <div class="te"></div>
+            <div class="ar"></div>
+            <div class="y"></div>
+        </div>
+        <div class="right-bar">
+            <div class="right-bar-top-bar"></div>
+            <div class="right-bar-bottom-bar"></div>
+        </div>
+    </div>
+    <div class="loader-text">请稍候、系统正在努力加载中。</div>
+</div>
+</body>
+</html>
