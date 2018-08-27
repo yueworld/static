@@ -21,34 +21,16 @@ svg{display: inline-block;fill: currentColor;vertical-align: top;text-align: cen
 // other
 .ys-platform-pointer{cursor: pointer}
 .ys-platform-readonly{
-    &,input{outline: none!important;background:#fff!important;}
+    &,&:focus,&.ys-platform-input:focus{outline: none!important;background-color:#fff!important;user-select: none}
 }
 
 .ys-platform-fwb{font-weight: bold!important;}
 .ys-platform-no-data {height: 100px!important;line-height: 100px!important;text-align: center;/*color: #999;*/font-size: 14px;letter-spacing: 5px;color: #333;}
-.ys-platform-no-select {-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+.ys-platform-no-select {user-select: none}
 .ys-platform-text-ellipsis{text-overflow:ellipsis;overflow:hidden;white-space: nowrap}
 .ys-platform-text-center{text-align: center!important;}
 .ys-platform-container:after,
 .ys-platform-container:before{display: table;content: " ";clear:both}
-
-// error
-button.ys-platform-error,
-input.ys-platform-error{/*border: 2px solid #E64E4D!important;*/outline: 2px solid #E64E4D!important;outline-offset:-2px;}
-div.ys-platform-error{
-    >.ys-platform-dropdown .ys-platform-dropdown-title,
-    >.ys-platform-dropdown .ys-platform-dropdown-text{outline: 2px solid #E64E4D!important;outline-offset:-2px;}
-    &.ys-platform-require .ys-platform-dropdown{
-        background:url(../img/common/icon/require.png) no-repeat right 3px top 3px;
-    }
-    .ys-platform-error-border{border: 2px solid #E64E4D!important}
-}
-
-// require
-input.ys-platform-require{background:url(../img/common/icon/require.png) no-repeat right 2px top 2px;}
-.ys-platform-require .ys-platform-dropdown{background:url(../img/common/icon/require.png) no-repeat right 3px top 3px;}
-.ys-platform-shadow{box-shadow: 0 1px 1px rgba(0,0,0,0.15)}
-.ys-platform-w100{width: 100%}
 
 // border width position radius
 .ys-platform-b{
@@ -56,6 +38,7 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
     &wl0{border-left:0px;}
     &r0{border-radius:0!important;}
 }
+
 
 // line-height
 .ys-platform-lh{
@@ -99,16 +82,51 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
     &f3{background: #f3f3f3}
 }
 
+// 缩略图
+.ys-platform-thumbnail{
+    float: left;margin-right: 12px;margin-bottom:12px;max-width: 180px;height: 80px;position: relative;
+    img{border:1px solid #eee;padding:8px;max-width: 180px;height: 80px;}
+    .drop,
+    .zoom{position: absolute;left:10px;bottom:10px;height: 22px;width:22px;border-radius: 2px;overflow: hidden;color:#E64E4D;background:#fff;text-align:center;display: none;cursor: pointer;border:1px solid #ddd}
+    .zoom{left:auto;right:10px;}
+    &:hover .drop,
+    &:hover .zoom{display: block}
+}
+
 // input
 .ys-platform-input{
     position: relative;text-overflow: ellipsis;overflow: hidden;
-    display: block;width: 100%;height: 32px;line-height:initial;padding:5px 12px;padding-right:20px;font-size: 14px;color: #555;background-color: #fff;border: 1px solid #dae1e7;transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    &:focus{/*border-color: #66afe9;*//*box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);*/
-        border-color: #32aaff!important;
-        outline:solid 1px #3aabf3!important;outline-offset: -1px;z-index: 2;
+    display: block;width: 100%;height: 32px;line-height:initial;padding:5px 12px;padding-right:20px;font-size: 14px;color: #555;background-color: #fff;border: 1px solid #dae1e7;
+    //transition: outline-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    &:focus{
+        /*border-color: #66afe9;*//*box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);*/
+        //border-color: #32aaff!important;
+        outline:1px solid #3aabf3;outline-offset: -1px;z-index: 2;
     }
     &::placeholder {color: #999;opacity: 1;}
 }
+
+// error
+button.ys-platform-error,
+input.ys-platform-error,
+input.ys-platform-error:focus,
+div.ys-platform-input.ys-platform-error{outline: 2px solid #E64E4D!important;outline-offset:-1px!important;}
+div.ys-platform-error{
+    >.ys-platform-dropdown .ys-platform-dropdown-title,
+    >.ys-platform-dropdown .ys-platform-dropdown-text{outline: 2px solid #E64E4D!important;outline-offset:-2px;}
+    &.ys-platform-require .ys-platform-dropdown{
+        background:url(../img/common/icon/require.png) no-repeat right 3px top 3px;
+    }
+    .ys-platform-error-border{border: 2px solid #E64E4D!important}
+}
+
+// require
+div.ys-platform-input.ys-platform-require,
+input.ys-platform-input.ys-platform-require{background:url(../img/common/icon/require.png) no-repeat right 2px top 2px;}
+.ys-platform-require .ys-platform-dropdown{background:url(../img/common/icon/require.png) no-repeat right 3px top 3px;}
+.ys-platform-shadow{box-shadow: 0 1px 1px rgba(0,0,0,0.15)}
+.ys-platform-w100{width: 100%}
+
 
 // icon
 .ys-platform-icon{
@@ -116,9 +134,9 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
     &-date{
        position: relative;height: 32px;cursor: pointer;
        &:after{
-           content: "";position: absolute;top:1px;right:1px;bottom:1px;display: block;width: 32px;
+           content: "";position: absolute;top:1px;right:1px;bottom:1px;display: block;width: 33px;
            background: url(../img/common/icon/calendar.png) no-repeat center center;
-           background-size: 20px 15px;border-left: 1px solid #eff1f4;z-index: 10;
+           background-size: 20px 15px;border-left: 1px solid #dae1e7;z-index: 10;pointer-events: none;
        }
     }
     &-project-bg{background: #21acff url(../img/common/icon/project_bg_icon.png) center center;background-size: contain;}
@@ -270,7 +288,7 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
             &:hover i{background-position: -20px 0;}
             &.selected i{background-position: -40px 0;}
             &.disabled i{background-position: -60px 0;}
-            &.selected.disabled{background-position: -80px 0;}
+            &.selected.disabled i{background-position: -80px 0;}
         }
         &radio{
             i{background-position: -100px 0;}
@@ -281,6 +299,8 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
         }
         &checkbox,
         &radio{display: inline-block;}
+
+        &input >.ys-platform-checkbox{padding-top: 1px}
 }
 
 // ================================================== Component ========================================================
@@ -295,8 +315,8 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
 .ys-platform-modal{
     position: fixed;z-index: 2001;top:0;left:0;right:0;bottom:0;transition: opacity 0.15s linear;
     .ys-platform-container{
-        position: relative;background: #fff;/*background-clip: padding-box;*/margin: 30px auto;float:initial!important;transform: translate(0, -25%);
-        transition: transform .3s ease-out,opacity 0.15s ease-out,width 0.15s;opacity: 0;
+        position: relative;background: #fff;/*background-clip: padding-box;*/margin: 30px auto;float:initial!important;
+        transform: translate(0, -25%);transition: transform .3s ease-out,opacity 0.15s ease-out,width 0.15s;opacity: 0;
         //border: 1px solid rgba(0, 0, 0, .2);
         box-shadow: 0 5px 15px rgba(0, 0, 0, .5);/*border-radius: 6px;*/
         /*overflow: hidden;*/
@@ -356,7 +376,7 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
                 > th{background: #f8fafa;color: #7e8c9e;padding: 8px 15px 7px 15px;line-height: initial!important;font-weight: normal;vertical-align:middle!important;}
                 > td{
                     padding:0px;
-                    > .ys-platform-input{height:35px;border:none;}
+                    > .ys-platform-input{height:32px;border:none;}
                     &.title{background-color: #f8fafa;}
                     &.title h3{
                         float: left;padding-left: 13px;font-size: 15px;margin:0;line-height: 35px;
@@ -376,10 +396,14 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
         &.up tr:nth-child(n+2) {display: none}
     }
     .ys-platform-dropdown{
+        .ys-platform-dropdown-title,
         .ys-platform-dropdown-toggle input,
-        .ys-platform-dropdown-search input{height:35px;border:none;/*padding:0px 0 0 12px !important;*/}
+        .ys-platform-dropdown-search input{/*height:35px;*/border:none;/*padding:0px 0 0 12px !important;*/}
         &.ys-platform-readonly .ys-platform-dropdown-toggle input{outline: none;background-image: none!important}
         .disabled{color: #999}
+        .ys-platform-dropdown-title{
+            > .placeholder,> .text,> .tags{line-height: 32px;}
+        }
     }
  /*   .bt6 {border-top: 6px solid #818c92}
     .lh36 {height: 36px;line-height: 36px}
@@ -410,4 +434,107 @@ input.ys-platform-require{background:url(../img/common/icon/require.png) no-repe
     .table tbody {border-top: 1px solid #ddd}
     .uib-datepicker-popup tbody {border: none}
     .uib-datepicker-popup th {background: none}*/
+}
+
+//  dropdown
+.ys-platform-dropdown {
+    position: relative;background-color: #fff;min-width: 88px;float: left;
+    // 头
+    &-title{
+        min-height: 32px;display: inline-block;width: 100%;float: left;cursor: pointer;user-select: none;position: relative;
+        border: 1px solid #dae1e7;/*transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;*/
+        >.placeholder{color: #999;line-height: 30px;padding-left: 12px;padding-right: 30px}
+        >.text{line-height: 30px;padding-left: 12px;padding-right:30px;font-size: 14px;text-overflow: ellipsis;overflow: hidden;white-space:nowrap;width: 100%;}
+        >.tags{
+            padding-top: 4px;padding-bottom:4px;padding-left: 12px;padding-right: 30px;height:initial!important;line-height: initial!important;white-space: normal;display: none;
+            >.tag{
+                background-color:$color-primary;padding: 0px 5px;border-radius: 2px;color: #fff;display: inline-block;
+                margin: 2px 4px 2px 0;user-select: none;font-size: 14px;height: 18px;line-height: 18px;
+                &:hover i{color: #C0C4CC}
+            }
+        }
+        > i{
+            background: url(../img/common/icon/select-black-down-icon.png);width:14px;height:8px;
+            display: inline-block;overflow: hidden;position: absolute;right: 11px;top: 50%;margin-top: -4px;transition: all .3s
+        }
+    }
+    &.multi{
+        .ys-platform-dropdown-title-content{line-height:initial;white-space:normal;padding-top: 4px;padding-bottom: 4px}
+        > .ys-platform-dropdown-body .ys-platform-dropdown-body-toolbar{display: block!important;}
+    }
+    // 体
+    &-body{
+        display:none;position: absolute;left: 0;top: 34px;padding: 5px 0;z-index: 1000;min-width: 100%;
+        max-height: 300px;overflow-y: auto;background-color: #fff;box-sizing: border-box;transition: top .3s;
+        border: 1px solid rgba(0, 0, 0, 0.15);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        // 提示语
+        &-tips{font-size: 14px;letter-spacing: 5px;color: #333;text-align: center;line-height: 32px;display: none;min-width: 160px;}
+        // 搜索
+        &-search{
+            padding: 0 10px;display: none;margin-bottom: 5px;
+            >.ys-platform-icon{position: absolute;z-index: 999;height: 32px;line-height: 32px;}
+            >.ys-platform-input{
+                border: none;border-bottom: 1px solid #E6E6E6;padding-left: 27px;outline: none;
+                &:focus{outline: none!important;border-bottom: 1px solid #E6E6E6!important;}
+            }
+        }
+        &-toolbar{
+            padding: 0 10px;line-height: 32px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: none;
+            > div{
+                cursor: pointer;margin-right: 15px;
+                &:hover{color: $color-primary}
+            }
+        }
+        &-loading{font-size: 14px;letter-spacing: 5px;color: #333;text-align: center;line-height: 32px;display: none}
+        &-options .option{
+            padding: 0 10px;
+            height: 32px;line-height: 32px;white-space: nowrap;overflow: hidden;
+            text-overflow: ellipsis;display: block;vertical-align: middle;cursor: pointer;box-sizing: border-box;
+            &:hover,
+            &.selected,
+            &.ys-platform-checkbox:hover{background-color: #f2f2f2}
+            &.ys-platform-checkbox{background: #fff}
+
+        }
+    }
+    &.open{
+        > .ys-platform-dropdown-title{
+            border-color: #32aaff!important;outline:solid 1px #3aabf3;outline-offset: -1px;;
+            i{transform: rotate(180deg);}
+        }
+        > .ys-platform-container > .ys-platform-dropdown-body,> .ys-platform-dropdown-body{display: block}
+        &.search{
+            .ys-platform-dropdown-body-search{display: block!important;}
+        }
+    }
+    //.ys-platform-require .ys-platform-dropdown .ys-platform-dropdown-text{border-left:none;}
+    &.theme-caret {
+        .ys-platform-dropdown-title {
+            text-align: center;
+            >.text,
+            >.placeholder{padding-right: 15px;color: #555}
+            > i{
+                position: absolute;bottom: 3px;right: 3px;width: 5px;height: 5px;display: inline-block;background: none;
+                border: none;border-right: solid 2px #999;border-bottom: solid 2px #999;z-index: 10;top:initial;
+            }
+            &:focus{border-color:#dae1e7!important;outline-color:#dae1e7!important;}
+            &:hover{
+                background-color: #32aaff!important;color: #FFF!important;border-color:#32aaff!important;color: #fff;
+                .text,
+                .placeholder{color: #FFF}
+                >i{border-color: #ffff}
+            }
+        }
+        &.open{
+            .ys-platform-dropdown-title,
+            .ys-platform-dropdown-title:focus,
+            .ys-platform-dropdown-title:hover{
+                color: #333;background-color: #d4d4d4!important;;border-color: #8c8c8c!important;box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+                outline:#8c8c8c;z-index: 2;color: #333!important;
+                >.text,
+                >.placeholder{color: #333!important;}
+            }
+        }
+    }
+    >.dropdown-menu{border-radius:0px;min-width: 80px;}
 }

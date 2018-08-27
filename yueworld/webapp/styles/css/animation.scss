@@ -30,6 +30,12 @@
 }
 .ys-platform-anim-scale {animation-name: ys-platform-scale}
 
+
+@keyframes ys-platform-modal-down {
+  from {transform: translate3d(0, -25%, 0);opacity: 0}
+  to {transform: translate3d(0, calc((100vh - 100%) /2 ), 0);opacity:1}
+}
+.ys-platform-anim-modal-down {animation-name: ys-platform-modal-down}
 // animation
 .ys-platform-anim {
   -webkit-animation-duration: .3s;

@@ -1,10 +1,10 @@
 <div class="col-xs-12 ys-platform-p0">
     <div class="ys-platform-navbar ys-platform-no-select">
         <div class="left-bar">
-            <div class="item" bindonce ng-repeat="bar in $app.defaults.topbarLeftSub" ui-sref="{{::bar.state}}" ng-class="{'active':$app.router.includes(bar.includes)}" bo-text="bar.text"></div>
+            <div class="item" ng-repeat="bar in $app.defaults.navigation.topSubbar" ng-class="{'active':$app.router.includes(bar.includes)}" ng-click="bar.click?bar.click():$app.router.go(bar.state)" ng-if="!bar.hidden">{{::bar.text}}</div>
         </div>
         <div class="right-bar">
-            <div class="item ys-platform-pointer" ng-repeat="item in $app.defaults.topbarRightSub" ng-click="item.click($event)">
+            <div class="item ys-platform-pointer" ng-repeat="item in $app.defaults.navigation.topToolbar" ng-click="item.click?item.click($event):$app.event.publish(item.command)">
                 <i ys-platform-icon="{name:item.icon,width:18,height:44}"></i> {{::item.text}}
             </div>
         </div>

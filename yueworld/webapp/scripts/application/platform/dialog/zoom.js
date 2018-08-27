@@ -5,7 +5,7 @@ module.exports = function ($app) {
 
     /**
      * 图片放大器
-     * @param option
+     * @param {url:xxx}
      */
     function zoom(option) {
         return $app.injector.invoke(["$rootScope", "$animate", "$timeout", "$compile", function ($rootScope, $animate, $timeout, $compile) {

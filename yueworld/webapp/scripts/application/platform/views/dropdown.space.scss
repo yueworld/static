@@ -1,0 +1,50 @@
+.ys-platform-dropdown-space {
+    .ys-platform-dropdown-container {
+        position: absolute;top: 100%;left: 0;z-index: 1000;float: left;display: none;font-size: 14px;background: #fff;min-width:420px;width:100%;border: 1px solid rgba(0,0,0,.15);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, .175);min-width: 580px;
+        &-header{
+          padding:20px;border-bottom:solid 1px #d8e0e7;
+          input{background: url(../../../../styles/img/common/icon/grey_search.png) no-repeat right 8px center;background-size: 17px 16px;}
+        }
+        &-footer{
+          height: auto;padding: 15px;text-align: right;border-top: 1px solid #e5e5e5;
+          .btn{margin-left: 10px;float: right}
+        }
+        .ys-platform-dropdown-title{border: 1px solid #dae1e7!important;}
+    }
+    .col-panel{
+        float: left;border-right: solid 1px #d8e0e7;padding-top: 15px!important;padding-right: 15px!important;
+        max-height: 300px;height: 300px;overflow: hidden;overflow-y: auto;
+        .title{font-size: 14px;padding-left: 10px;border-left: solid 3px #1faeff;line-height: 20px;}
+        .list{
+            padding:10px 0;clear:both;
+            li{
+                position: relative;padding-left:5px;padding-right:26px;line-height: 32px;cursor:pointer;list-style: none;
+                &:hover{background-color:#f8fafa;}
+                &.selected:after{
+                    display: block;position: absolute;top:50%;right:5px;cursor:pointer;margin-top:-7px;color:#51c637;
+                    font-family: 'Glyphicons Halflings';font-style: normal;font-weight: 400;line-height: 1;
+                    -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;content: "\e084";font-size:14px;
+                }
+            }
+            &.selected{
+                li:after{
+                    display: block;position: absolute;top:50%;right:5px;cursor:pointer;margin-top:-7px;color:#51c637;
+                    font-family: 'Glyphicons Halflings';font-style: normal;font-weight: 400;line-height: 1;
+                    -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;content: "\e014";font-size:14px;color: #d8e0e7;
+                }
+                li:hover:after{color:#E64E4D;}
+            }
+        }
+        &:last-child{border-right:none;padding-right: 0!important;}
+    }
+    &.open{
+        .ys-platform-dropdown-text{/*border:1px solid #aaa;border-bottom: none;*/background:transparent url(../../../../styles/img/common/icon/select-black-up-icon.png) no-repeat right  10px center!important;}
+        .ys-platform-dropdown-container{display: block}
+        &.search {
+        .ys-platform-dropdown-container{display: block;top:0;}
+        .ys-platform-dropdown-search{display:block;}
+        }
+    }
+
+}

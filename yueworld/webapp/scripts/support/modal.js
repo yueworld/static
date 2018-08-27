@@ -70,10 +70,9 @@ module.exports = function ($app) {
                     // 异步通知对象
                     deferred: $q.defer()
                 }, config, overwrite);
-
             function open(resolveObj) {
                 var $backdrop = $app.backdrop(),
-                    $modal = $app.$('<div class="ys-platform-modal"><div class="col-xs-12 ys-platform-p0 ys-platform-container"></div></div>'),
+                    $modal = $app.$('<div class="ys-platform-modal"><div class="col-xs-12 ys-platform-p0 ys-platform-container ys-platform-anim"></div></div>'),
                     $container = $modal.find(".ys-platform-container").css({width: option.width}).addClass(option.class ? option.class : "");
                 $scope.close = function ($callback) {
                     $animate.removeClass($container, "in").then(function () {

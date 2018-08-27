@@ -74,5 +74,7 @@
         &-line{position:absolute;bottom:0;left:0;right:0;border-bottom: 4px solid #808C92}
         &-label{text-align: right;padding:0!important;height: 32px;line-height: 32px;color:#757575}
         .ys-platform-dropdown .disabled{color: #999}
+        div.ys-platform-input{line-height: 22px;}
+        .ys-platform-icon-date:after{border-left-color: #eff1f4}
     }
 }

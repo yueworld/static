@@ -1,0 +1,48 @@
+<div class="ys-platform-dropdown ys-platform-dropdown-space">
+    <div class="ys-platform-dropdown-title">
+        <div class="placeholder"></div>
+        <div class="text"></div>
+        <div class="tags"></div>
+        <i/>
+    </div>
+    <div class="ys-platform-dropdown-container ys-platform-anim ys-platform-anim-upbit">
+        <div class="ys-platform-dropdown-container-header">
+            <input class="ys-platform-input" placeholder="请输入编号、空间、商铺、多经名称！" ng-model="defaults.filter.term"/>
+        </div>
+        <div class="ys-platform-dropdown-container-body ys-platform-pl20 ys-platform-pr20">
+            <div class="col-xs-4 ys-platform-p0 col-panel">
+                <div class="title">楼层</div>
+                <div class="ys-platform-mt10"
+                     ys-platform-dropdown-dynamic="{model:defaults.filter,set:{id:'buildingId'},watchReload:{model:defaults.filter,property:'projectId'},handler:queryBuildingHandler}"></div>
+                <div class="col-xs-12 ys-platform-no-data" ng-if="!floors.length">无可选楼层</div>
+                <ul class="list">
+                    <li ng-class="{'selected':defaults.filter.floorId==floor.id}" ng-repeat="floor in floors"
+                        ng-click="defaults.filter.floorId=floor.id">{{floor.text}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-4 ys-platform-p0 ys-platform-pl15 col-panel">
+                <div class="title">空间</div>
+                <div class="col-xs-12 ys-platform-no-data" ng-if="!spaces.length">无可选空间</div>
+                <ul class="list">
+                    <li ng-class="{'selected':space.selected}" ng-repeat="space in spaces"
+                        ng-click="select(space)">{{space.text}}
+                        <!--ng-click="space.selected=!space.selected"-->
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-4 ys-platform-p0 ys-platform-pl15 col-panel">
+                <div class="title">已选空间</div>
+                <div class="col-xs-12 ys-platform-no-data" ng-if="!selectdItems.length">尚未选择空间</div>
+                <ul class="list selected">
+                    <li ng-repeat="space in selectdItems" ng-click="drop(space)">{{space.text}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 ys-platform-dropdown-container-footer">
+            <!--<button class="btn ys-platform-btn-default" ng-click="reset()">重置</button>-->
+            <button class="btn ys-platform-btn-default" ng-click="clear()">清空</button>
+            <button class="btn ys-platform-btn-primary" ng-click="close()">确认</button>
+        </div>
+    </div>
+</div>

@@ -54,7 +54,10 @@ require("./support/import")($app);
 require("./support/defaults")($app)
 
 // 通用 异常信息拦截
-$app.register.config(["$provide", "$stateProvider", "$urlRouterProvider", "$locationProvider", "$qProvider", function ($provide, $stateProvider, $urlRouterProvider, $locationProvider, $qProvider) {
+$app.register.config(["$provide", "$stateProvider", "$urlRouterProvider", "$locationProvider", "$compileProvider", function ($provide, $stateProvider, $urlRouterProvider, $locationProvider, $compileProvider) {
+
+    $compileProvider.debugInfoEnabled(false);
+
     $provide.decorator("$exceptionHandler", ["$delegate", function ($delegate) {
         return function (exception, cause) {
             // 调用默认行为
@@ -186,6 +189,7 @@ function init($app) {
     $app.el.container.prepend("<div ng-include=\"'scripts/application/platform/views/icons.html'\"></div>");
     // 默认显示、隐藏 Loading
     $app.el.loading.css({display: $app.defaults.loading ? "block" : "none"});
+
 }
 
 /**

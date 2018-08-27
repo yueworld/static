@@ -2,14 +2,15 @@ module.exports = function ($app) {
     // 日期处理
     // ========================================== Date Helper ==========================================================
     var regex = [
-        /^\d{8}$/,                                        // 20180502                     yyyyMMdd
-        /^\d{10}$/,                                       // 1525271112                   秒值
-        /^\d{12}$/,                                       // 201805021232                 yyyyMMddHHmm
-        /^\d{13}$/,                                       // 1525271088641                毫秒值
-        /^\d{4}-\d{1,2}-\d{1,2}$/,                        // 2008-05-02                   yyyy-MM-dd
-        /^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}$/,       // 2008-05-02 02:12             yyyy-MM-dd HH:mm
-        /^\d{4}年\d{1,2}月\d{1,2}日$/,                     // 2008年05月02日                yyyy年MM月dd日
-        /^\d{4}年\d{1,2}月\d{1,2}日\s\d{1,2}时\d{1,2}分$/   // 2008年05月02日 02时12分       yyyy年MM月dd日 HH时mm分
+        /^\d{8}$/,                                          // 20180502                     yyyyMMdd
+        /^\d{10}$/,                                         // 1525271112                   秒值
+        /^\d{12}$/,                                         // 201805021232                 yyyyMMddHHmm
+        /^\d{13}$/,                                         // 1525271088641                毫秒值
+        /^\d{4}-\d{1,2}-\d{1,2}$/,                          // 2008-05-02                   yyyy-MM-dd
+        /^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}$/,         // 2008-05-02 02:12             yyyy-MM-dd HH:mm
+        /^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/, // 2008-05-02 02:12:12          yyyy-MM-dd HH:mm:ss
+        /^\d{4}年\d{1,2}月\d{1,2}日$/,                       // 2008年05月02日                yyyy年MM月dd日
+        /^\d{4}年\d{1,2}月\d{1,2}日\s\d{1,2}时\d{1,2}分$/     // 2008年05月02日 02时12分       yyyy年MM月dd日 HH时mm分
     ], toString = Object.prototype.toString;
 
     /**
@@ -19,44 +20,54 @@ module.exports = function ($app) {
      * @returns {*}
      */
     function parse(value) {
-        $app.assert.isTrue(!$app.valid.isDate(value), "参数格式错误、转换日期失败！", 1001);
-        if (toString.call(value) === '[object Date]') {
-            return value;
-        }
-        value = String(value);
-        for (var i = 0; i < regex.length; i++) {
-            if (regex[i].test(value)) {
-                if (i == 0) {
-                    // 20180502
-                    return new Date(value.substring(0, 4), parseInt(value.substring(4, 6)) - 1, value.substring(6, 8));
-                } else if (i == 1) {
-                    // 1525271112
-                    return new Date(value * 1000);
-                } else if (i == 2) {
-                    // 201805021232
-                    return new Date(value.substring(0, 4), parseInt(value.substring(4, 6)) - 1, value.substring(6, 8), value.substring(8, 10), value.substring(10, 12));
-                } else if (i == 3) {
-                    // 1525271088641
-                    return new Date(Number(value));
-                } else if (i == 4) {
-                    // 2008-05-02
-                    value = value.split("-");
-                    return new Date(value[0], parseInt(value[1]) - 1, value[2]);
-                } else if (i == 5) {
-                    // 2008-05-02 02:12
-                    var tmp1 = value.split(" ")[0].split("-"),
-                        tmp2 = value.split(" ")[1].split(":");
-                    return new Date(tmp1[0], tmp1[1], tmp1[2], tmp2[0], tmp2[1]);
-                } else if (i == 6) {
-                    // 2008年05月02
-                    return new Date(value.substring(0, 4), value.substring(5, 7), value.substring(8, 10));
-                } else if (i == 7) {
-                    // 2008年05月02日 02时12分
-                    return new Date(value.substring(0, 4), value.substring(5, 7), value.substring(8, 10), value.substring(12, 14), value.substring(15, 17));
+        try {
+            $app.assert.isTrue(!$app.valid.isDate(value), "参数格式错误、转换日期失败！", 1001);
+            if (toString.call(value) === '[object Date]') {
+                return angular.copy(value);
+            }
+            value = String(value);
+            for (var i = 0; i < regex.length; i++) {
+                if (regex[i].test(value)) {
+                    if (i == 0) {
+                        // 20180502
+                        return new Date(value.substring(0, 4), parseInt(value.substring(4, 6)) - 1, value.substring(6, 8));
+                    } else if (i == 1) {
+                        // 1525271112
+                        return new Date(value * 1000);
+                    } else if (i == 2) {
+                        // 201805021232
+                        return new Date(value.substring(0, 4), parseInt(value.substring(4, 6)) - 1, value.substring(6, 8), value.substring(8, 10), value.substring(10, 12));
+                    } else if (i == 3) {
+                        // 1525271088641
+                        return new Date(Number(value));
+                    } else if (i == 4) {
+                        // 2008-05-02
+                        value = value.split("-");
+                        return new Date(value[0], parseInt(value[1]) - 1, value[2]);
+                    } else if (i == 5) {
+                        // 2008-05-02 02:12
+                        var tmp1 = value.split(" ")[0].split("-"),
+                            tmp2 = value.split(" ")[1].split(":");
+                        return new Date(tmp1[0], tmp1[1], tmp1[2], tmp2[0], tmp2[1]);
+                    } else if (i == 6) {
+                        // 2008-05-02 02:12:12
+                        var tmp1 = value.split(" ")[0].split("-"),
+                            tmp2 = value.split(" ")[1].split(":");
+                        return new Date(tmp1[0], tmp1[1], tmp1[2], tmp2[0], tmp2[1], tmp2[2]);
+                    } else if (i == 7) {
+                        // 2008年05月02
+                        return new Date(value.substring(0, 4), value.substring(5, 7), value.substring(8, 10));
+                    } else if (i == 8) {
+                        // 2008年05月02日 02时12分
+                        return new Date(value.substring(0, 4), value.substring(5, 7), value.substring(8, 10), value.substring(12, 14), value.substring(15, 17));
+                    }
                 }
             }
+            $app.isTrue(true, "未被支持的日期格式：" + value, 1002);
+        } catch (ex) {
+            console.log(ex)
         }
-        $app.isTrue(true, "未被支持的日期格式：" + value, 1002);
+        return value;
     }
 
     /**
@@ -181,22 +192,26 @@ module.exports = function ($app) {
      * @param format   y年m个月d天
      */
     function spacingText(start, end, format) {
-        $app.assert.isTrue(!$app.valid.isDate(start), "开始日期格式错误!");
-        $app.assert.isTrue(!$app.valid.isDate(end), "结束日期格式错位!");
-        var result = compare(start, end);
-        if (!format) {
-            format = "";
-            if (result.year > 0) {
-                format = "y年";
+        if (!$app.valid.isDate(start) || !$app.valid.isDate(end)) {
+            return "0天";
+        } else {
+            // $app.assert.isTrue(!$app.valid.isDate(start), "开始日期格式错误!");
+            // $app.assert.isTrue(!$app.valid.isDate(end), "结束日期格式错位!");
+            var result = compare(start, end);
+            if (!format) {
+                format = "";
+                if (result.year > 0) {
+                    format = "y年";
+                }
+                if (result.month > 0) {
+                    format += "m个月";
+                }
+                if (result.day > 0) {
+                    format += "d天";
+                }
             }
-            if (result.month > 0) {
-                format += "m个月";
-            }
-            if (result.day > 0) {
-                format += "d天";
-            }
+            return format.replace("y", result.year).replace("m", result.month).replace("d", result.day);
         }
-        return format.replace("y", result.year).replace("m", result.month).replace("d", result.day);
     }
 
     /**

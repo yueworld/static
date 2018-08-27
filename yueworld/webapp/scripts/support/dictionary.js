@@ -19,7 +19,7 @@ module.exports = function ($app) {
 
     // 将数组换换位 {has:{},options,root:{},tree:{}} 形式、方便控件初始化 查值
     function build(options, isBuildTree, filter) {
-        var result = {all/*原始*/: [], options: options, hash: {}, root: {}, selected: []};
+        var result = {all/*原始*/: angular.copy(options), options: options, hash: {}, root: {}, selected: []};
         angular.forEach(result.options, function (option) {
             result.hash[option.id] = option;
             if (option.id == "-1") {
@@ -85,5 +85,39 @@ module.exports = function ($app) {
         })
     }
 
-    $app.dictionary = {build: build, parents: parents, path: path, init: init};
+    $app.dictionary = {
+        build: build,
+        parents: parents,
+        path: path,
+        init: init,
+        // 区域
+        AREA: build([
+            {id: "1001", text: "测试区域"}
+        ]),
+        LAYOUTS: build([{id: -1, name: "全部业态"},
+            {id: 1003, name: "中餐", parentId: -1},
+            {id: 10031, name: "粤菜", parentId: 1003},
+            {id: 10032, name: "茶餐厅", parentId: 1003},
+            {id: 10033, name: "川菜", parentId: 1003},
+            {id: 100331, name: "重庆小面", parentId: 10033}
+        ], true),
+        // 项目
+        PROJECTS: build([
+            {id: "1001", text: "测试项目", areaId: "1001"}
+        ]),
+        // 楼栋
+        BUILDINGS: build([
+            {id: "1001", text: "测试楼栋", projectId: "1001"}
+        ]),
+        // 楼层
+        FLOORS: build([
+            {id: "1001", text: "测试楼层-01", buildingId: "1001"},
+            {id: "1002", text: "测试楼层-02", buildingId: "1001"}
+        ]),
+        // 空间
+        SPACES: build([
+            {id: "1001", text: "测试空间-01", floorId: "1001", projectId: "1001"},
+            {id: "1002", text: "测试空间-02", floorId: "1001", projectId: "1001"}
+        ])
+    };
 }

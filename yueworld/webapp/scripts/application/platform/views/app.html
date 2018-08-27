@@ -1,15 +1,14 @@
 <div bindonce class="ys-platform-app" ng-class="{'unfold':ysSidebarStatus!='fold','fold':ysSidebarStatus=='fold'}">
     <div class="ys-platform-topbar">
-        <div class="logo pull-left pointer" ui-sref="operations.situation.index">
-            <!--<img ng-src="{{::$app.config.text('/ui/logo')}}" alt="{{::$app.config.text('/ui/title/full')}}"/>-->
-            <img src="../../../../styles/img/logo/default.png">
+        <div class="logo pull-left pointer">
+            <a href="/"><img src="../../../../styles/img/logo/default.png"></a>
         </div>
         <div class="fold" ng-click="toggleSidebar()">
             <i ys-platform-icon="{name:'menus-3',height:44,width:16}"></i>
         </div>
         <div class="channel pull-left">
-            <div class="item" ui-sref="{{::item.state}}" ng-repeat="item in $app.defaults.topbar"
-                 ng-class="{'active':$app.router.includes(item.includes)}" ng-bind="::item.text">
+            <div class="item" ui-sref="{{::item.state}}" ng-repeat="item in $app.defaults.navigation.topbar"
+                 ng-class="{'active':$app.router.includes(item.includes)}" ng-bind="::item.text" ng-if="!item.hidden">
             </div>
         </div>
         <div class="menus pull-right">

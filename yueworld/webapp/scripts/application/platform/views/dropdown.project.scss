@@ -1,13 +1,4 @@
 .ys-platform-dropdown-project {
-    position: relative;background: #fff;min-width: 88px;float: left;
-    .ys-platform-dropdown{
-      &-text {
-        cursor: pointer;background:transparent url(../../../../styles/img/common/icon/select-black-down-icon.png) no-repeat right  10px center!important;user-select: none;/*box-shadow:none;border:1px solid #dbdede*/transition:none;
-        width: 100%;text-align:left;height: 32px;line-height: 30px;padding-top: 0px; padding-bottom: 0px;
-        &::placeholder{color: #333!important}
-      }
-      &-container {position: absolute;top: 100%;margin-top:2px;left: 0;z-index: 1000;width: 100%;float: left;display: none;font-size: 14px;background: #fff}
-    }
     .ys-platform-dropdown-container {
         position: absolute;top: 100%;left: 0;z-index: 1000;float: left;display: none;font-size: 14px;background: #fff;min-width:420px;width:100%;border: 1px solid rgba(0,0,0,.15);
         box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
@@ -26,40 +17,21 @@
           .ys-platform-dropdown-container-result-title{margin-left:-20px;margin-right:-20px;padding-left: 20px;background:#f8faf9;color:#8b97a7}
         }
         &-result.area{width: 40%;}
-        &-result.project{width:60%;border-left:solid 1px #d8e0e7;margin-left: -1px;}
+        &-result.project{width:60%;border-left:solid 1px #d8e0e7;margin-left: -1px;min-height: 100px;}
         &-result:last-child{
           border-right:none;
         }
+        &-footer{
+          height: auto;padding: 15px;text-align: right;border-top: 1px solid #e5e5e5;
+          .btn{margin-left: 10px;float: right}
+        }
     }
-    .caret{display:none}
-    .ys-platform-require .ys-platform-dropdown .ys-platform-dropdown-text{border-left:none;}
     &.open{
         .ys-platform-dropdown-text{/*border:1px solid #aaa;border-bottom: none;*/background:transparent url(../../../../styles/img/common/icon/select-black-up-icon.png) no-repeat right  10px center!important;}
         .ys-platform-dropdown-container{display: block}
         &.search {
         .ys-platform-dropdown-container{display: block;top:0;}
         .ys-platform-dropdown-search{display:block;}
-        }
-    }
-    &.theme-caret {
-        .caret{display: inline-block;position: absolute;width: 5px;height: 5px;bottom: 3px;right: 3px;border: none;border-right: solid 2px #999;border-bottom: solid 2px #999;z-index: 10}
-        .ys-platform-dropdown-text{padding-left:20px;padding-right: 20px;}
-        .ys-platform-dropdown-text,
-        .ys-platform-dropdown-search input{background-image: none!important;text-align: center}
-        .ys-platform-dropdown-text:focus{border-color:#dae1e7!important;outline-color:#dae1e7!important;}
-        .ys-platform-dropdown-text:hover{background-color: #32aaff!important;color: #FFF!important;border-color:#32aaff!important;}
-        .ys-platform-dropdown-text:focus:hover{border-color:#32aaff!important;outline-color:#32aaff!important;}
-        .ys-platform-dropdown-text:hover::placeholder{color: #FFF!important;}
-        .ys-platform-dropdown-toggle:hover .caret{border-right: solid 2px #FFF;border-bottom: solid 2px #FFF;}
-        &.open{
-          .ys-platform-dropdown-text,
-          .ys-platform-dropdown-text:focus,
-          .ys-platform-dropdown-text:hover{
-            color: #333;background-color: #d4d4d4!important;;border-color: #8c8c8c!important;box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-            outline:#8c8c8c;z-index: 2;
-          }
-          .ys-platform-dropdown-text:hover,
-          .ys-platform-dropdown-text::placeholder{color: #333!important}
         }
     }
 }

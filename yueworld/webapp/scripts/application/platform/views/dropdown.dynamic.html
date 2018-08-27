@@ -1,10 +1,44 @@
-<div class="ys-platform-dropdown ys-platform-dropdown-dynamic" ng-class="{'search':option.search}" ng-click="$event.stopPropagation();">
-    <div class="ys-platform-dropdown-toggle">
-        <input class="ys-platform-input ys-platform-dropdown-text" type="button"
-               value="{{dictionary.hash[option.model[option.set.id]][option.textField]||option.placeholder}}"/>
-        <span class="caret"></span>
+<div class="ys-platform-dropdown ys-platform-dropdown-dynamic">
+    <div class="ys-platform-dropdown-title">
+        <div class="placeholder"></div>
+        <div class="text"></div>
+        <div class="tags"></div>
+        <i/>
     </div>
-    <div class="ys-platform-dropdown-container ys-platform-anim ys-platform-anim-upbit">
+    <div class="ys-platform-dropdown-body ys-platform-anim ys-platform-anim-upbit">
+        <div class="ys-platform-dropdown-body-toolbar">
+            <div class="pull-left all">
+                <i class="svg-container" style="width: 16px; height: 32px; display: inline-block;">
+                    <svg style="width:16px; height: 32px;">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-quanxuan-1" svg-href="quanxuan-1"></use>
+                    </svg>
+                </i> 全选
+            </div>
+            <div class="pull-left qkxz">
+                <i class="svg-container" style="width: 16px; height: 32px; display: inline-block;">
+                    <svg style="width:16px; height: 32px;">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-qkxz-1" svg-href="qkxz-1"></use>
+                    </svg>
+                </i> 清空
+            </div>
+            <div class="pull-left fx">
+                <i class="svg-container" style="width: 16px; height: 32px; display: inline-block;">
+                    <svg style="width:16px; height: 32px;">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-fanxuan-1" svg-href="fanxuan-1"></use>
+                    </svg>
+                </i> 反选
+            </div>
+        </div>
+        <div class="ys-platform-dropdown-body-search">
+            <i class="ys-platform-icon ys-platform-icon-search"></i>
+            <input class="ys-platform-input" type="text" placeholder="请搜索"/>
+        </div>
+        <div class="ys-platform-dropdown-body-loading ys-platform-anim ys-platform-anim-fadein">加载中～～～</div>
+        <div class="ys-platform-dropdown-body-tips">没有找到选项</div>
+        <div class="ys-platform-dropdown-body-options"></div>
+    </div>
+
+   <!-- <div class="ys-platform-dropdown-container ys-platform-anim ys-platform-anim-upbit">
         <div class="ys-platform-dropdown-search">
             <input class="ys-platform-input" placeholder="{{option.placeholder}}" ng-model="option.filter.term"/>
         </div>
@@ -18,7 +52,8 @@
              style="padding:10px; width: 100%">
             <span ng-if="!option.filter.term&&option.search">请输入查询关键字!</span>
             <span ng-if="(option.filter.term||!option.search)&&loading">查询中...</span>
-            <span ng-if="(option.filter.term||!option.search)&&!loading">无相关数据<!--未查询到相关数据--></span>
+            <span ng-if="(option.filter.term||!option.search)&&!loading">无相关数据&lt;!&ndash;未查询到相关数据&ndash;&gt;</span>
         </div>
-    </div>
+    </div>-->
 </div>
+

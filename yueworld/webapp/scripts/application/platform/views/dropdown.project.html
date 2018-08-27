@@ -1,18 +1,24 @@
-<div class="ys-platform-dropdown ys-platform-dropdown-project" ng-click="$event.stopPropagation();">
-    <div class="ys-platform-dropdown-toggle">
+<div class="ys-platform-dropdown ys-platform-dropdown-project">
+    <div class="ys-platform-dropdown-title">
+        <div class="placeholder"></div>
+        <div class="text"></div>
+        <div class="tags"></div>
+        <i/>
+    </div>
+    <!--<div class="ys-platform-dropdown-toggle">
         <input class="ys-platform-input ys-platform-dropdown-text" type="button"
                value="{{$app.dictionary.PROJECTS.hash[option.model[option.set.id]][option.textField]||option.placeholder}}"/>
         <span class="caret"></span>
-    </div>
+    </div>-->
     <div class="ys-platform-dropdown-container ys-platform-anim ys-platform-anim-upbit">
         <div class="ys-platform-dropdown-container-header">
-            <input class="ys-platform-input" placeholder="{{option.placeholder}}" ng-model="option.filter.term"/>
+            <input class="ys-platform-input" placeholder="{{defaults.placeholder}}" ng-model="defaults.filter.term"/>
         </div>
         <div class="ys-platform-dropdown-container-body">
             <div class="ys-platform-dropdown-container-result area">
                 <ul>
                     <li ng-repeat="item in $app.dictionary.AREAS.options" ng-click="selectArea(item)"
-                        ng-class="{'selected':option.filter.areaId==item.id}">{{item.text}}
+                        ng-class="{'selected':defaults.filter.areaId==item.id}">{{item.text}}
                     </li>
                 </ul>
             </div>
@@ -20,13 +26,17 @@
                 <ul>
                     <li class="ys-platform-dropdown-container-result-title">项目</li>
                     <li ng-repeat="item in projects" ng-click="selectProject(item)"
-                        ng-class="{'selected':option.model[option.set.id]==item.id}">{{item.text}}
+                        ng-class="{'selected':defaults.model[defaults.set.id]==item.id}">{{item.text}}
                     </li>
                     <li ng-if="projects.length==0">
                         <div class="ys-platform-mt0 ys-platform-no-data">请选择区域</div>
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="col-xs-12 ys-platform-dropdown-container-footer">
+            <button class='btn ys-platform-btn-default' ng-click='clear()'>清空</button>
+            <button class='btn ys-platform-btn-primary' ng-click='submit()' ng-if="defaults.multi">确认</button>
         </div>
     </div>
 </div>

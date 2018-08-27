@@ -267,10 +267,28 @@ module.exports = function ($app) {
             return val.split(split || ",").filter(function (val) {
                 return !!val;
             });
+        } else if (angular.isNumber(val)) {
+            return [val + ""];
         } else {
             return [];
         }
     }
+
+    //用于生成uuid
+    function S4() {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    }
+
+    function guid() {
+        return (S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4());
+    }
+
+
+    // 获取参数
+    function getArg(args, index) {
+        return Array.prototype.slice.call(args, index || 0)
+    }
+
 
     $app.helper = {
         range: range,
@@ -296,8 +314,7 @@ module.exports = function ($app) {
         // 延迟执行、用于缓存Service执行结果
         lazyExecute: lazyExecute,
         // 自动事件反注册
-        ade: autoDestroyEvent,
-        autoDestroyEvent: autoDestroyEvent,
+        ade: autoDestroyEvent, autoDestroyEvent: autoDestroyEvent,
         // 延迟响应 watch
         watch: watch,
         // 返回已执行的 promise 对象
@@ -311,7 +328,20 @@ module.exports = function ($app) {
         // 字符串转驼峰命名
         strToHumpNamespace: strToHumpNamespace,
         // 转换为数组
-        toArray: toArray
+        toArray: toArray,
+        // 生成 UUID
+        guid: guid,
+        // 获取参数
+        getArg: getArg,
+        // 签名、md5
+        signature: require("./plugins/md5"),
+        // 默认值
+        default: function (v1, v2) {
+            return v1 ? v1 : v2;
+        },
+        regex: function ($regex) {
+            return new RegExp($regex);
+        }
     }
 
 }

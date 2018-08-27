@@ -17,9 +17,8 @@ module.exports = function ($app) {
         return {
             restrict: "A", replace: true, transclude: true,
             controller: ["$scope", "$q", "$compile", "$element", "$attrs", function (_$scope, $q, $compile, $element, $attrs) {
-                var $container = $app.$(template),
-                    $scope = _$scope.$new(),
-                    option = $scope.option = angular.extend({
+                var $scope = _$scope.$new(),
+                    defaults = $scope.defaults = angular.extend({
                         // 待操作的模型
                         model: {},
                         // 值字段名、唯一编号
@@ -39,23 +38,57 @@ module.exports = function ($app) {
                         theme: "default", /* default、caret */
                         filter: {}
                     }, $scope.$eval($attrs.ysPlatformDropdownProject)),
+                    $container = $app.$(template).addClass(defaults.multi /* 多选 */ ? "multi" : "").addClass(defaults.theme == "caret" ? "theme-caret" : "").width(defaults.width ? defaults.width : (defaults.theme == "caret" ? "initial" : "100%")),
+                    $title = $container.find(".ys-platform-dropdown-title"),
+                    $placeholder = $title.find(".placeholder"),
+                    $text = $title.find(".text"),
+                    $tags = $title.find(".tags"),
+                    $body = $container.find(".ys-platform-dropdown-body"),
+                    $tips = $body.find(".ys-platform-dropdown-body-tips"),
+                    $input = $body.find(".ys-platform-dropdown-body-search input"),
+                    $options = $body.find(".ys-platform-dropdown-body-options"),
+                    idField = defaults.idField,
+                    textField = defaults.textField,
+                    multi = defaults.multi,
+                    set = defaults.set,
+                    path = defaults.path,
+                    includes = defaults.includes,
+                    excludes = defaults.excludes,
                     // 默认提示
-                    placeholder = option.placeholder = option.placeholder || "-- 请选择 --",
+                    placeholder = defaults.placeholder = defaults.placeholder || "-- 请选择 --",
                     defaultOption = {},
                     projects = $scope.projects = $app.dictionary.PROJECTS.options.filter(function (item) {
-                        return option.model[option.set[option.idField]] == item.id;
+                        return defaults.model[set[idField]] == item.id;
                     });
-                defaultOption[option.idField] = -1;
-                defaultOption[option.textField] = $app.valid.startsWith(placeholder, "-") ? placeholder : "请选择" + placeholder;
-                placeholder = option.placeholder = $app.valid.startsWith(placeholder, "-") ? placeholder : "所有" + placeholder;
-                if ($app.dictionary.PROJECTS.hash[option.model[option.set.id]]) {
-                    option.filter.areaId = $app.dictionary.PROJECTS.hash[option.model[option.set.id]].areaId;
-                    // console.log(option.filter.areaId)
+                defaultOption[idField] = -1;
+                defaultOption[textField] = $app.valid.startsWith(placeholder, "-") ? placeholder : "请选择" + placeholder;
+                placeholder = defaults.placeholder = $app.valid.startsWith(placeholder, "-") ? placeholder : "所有" + placeholder;
+                $placeholder.text(placeholder);
+
+                if ($app.dictionary.PROJECTS.hash[defaults.model[set.id]]) {
+                    defaults.filter.areaId = $app.dictionary.PROJECTS.hash[defaults.model[set.id]].areaId;
                 }
+
+                // 监控 model 上 idField 字段的变化、重制默认选项
+                $scope.$watch("defaults.model." + set[idField], function (nv) {
+                    if (!nv) {
+                        $tags.hide();
+                        $text.hide();
+                        $placeholder.show();
+                    } else {
+                        if ($app.dictionary.PROJECTS.hash[nv]) {
+                            $text.text($app.dictionary.PROJECTS.hash[nv][textField]).show();
+                            $placeholder.hide();
+                        } else {
+                            $text.hide();
+                            $placeholder.show();
+                        }
+                    }
+                });
 
                 // 选择区域、加载项目
                 $scope.selectArea = function (_item) {
-                    option.filter.areaId = _item.id;
+                    defaults.filter.areaId = _item.id;
                     // 清空数据
                     projects = $scope.projects = [];
                     // 筛选项目
@@ -67,23 +100,25 @@ module.exports = function ($app) {
                 }
                 // 选择项目、加载商户
                 $scope.selectProject = function (item) {
-                    if (item[option.idField] != "-1") {
-                        angular.forEach(option.set, function (key, value) {
-                            option.model[key] = item[value];
+                    if (item[idField] != "-1") {
+                        angular.forEach(set, function (key, value) {
+                            defaults.model[key] = item[value];
                         })
                     } else {
-                        clear();
-                        option.model[option.set[option.idField]] = "";
+                        defaults.model[set[idField]] = "";
                     }
-                    if (angular.isFunction(option.select)) {
-                        option.select(item, option.model);
+                    if (angular.isFunction(defaults.select)) {
+                        defaults.select(item, defaults.model);
                     }
                     $container.removeClass("open");
                 }
-
-                $scope.$watch("option.filter.term", function (n, o) {
+                $scope.clear = function () {
+                    $container.removeClass("open");
+                    defaults.model[set[idField]] = "";
+                }
+                $scope.$watch("defaults.filter.term", function (n, o) {
                     if (n != o) {
-                        option.filter.areaId = undefined;
+                        defaults.filter.areaId = undefined;
                         projects = $scope.projects = [];
                         angular.forEach($app.dictionary.PROJECTS.options, function (item) {
                             if (item.name.indexOf(n) != -1) {
@@ -91,23 +126,21 @@ module.exports = function ($app) {
                             }
                         })
                     }
-                })
-                if (option.theme == "caret") {
-                    $container.addClass("theme-caret");
-                    option.width = "initial";
-                }
+                });
                 // 显示 与 隐藏 dropdown
-                $container.on("click", ".ys-platform-dropdown-toggle", function () {
-                    $app.$("div.ys-platform-dropdown").not($container).removeClass("open");
+                $title.click(function () {
+                    $app.$(".ys-platform-dropdown").not($container).removeClass("open");
                     $container.toggleClass("open");
                     if ($container.hasClass("open")) {
-                        $container.find(".ys-platform-dropdown-search input").trigger("focus");
+                        $input.trigger("focus");
                         $app.el.body.one("click", function () {
                             $container.removeClass("open");
                         })
                     }
                 });
-                $container.width(option.width);
+                $container.click(function ($event) {
+                    $event.stopPropagation();
+                });
                 $element.append($compile($container)($scope));
             }]
         };

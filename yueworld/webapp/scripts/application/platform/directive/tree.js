@@ -499,7 +499,7 @@ module.exports = function ($app) {
                     if (!template) {
                         template =
                             '<ul {{options.ulClass}} >' +
-                            '   <li ng-repeat="node in node.{{options.nodeChildren}} | filter:filterExpression:filterComparator {{options.orderBy}}" ng-class="headClass(node)" {{options.liClass}} set-node-to-data>' +
+                            '   <li ng-repeat="node in node.{{options.nodeChildren}} | filter:filterExpression:filterComparator {{options.orderBy}} track by $index" ng-class="headClass(node)" {{options.liClass}} set-node-to-data>' +
                             '       <div class="title" ng-class="{\'selected\':isSelectedNode(node)}">' +
                             '           <i class="tree-branch-head" ng-class="iBranchClass()" ng-click="selectNodeHead(node)"></i>' +
                             '           <i class="tree-leaf-head {{options.iLeafClass}}"></i>' +

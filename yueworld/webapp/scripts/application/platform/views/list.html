@@ -1,28 +1,28 @@
-<div bindonce class="col-xs-12 ys-platform-p0 ys-platform-product-scrollbar">
+<div class="col-xs-12 ys-platform-p0 ys-platform-product-scrollbar">
     <table class="table ys-platform-list">
         <thead></thead>
         <tbody></tbody>
         <tfoot>
-        <td colspan="{{option.columns.length}}" class="ys-platform-p0">
+        <td colspan="{{defaults.checkbox?defaults.columns.length+1:defaults.columns.length}}" class="ys-platform-p0">
             <div class="col-xs-12 ys-platform-p0 pagers ys-platform-mt20"
-                 bo-if="option.pagerSupport&&option.pager.totalElements">
-                <span class="summary">共{{::option.pager.totalElements}}条记录,当前{{::option.pager.page}}/{{::option.pager.totalPages}}页</span>
-                <span class="goto"><input class="text ys-platform-input" ng-model="option.filter.page"/></span>
+                 ng-if="defaults.pagerSupport&&defaults.pager.totalElements">
+                <span class="summary">共{{::defaults.pager.totalElements}}条记录,当前{{defaults.pager.page}}/{{defaults.pager.totalPages}}页</span>
+                <span class="goto"><input class="text ys-platform-input" ng-model="defaults.filter.page"/></span>
                 <ul class="pull-right ys-platform-mt0"
                     uib-pagination
-                    items-per-page="option.pager.size"
-                    total-items="option.pager.totalElements"
-                    ng-model="option.filter.page"
-                    max-size="option.filter.size"
+                    items-per-page="defaults.pager.size"
+                    total-items="defaults.pager.totalElements"
+                    ng-model="defaults.filter.page"
+                    max-size="defaults.filter.size"
                     previous-text="上页" next-text="下页" first-text="首页" last-text="尾页"
                     boundary-links="true"></ul>
             </div>
         </td>
         </tfoot>
     </table>
-    <div class="col-xs-12 ys-platform-no-data" bo-if="!option.pager.results.length">
+    <div class="col-xs-12 ys-platform-no-data" ng-if="!defaults.pager.results.length">
         <i ys-platform-icon="{name:'no-data-1',width:16,height:100}"></i>
-        {{::option.noDataMessage}}
+        {{::defaults.noDataMessage}}
     </div>
 
 </div>

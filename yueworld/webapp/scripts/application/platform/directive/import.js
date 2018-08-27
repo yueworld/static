@@ -5,8 +5,9 @@ module.exports = function ($app) {
         require("./app"),
         require("./dropdown.static"),
         require("./dropdown.dynamic"),
-        require("./dropdown.project"),
         require("./dropdown.tree"),
+        require("./dropdown.project"),
+        require("./dropdown.space"),
         require("./list"),
         require("./tree"),
         // 功能型
@@ -18,12 +19,7 @@ module.exports = function ($app) {
         require("./drag"),
         require("./number"),
         require("./zoom"),
-        require("./uploader"),
-        // require("./select2"),
-        // require("./tinymce"),
-        // require("./select"),
-        //require("./dropdown.tree"),
-        require("./billing/import")
+        require("./uploader")
     ].forEach(function (callback) {
         callback($app)
     });

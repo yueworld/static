@@ -27,6 +27,8 @@ module.exports = function ($app) {
                                 container.animate({scrollTop: top});
                                 $el.trigger("focus");
                                 $el.addClass("ys-platform-error");
+                                // 触发下拉列表
+                                $el.find(">.ys-platform-dropdown >.ys-platform-dropdown-title").trigger("click");
                             })
                         }
                     } else {
