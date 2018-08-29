@@ -9,12 +9,12 @@ module.exports = function ($app) {
             restrict: "A",
             controller: ["$scope", "$element", "$attrs", "$location", function ($scope, $element, $attrs, $location) {
                 var $el = $app.$($element),
-                    option = $scope.ysPlatformIcon = $scope.$eval($attrs.ysPlatformIcon),
-                    link = $app.platform.window ? $location.absUrl() + "#icon-" + option.name : "#icon-" + option.name;
-                $el.css({width: option.width, height: option.height,display:"inline-block"}).addClass("svg-container");
-                $app.$($app.helper.template(template, {link: link, name: option.name})).css({
-                    width: option.width,
-                    height: option.height
+                    defaults = $scope.$eval($attrs.ysPlatformIcon),
+                    link = $app.platform.window ? $location.absUrl() + "#icon-" + defaults.name : "#icon-" + defaults.name;
+                $el.css({width: defaults.width, height: defaults.height, display: "inline-block"}).addClass("svg-container");
+                $app.$($app.helper.template(template, {link: link, name: defaults.name})).css({
+                    width: defaults.width,
+                    height: defaults.height
                 }).appendTo($el);
             }]
         };

@@ -289,6 +289,19 @@ module.exports = function ($app) {
         return Array.prototype.slice.call(args, index || 0)
     }
 
+    /**
+     * 追加空格
+     * @param count 次数
+     * @param text 文本
+     * @returns {string}
+     */
+    function appendSpace(count, text) {
+        var space = "";
+        for (var i = 0; i < count; i++) {
+            space += "&nbsp;&nbsp;&nbsp;&nbsp;"
+        }
+        return space + text;
+    }
 
     $app.helper = {
         range: range,
@@ -339,9 +352,12 @@ module.exports = function ($app) {
         default: function (v1, v2) {
             return v1 ? v1 : v2;
         },
+        // 实例化正则表达式对象
         regex: function ($regex) {
             return new RegExp($regex);
-        }
+        },
+        // 追加空格
+        appendSpace: appendSpace
     }
 
 }

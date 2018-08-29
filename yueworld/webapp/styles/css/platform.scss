@@ -42,6 +42,9 @@ svg{display: inline-block;fill: currentColor;vertical-align: top;text-align: cen
 
 // line-height
 .ys-platform-lh{
+    &20{line-height: 20px!important;}
+    &22{line-height: 22px!important;}
+    &23{line-height: 23px!important;}
     &24{line-height: 24px!important;}
     &32{line-height: 32px!important;}
     &34{line-height: 34px!important;}
@@ -96,14 +99,15 @@ svg{display: inline-block;fill: currentColor;vertical-align: top;text-align: cen
 // input
 .ys-platform-input{
     position: relative;text-overflow: ellipsis;overflow: hidden;
-    display: block;width: 100%;height: 32px;line-height:initial;padding:5px 12px;padding-right:20px;font-size: 14px;color: #555;background-color: #fff;border: 1px solid #dae1e7;
+    display: block;width: 100%;min-height: 32px;line-height:initial;padding:5px 12px;padding-right:20px;font-size: 14px;color: #555;background-color: #fff;border: 1px solid #dae1e7;
     //transition: outline-color ease-in-out .15s, box-shadow ease-in-out .15s;
     &:focus{
         /*border-color: #66afe9;*//*box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);*/
         //border-color: #32aaff!important;
         outline:1px solid #3aabf3;outline-offset: -1px;z-index: 2;
     }
-    &::placeholder {color: #999;opacity: 1;}
+    &::placeholder {color: #999!important;opacity: 1;}
+    &.ys-platform-text-invalid{color: #999!important;}
 }
 
 // error
@@ -111,7 +115,7 @@ button.ys-platform-error,
 input.ys-platform-error,
 input.ys-platform-error:focus,
 div.ys-platform-input.ys-platform-error{outline: 2px solid #E64E4D!important;outline-offset:-1px!important;}
-div.ys-platform-error{
+.ys-platform-error{
     >.ys-platform-dropdown .ys-platform-dropdown-title,
     >.ys-platform-dropdown .ys-platform-dropdown-text{outline: 2px solid #E64E4D!important;outline-offset:-2px;}
     &.ys-platform-require .ys-platform-dropdown{
@@ -282,7 +286,7 @@ input.ys-platform-input.ys-platform-require{background:url(../img/common/icon/re
 // checkbox radio
 .ys-platform-{
         &checkbox i,
-        &radio i{background: url(../img/common/icon/box2.png) no-repeat;width: 18px;height: 18px;display: inline-block;vertical-align: middle;cursor: pointer;-webkit-background-size: 200px 20px;background-size: 200px 20px;margin-right: 8px;}
+        &radio i{background: url(../img/common/icon/box2.png) no-repeat;width: 18px;height: 18px;display: inline-block;vertical-align: middle;cursor: pointer;-webkit-background-size: 200px 20px;background-size: 200px 18px;margin-right: 8px;}
         &checkbox {
             i{background-position: 0 0;}
             &:hover i{background-position: -20px 0;}
@@ -298,9 +302,9 @@ input.ys-platform-input.ys-platform-require{background:url(../img/common/icon/re
             &.selected.disabled i{background-position: -180px 0;}
         }
         &checkbox,
-        &radio{display: inline-block;}
+        &radio{display: inline-block;line-height: 32px;}
 
-        &input >.ys-platform-checkbox{padding-top: 1px}
+        &input >.ys-platform-checkbox{line-height: 18px!important;float:left;}
 }
 
 // ================================================== Component ========================================================
@@ -368,7 +372,30 @@ input.ys-platform-input.ys-platform-require{background:url(../img/common/icon/re
 
 // form
 .ys-platform-grid {
-    > table{
+    &-container{
+        user-select: none;padding:0;width: 100%;
+        &.up{
+            .ys-platform-grid-title > i{transform: rotate(180deg);}
+            .ys-platform-grid-body{
+                height: 0!important;
+            }
+        }
+    }
+    &-title{
+        padding:0;border: 1px solid #eff1f4;border-left: 2px solid #32aaff;cursor: pointer;
+        background-color: #f8fafa;
+        h3{padding-left: 13px;font-size: 15px;margin:0;line-height: 35px;float: left}
+        > i{
+            background: url(../img/common/icon/select-black-down-icon.png);width:14px;height:8px;
+            display: inline-block;overflow: hidden;position: absolute;right: 11px;top: 50%;margin-top: -4px;transition: all .3s
+        }
+    }
+    &-body{
+        padding:0;transition: height .3s;height:100%!important;overflow: hidden;
+        &.ys-platform-anim{}
+    }
+    &-table{
+        width: 100%;
         > tbody{
             > tr >th,
             > tr >td{border: solid 1px #eff1f4;/*height: 36px;line-height: 35px;*/}
@@ -405,35 +432,6 @@ input.ys-platform-input.ys-platform-require{background:url(../img/common/icon/re
             > .placeholder,> .text,> .tags{line-height: 32px;}
         }
     }
- /*   .bt6 {border-top: 6px solid #818c92}
-    .lh36 {height: 36px;line-height: 36px}
-    .title {height: 40px;line-height: 40px;color: #333;font-size: 16px;padding: 0 0 0 20px}
-    .ys-radio {height: 20px}
-    .table{border: solid 1px #eff1f4!important;}
-    td,
-    th {vertical-align: middle !important;height: 36px;color: #757575;font-weight: 400}
-    td.p0 {padding: 0 !important}
-    td.pl10 {padding-left: 20px !important}
-
-    th strong {color: #333}
-    td input,
-    td textarea {border: 0;resize: none;-webkit-box-shadow: none;box-shadow: none;padding-left: 15px}
-    .table input {height: 36px;line-height: 36px}
-    .table .require {border-left: 2px solid #e64e4d !important}
-    .table .table {border: none !important;margin-bottom: 0;table-layout: fixed}
-    .table .table td,
-    .table .table th {border-left: 0 !important;border-top: 0 !important}
-    .table .table td:last-child,
-    .table .table th:last-child {border-right: 0 !important}
-    .table .table tr:last-child td,
-    .table .table tr:last-child th {border-bottom: 0}
-    .table .single-img {margin-bottom: 8px;width: 206px;margin-top: 5px}
-    .table .ys-cover {margin-bottom: 8px;margin-top: 5px}
-    .table .error {border: 2px solid #e64e4d !important}
-    .table .attach.error {padding-left: 12px}
-    .table tbody {border-top: 1px solid #ddd}
-    .uib-datepicker-popup tbody {border: none}
-    .uib-datepicker-popup th {background: none}*/
 }
 
 //  dropdown

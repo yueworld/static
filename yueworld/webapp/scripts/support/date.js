@@ -182,6 +182,7 @@ module.exports = function ($app) {
         result.year = year;
         result.month = month;
         result.day = day;
+        result.totalDay = result.max.getTime() - result.min.getTime();
         return result;
     }
 
@@ -297,6 +298,24 @@ module.exports = function ($app) {
         }
     }
 
+    /**
+     * 获取两个日期之间的天数
+     * @param start
+     * @param end
+     */
+    function spacingDay(start, end) {
+        if ($app.valid.isDate(start) && $app.valid.isDate(end)) {
+            var min = parse(start),
+                max = parse(end);
+            if (min.getTime() > max.getTime()) {
+                min = parse(end);
+                max = parse(start);
+            }
+            return ((max.getTime() - min.getTime()) / 86400 / 1000) + 1;
+        }
+        return 0
+    }
+
     $app.date = {
         // 当前日期
         now: new Date(),
@@ -318,6 +337,8 @@ module.exports = function ($app) {
         spacingText: spacingText,
         // 获取两个日期之间的时间周期
         spacingYear: spacingYear,
+        // 获取两个日期之间的天数
+        spacingDay: spacingDay,
         // 毫秒转文本
         msToText: msToText
     }

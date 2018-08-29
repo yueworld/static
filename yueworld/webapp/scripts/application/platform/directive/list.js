@@ -10,7 +10,7 @@ module.exports = function ($app) {
             '      <i style="cursor: pointer" ng-if="column.serverSortHandler" ys-platform-icon="{name:\'sort-asc\',width:12,height:36}"></i>' +
             '   </th>' +
             '</tr>',
-        _trRs = $app.$("<tr class='ys-platform-pointer ys-platform-no-select' ng-class='{\"selected\":selectedItem==item}'></tr>"),
+        _trRs = $app.$("<tr class='ys-platform-pointer ys-platform-no-select'></tr>"), /*ng-class='{"selected":selectedItem==item}'*/
         _trDetail = $app.$("<tr class='detail'><td><div class='col-xs-12 ys-platform-list-form' ng-if='selectedItem==item'></div></td></tr>"),
         _td = $app.$("<td><span></span></td>"),
         isAsc = false;
@@ -90,6 +90,8 @@ module.exports = function ($app) {
             controller: ["$scope", "$compile", "$element", "$attrs", function (_$scope, $compile, $element, $attrs) {
                 var $scope = _$scope.$new(),
                     defaults = $scope.defaults = angular.extend({
+                        loading: false,
+                        downDelay: 0,
                         filter: {add: true},
                         // 字段
                         columns: [],
@@ -106,7 +108,8 @@ module.exports = function ($app) {
                         selectHandler: angular.noop,
                         newItem: {},
                     }, _$scope.$eval($attrs.ysPlatformList)),
-                    $container = $app.$(template), $table = $container.find("table");
+                    $container = $app.$(template), $table = $container.find("table"),
+                    $trs = [];
 
                 // 行选中
                 $scope.trClick = function (item) {
@@ -138,6 +141,7 @@ module.exports = function ($app) {
                 // 主体、响应结果集变化
                 $scope.$watch("defaults.pager.results", function (nv, ov) {
                     generateBody($scope, $compile, $table, defaults);
+                    $trs = $table.find(">tbody>tr");
                 }, true);
 
                 // 排序
@@ -146,16 +150,17 @@ module.exports = function ($app) {
                     defaults.serverSortHandler(column);
                 }
 
-                // 编辑
-                $scope.edit = function (item) {
-                    var panels = $table.find(">tbody>tr>td>.ys-platform-list-form");
+                function edit(item) {
+                    var panels = $trs.find(">td>.ys-platform-list-form");
                     // 存在展开的面板
                     if (panels.length > 0) {
                         // 全部收起
                         panels.slideUp("fast", function () {
                             $timeout(function () {
+                                $trs.removeClass("selected");
                                 if ($scope.selectedItem == item) {
                                     $scope.selectedItem = undefined;
+                                    $app.loading(false);
                                 } else {
                                     $scope.selectedItem = undefined;
                                     $timeout(function () {
@@ -168,9 +173,25 @@ module.exports = function ($app) {
                         $scope.selectedItem = item;
                         // 展开
                         $timeout(function () {
-                            $table.find(">tbody>tr>td>div.ys-platform-list-form").slideDown("fast");
+                            var form = $trs.find(">td>div.ys-platform-list-form");
+                            form.parent().parent().prev().addClass("selected");
+                            form.slideDown("fast", function () {
+                                $app.loading(false);
+                            });
                             $app.event.publish(defaults.detail + ".down", {item: item});
-                        })
+                        }, 100);
+                    }
+                }
+
+                // 编辑
+                $scope.edit = function (item) {
+                    if (defaults.loading) {
+                        $app.loading($scope.selectedItem != item);
+                        $timeout(function () {
+                            edit(item)
+                        }, 100);
+                    } else {
+                        edit(item);
                     }
                 }
 
@@ -212,14 +233,14 @@ module.exports = function ($app) {
 
                 // 收起
                 $scope.slideUp = function () {
-                    var deferred = $q.defer(),
-                        panels = $table.find(">tbody>tr>td>.ys-platform-list-form");
+                    var deferred = $q.defer(), panels = $trs.find(">td>.ys-platform-list-form");
+                    $trs.removeClass("selected");
                     // 全部收起
                     panels.slideUp("fast", function () {
                         $timeout(function () {
                             deferred.resolve();
-                            $app.event.publish(defaults.detail + ".up", {item: $scope.selectedItem});
                             $scope.selectedItem = undefined;
+                            $app.event.publish(defaults.detail + ".up", {item: $scope.selectedItem});
                         })
                     });
                     return deferred.promise;

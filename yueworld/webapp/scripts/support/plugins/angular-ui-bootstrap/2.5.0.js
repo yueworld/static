@@ -1624,8 +1624,8 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
                     case 'minDate':
                         $scope.$watch('datepickerOptions.' + key, function (value) {
                             if (value) {
-                                if (angular.isDate(value)) {
-                                    self[key] = dateParser.fromTimezone(new Date(value), ngModelOptions.getOption('timezone'));
+                                if ($app.valid.isDate(value)) {
+                                    self[key] = dateParser.fromTimezone($app.date.parse(value), ngModelOptions.getOption('timezone'));
                                 } else {
                                     if ($datepickerLiteralWarning) {
                                         $log.warn('Literal date support has been deprecated, please switch to date object usage');
@@ -1923,6 +1923,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
 
         this.step = {months: 1};
         this.element = $element;
+
         function getDaysInMonth(year, month) {
             return month === 1 && year % 4 === 0 &&
             (year % 100 !== 0 || year % 400 === 0) ? 29 : DAYS_IN_MONTH[month];
@@ -3029,8 +3030,8 @@ angular.module('ui.bootstrap.datepickerPopup', ['ui.bootstrap.datepicker', 'ui.b
                 angular.forEach(['minDate', 'maxDate'], function (key) {
                     if (!$scope.datepickerOptions[key]) {
                         dates[key] = null;
-                    } else if (angular.isDate($scope.datepickerOptions[key])) {
-                        dates[key] = new Date($scope.datepickerOptions[key]);
+                    } else if ($app.valid.isDate($scope.datepickerOptions[key])) {
+                        dates[key] = $app.date.parse($scope.datepickerOptions[key]);
                     } else {
                         if ($datepickerPopupLiteralWarning) {
                             $log.warn('Literal date support has been deprecated, please switch to date object usage');
@@ -4107,8 +4108,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
 
             function isVisible(element) {
                 return !!(element.offsetWidth ||
-                element.offsetHeight ||
-                element.getClientRects().length);
+                    element.offsetHeight ||
+                    element.getClientRects().length);
             }
 
             function backdropIndex() {
@@ -6161,8 +6162,8 @@ angular.module('ui.bootstrap.tabs', [])
                 if (angular.isUndefined(attrs.index)) {
                     if (tabsetCtrl.tabs && tabsetCtrl.tabs.length) {
                         scope.index = Math.max.apply(null, tabsetCtrl.tabs.map(function (t) {
-                                return t.index;
-                            })) + 1;
+                            return t.index;
+                        })) + 1;
                     } else {
                         scope.index = 0;
                     }
@@ -6237,14 +6238,14 @@ angular.module('ui.bootstrap.tabs', [])
 
         function isTabHeading(node) {
             return node.tagName && (
-                    node.hasAttribute('uib-tab-heading') ||
-                    node.hasAttribute('data-uib-tab-heading') ||
-                    node.hasAttribute('x-uib-tab-heading') ||
-                    node.tagName.toLowerCase() === 'uib-tab-heading' ||
-                    node.tagName.toLowerCase() === 'data-uib-tab-heading' ||
-                    node.tagName.toLowerCase() === 'x-uib-tab-heading' ||
-                    node.tagName.toLowerCase() === 'uib:tab-heading'
-                );
+                node.hasAttribute('uib-tab-heading') ||
+                node.hasAttribute('data-uib-tab-heading') ||
+                node.hasAttribute('x-uib-tab-heading') ||
+                node.tagName.toLowerCase() === 'uib-tab-heading' ||
+                node.tagName.toLowerCase() === 'data-uib-tab-heading' ||
+                node.tagName.toLowerCase() === 'x-uib-tab-heading' ||
+                node.tagName.toLowerCase() === 'uib:tab-heading'
+            );
         }
     });
 

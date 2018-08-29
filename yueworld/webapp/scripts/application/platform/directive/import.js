@@ -3,13 +3,15 @@ module.exports = function ($app) {
     [
         // app 主入口
         require("./app"),
+        // 下拉框
         require("./dropdown.static"),
         require("./dropdown.dynamic"),
         require("./dropdown.tree"),
         require("./dropdown.project"),
         require("./dropdown.space"),
+        require("./form.table"),
+        require("./input"),
         require("./list"),
-        require("./tree"),
         // 功能型
         require("./icon"),
         require("./error"),
@@ -19,7 +21,8 @@ module.exports = function ($app) {
         require("./drag"),
         require("./number"),
         require("./zoom"),
-        require("./uploader")
+        require("./tree"),
+        require("./uploader"),
     ].forEach(function (callback) {
         callback($app)
     });

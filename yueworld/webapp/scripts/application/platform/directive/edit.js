@@ -10,17 +10,18 @@ module.exports = function ($app) {
         return {
             restrict: 'A',
             link: function (_$scope, element, attrs) {
-                var $el = $app.$(element),
-                    $scope = angular.extend(_$scope.$new(), {
-                        watch: "model.isEdit",
-                        expression: "model.isEdit",
-                    }, _$scope.$eval(attrs.ysPlatformEdit));
-                var handlers = [], dropdowns = $el.find(".ys-platform-dropdown");
-                $scope.$watch($scope.watch, function (isEdit) {
-                    isEdit = $scope.$eval($scope.expression);
-                    if (0 != dropdowns.length) {
+                var $scope = _$scope.$new(),
+                    defaults = $scope.defaults = angular.extend({
+                        model: {},
+                        isEdit: "model.isEdit"
+                    }, $scope.$eval(attrs.ysPlatformEdit)),
+                    handlers = [],
+                    $container = $app.$(element),
+                    dropdown = $container.find(".ys-platform-dropdown");
+                $scope.$watch("defaults." + defaults.isEdit, function (isEdit) {
+                    isEdit = $scope.$eval("defaults." + defaults.isEdit);
+                    if (0 != dropdown.length) {
                         // ys-platform-dropdown
-                        var dropdown = $el.find(".ys-platform-dropdown");
                         if (handlers.length == 0) {
                             handlers = handlers.concat($app.$._data(dropdown.get(0), "events").click);
                         }
@@ -41,45 +42,45 @@ module.exports = function ($app) {
                         }
                     } else {
                         // input、textarea、div
-                        if (handlers.length == 0 & $app.$._data($el.get(0), "events")) {
-                            handlers = handlers.concat($app.$._data($el.get(0), "events").click)
+                        if (handlers.length == 0 & $app.$._data($container.get(0), "events")) {
+                            handlers = handlers.concat($app.$._data($container.get(0), "events").click)
                         }
                         if (isEdit) {
                             // 还原事件
                             handlers.filter(function () {
-                                return $el.data("unbind");
+                                return $container.data("unbind");
                             }).forEach(function (handler) {
-                                $el.bind("click", handler.handler);
+                                $container.bind("click", handler.handler);
                             });
-                            $el.data("unbind", false);
+                            $container.data("unbind", false);
                             if (attrs.uibDatepickerPopup) {
                                 // 日历控件、强制为只读控件
-                                // $el.addClass("ys-platform-readonly");
-                                $el.attr("readonly", true);
+                                // $container.addClass("ys-platform-readonly");
+                                $container.attr("readonly", true);
                             } else {
-                                $el.removeClass("ys-platform-readonly");
-                                $el.attr("readonly", false);
+                                $container.removeClass("ys-platform-readonly");
+                                $container.attr("readonly", false);
                             }
                         } else {
                             // 解除事件
-                            $el.unbind("click");
-                            $el.addClass("ys-platform-readonly");
-                            $el.data("unbind", true);
-                            $el.attr("readonly", true);
+                            $container.unbind("click");
+                            $container.addClass("ys-platform-readonly");
+                            $container.data("unbind", true);
+                            $container.attr("readonly", true);
                         }
 
                     }
-                    if ($scope.require) {
+                    if (defaults.require) {
                         // require
                         if (isEdit) {
-                            $el.addClass("ys-platform-require")
+                            $container.addClass("ys-platform-require")
                         } else {
-                            $el.removeClass("ys-platform-require");
+                            $container.removeClass("ys-platform-require");
                         }
                     }
                 });
                 $scope.$on("$destroy", function () {
-                    $el.remove();
+                    $container.remove();
                 })
             }
         };

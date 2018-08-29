@@ -1,9 +1,9 @@
-<div bindonce class="ys-platform-app" ng-class="{'unfold':ysSidebarStatus!='fold','fold':ysSidebarStatus=='fold'}">
+<div class="ys-platform-app">
     <div class="ys-platform-topbar">
         <div class="logo pull-left pointer">
             <a href="/"><img src="../../../../styles/img/logo/default.png"></a>
         </div>
-        <div class="fold" ng-click="toggleSidebar()">
+        <div class="fold">
             <i ys-platform-icon="{name:'menus-3',height:44,width:16}"></i>
         </div>
         <div class="channel pull-left">
@@ -31,10 +31,8 @@
                 </div>
             </div>
             <div class="item dropdown my">
-                <div class="dropdown-toggle">
-                    {{$app.user.realname}}
-                </div>
-                <div class="dropdown-menu hidden">
+                <!--<div class="dropdown-toggle" ng-bind-html="::$app.user.realname"></div>-->
+                <!--<div class="dropdown-menu hidden">
                     <div class="arrow"></div>
                     <div class="list">
                         <div class="entrance">
@@ -53,48 +51,22 @@
                     <div class="footer" ng-click="$app.user.logout()">
                         退出系统
                     </div>
-                </div>
+                </div>-->
             </div>
             <div class="item dropdown fullscreen">
-                <div class="dropdown-toggle" ng-if="!$app.screen.isFullscreen" ng-click="$app.screen.fullscreen()">
-                    进入全屏
-                </div>
-                <div class="dropdown-toggle" ng-if="$app.screen.isFullscreen" ng-click="$app.screen.exitFullscreen()">
-                    退出全屏
-                </div>
-                <!--<ul class="dropdown-menu">
-                    <div class="arrow"></div>
-                    <li ng-if="!$app.screen.isFullscreen" ng-click="$app.screen.fullscreen()">进入</li>
-                    <li ng-if="$app.screen.isFullscreen" ng-click="$app.screen.exitFullscreen()">退出</li>
-                </ul>-->
+                <div class="dropdown-toggle">进入全屏</div>
             </div>
-
-            <!--<a href="javascript:void(0)" ng-click="$app.screen.fullscreen()" ng-if="!$app.screen.isFullscreen">
-                &lt;!&ndash;<icon name="fullscreen-enter-1" width="13px" height="44px"></icon>&ndash;&gt;
-                全屏模式
-            </a>
-            <a href="javascript:void(0)" ng-click="$app.screen.exitFullscreen()" ng-if="$app.screen.isFullscreen">
-                &lt;!&ndash;<icon name="fullscreen-exit-1" width="13px" height="44px"></icon>&ndash;&gt;
-                退出全屏
-            </a>-->
-            <!--<a href="javascript:void(0)" ng-click="$app.logout()">
-                <icon name="logout-1" width="15px" height="44px"></icon>
-                退出
-            </a>-->
         </div>
     </div>
     <div class="ys-platform-sidebar">
         <div class="ys-platform-sidebar-container">
-            <!--ui-sref="operations.situation.index" ng-class="{'active':$app.router.includes('operations')}"-->
+            <!--ui-sref="operations.situation.index" ng-class="{'active':$app.router.includes('operations')}"
             <div class="item" ng-repeat="item in $app.defaults.menus" ui-sref="{{::item.state}}"
                  ng-class="{'active':$app.router.includes(item.includes)}">
                 <i class="{{::'icon-'+item.icon}}"></i>
                 {{::item.text}}
             </div>
-            <div class="line hidden"></div>
-            <!--<div class="manager">
-                系统设置
-            </div>-->
+            <div class="manager">系统设置</div>-->
         </div>
     </div>
     <div class="col-xs-12 ys-platform-p0 ys-platform-bg-white ys-platform-product">

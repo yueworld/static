@@ -23,8 +23,11 @@ module.exports = function ($app) {
                                     elTop = $el.offset().top,
                                     verticalHeight = $app.screen.height / 2,
                                     top = cTop + elTop - verticalHeight;
-                                // console.log(elTop + ":" + top + "：" + verticalHeight);
-                                container.animate({scrollTop: top});
+                                if (container.css("position") == "absolute") {
+                                    container.animate({scrollTop: top});
+                                } else {
+                                    $app.el.html.animate({scrollTop: top});
+                                }
                                 $el.trigger("focus");
                                 $el.addClass("ys-platform-error");
                                 // 触发下拉列表

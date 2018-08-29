@@ -1,0 +1,47 @@
+.ys-platform-form-table{
+    width: 100%;padding:0px;
+    &-title{
+      padding:0;border: 1px solid #eff1f4;border-left: 2px solid #32aaff;cursor: pointer;/*border-bottom: none;border-bottom:1px solid #eff1f4*/
+      background-color: #f8fafa;
+      h3{padding-left: 13px;font-size: 15px;margin:0;line-height: 35px;float: left}
+      > i{
+        background: url(../../../../styles/img/common/icon/select-black-down-icon.png);width:14px;height:8px;
+        display: inline-block;overflow: hidden;position: absolute;right: 11px;top: 50%;margin-top: -4px;transition: all .3s
+      }
+    }
+    &-body{
+        padding:0px;transition: height .3s;min-height:0px;
+        > table{
+            width: 100%;
+            > tbody{
+              > tr >th,
+              > tr >td{border: solid 1px #eff1f4;}
+              > tr {
+                  > th{background: #f8fafa;color: #7e8c9e;padding: 8px 15px 7px 15px;line-height: initial!important;font-weight: normal;vertical-align:middle!important;}
+                  > td{
+                      padding:0px;
+                      > .ys-platform-input{height:32px;border:none;}
+                      > .ys-platform-dropdown{
+                          .ys-platform-dropdown-title,
+                          .ys-platform-dropdown-toggle input,
+                          .ys-platform-dropdown-search input{border:none;}
+                          &.ys-platform-readonly .ys-platform-dropdown-toggle input{outline: none;background-image: none!important}
+                          .disabled{color: #999}
+                          .ys-platform-dropdown-title{
+                              > .placeholder,> .text{line-height: 32px!important;}
+                              > .tags{line-height: 24px!important;}
+                          }
+                      }
+                  }
+              }
+              > tr:first-child >th,
+              > tr:first-child >td{border-top:none!important;}
+            }
+        }
+    }
+    &-up{
+      >.ys-platform-form-table-title{}
+      >.ys-platform-form-table-title > i{transform: rotate(180deg)}
+      >.ys-platform-form-table-body{height:0!important;overflow: hidden;}
+    }
+}

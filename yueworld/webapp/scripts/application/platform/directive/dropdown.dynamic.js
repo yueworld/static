@@ -206,10 +206,11 @@ module.exports = function ($app) {
                                 .appendTo($options);
                         })
                     }
+                    // 渲染控件
                     render();
                 }, true);
 
-
+                // 渲染控件
                 function render() {
                     var selectedId = model[set[idField]],
                         options = $options.find(".option").removeClass("selected");

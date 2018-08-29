@@ -57,6 +57,7 @@ module.exports = function ($app) {
                     $tips = $body.find(".ys-platform-dropdown-body-tips"),
                     $input = $body.find(".ys-platform-dropdown-body-search input"),
                     $options = $body.find(".ys-platform-dropdown-body-options"),
+                    model = defaults.model ? defaults.model : {},
                     idField = defaults.idField,
                     textField = defaults.textField,
                     multi = defaults.multi,
@@ -87,6 +88,7 @@ module.exports = function ($app) {
                             defaults.dictionary.push(angular.extend({}, item, {id: item.property}));
                         })
                     }
+
                 }
                 if (multi) {
                     defaultOption = [];
@@ -157,15 +159,19 @@ module.exports = function ($app) {
                                 .data(item)
                                 .addClass(id == -1 ? "ys-platform-text-invalid" : "")
                                 .addClass(multi ? "ys-platform-checkbox multi" : "single")
+                                // .addClass("selected")
                                 .append(item[textField])
                                 .appendTo($options);
-                        })
+
+                        });
                     }
+                    // 渲染控件
+                    render();
                 });
 
-
+                // 渲染控件
                 function render() {
-                    var selectedId = defaults.model[set[idField]],
+                    var selectedId = model[set[idField]],
                         options = $options.find(".option").removeClass("selected");
                     if (!selectedId || !options.length) {
                         $tags.hide();
@@ -209,7 +215,7 @@ module.exports = function ($app) {
                     }
                 }
 
-                // 监控 model 上 idField 字段的变化、重制默认选项
+                // 监控 model 上 idField 字段的变化、重置默认选项
                 $scope.$watch("defaults.model." + set[idField], render);
 
                 // 单选
@@ -218,17 +224,17 @@ module.exports = function ($app) {
                     $timeout(function () {
                         if (id != "-1") {
                             angular.forEach(set, function (key, value) {
-                                defaults.model[key] = data[value];
+                                model[key] = data[value];
                             })
                         } else {
                             // 清理数据
                             angular.forEach(set, function (key, value) {
-                                delete defaults.model[key];
+                                delete model[key];
                             })
-                            defaults.model[set[idField]] = "";
+                            model[set[idField]] = "";
                         }
                         if (angular.isFunction(defaults.select)) {
-                            defaults.select(data, defaults.model);
+                            defaults.select(data, model);
                         }
                         $container.removeClass("open");
                     });
@@ -236,7 +242,7 @@ module.exports = function ($app) {
 
                 // 多选
                 $options.on("click", ".multi", function () {
-                    var option = $app.$(this), data = option.data(), id = data[idField], ids = $app.helper.toArray(defaults.model[set.id]);
+                    var option = $app.$(this), data = option.data(), id = data[idField], ids = $app.helper.toArray(model[set.id]);
                     $timeout(function () {
                         if (option.hasClass("selected")) {
                             ids = ids.filter(function (old) {
@@ -245,9 +251,9 @@ module.exports = function ($app) {
                         } else {
                             ids.push(id);
                         }
-                        defaults.model[set[idField]] = ids.join(",");
+                        model[set[idField]] = ids.join(",");
                         if (angular.isFunction(defaults.select)) {
-                            defaults.select(ids, defaults.model);
+                            defaults.select(ids, model);
                         }
                     });
                 });
@@ -256,13 +262,13 @@ module.exports = function ($app) {
                 $title.on("click", "span.tag i", function ($event) {
                     $event.stopPropagation();
                     var data = $app.$($event.currentTarget).data(),
-                        ids = $app.helper.toArray(defaults.model[set[idField]]).filter(function (id) {
+                        ids = $app.helper.toArray(model[set[idField]]).filter(function (id) {
                             return id != data[idField];
                         });
                     $timeout(function () {
-                        defaults.model[set[idField]] = ids.join(",");
+                        model[set[idField]] = ids.join(",");
                         if (angular.isFunction(defaults.select)) {
-                            defaults.select(ids, defaults.model);
+                            defaults.select(ids, model);
                         }
                     })
                 });
@@ -272,7 +278,7 @@ module.exports = function ($app) {
                 // 全选
                 $body.on("click", "div.all", function ($event) {
                     $timeout(function () {
-                        defaults.model[set[idField]] = $scope.dictionary.options.map(function (item) {
+                        model[set[idField]] = $scope.dictionary.options.map(function (item) {
                             return item.id;
                         }).join(",");
                     })
@@ -280,14 +286,14 @@ module.exports = function ($app) {
                 // 清空
                 $body.on("click", "div.qkxz", function ($event) {
                     $timeout(function () {
-                        defaults.model[set[idField]] = undefined;
+                        model[set[idField]] = undefined;
                     })
                 });
                 // 反选
                 $body.on("click", "div.fx", function ($event) {
                     $timeout(function () {
-                        var ids = $app.helper.toArray(defaults.model[set[idField]]);
-                        defaults.model[set[idField]] = $scope.dictionary.options.filter(function (item) {
+                        var ids = $app.helper.toArray(model[set[idField]]);
+                        model[set[idField]] = $scope.dictionary.options.filter(function (item) {
                             return !ids.some(function (id) {
                                 return id == item.id;
                             });
